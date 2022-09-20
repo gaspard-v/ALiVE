@@ -1,0 +1,36 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "src/data/map/area01.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "src/data/map/area01.tmx": {
+            "scale": 1.2053125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.2488981073373,
+                "y": 240.6015037593985
+            }
+        },
+        "src/data/map/area01.tmx#area01_level_tiles": {
+            "scaleInDock": 1
+        }
+    },
+    "last.imagePath": "C:/Users/gaspa/ALiVE/src/data/img/map",
+    "map.height": 15,
+    "map.lastUsedFormat": "tmx",
+    "map.layerDataFormat": null,
+    "map.width": 20,
+    "openFiles": [
+        "src/data/map/area01.tmx"
+    ],
+    "project": "ALiVE.tiled-project",
+    "recentFiles": [
+        "src/data/map/area01.tmx"
+    ],
+    "tileset.embedInMap": true
+}
