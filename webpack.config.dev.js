@@ -29,11 +29,11 @@ module.exports = {
             },
             {
                 test: /\.(jpg|jpeg|png|svg|gif)$/i,
-                type: 'asset/resource',
+                type: 'assets',
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
-                type: 'asset/resource',
+                type: 'assets/resource',
             },
         ],
     },
@@ -48,6 +48,7 @@ module.exports = {
                 {
                     from: path.posix.join(
                         path.resolve(__dirname, 'static').replace(/\\/g, '/'),
+                        '**',
                         '*'
                     ),
                     to: path.resolve(__dirname, 'build'),
