@@ -2,10 +2,17 @@ import * as Phaser from 'phaser';
 import PlayScene from './src/scenes/PlayScene';
 
 const config = {
-    name: 'app',
+    name: 'ALiVE',
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    backgroundColor: '#D3D3D3',
+    scale: {
+        mode: Phaser.Scale.FIT,
+        width: 800,
+        height: 600,
+    },
+    autoCenter: true,
+    antialias: true,
+    autoFocus: true,
     scene: [PlayScene],
 };
 
