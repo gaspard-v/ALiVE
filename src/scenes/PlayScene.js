@@ -6,10 +6,10 @@ export default class PlayScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('star', '/static/star.png');
+        this.load.image('luxmetre', '/static/luxmetrePro.jfif');
     }
 
     create() {
-        this.add.image(game.config.width / 2, game.config.height / 2, 'star');
+        this.add.image(game.config.width / 2, game.config.height / 2, 'luxmetre');
     }
 }
