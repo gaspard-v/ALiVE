@@ -1,19 +1,28 @@
 import * as Phaser from 'phaser';
 import PlayScene from './src/scenes/PlayScene';
+import MainMenuScene from './src/scenes/MainMenu';
+
+const ratio = Math.max(
+    window.innerWidth / window.innerHeight,
+    window.innerHeight / window.innerWidth
+);
+const DEFAULT_HEIGHT = 720; // any height you want
+const DEFAULT_WIDTH = ratio * DEFAULT_HEIGHT;
 
 const config = {
     name: 'ALiVE',
     type: Phaser.AUTO,
-    backgroundColor: '#D3D3D3',
+    backgroundColor: '#282828',
     scale: {
         mode: Phaser.Scale.FIT,
-        width: 800,
-        height: 600,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: DEFAULT_WIDTH,
+        height: DEFAULT_HEIGHT,
     },
     autoCenter: true,
     antialias: true,
     autoFocus: true,
-    scene: [PlayScene],
+    scene: [MainMenuScene],
 };
 
 window.game = new Phaser.Game(config);
