@@ -6,26 +6,19 @@ export default class TextScene extends Phaser.Scene {
 
     constructor() {
         console.log('Starting Textscene');
-        super({ key: 'TextScene', active: true });
+        super({ key: 'TextScene' });
     }
 
     preload() {
         this.load.text('luxmetreText', '/static/luxmetreText.txt');
     }
 
-    displayText() {
-        const visible = this.scene.isVisible();
-        if (visible) {
-            this.scene.sendToBack();
-        } else {
-            this.scene.bringToTop();
-        }
-        this.scene.setVisible(!visible);
+    stopScene() {
+        this.scene.stop('TextScene');
+        this.scene.start('PlayScene');
     }
 
     create() {
-        this.scene.setVisible(false);
-
         this.rectangle = this.add.rectangle(
             game.config.width / 2,
             game.config.height / 2,
@@ -33,7 +26,12 @@ export default class TextScene extends Phaser.Scene {
             (game.config.height * 3) / 4,
             0x6666
         );
-        this.closeButton = this.add.text();
+        const buttonXPosition = this.rectangle.width;
+        const buttonYPosition = this.game.config.height - this.rectangle.height;
+        this.closeButton = this.add
+            .text(buttonXPosition, buttonYPosition, 'close')
+            .setInteractive({ useHandCursor: true });
+        this.closeButton.on('pointerdown', () => this.stopScene());
         this.texte = this.add.text(
             game.config.width / 2,
             game.config.height / 2,

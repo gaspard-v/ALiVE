@@ -10,7 +10,8 @@ export default class PlayScene extends Phaser.Scene {
     }
 
     displayScene() {
-        this.texteScene.displayText();
+        this.scene.start('TextScene');
+        this.scene.stop('PlayScene');
     }
 
     create() {
