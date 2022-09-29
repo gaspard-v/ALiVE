@@ -7,6 +7,11 @@ export default class PlayScene extends Phaser.Scene {
 
     preload() {
         this.load.image('luxmetre', '/static/luxmetrePro.jfif');
+        // scene.load.plugin(
+        //     'rexgrayscalepipelineplugin',
+        //     'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgrayscalepipelineplugin.min.js',
+        //     true
+        // );
     }
 
     displayScene() {

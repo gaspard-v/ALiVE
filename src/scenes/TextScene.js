@@ -27,7 +27,8 @@ export default class TextScene extends Phaser.Scene {
             0x6666
         );
         const buttonXPosition = this.rectangle.width;
-        const buttonYPosition = this.game.config.height - this.rectangle.height;
+        const buttonYPosition =
+            (this.game.config.height - this.rectangle.height) / 2;
         this.closeButton = this.add
             .text(buttonXPosition, buttonYPosition, 'close')
             .setInteractive({ useHandCursor: true });
