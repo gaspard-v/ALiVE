@@ -1,6 +1,7 @@
 import * as Phaser from 'phaser';
 import PlayScene from './src/scenes/PlayScene';
 import TextScene from './src/scenes/TextScene';
+import GrayScalePipelinePlugin from 'phaser3-rex-plugins/plugins/grayscalepipeline-plugin.js';
 
 const config = {
     name: 'ALiVE',
@@ -14,6 +15,15 @@ const config = {
     autoCenter: true,
     antialias: true,
     autoFocus: true,
+    plugins: {
+        global: [
+            {
+                key: 'rexGrayScalePipeline',
+                plugin: GrayScalePipelinePlugin,
+                start: true,
+            },
+        ],
+    },
     scene: [PlayScene, TextScene],
 };
 
