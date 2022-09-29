@@ -22,6 +22,15 @@ const config = {
     autoCenter: true,
     antialias: true,
     autoFocus: true,
+    plugins: {
+        global: [
+            {
+                key: 'rexGrayScalePipeline',
+                plugin: GrayScalePipelinePlugin,
+                start: true,
+            },
+        ],
+    },
     scene: [PlayScene, TextScene],
 };
 

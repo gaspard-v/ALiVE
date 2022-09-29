@@ -1,6 +1,7 @@
 {
     "dependencies": {
-        "phaser": "^3.55.2"
+        "phaser": "^3.55.2",
+        "phaser3-rex-plugins": "^1.1.73"
     },
     "devDependencies": {
         "@babel/core": "^7.19.1",
