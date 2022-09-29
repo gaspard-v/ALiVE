@@ -11,6 +11,7 @@ export default class TextScene extends Phaser.Scene {
 
     preload() {
         this.load.text('luxmetreText', '/static/luxmetreText.txt');
+        this.load.image('closeIcon', '/static/close.png');
     }
 
     stopScene() {
@@ -30,7 +31,7 @@ export default class TextScene extends Phaser.Scene {
         const buttonYPosition =
             (this.game.config.height - this.rectangle.height) / 2;
         this.closeButton = this.add
-            .text(buttonXPosition, buttonYPosition, 'close')
+            .image(buttonXPosition, buttonYPosition, 'closeIcon')
             .setInteractive({ useHandCursor: true });
         this.closeButton.on('pointerdown', () => this.stopScene());
         this.texte = this.add.text(
