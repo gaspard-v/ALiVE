@@ -22,7 +22,7 @@ const config = {
     autoCenter: true,
     antialias: true,
     autoFocus: true,
-    scene: [PlayScene],
+    scene: [PlayScene, TextScene],
 };
 
 window.game = new Phaser.Game(config);
