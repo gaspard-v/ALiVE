@@ -27,7 +27,8 @@ export default class TextScene extends Phaser.Scene {
             (game.config.height * 3) / 4,
             0x6666
         );
-        const buttonXPosition = this.rectangle.width;
+        const buttonXPosition =
+            this.rectangle.width + (this.rectangle.width * 1) / 6;
         const buttonYPosition =
             (this.game.config.height - this.rectangle.height) / 2;
         this.closeButton = this.add
