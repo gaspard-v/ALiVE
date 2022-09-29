@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import PlayScene from './src/scenes/PlayScene';
+import TextScene from './src/scenes/TextScene';
 
 const config = {
     name: 'ALiVE',
