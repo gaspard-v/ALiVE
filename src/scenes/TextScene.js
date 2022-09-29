@@ -34,9 +34,9 @@ export default class TextScene extends Phaser.Scene {
             .setInteractive({ useHandCursor: true });
         this.closeButton.on('pointerdown', () => this.stopScene());
         this.texte = this.add.text(
-            game.config.width / 2,
-            game.config.height / 2,
-            'luxmetreText',
+            game.config.width / 4,
+            game.config.height / 4,
+            "Ceci est le descriptif d'un luxmetre",
             {
                 fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
             }
