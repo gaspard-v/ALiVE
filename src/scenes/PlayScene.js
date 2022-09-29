@@ -7,6 +7,7 @@ export default class PlayScene extends Phaser.Scene {
 
     preload() {
         this.load.image('luxmetre', '/static/luxmetrePro.jfif');
+        this.load.audio('ambiance', '/static/atmosphere.mp3.')
     }
 
     create() {
