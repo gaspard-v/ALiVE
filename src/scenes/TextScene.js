@@ -19,18 +19,33 @@ export default class TextScene extends Phaser.Scene {
         this.scene.start('PlayScene');
     }
 
+    createRectangle = (x, y, height, width) => {};
+
     create() {
-        this.rectangle = this.add.rectangle(
-            game.config.width / 2,
-            game.config.height / 2,
+        // this.rectangle = this.add.rectangle(
+        //     game.config.width / 2,
+        //     game.config.height / 2,
+        //     (game.config.width * 3) / 4,
+        //     (game.config.height * 3) / 4,
+        //     0x6666
+        // );
+        this.graphics = this.add.graphics();
+        this.graphics.fillStyle(0x6666);
+        this.rectangle = this.graphics.fillRoundedRect(
+            0,
+            0,
             (game.config.width * 3) / 4,
             (game.config.height * 3) / 4,
-            0x6666
+            32
         );
-        const buttonXPosition =
-            this.rectangle.width + (this.rectangle.width * 1) / 6;
-        const buttonYPosition =
-            (this.game.config.height - this.rectangle.height) / 2;
+        this.rectangle.setX(game.config.width / 8);
+        this.rectangle.setY(game.config.height / 8);
+
+        const buttonXPosition = this.rectangle.x;
+        const buttonYPosition = this.rectangle.y;
+        console.log(
+            `${this.rectangle.x} ${this.rectangle.y} ${this.rectangle.z} ${this.rectangle.w}`
+        );
         this.closeButton = this.add
             .image(buttonXPosition, buttonYPosition, 'closeIcon')
             .setInteractive({ useHandCursor: true });
