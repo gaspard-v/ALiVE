@@ -19,43 +19,45 @@ export default class TextScene extends Phaser.Scene {
         this.scene.start('PlayScene');
     }
 
-    createRectangle = (x, y, height, width) => {};
+    createRectangle = (
+        x,
+        y,
+        width,
+        height,
+        radius,
+        color,
+        depth = undefined
+    ) => {
+        const graphics = this.add.graphics();
+        graphics.fillStyle(color);
+        const rectangle = graphics.fillRoundedRect(0, 0, width, height, radius);
+        rectangle.setX(x);
+        rectangle.setY(y);
+        const closeButton = this.add
+            .image(0, 0, 'closeIcon')
+            .setInteractive({ useHandCursor: true });
+        closeButton.setX(x + width - closeButton.width);
+        closeButton.setY(y + closeButton.height);
+        closeButton.on('pointerdown', () => this.stopScene());
+    };
 
     create() {
-        // this.rectangle = this.add.rectangle(
-        //     game.config.width / 2,
-        //     game.config.height / 2,
-        //     (game.config.width * 3) / 4,
-        //     (game.config.height * 3) / 4,
-        //     0x6666
-        // );
-        this.graphics = this.add.graphics();
-        this.graphics.fillStyle(0x6666);
-        this.rectangle = this.graphics.fillRoundedRect(
-            0,
-            0,
+        this.createRectangle(
+            game.config.width / 8,
+            game.config.height / 8,
             (game.config.width * 3) / 4,
             (game.config.height * 3) / 4,
-            32
+            32,
+            0x6666
         );
-        this.rectangle.setX(game.config.width / 8);
-        this.rectangle.setY(game.config.height / 8);
 
-        const buttonXPosition = this.rectangle.x;
-        const buttonYPosition = this.rectangle.y;
-        console.log(
-            `${this.rectangle.x} ${this.rectangle.y} ${this.rectangle.z} ${this.rectangle.w}`
-        );
-        this.closeButton = this.add
-            .image(buttonXPosition, buttonYPosition, 'closeIcon')
-            .setInteractive({ useHandCursor: true });
-        this.closeButton.on('pointerdown', () => this.stopScene());
         this.texte = this.add.text(
             game.config.width / 4,
             game.config.height / 4,
             "Ceci est le descriptif d'un luxmetre",
             {
                 fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+                fontSize: 64,
             }
         );
     }
