@@ -1,13 +1,7 @@
 import * as Phaser from 'phaser';
 import PlayScene from './src/scenes/PlayScene';
-import MainMenuScene from './src/scenes/MainMenu';
-
-const ratio = Math.max(
-    window.innerWidth / window.innerHeight,
-    window.innerHeight / window.innerWidth
-);
-const DEFAULT_HEIGHT = 720; // any height you want
-const DEFAULT_WIDTH = ratio * DEFAULT_HEIGHT;
+import TextScene from './src/scenes/TextScene';
+import GrayScalePipelinePlugin from 'phaser3-rex-plugins/plugins/grayscalepipeline-plugin.js';
 
 const config = {
     name: 'ALiVE',
