@@ -25,7 +25,7 @@ const config = {
             },
         ],
     },
-    scene: [PlayScene, TextScene],
+    scene: [PlayScene],
 };
 
 window.game = new Phaser.Game(config);

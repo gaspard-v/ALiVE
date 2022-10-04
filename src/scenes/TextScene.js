@@ -5,8 +5,7 @@ export default class TextScene extends Phaser.Scene {
     y = Phaser.Math.Between(64, 128);
 
     constructor() {
-        console.log('Starting Textscene');
-        super({ key: 'TextScene' });
+        super({ key: 'TextScene', active: false });
     }
 
     preload() {
@@ -15,8 +14,8 @@ export default class TextScene extends Phaser.Scene {
     }
 
     stopScene() {
-        this.scene.stop('TextScene');
-        this.scene.start('PlayScene');
+        // this.scene.stop('TextScene');
+        // this.scene.start('PlayScene');
     }
 
     createRectangle = (
