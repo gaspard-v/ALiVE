@@ -20,26 +20,26 @@ export default class PlayScene extends Phaser.Scene {
     desactiveScene() {
         this.scene.setActive(false);
         this.scene.sendToBack();
-        this.blur.active = true;
+        // this.blur.active = true;
     }
 
     reactiveScene() {
         this.scene.setActive(true);
         this.scene.bringToTop();
         console.log('reactiveScene');
-        this.blur.active = false;
+        // this.blur.active = false;
     }
 
     create() {
         this.scene.bringToTop();
         this.textScene = this.scene.get('TextScene');
         this.textScene.scene.stop();
-        this.blur = this.plugins
-            .get('rexKawaseBlurPipeline')
-            .add(this.cameras.main, {
-                intensity: 1,
-            });
-        this.blur.active = false;
+        // this.blur = this.plugins
+        //     .get('rexKawaseBlurPipeline')
+        //     .add(this.cameras.main, {
+        //         intensity: 1,
+        //     });
+        // this.blur.active = false;
         const exterior1 = this.add.image(
             game.config.width / 2,
             game.config.height / 2,

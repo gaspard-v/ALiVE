@@ -45,6 +45,9 @@ export default class TextScene extends Phaser.Scene {
         closeButton.setX(x + width - closeButton.width);
         closeButton.setY(y + closeButton.height);
         closeButton.on('pointerdown', () => this.stopScene());
+        const blur = this.plugins.get('rexKawaseBlurPipeline').add(rectangle, {
+            intensity: 1,
+        });
     };
 
     create() {
