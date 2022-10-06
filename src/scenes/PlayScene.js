@@ -10,35 +10,45 @@ export default class PlayScene extends Phaser.Scene {
         this.load.image('exterior1', '/static/exterior1.jpg');
     }
 
-    displayScene() {
-        // this.textScene.scene.start();
-        // this.scene.sendToBack();
-        // this.luxmeter.setInteractive({ useHandCursor: false });
-        // this.plugins.get('rexGrayScalePipeline').add(this.cameras.main, {
-        //     intensity: 1,
-        // });
-        console.log('print');
+    displayText() {
+        console.log('displayText');
+        this.textScene.data.set('reactiveScene', this.reactiveScene.bind(this));
+        this.textScene.scene.start();
+        this.desactiveScene();
+    }
+
+    desactiveScene() {
+        this.scene.setActive(false);
+        this.scene.sendToBack();
+        this.blur.active = true;
+    }
+
+    reactiveScene() {
+        this.scene.setActive(true);
+        this.scene.bringToTop();
+        console.log('reactiveScene');
+        this.blur.active = false;
     }
 
     create() {
         this.scene.bringToTop();
-        // this.textScene = this.scene.get('TextScene');
-        // this.textScene.scene.stop();
+        this.textScene = this.scene.get('TextScene');
+        this.textScene.scene.stop();
+        this.blur = this.plugins
+            .get('rexKawaseBlurPipeline')
+            .add(this.cameras.main, {
+                intensity: 1,
+            });
+        this.blur.active = false;
         const exterior1 = this.add.image(
             game.config.width / 2,
             game.config.height / 2,
             'exterior1'
         );
-        const luxmeter = this.add
+        this.luxmeter = this.add
             .image(game.config.width / 2, game.config.height / 2, 'luxmetre')
             .setInteractive({ useHandCursor: true });
 
-        //this.luxmeter.on('pointerup', () => this.displayScene());
-        luxmeter.on('pointerdown', (pointer) => {
-            console.log('pointerdown');
-        });
-        luxmeter.on('pointerup', (pointer) => {
-            console.log('pointerup');
-        });
+        this.luxmeter.on('pointerup', () => this.displayText());
     }
 }
