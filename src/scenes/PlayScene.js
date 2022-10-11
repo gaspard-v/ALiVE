@@ -21,6 +21,7 @@ export default class PlayScene extends Phaser.Scene {
         this.scene.setActive(false);
         this.scene.sendToBack();
         this.blur.active = true;
+        this.darkRectangle.setVisible(true);
     }
 
     reactiveScene() {
@@ -28,6 +29,7 @@ export default class PlayScene extends Phaser.Scene {
         this.scene.bringToTop();
         console.log('reactiveScene');
         this.blur.active = false;
+        this.darkRectangle.setVisible(false);
     }
 
     create() {
@@ -50,5 +52,16 @@ export default class PlayScene extends Phaser.Scene {
             .setInteractive({ useHandCursor: true });
 
         this.luxmeter.on('pointerup', () => this.displayText());
+        const darkColor = new Phaser.Display.Color(0, 0, 0);
+        this.darkRectangle = this.add
+            .rectangle(
+                game.config.width / 2,
+                game.config.height / 2,
+                game.config.width,
+                game.config.height,
+                darkColor
+            )
+            .setAlpha(0.7)
+            .setVisible(false);
     }
 }
