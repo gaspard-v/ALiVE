@@ -10,7 +10,7 @@ export default class TextScene extends Phaser.Scene {
 
     preload() {
         this.load.text('luxmetreText', '/static/luxmetreText.txt');
-        this.load.image('closeIcon', '/static/close.png');
+        this.load.image('closeIcon', '/static/close2.png');
     }
 
     stopScene() {

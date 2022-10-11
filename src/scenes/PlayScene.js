@@ -40,7 +40,7 @@ export default class PlayScene extends Phaser.Scene {
                 intensity: 1,
             });
         this.blur.active = false;
-        const exterior1 = this.add.image(
+        this.exterior1 = this.add.image(
             game.config.width / 2,
             game.config.height / 2,
             'exterior1'
