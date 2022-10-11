@@ -38,7 +38,6 @@ export default class TextScene extends Phaser.Scene {
         const rectangle = graphics.fillRoundedRect(0, 0, width, height, radius);
         rectangle.setX(x);
         rectangle.setY(y);
-        rectangle.setAlpha(0.5);
         const closeButton = this.add
             .image(0, 0, 'closeIcon')
             .setInteractive({ useHandCursor: true });
@@ -54,8 +53,9 @@ export default class TextScene extends Phaser.Scene {
             (game.config.width * 3) / 4,
             (game.config.height * 3) / 4,
             32,
-            0x262626
+            0x6666
         );
+
         this.texte = this.add.text(
             game.config.width / 4,
             game.config.height / 4,
