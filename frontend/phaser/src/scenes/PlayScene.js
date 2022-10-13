@@ -7,7 +7,8 @@ export default class PlayScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('luxmetre', '/static/luxmetrePro.png');
+        this.load.image('luxmetreOld', '/static/luxmetrePro.png');
+        this.load.image('luxmetre', '/static/mglass.png');
         this.load.image('exterior1', '/static/exterior1.jpg');
         this.load.text('luxmeterTitle', '/static/luxmeterTitle.txt');
     }
