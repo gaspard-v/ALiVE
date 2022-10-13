@@ -66,7 +66,7 @@ CREATE TABLE Sentence (
     PRIMARY KEY(id)
 );
 
-CREATE TABLE Character (
+CREATE TABLE Characters (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     name VARCHAR(50),
     color VARCHAR(20),
@@ -80,50 +80,57 @@ CREATE TABLE Administrator (
     PRIMARY KEY(id)
 );
 
+CREATE TABLE Door (
+    id BIGINT UNSIGNED AUTO_INCREMENT,
+    Xcoord INT,
+    Ycoord INT,
+    PRIMARY KEY(id)
+);
+
 ALTER TABLE RoomObject
     ADD COLUMN (
         ObjectId BIGINT UNSIGNED NOT NULL,
         PlaceRoomId BIGINT UNSIGNED NOT NULL
     ),
-    ADD CONSTRAINT fk_Object FOREIGN KEY (ObjectId) REFERENCES Object(id),
-    ADD CONSTRAINT fk_PlaceRoom FOREIGN KEY (PlaceRoomId) REFERENCES PlaceRoom(id),
-    ADD UNIQUE INDEX ux_Object_PlaceRoom (ObjectId, PlaceRoomId);
+    ADD CONSTRAINT fk_Object_RoomObject FOREIGN KEY (ObjectId) REFERENCES Object(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT fk_PlaceRoom_RoomObject FOREIGN KEY (PlaceRoomId) REFERENCES PlaceRoom(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD UNIQUE INDEX ux_Object_PlaceRoom_RoomObject (ObjectId, PlaceRoomId);
 
 ALTER TABLE PlaceRoom
     ADD COLUMN (
         PlaceId BIGINT UNSIGNED NOT NULL,
         RoomId BIGINT UNSIGNED NOT NULL
     ),
-    ADD CONSTRAINT fk_Place FOREIGN KEY (PlaceId) REFERENCES Place(id),
-    ADD CONSTRAINT fk_Room FOREIGN KEY (RoomId) REFERENCES Room(id),
-    ADD UNIQUE INDEX ux_Place_Room (PlaceId, RoomId);
+    ADD CONSTRAINT fk_Place_PlaceRoom FOREIGN KEY (PlaceId) REFERENCES Place(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT fk_Room_PlaceRoom FOREIGN KEY (RoomId) REFERENCES Room(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD UNIQUE INDEX ux_Place_Room_PlaceRoom (PlaceId, RoomId);
 
 ALTER TABLE Place
     ADD COLUMN (
-        MapId BIGINT UNSIGNED NOT NULL,
+        MapId BIGINT UNSIGNED NOT NULL
     ),
-    ADD CONSTRAINT fk_map FOREIGN KEY (MapId) REFERENCES Map(id)
-    ADD UNIQUE INDEX ux_map (MapId);
+    ADD CONSTRAINT fk_Map_Place FOREIGN KEY (MapId) REFERENCES Map(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD UNIQUE INDEX ux_Map_Place (MapId);
 
 ALTER TABLE Door
     ADD COLUMN (
         StartingPlaceRoomId BIGINT UNSIGNED NOT NULL,
-        DestinationPlaceRoomId BIGINT UNSIGNED NOT NULL,
+        DestinationPlaceRoomId BIGINT UNSIGNED NOT NULL
     ),
-    ADD CONSTRAINT fk_starting_room FOREIGN KEY (StartingPlaceRoomId) REFERENCES Room(id),
-    ADD CONSTRAINT fk_destination_room FOREIGN KEY(DestinationPlaceRoomId) REFERENCES Room(id),
-    ADD UNIQUE INDEX ux_room (StartingPlaceRoomId, DestinationPlaceRoomId);
+    ADD CONSTRAINT fk_starting_room_Door FOREIGN KEY (StartingPlaceRoomId) REFERENCES Room(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT fk_destination_room_Door FOREIGN KEY(DestinationPlaceRoomId) REFERENCES Room(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD UNIQUE INDEX ux_room_Door (StartingPlaceRoomId, DestinationPlaceRoomId);
 
 ALTER TABLE Day
     ADD COLUMN (
         DialogueId BIGINT UNSIGNED,
         MapId BIGINT UNSIGNED NOT NULL UNIQUE
     ),
-    ADD CONSTRAINT fk_dialogue FOREIGN KEY (DialogueId) REFERENCES Dialogue(id),
-    ADD CONSTRAINT  fk_map FOREIGN KEY (MapId) REFERENCES Map(id);
+    ADD CONSTRAINT fk_dialogue_Day FOREIGN KEY (DialogueId) REFERENCES Dialogue(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT  fk_map_Day FOREIGN KEY (MapId) REFERENCES Map(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE Sentence
     ADD COLUMN (
-        DialogueId BIGINT UNSIGNED NOT NULL UNIQUE
+        DialogueId BIGINT UNSIGNED NOT NULL
     ),
-    ADD CONSTRAINT fk_dialogue FOREIGN KEY (DialogueId) REFERENCES Dialogue(id);
+    ADD CONSTRAINT fk_dialogue_Sentence FOREIGN KEY (DialogueId) REFERENCES Dialogue(id) ON DELETE CASCADE ON UPDATE CASCADE;
