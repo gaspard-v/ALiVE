@@ -81,13 +81,13 @@ export default class PlayScene extends Phaser.Scene {
 
     update() {
         this.luxmeter.on('pointerover', () => {
-            this.luxmeterName.setVisible(true);
             this.infosRectangle.setVisible(true);
+            this.luxmeterName.setVisible(true);
             setTimeout(() => 20000);
         });
         this.luxmeter.on('pointerout', () => {
-            this.luxmeterName.setVisible(false);
             this.infosRectangle.setVisible(false);
+            this.luxmeterName.setVisible(false);
         });
     }
 }
