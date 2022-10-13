@@ -14,7 +14,6 @@ export default class TextScene extends Phaser.Scene {
     }
 
     stopScene() {
-        console.log('stopScene');
         const reactiveScene = this.data.values.reactiveScene;
 
         this.scene.stop();
@@ -59,7 +58,7 @@ export default class TextScene extends Phaser.Scene {
         this.texte = this.add.text(
             game.config.width / 4,
             game.config.height / 4,
-            "Ceci est le descriptif d'un luxmetre",
+            this.cache.text.get('luxmetreText'),
             {
                 fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
                 fontSize: 64,
