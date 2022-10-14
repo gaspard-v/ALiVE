@@ -1,6 +1,59 @@
 #globalEdition {
-    background-color: antiquewhite;
+    background-color: #99582A;
     min-height: 100vh;
 	white-space: pre-line;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr) ;
+    grid-template-areas: 
+    "Searchbar . . "
+    ". Buttons Buttons "
+    ". Buttons Buttons ";
 }
 
+.Buttons{
+    grid-area: Buttons;
+    display: grid;
+    grid-template-columns: repeat(2,'min-content');
+    grid-template-rows: repeat(2,'min-content') ;
+    grid-template-areas: 
+    "Objects Rooms"
+    "Maps Days";
+}
+
+.SearchBar{
+    grid-area: SearchBar;
+
+}
+
+.EditButton img{
+    width: 60vh;
+    height: 35vh;
+    object-fit: cover;
+}
+
+.EditButton{
+    border: 0;
+    max-width: 60vh;
+    max-height: 35h;
+    padding: 0;
+}
+
+#Objects{
+    grid-area: Objects;
+
+}
+
+#Rooms{
+    grid-area: Rooms;
+
+}
+
+#Days{
+    grid-area: Days;
+
+}
+
+#Maps{
+    grid-area: Maps;
+
+}
