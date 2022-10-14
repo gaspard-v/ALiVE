@@ -7,8 +7,9 @@ export default function SearchBar(){
         <>
         <div id="searchBarObject">
             <button className="searchbar-button">
-                <img className="glass" src={glass}></img>
+                <img className="glass" src={glass} alt=""></img>
             </button>
+            
             <input className="searchbar" type="text" name="name"></input>
         </div>
         </>
