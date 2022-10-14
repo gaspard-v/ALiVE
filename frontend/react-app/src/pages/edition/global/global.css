@@ -4,9 +4,10 @@
 	white-space: pre-line;
     display: grid;
     grid-template-columns: min-content 1fr;
-    grid-template-rows: min-content 4.5em 1fr;
-    grid-template-areas: 
-    "Searchbar . "
+    grid-template-rows: 2em min-content 4em 1fr;
+    grid-template-areas:
+    ". ." 
+    "Searchddbar . "
     ". ."
     ". Buttons ";
 }
@@ -14,7 +15,7 @@
 .Buttons{
     grid-area: Buttons;
     display: grid;
-    grid-gap: 2.5em;
+    grid-gap: 1.5em;
     grid-template-columns: min-content min-content;
     grid-template-rows: min-content min-content ;
     grid-template-areas: 
@@ -28,17 +29,17 @@
 }
 
 .EditButton img{
-    width: 60vh;
-    height: 35vh;
+    width: 70vh;
+    height: 38vh;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .EditButton{
     background-color: transparent;
     border: 0;
-    max-width: 60vh;
-    max-height: 35vh;
+    max-width: 70vh;
+    max-height: 38vh;
     padding: 0;
 }
 
