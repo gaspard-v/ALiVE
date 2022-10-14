@@ -10,7 +10,6 @@ function GlobalEdition(){
     return(
         <>
         <div id="globalEdition">
-            Edition
             <SearchBar/> 
             <div className="Buttons">
             <button id="Objects" className="EditButton"><img src={objects} alt="Objets"></img></button>

@@ -1,20 +1,22 @@
 #globalEdition {
-    background-color: #99582A;
+    background-color: #432818;
     min-height: 100vh;
 	white-space: pre-line;
-    grid-template-columns: repeat(3,1fr);
-    grid-template-rows: repeat(3,1fr) ;
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-template-rows: min-content 4.5em 1fr;
     grid-template-areas: 
-    "Searchbar . . "
-    ". Buttons Buttons "
-    ". Buttons Buttons ";
+    "Searchbar . "
+    ". ."
+    ". Buttons ";
 }
 
 .Buttons{
     grid-area: Buttons;
     display: grid;
-    grid-template-columns: repeat(2,'min-content');
-    grid-template-rows: repeat(2,'min-content') ;
+    grid-gap: 2.5em;
+    grid-template-columns: min-content min-content;
+    grid-template-rows: min-content min-content ;
     grid-template-areas: 
     "Objects Rooms"
     "Maps Days";
@@ -22,19 +24,21 @@
 
 .SearchBar{
     grid-area: SearchBar;
-
+    
 }
 
 .EditButton img{
     width: 60vh;
     height: 35vh;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 .EditButton{
+    background-color: transparent;
     border: 0;
     max-width: 60vh;
-    max-height: 35h;
+    max-height: 35vh;
     padding: 0;
 }
 
