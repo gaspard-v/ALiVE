@@ -6,8 +6,8 @@
 }
 
 .glass {
-    max-width: 1.6em;
-    max-height: 1.6em;
+    max-width: 1.4em;
+    max-height: 1.4em;
     padding: 12%;
     opacity: 0.4;
     }
@@ -21,7 +21,7 @@
     border-top-right-radius: 1em;
     border-bottom-right-radius: 1em;
     border-left: 1px grey solid;
-    height: 2em;
+    height: 1.8em;
     width: 160px;
     color: #CCC;
 }
@@ -34,4 +34,4 @@
     border : 0;
     padding: 0;
     width: 2em; 
-    height: 2em;}
+    height: 1.8em;}

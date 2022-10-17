@@ -3,13 +3,13 @@
     min-height: 100vh;
 	white-space: pre-line;
     display: grid;
-    grid-template-columns: min-content 1fr;
-    grid-template-rows: 2em min-content 4em 1fr;
+    grid-template-columns: 1em 1fr min-content 1fr;
+    grid-template-rows: 1em min-content 3em 1fr;
     grid-template-areas:
-    ". ." 
-    "Searchddbar . "
-    ". ."
-    ". Buttons ";
+    ". . . ."
+    ". SearchBar SearchBar . "
+    ". . . ."
+    ". . Buttons .";
 }
 
 .Buttons{
@@ -23,9 +23,8 @@
     "Maps Days";
 }
 
-.SearchBar{
+#searchBarObject{
     grid-area: SearchBar;
-    
 }
 
 .EditButton img{
@@ -36,12 +35,29 @@
 }
 
 .EditButton{
+    display: grid;
     background-color: transparent;
     border: 0;
     max-width: 70vh;
     max-height: 38vh;
     padding: 0;
+    transition: .5s;
+    grid-template-columns: min-content;
+    grid-template-rows: min-content;
+    grid-template-areas: "ButtonTitle";
 }
+
+.ButtonTitle{
+    grid-area: ButtonTitle;
+    display: none;
+}
+
+.EditButton:hover{
+    transform: scale(1.01);
+    filter: blur(1px);
+}
+
+.EditButton:oncl
 
 #Objects{
     grid-area: Objects;
