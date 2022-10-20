@@ -1,3 +1,35 @@
 #ListComponent{
-    border: 1px red;
+    border: 1px solid ;
+    height: 6vh;
+    min-width: 40vh;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 5% 20% 5% 65% 5%;
+    grid-template-rows: 5% 90% 5%;
+    grid-template-areas: 
+    ". . . . ."
+    ". ObjImg . ObjName ."
+    ". . . . .";
+    background-color: #4E2800;
+    z-index: 0;
+    margin:0.25em 0 0.25em 0;
 }
+
+#ListComponent img{
+    grid-area: ObjImg;
+    object-fit: cover;
+    height: 100%;
+    width: 100%; 
+    background-color: #EDDBC6;
+}
+
+.objectName{
+    margin: 4%;
+    grid-area: ObjName;
+    font-size: 25px;
+    font-weight: bold;
+    color:#ffffff;
+    align-items: center;
+
+}
+

@@ -3,16 +3,18 @@
     min-height: 100vh;
     white-space: pre-line;
     display: grid;
-    grid-template-columns: 1em 1fr min-content 1fr;
-    grid-template-rows: 1em min-content 3em 1fr;
+    grid-template-columns: 1em min-content min-content 1fr;
+    grid-template-rows: 1em min-content min-content 1fr;
     grid-template-areas:
         ". . . ."
         ". SearchBar SearchBar . "
-        ". . ListObj ."
-        ". . . .";
+        "ListMenu ListMenu . ."
+        "ListMenu ListMenu . .";
+    }
+
+#ListMenu{
+    overflow: hidden;
+    grid-area: ListMenu;
 }
 
-#ListComponent{
-    grid-area: ListObj
-}
 

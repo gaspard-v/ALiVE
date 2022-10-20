@@ -1,14 +1,18 @@
 import "./objects.css";
 import React from "react";
 import SearchBar from "../../../components/searchbar/SearchBar";
-import ListComponent from "../../../components/selections/list/component/ListComponent";
+import ListMenu from "../../../components/selections/list/menu/ListMenu";
+
 
 function ObjectsEdition(){
+
+
+
     return(
         <>
         <div id="objectEdition">
             <SearchBar/>
-            <ListComponent/>
+            <ListMenu/>
         </div>
         </>
     )
