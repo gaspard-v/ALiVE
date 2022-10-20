@@ -27,6 +27,10 @@
     grid-area: SearchBar;
 }
 
+.EditButton > *{
+    grid-area: EditButton;
+}
+
 .EditButton img{
     width: 70vh;
     height: 38vh;
@@ -36,28 +40,34 @@
 
 .EditButton{
     display: grid;
+    grid-template-areas: "EditButton";
     background-color: transparent;
     border: 0;
     max-width: 70vh;
     max-height: 38vh;
     padding: 0;
     transition: .5s;
-    grid-template-columns: min-content;
-    grid-template-rows: min-content;
-    grid-template-areas: "ButtonTitle";
+    place-content: center;
+    place-items: center;
 }
 
 .ButtonTitle{
-    grid-area: ButtonTitle;
-    display: none;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    font-size: 3tem;
+    color: aliceblue;
+    
 }
 
-.EditButton:hover{
+
+
+.EditButton img:hover{
     transform: scale(1.01);
     filter: blur(1px);
 }
 
-.EditButton:oncl
+
 
 #Objects{
     grid-area: Objects;
