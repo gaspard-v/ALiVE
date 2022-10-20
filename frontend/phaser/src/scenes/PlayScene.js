@@ -7,8 +7,8 @@ export default class PlayScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('luxmetreOld', '/static/luxmetrePro.png');
-        this.load.image('luxmetre', '/static/mglass.png');
+        this.load.image('luxmetre', '/static/luxmetrePro.png');
+        this.load.image('mGlass', '/static/mglass.png');
         this.load.image('exterior1', '/static/exterior1.jpg');
         this.load.text('luxmeterTitle', '/static/luxmeterTitle.txt');
     }
@@ -49,7 +49,7 @@ export default class PlayScene extends Phaser.Scene {
             'exterior1'
         );
         this.luxmeter = this.add
-            .image(game.config.width / 2, game.config.height / 2, 'luxmetre')
+            .image(game.config.width / 2, game.config.height / 2, 'mGlass')
             .setInteractive({ useHandCursor: true });
 
         this.luxmeterName = this.add.text(game.config.width / 2 - 100, game.config.height / 2 - 190, this.cache.text.get('luxmeterTitle'), { fontFamily: 'Arial', fontSize: 32, color: 'white'}).setVisible(false);
