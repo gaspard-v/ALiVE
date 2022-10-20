@@ -1,45 +1,53 @@
 #globalEdition {
     background-color: #F5EBDF;
     min-height: 100vh;
-	white-space: pre-line;
+    white-space: pre-line;
     display: grid;
     grid-template-columns: 1em 1fr min-content 1fr;
     grid-template-rows: 1em min-content 3em 1fr;
     grid-template-areas:
-    ". . . ."
-    ". SearchBar SearchBar . "
-    ". . . ."
-    ". . Buttons .";
+        ". . . ."
+        ". SearchBar SearchBar . "
+        ". . . ."
+        ". . Buttons .";
 }
 
-.Buttons{
+a:visited {
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.Buttons {
     grid-area: Buttons;
     display: grid;
     grid-gap: 1.5em;
     grid-template-columns: min-content min-content;
-    grid-template-rows: min-content min-content ;
-    grid-template-areas: 
-    "Objects Rooms"
-    "Maps Days";
+    grid-template-rows: min-content min-content;
+    grid-template-areas:
+        "Objects Rooms"
+        "Maps Days";
 }
 
-#searchBarObject{
+#searchBarObject {
     grid-area: SearchBar;
 }
 
-.EditButton > *{
+.EditButton>* {
     grid-area: EditButton;
 }
 
-.EditButton img{
+.EditButton img {
     width: 70vh;
     height: 38vh;
     object-fit: cover;
-    border-radius: 5px;
-    filter: drop-shadow(0 0.5rem 0.75rem #3b1e00);
+    border-radius: 12px;
+    filter: drop-shadow(0 0.25rem 0.5rem #3b1e00);
 }
 
-.EditButton{
+.EditButton {
     display: grid;
     grid-template-areas: "EditButton";
     background-color: transparent;
@@ -52,40 +60,40 @@
     place-items: center;
 }
 
-.ButtonTitle{
+.ButtonTitle {
     position: relative;
     z-index: 1;
     text-align: center;
     font-size: 4em;
     color: aliceblue;
-    
+
 }
 
 
 
-.EditButton img:hover{
+.EditButton img:hover {
     transform: scale(1.01);
     filter: blur(1px) drop-shadow(0 0.75rem 0.75rem #3b1e00);
 }
 
 
 
-#Objects{
+#Objects {
     grid-area: Objects;
 
 }
 
-#Rooms{
+#Rooms {
     grid-area: Rooms;
 
 }
 
-#Days{
+#Days {
     grid-area: Days;
 
 }
 
-#Maps{
+#Maps {
     grid-area: Maps;
 
 }

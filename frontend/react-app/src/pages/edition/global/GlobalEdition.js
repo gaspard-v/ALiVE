@@ -12,10 +12,10 @@ function GlobalEdition(){
         <div id="globalEdition">
             <SearchBar className="GlobalSearchBar"/> 
             <div className="Buttons">
-            <button id="Objects" className="EditButton"><p className="ButtonTitle">Objets</p><img src={objects} alt="Objets"></img></button>
-            <button id="Rooms" className="EditButton"><p className="ButtonTitle">Pièces</p><img src={rooms} alt="Rooms"></img></button>
-            <button id="Maps" className="EditButton"><p className="ButtonTitle">Carte</p><img src={maps} alt="Maps"></img></button>
-            <button id="Days" className="EditButton"><p className="ButtonTitle">Journées</p><img src={days} alt="Days"></img></button>
+            <a id="Objects" className="EditButton" href="/edition/objects"><p className="ButtonTitle">Objets</p><img src={objects} alt="Objets"></img></a>
+            <a id="Rooms" className="EditButton" href="/edition/rooms"><p className="ButtonTitle">Pièces</p><img src={rooms} alt="Rooms"></img></a>
+            <a id="Maps" className="EditButton" href="/edition/maps"><p className="ButtonTitle">Carte</p><img src={maps} alt="Maps"></img></a>
+            <a id="Days" className="EditButton" href="/edition/days"><p className="ButtonTitle">Journées</p><img src={days} alt="Days"></img></a>
             </div>   
         </div>
         </>

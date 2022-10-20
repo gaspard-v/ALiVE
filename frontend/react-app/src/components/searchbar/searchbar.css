@@ -3,6 +3,7 @@
     grid-template-columns: min-content min-content;
     grid-template-areas: 'sbbutton sbbar';
     border-radius: 35em;
+    filter: drop-shadow(0 0.5rem 0.75rem #3b1e00);
 }
 
 .glass {
