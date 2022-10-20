@@ -1,5 +1,3 @@
-DROP DATABASE IF EXISTS alive;
-
 CREATE DATABASE alive CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE alive;
 
@@ -134,3 +132,7 @@ ALTER TABLE Sentence
         DialogueId BIGINT UNSIGNED NOT NULL
     ),
     ADD CONSTRAINT fk_dialogue_Sentence FOREIGN KEY (DialogueId) REFERENCES Dialogue(id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE USER 'alive'@'%' IDENTIFIED BY '5e6c&6iP&m6p6aQd$A&f';
+GRANT ALL ON alive TO 'alive'@'%';
+FLUSH PRIVILEGES;
