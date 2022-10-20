@@ -1,0 +1,18 @@
+#objectEdition {
+    background-color: #F5EBDF;
+    min-height: 100vh;
+    white-space: pre-line;
+    display: grid;
+    grid-template-columns: 1em 1fr min-content 1fr;
+    grid-template-rows: 1em min-content 3em 1fr;
+    grid-template-areas:
+        ". . . ."
+        ". SearchBar SearchBar . "
+        ". . ListObj ."
+        ". . . .";
+}
+
+#ListComponent{
+    grid-area: ListObj
+}
+
