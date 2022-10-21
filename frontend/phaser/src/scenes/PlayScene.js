@@ -78,17 +78,40 @@ export default class PlayScene extends Phaser.Scene {
             )
             .setAlpha(0.7)
             .setVisible(false);
+
+        this.luxmeter2 = this.add
+            .image(game.config.width / 2, game.config.height / 2, 'luxmetre')
+            .setInteractive({ useHandCursor: true }).setVisible(false);
+
+        var style = {
+            'background-color': 'red',
+            'width': '220px',
+            'height': '100px',
+            'font': '48px Arial',
+            'font-weight': 'bold'
+        };
+
+        var element = this.add.dom(400, 300, 'div', style, 'Phaser 3');
+        element.setVisible(true);
+        console.log(element);
+
+
+
     }
 
     update() {
         this.luxmeter.on('pointerover', () => {
-            this.infosRectangle.setVisible(true);
-            this.luxmeterName.setVisible(true);
-            setTimeout(() => 20000);
+            this.showInfos(true);
         });
         this.luxmeter.on('pointerout', () => {
-            this.infosRectangle.setVisible(false);
-            this.luxmeterName.setVisible(false);
+            this.showInfos(false);
         });
+    }
+
+    showInfos(bool) {
+        this.infosRectangle.setVisible(bool);
+        this.luxmeterName.setVisible(bool);
+        this.luxmeter2.setVisible(bool);
+        this.luxmeter.setVisible(!bool);
     }
 }
