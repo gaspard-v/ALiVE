@@ -3,12 +3,13 @@ import "./component.css";
 
 function ListComponent(props){
     const name = props.name;
-    const img = `data:image/png;base64,${props.img}`;
+    const img = props.img;
+    const url = props.url;
     return(
-        <div id="ListComponent">
+        <a id="ListComponent" href={url}>
             <img src={img}></img>
             <p className="objectName">{name}</p>
-        </div>
+        </a>
     )
 
 }

@@ -1,5 +1,9 @@
 #ListMenu{
     overflow-y: scroll;
-    max-height: 95vh;
+    max-height: 100vh;
     padding: 0;
+    scrollbar-width: none;
+    border-radius: 10px;
+    background-color: #EDDBC6;
+    filter: drop-shadow(0 0.15rem 0.25rem #271400);
 }

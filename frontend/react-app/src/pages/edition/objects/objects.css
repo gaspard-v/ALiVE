@@ -8,13 +8,17 @@
     grid-template-areas:
         ". . . ."
         ". SearchBar SearchBar . "
-        "ListMenu ListMenu . ."
-        "ListMenu ListMenu . .";
+        ". ListMenu . ."
+        ". ListMenu . .";
+        overflow: hidden;
     }
 
 #ListMenu{
-    overflow: hidden;
     grid-area: ListMenu;
+    
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
 
