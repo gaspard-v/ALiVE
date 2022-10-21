@@ -3,13 +3,16 @@
     min-height: 100vh;
     white-space: pre-line;
     display: grid;
-    grid-template-columns: 1em 1fr min-content 1fr;
-    grid-template-rows: 1em min-content 3em 1fr;
+    grid-template-columns: 1em  1fr 1em;
+    grid-template-rows: 1em min-content 3em 1fr 1em;
     grid-template-areas:
-        ". . . ."
-        ". SearchBar SearchBar . "
-        ". . . ."
-        ". . Buttons .";
+        ". . ."
+        ". SearchBar ."
+        ". . ."
+        ". Buttons ."
+        ". . . ";
+    align-content: center;
+    justify-items: center;
 }
 
 a:visited {

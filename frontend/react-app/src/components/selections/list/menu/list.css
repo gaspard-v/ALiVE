@@ -1,9 +1,17 @@
 #ListMenu{
+    grid-area: List;
     overflow-y: scroll;
-    max-height: 100vh;
-    padding: 0;
-    scrollbar-width: none;
-    border-radius: 10px;
-    background-color: #EDDBC6;
-    filter: drop-shadow(0 0.15rem 0.25rem #271400);
+    max-height: 88vh ;
+    padding:0;
+    margin: 0;
 }
+
+.Menu{
+    height: 96vh;
+}
+
+.Menu #searchBarObject{
+    padding: 0 2em 0 2em;
+}
+
+

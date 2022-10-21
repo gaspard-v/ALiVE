@@ -6,10 +6,10 @@ function ListComponent(props){
     const img = props.img;
     const url = props.url;
     return(
-        <a id="ListComponent" href={url}>
+        <button id="ListComponent" href={url}>
             <img src={img}></img>
             <p className="objectName">{name}</p>
-        </a>
+        </button>
     )
 
 }

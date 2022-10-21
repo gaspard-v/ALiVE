@@ -3,19 +3,27 @@
     min-height: 100vh;
     white-space: pre-line;
     display: grid;
-    grid-template-columns: 1em min-content min-content 1fr;
-    grid-template-rows: 1em min-content min-content 1fr;
+    grid-template-columns: 2vh min-content 1fr 2vh;
+    grid-template-rows: 2vh min-content 2vh;
     grid-template-areas:
         ". . . ."
-        ". SearchBar SearchBar . "
-        ". ListMenu . ."
-        ". ListMenu . .";
-        overflow: hidden;
+        ". Menu ObjEditionScreen . "
+        ". . . .";
+    justify-content: center; 
     }
 
-#ListMenu{
-    grid-area: ListMenu;
+.Menu{
+    scrollbar-width: none;
+    border-radius: 10px;
+    background-color: #EDDBC6;
+    filter: drop-shadow(0 0.1rem 0.2rem #787777);
+    grid-area: Menu;
+    max-width: min-content;
     
+}
+
+#ObjectEditionScreen{
+    grid-area: ObjEditionScreen;
 }
 
 ::-webkit-scrollbar {

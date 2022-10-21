@@ -3,7 +3,12 @@
     grid-template-columns: min-content min-content;
     grid-template-areas: 'sbbutton sbbar';
     border-radius: 35em;
-    filter: drop-shadow(0 0.15rem 0.25rem #271400);
+    filter: drop-shadow(0 0.15rem 0.25rem #aeaeae);
+    margin: 2vh 0 2vh 0;
+}
+
+#searchBarObject:hover{
+    filter: drop-shadow(0 0.15rem 0.25rem #898886);
 }
 
 .glass {
@@ -19,9 +24,9 @@
     padding-left:0.2em;
     outline: 0;
     border: 0;
-    border-top-right-radius: 1em;
-    border-bottom-right-radius: 1em;
-    border-left: 1px grey solid;
+    border-top-right-radius: 0.75em;
+    border-bottom-right-radius: 0.75em;
+    border-left: 1px rgb(198, 198, 198) solid;
     height: 1.8em;
     width: 160px;
     color: #CCC;
@@ -30,8 +35,8 @@
 .searchbar-button{
     grid-area: sbbutton; 
     background-color: white;
-    border-bottom-left-radius: 1em;
-    border-top-left-radius: 1em;
+    border-bottom-left-radius: 0.75em;
+    border-top-left-radius: 0.75em;
     border : 0;
     padding: 0;
     width: 2em; 
