@@ -52,17 +52,25 @@ export default class PlayScene extends Phaser.Scene {
             .image(game.config.width / 2, game.config.height / 2, 'mGlass')
             .setInteractive({ useHandCursor: true });
 
-        this.luxmeterName = this.add.text(game.config.width / 2 - 100, game.config.height / 2 - 190, this.cache.text.get('luxmeterTitle'), { fontFamily: 'Arial', fontSize: 32, color: 'white'}).setVisible(false);
+        this.luxmeterName = this.add
+            .text(
+                game.config.width / 2 - 100,
+                game.config.height / 2 - 190,
+                this.cache.text.get('luxmeterTitle'),
+                { fontFamily: 'Arial', fontSize: 32, color: 'white' }
+            )
+            .setVisible(false);
 
         const darkColor = new Phaser.Display.Color(0, 0, 0);
 
-        this.infosRectangle  = this.add.rectangle(
-            game.config.width / 2 - 40,
-            game.config.height / 2 - 170,
-            200,
-            40,
-            darkColor
-        )
+        this.infosRectangle = this.add
+            .rectangle(
+                game.config.width / 2 - 40,
+                game.config.height / 2 - 170,
+                200,
+                40,
+                darkColor
+            )
             .setAlpha(0.3)
             .setData(this.luxmeterName)
             .setVisible(false);
@@ -81,22 +89,17 @@ export default class PlayScene extends Phaser.Scene {
 
         this.luxmeter2 = this.add
             .image(game.config.width / 2, game.config.height / 2, 'luxmetre')
-            .setInteractive({ useHandCursor: true }).setVisible(false);
+            .setInteractive({ useHandCursor: true })
+            .setVisible(false);
 
-        var style = {
+        const style = {
             'background-color': 'red',
-            'width': '220px',
-            'height': '100px',
-            'font': '48px Arial',
-            'font-weight': 'bold'
+            width: '220px',
+            height: '100px',
+            font: '48px Arial',
+            'font-weight': 'bold',
         };
-
-        var element = this.add.dom(400, 300, 'div', style, 'Phaser 3');
-        element.setVisible(true);
-        console.log(element);
-
-
-
+        var element = this.add.dom(400, 100, 'div', style, 'mdr');
     }
 
     update() {
