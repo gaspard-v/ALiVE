@@ -38,9 +38,7 @@ export default class PlayScene extends Phaser.Scene {
         this.desactiveScene();
     }
 
-    displayTextScene() {
-
-    }
+    displayTextScene() {}
 
     desactiveScene() {
         this.scene.setActive(false);
@@ -74,6 +72,10 @@ export default class PlayScene extends Phaser.Scene {
         this.mGlass = this.add
             .image(game.config.width / 2, game.config.height / 2, 'mGlass')
             .setInteractive({ useHandCursor: true });
+        const glassImg = document.createElement('img');
+        glassImg.src = '/static/mglass.png';
+        glassImg.classList = ['glassClass'];
+        this.glassTest = this.add.dom(400, 300, glassImg);
 
         this.mGlass2 = this.add
             .image(game.config.width / 4, game.config.height / 1.3, 'mGlass')
@@ -163,25 +165,82 @@ export default class PlayScene extends Phaser.Scene {
         };
 
         var styleOnMGlass = {
-            'filter': 'drop-shadow(0 0 0.75rem crimson)',
+            filter: 'drop-shadow(0 0 0.75rem crimson)',
         };
 
         //this.mGlass1 = this.add.dom(this.cache.images.get('mGlass'));
 
         // luxmetre
-        this.mGlassDom = this.add.dom(game.config.width / 2 + 2, game.config.height / 2 - 68, 'div', styleBlur, '').setVisible(false);
-        this.elementBlur = this.add.dom(game.config.width / 2 + 2, game.config.height / 2 - 68, 'div', styleBlur, '').setVisible(false);
-        this.elementBoxTxt = this.add.dom(game.config.width / 2, game.config.height / 2 - 70, 'div1', styleTxt, '').setVisible(false);
-        this.elementTxt = this.add.dom(game.config.width / 2, game.config.height / 2 - 70, 'div1', styleTxt, this.cache.text.get('luxmeterTitle')).setVisible(false);
+        this.mGlassDom = this.add
+            .dom(
+                game.config.width / 2 + 2,
+                game.config.height / 2 - 68,
+                'div',
+                styleBlur,
+                ''
+            )
+            .setVisible(false);
+        this.elementBlur = this.add
+            .dom(
+                game.config.width / 2 + 2,
+                game.config.height / 2 - 68,
+                'div',
+                styleBlur,
+                ''
+            )
+            .setVisible(false);
+        this.elementBoxTxt = this.add
+            .dom(
+                game.config.width / 2,
+                game.config.height / 2 - 70,
+                'div1',
+                styleTxt,
+                ''
+            )
+            .setVisible(false);
+        this.elementTxt = this.add
+            .dom(
+                game.config.width / 2,
+                game.config.height / 2 - 70,
+                'div1',
+                styleTxt,
+                this.cache.text.get('luxmeterTitle')
+            )
+            .setVisible(false);
 
         // bouteille d'eau
-        this.elementBlur2 = this.add.dom(game.config.width / 4 + 2, game.config.height / 1.3 - 68, 'div', styleBlur, '').setVisible(false);
-        this.elementBoxTxt2 = this.add.dom(game.config.width / 4, game.config.height / 1.3 - 70, 'div1', styleTxt, '').setVisible(false);
-        this.elementTxt2 = this.add.dom(game.config.width / 4, game.config.height / 1.3 - 70, 'div1', styleTxt, this.cache.text.get('bottleTitle')).setVisible(false);
+        this.elementBlur2 = this.add
+            .dom(
+                game.config.width / 4 + 2,
+                game.config.height / 1.3 - 68,
+                'div',
+                styleBlur,
+                ''
+            )
+            .setVisible(false);
+        this.elementBoxTxt2 = this.add
+            .dom(
+                game.config.width / 4,
+                game.config.height / 1.3 - 70,
+                'div1',
+                styleTxt,
+                ''
+            )
+            .setVisible(false);
+        this.elementTxt2 = this.add
+            .dom(
+                game.config.width / 4,
+                game.config.height / 1.3 - 70,
+                'div1',
+                styleTxt,
+                this.cache.text.get('bottleTitle')
+            )
+            .setVisible(false);
 
         this.bottle = this.add
             .image(game.config.width / 4, game.config.height / 1.3, 'bottle')
-            .setInteractive({ useHandCursor: true }).setVisible(false);
+            .setInteractive({ useHandCursor: true })
+            .setVisible(false);
     }
 
     update() {
@@ -202,7 +261,6 @@ export default class PlayScene extends Phaser.Scene {
     showInfos(bool) {
         //this.infosRectangle.setVisible(bool);
         //this.luxmeterName.setVisible(bool);
-        this.showHalo(bool);
         //this.mGlass.setVisible(!bool);
         this.elementTxt.setVisible(bool);
         this.elementBlur.setVisible(bool);
@@ -211,14 +269,5 @@ export default class PlayScene extends Phaser.Scene {
     showInfos2(bool) {
         this.elementTxt2.setVisible(bool);
         this.elementBlur2.setVisible(bool);
-    }
-
-    showHalo(bool) {
-        if(bool) {
-            // this.mGlass.setItem('style', 'filter: drop-shadow(0 0 0.75rem crimson)');
-            // filter: drop-shadow(0 0 0.75rem crimson);
-            console.log(this.mGlass);
-        } else {
-        }
     }
 }
