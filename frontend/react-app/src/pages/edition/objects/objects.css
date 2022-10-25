@@ -1,10 +1,10 @@
 #objectEdition {
-    background-color: #F5EBDF;
+    background-color: #F1F5F9;
     min-height: 100vh;
     white-space: pre-line;
     display: grid;
-    grid-template-columns: 2vh min-content 1fr 2vh;
-    grid-template-rows: 2vh min-content 2vh;
+    grid-template-columns: 1% 24% 74% 1%;
+    grid-template-rows: 1% 98% 1%;
     grid-template-areas:
         ". . . ."
         ". Menu ObjEditionScreen . "
@@ -12,15 +12,11 @@
     justify-content: center; 
     }
 
-.Menu{
-    scrollbar-width: none;
-    border-radius: 10px;
-    background-color: #EDDBC6;
-    filter: drop-shadow(0 0.1rem 0.2rem #787777);
-    grid-area: Menu;
-    max-width: min-content;
-    
+#objectEdition > *{
+    margin: 0 1vh;
 }
+
+
 
 #ObjectEditionScreen{
     grid-area: ObjEditionScreen;

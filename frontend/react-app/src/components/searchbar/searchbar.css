@@ -19,24 +19,24 @@
     }
 
 .searchbar{
-    background-color: white;
+    background-color: #EDF2F7;
     padding: 0;
     padding-left:0.2em;
     outline: 0;
     border: 0;
-    border-top-right-radius: 0.75em;
-    border-bottom-right-radius: 0.75em;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
     border-left: 1px rgb(198, 198, 198) solid;
     height: 1.8em;
-    width: 160px;
-    color: #CCC;
+    width: 180px;
+    color: #999999;
 }
 
 .searchbar-button{
     grid-area: sbbutton; 
-    background-color: white;
-    border-bottom-left-radius: 0.75em;
-    border-top-left-radius: 0.75em;
+    background-color: #EDF2F7;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
     border : 0;
     padding: 0;
     width: 2em; 

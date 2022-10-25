@@ -10,10 +10,10 @@
     ". . . . ."
     ". ObjImg . ObjName ."
     ". . . . .";
-    background-color: #753D00;
+    background-color: #c6d3e7;
     z-index: 0;
     align-items: center;
-    margin:0.5em 0.8em 0.5em 0.8em;
+    margin:0.5em 0.6em 0.5em 0.6em;
     filter: drop-shadow(0 0.05rem 0.05rem #262421);
 }
 
