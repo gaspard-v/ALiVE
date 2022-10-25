@@ -7,6 +7,7 @@ CREATE TABLE Object (
     description TEXT,
     picture BLOB,
     isTool tinyint(1),
+    INDEX ix_name_object(name),
     PRIMARY KEY(id)
 );
 
@@ -21,6 +22,7 @@ CREATE TABLE Room (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
     picture BLOB,
+    INDEX ix_name_room(name),
     PRIMARY KEY(id)
 );
 
@@ -34,6 +36,7 @@ CREATE TABLE Place (
     name varchar(100) NOT NULL,
     Xcoord INT,
     Ycoord INT,
+    INDEX ix_name_place(name),
     PRIMARY KEY(id) 
 );
 
@@ -41,6 +44,7 @@ CREATE TABLE Map (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
     picture BLOB,
+    INDEX ix_name_map(name),
     PRIMARY KEY(id)
 );
 
@@ -48,6 +52,7 @@ CREATE TABLE Day (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
     description TEXT,
+    INDEX ix_name_day(name),
     PRIMARY KEY(id)
 );
 
@@ -68,12 +73,13 @@ CREATE TABLE Characters (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     name VARCHAR(50),
     color VARCHAR(20),
+    INDEX ix_name_characters(name),
     PRIMARY KEY(id)
 );
 
 CREATE TABLE Administrator (
     id BIGINT UNSIGNED AUTO_INCREMENT,
-    login VARCHAR(50),
+    login VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(300),
     PRIMARY KEY(id)
 );
@@ -136,3 +142,38 @@ ALTER TABLE Sentence
 CREATE USER 'alive'@'%' IDENTIFIED BY '5e6c&6iP&m6p6aQd$A&f';
 GRANT ALL ON alive TO 'alive'@'%';
 FLUSH PRIVILEGES;
+
+DELIMITER //
+
+-- Pour ne pas définir de valeur dans les paramètre:
+-- dans le cas ou le parametre est un VARCHAR, CHAR, BLOB, TEXT
+--  valeur par default = '' (empty string)
+-- dans le cas ou INT, BITINT, etc
+--  valeur par default = -1
+
+-- Créer un administrateur OU modifier son mot de passe
+CREATE PROCEDURE changeAdministrator(IN login VARCHAR(50), IN password VARCHAR(50))
+BEGIN
+    INSERT INTO Administrator(login, password) VALUES (login, password)
+    ON DUPLICATE KEY UPDATE password=password;
+END; //
+
+CREATE PROCEDURE getObjects(IN object_name VARCHAR(100), 
+                            IN object_id BIGINT, 
+                            IN room_id BIGINT)
+BEGIN
+    DECLARE var_query TEXT;
+    SET var_query = "SELECT * FROM Object WHERE TRUE";
+    IF object_name != '' THEN
+    	SET var_query = CONCAT(var_query, "AND name LIKE CONCAT('%', object_name, '%')");
+    END IF;
+    IF object_id != -1 THEN
+    	SET var_query = CONCAT(var_query, "AND id = object_id");
+    END IF;
+    IF room_id != -1 THEN
+    	SET var_query = CONCAT(var_query,"INNER JOIN RoomObject ON Object.id = RoomObject.ObjectId
+                                          INNER JOIN Room ON RoomObject. ");
+    END IF;
+    EXECUTE var_query;
+END; //
+DELIMITER ;
