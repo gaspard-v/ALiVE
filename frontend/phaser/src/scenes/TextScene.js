@@ -10,6 +10,7 @@ export default class TextScene extends Phaser.Scene {
 
     preload() {
         this.load.text('luxmetreText', '/static/luxmetreText.txt');
+        this.load.text('bottleText', '/static/bottleText.txt');
         this.load.image('closeIcon', '/static/close2.png');
     }
 
@@ -58,7 +59,7 @@ export default class TextScene extends Phaser.Scene {
         this.texte = this.add.text(
             game.config.width / 4,
             game.config.height / 4,
-            this.cache.text.get('luxmetreText'),
+            this.data.values.displayText,
             {
                 fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
                 fontSize: 64,
