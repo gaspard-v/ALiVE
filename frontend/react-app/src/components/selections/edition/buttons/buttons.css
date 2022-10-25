@@ -11,13 +11,11 @@
     background-color: black;
 }
 
-.ModifyObject.success {
-    background-color: green !important;
-}
 
 .ModifyObject.new {
     background-color: #0063CC;
 }
+
 
 
 .ModifyObject > * {
