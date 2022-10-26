@@ -9,7 +9,7 @@
 .Menu{
     scrollbar-width: none;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: #F8FAFC;
     filter: drop-shadow(0 0.1rem 0.2rem #787777);
     grid-area: Menu;
     max-width: min-content;

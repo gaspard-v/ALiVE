@@ -4,18 +4,35 @@
     grid-template-rows: 2em;
     grid-template-areas: ". ButtonIcon NewButtonText .";
     justify-items: center;
+    align-items: center;
     color: #fff;
     border: 0;
     border-radius: 3px;
     padding: 0;
     background-color: black;
+    margin: 0.1em 0;
 }
 
 
 .ModifyObject.new {
+    grid-area: AddButton;
     background-color: #0063CC;
+    margin: 2.5vh 1.5vh;
+    width:  17em;
+    height: 2em;
 }
 
+.ModifyObject.delete{
+    grid-area: DelButton;
+    background-color: red;
+}
+
+.ModifyObject.modify{
+    grid-area: ModButton;
+    background-color: #0063CC;
+
+
+}
 
 
 .ModifyObject > * {
@@ -31,24 +48,7 @@
 .ButtonIcon{
     grid-area: ButtonIcon;
     margin: 0 3px;
+    padding: 0;
 }
 
 
-.ModifyObject{
-    margin: 2.5vh 1.5vh;
-    width:  17em;
-    height: 2em;
-}
-
-.DelObject{
-    margin: 2.5vh 1.5vh;
-    width:  17em;
-    height: 2em;
-}
-
-.AddObject{
-    margin: 2.5vh 1.5vh;
-    width:  17em;
-    height: 2em;
-    background-color: #0063CC;
-}

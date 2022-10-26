@@ -1,6 +1,5 @@
 import './buttons.css';
 import React from "react";
-import { HiPlus } from 'react-icons/hi';
 
 const Buttons = ({icon, children, type}) => {
     return(
