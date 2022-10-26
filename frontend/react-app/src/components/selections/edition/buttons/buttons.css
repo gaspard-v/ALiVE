@@ -22,6 +22,11 @@
     height: 2em;
 }
 
+.ModifyObject.validate{
+    grid-area: ValButton;
+    background-color: green;
+}
+
 .ModifyObject.delete{
     grid-area: DelButton;
     background-color: red;

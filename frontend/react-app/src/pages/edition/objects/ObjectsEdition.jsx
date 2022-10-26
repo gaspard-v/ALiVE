@@ -1,14 +1,16 @@
 import "./objects.css";
 import React from "react";
 import ListMenu from "../../../components/selections/list/menu/ListMenu";
-import ObjectEdition from "../../../components/selections/edition/objects/ObjectEdition";
+import ObjectPrompt from "../../../components/selections/edition/objects/prompt/ObjectPrompt"
+import ObjectCreation from "../../../components/selections/edition/objects/creation/ObjectCreation";
 
 function ObjectsEdition(){
 
     return(
         <div id="objectEdition">
             <ListMenu/>
-            <ObjectEdition/>
+            <ObjectCreation/>
+            {/* <ObjectPrompt/> */}
         </div>
     )
 

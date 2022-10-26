@@ -1,4 +1,4 @@
-#ListMenu{
+.ListMenu{
     grid-area: List;
     overflow-y: scroll;
     max-height: 80vh ;
@@ -7,6 +7,12 @@
 }
 
 .Menu{
+    display:grid;
+    grid-template-rows: min-content 1fr min-content;
+    grid-template-columns: auto;
+    grid-template-areas: "SearchBar"
+                        "List"
+                        "AddButton";
     scrollbar-width: none;
     border-radius: 5px;
     background-color: #F8FAFC;

@@ -1,23 +1,19 @@
-#ObjectEditionScreen{
-    border-radius: 5px;
-    max-height: 100%;
-    max-width: 100%;
-    background-color: #F8FAFC;
-    filter: drop-shadow(0 0.1rem 0.2rem #787777);
-    display: grid;
+.creation{
     grid-template-columns: 1em min-content min-content repeat(3,1fr) 1em;
-    grid-template-rows: 1em repeat(2,min-content) 1fr repeat(2, min-content) 1em;
+    grid-template-rows: 1em repeat(2,min-content)1fr 1fr 3em min-content 1em;
     grid-template-areas: ". . . . . . ."
+                        ". ObjLabel . . . . ."
                         " . ObjectName SegmentedControl . . . ."
                         ". ObjectDescription ObjectDescription ObjectDescription ObjectDescription ObjectDescription ."
-                        ". ObjectDescription ObjectDescription ObjectDescription ObjectDescription ObjectDescription ."
-                        ". ObjImg . . . ModButton ."
-                        ". ObjImg . . . DelButton ."
+                        ". . . . . . ."
+                        ". ObjImg . . . . . "
+                        ". ObjImg . . . ValButton ."
                         ". . . . . . .";
-
-
 }
 
+.creation > input{
+    margin: 0.5em;
+}
 
 .ObjectName{
     grid-area: ObjectName;

@@ -1,3 +1,14 @@
+
+#ObjectEditionScreen{
+    border-radius: 5px;
+    max-height: 100%;
+    max-width: 100%;
+    background-color: #F8FAFC;
+    filter: drop-shadow(0 0.1rem 0.2rem #787777);
+    display: grid;
+   
+}
+
 #objectEdition {
     background-color: #F1F5F9;
     min-height: 100vh;
@@ -16,7 +27,11 @@
     margin: 0 1vh;
 }
 
-
+.objectLabel{
+    grid-area: ObjLabel;
+    white-space: nowrap;
+    font-size: 0.8em;
+}
 
 #ObjectEditionScreen{
     grid-area: ObjEditionScreen;

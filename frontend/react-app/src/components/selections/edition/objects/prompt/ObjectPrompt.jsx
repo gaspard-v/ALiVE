@@ -1,17 +1,17 @@
-import "./objects.css";
+import "./prompt.css";
 import {useRef, useState} from "react";
 import React from "react";
-import Buttons from "../buttons/Buttons";
+import Buttons from "../../buttons/Buttons";
 import { TiPencil } from "react-icons/ti"
 import { RiDeleteBin2Line } from "react-icons/ri"
-import SegmentedControl from "../segmented/SegmentedControl";
+import SegmentedControl from "../../segmented/SegmentedControl";
 
 
-function ObjectsEdition(){
+function ObjectPrompt(){
 
     const [selectedValue1, setSelectedValue1] = useState("complete");
     return(
-        <div id="ObjectEditionScreen">
+        <div id="ObjectEditionScreen" className="prompt">
             <h1 className="ObjectName">Nom d'objet</h1>
             <SegmentedControl
                     name="group-1"
@@ -42,4 +42,4 @@ function ObjectsEdition(){
 
 }
 
-export default ObjectsEdition;
+export default ObjectPrompt;
