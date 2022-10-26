@@ -1,9 +1,10 @@
 .creation{
     grid-template-columns: 1em min-content min-content repeat(3,1fr) 1em;
-    grid-template-rows: 1em repeat(2,min-content)1fr 1fr 3em min-content 1em;
+    grid-template-rows: 1em repeat(3,min-content) 1fr 1fr 3em min-content 1em;
     grid-template-areas: ". . . . . . ."
-                        ". ObjLabel . . . . ."
+                        ". ObjLabel SegmentedControl . . . ."
                         " . ObjectName SegmentedControl . . . ."
+                        ". DescriptionLabel . . . . ."
                         ". ObjectDescription ObjectDescription ObjectDescription ObjectDescription ObjectDescription ."
                         ". . . . . . ."
                         ". ObjImg . . . . . "
@@ -13,6 +14,10 @@
 
 .creation > input{
     margin: 0.5em;
+}
+
+.descriptionLabel{
+    grid-area: DescriptionLabel;
 }
 
 .ObjectName{

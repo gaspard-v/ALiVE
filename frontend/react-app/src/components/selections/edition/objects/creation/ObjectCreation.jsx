@@ -2,8 +2,7 @@ import "./creation.css";
 import {useRef, useState} from "react";
 import React from "react";
 import Buttons from "../../buttons/Buttons";
-import { TiPencil,TiTick} from "react-icons/ti"
-import { RiDeleteBin2Line } from "react-icons/ri"
+import { TiTick } from "react-icons/ti"
 import SegmentedControl from "../../segmented/SegmentedControl";
 
 
@@ -31,6 +30,7 @@ function ObjectCreation(){
                     },
                 ]
             }/>
+            <label className="descriptionLabel">Description de l'objet</label>
             <input className="ObjectDescription"></input>
             <input className="ObjImg" type="file" name="img" accept="image/*"></input>
             <Buttons icon={<TiTick className="ButtonIcon"/>} type="validate">Valider</Buttons>

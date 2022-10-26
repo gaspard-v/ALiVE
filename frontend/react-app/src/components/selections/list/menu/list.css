@@ -6,24 +6,29 @@
     margin: 0;
 }
 
+.MenuTitle{
+    grid-area: MenuTitle;
+    white-space: nowrap;
+    font-size: 1em;
+    margin: 1vh;
+}
+
 .Menu{
     display:grid;
-    grid-template-rows: min-content 1fr min-content;
-    grid-template-columns: auto;
-    grid-template-areas: "SearchBar"
-                        "List"
-                        "AddButton";
+    grid-template-rows: repeat(2,min-content) 1fr min-content;
+    grid-template-columns: 2.2em 1fr;
+    grid-template-areas:"BackButton MenuTitle" 
+                        "SearchBar SearchBar"
+                        "List List"
+                        "AddButton AddButton";
     scrollbar-width: none;
     border-radius: 5px;
     background-color: #F8FAFC;
     filter: drop-shadow(0 0.1rem 0.2rem #787777);
     grid-area: Menu;
     max-width: min-content;
+    align-items: center;
+    justify-items: center;
     
 }
-
-.Menu #searchBarObject{
-    padding:0 1.2em;
-}
-
 

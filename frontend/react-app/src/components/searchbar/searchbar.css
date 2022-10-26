@@ -4,7 +4,7 @@
     grid-template-areas: 'sbbutton sbbar';
     border-radius: 35em;
     filter: drop-shadow(0 0.15rem 0.25rem #aeaeae);
-    margin: 2vh 0 2vh 0;
+    margin: 1vh 0 1vh 0;
 }
 
 #searchBarObject:hover{
