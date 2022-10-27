@@ -59,7 +59,7 @@ export default class TextScene extends Phaser.Scene {
         this.texte = this.add.text(
             game.config.width / 4,
             game.config.height / 4,
-            this.data.values.displayText,
+            "Ceci est le descriptif de l'objet.",
             {
                 fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
                 fontSize: 64,

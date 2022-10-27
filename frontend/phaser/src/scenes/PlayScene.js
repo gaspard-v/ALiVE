@@ -7,6 +7,9 @@ export default class PlayScene extends Phaser.Scene {
     elementBoxTxt;
     elementTxt;
     mGlass1;
+    objectListNumber;
+    objectList;
+    visibilityBool;
     constructor() {
         super({ key: 'PlayScene', active: true });
     }
@@ -23,8 +26,11 @@ export default class PlayScene extends Phaser.Scene {
     displayText() {
         this.textScene.data.set('reactiveScene', this.reactiveScene.bind(this));
         //this.textScene.data.set('displayText', this.displayTextScene.bind(this));
-        this.elementTxt.setVisible(false);
-        this.elementBlur.setVisible(false);
+        this.visibilityBool = true;
+        console.log(this.elementBlur)
+        console.log(typeof this.elementBlur)
+        this.elementBlur.active = false;
+        //this.elementBlur.setVisible(false);
         this.textScene.scene.start();
         this.desactiveScene();
     }
@@ -69,64 +75,37 @@ export default class PlayScene extends Phaser.Scene {
             game.config.height / 2,
             'exterior1'
         );
-        this.mGlass = this.add
-            .image(game.config.width / 2, game.config.height / 2, 'mGlass')
-            .setInteractive({ useHandCursor: true });
+
+        this.visibilityBool = false;
         const glassImg = document.createElement('img');
         glassImg.src = '/static/mglass.png';
         glassImg.classList = ['glassClass'];
-        this.glassTest = this.add.dom(400, 300, glassImg);
+        glassImg.addEventListener('mouseover', ()=> {this.showInfos(true);});
+        glassImg.addEventListener('mouseout', ()=> {this.showInfos(false);});
+        glassImg.addEventListener('click', ()=> {this.displayText();});
 
-        this.mGlass2 = this.add
-            .image(game.config.width / 4, game.config.height / 1.3, 'mGlass')
-            .setInteractive({ useHandCursor: true });
 
-        this.luxmeterName = this.add
-            .text(
-                game.config.width / 2 - 100,
-                game.config.height / 2 - 190,
-                this.cache.text.get('luxmeterTitle'),
-                { fontFamily: 'Arial', fontSize: 32, color: 'white' }
-            )
-            .setVisible(false);
+        const glassImg2 = document.createElement('img');
+        glassImg2.src = '/static/mglass.png';
+        glassImg2.classList = ['glassClass'];
+        glassImg2.addEventListener('mouseover', ()=> this.showInfos2(true));
+        glassImg2.addEventListener('mouseout', ()=> this.showInfos2(false));
+        glassImg2.addEventListener('click', ()=> {this.displayText2(); glassImg2.hidden = true;});
 
-        this.bottleName = this.add
-            .text(
-                game.config.width / 2 - 100,
-                game.config.height / 1.3 - 190,
-                this.cache.text.get('bottleTitle'),
-                { fontFamily: 'Arial', fontSize: 32, color: 'white' }
-            )
-            .setVisible(false);
+        const luxmeterName2 = document.createElement('div');
+        console.log(luxmeterName2)
+
+
+        // this.glassLuxmetre = this.add.dom(game.config.width / 2, game.config.height / 2, glassImg);
+        // this.glassBottle = this.add.dom(game.config.width / 4, game.config.height / 1.3, glassImg2);
+        this.glassLuxmetre = this.add.image(game.config.width / 2, game.config.height / 2, 'mGlass');
+//        this.luxmeterName2 = this.add.dom(game.config.width / 2 - 100, game.config.height / 2 - 190, luxmeterName2, { fontFamily: 'Arial', fontSize: 32, color: 'white' });
+
+
+
 
         const darkColor = new Phaser.Display.Color(0, 0, 0);
 
-        this.infosRectangle = this.add
-            .rectangle(
-                game.config.width / 2 - 40,
-                game.config.height / 2 - 170,
-                200,
-                40,
-                darkColor
-            )
-            .setAlpha(0.3)
-            .setData(this.luxmeterName)
-            .setVisible(false);
-
-        this.infosRectangle2 = this.add
-            .rectangle(
-                game.config.width / 2 - 40,
-                game.config.height / 1.3 - 170,
-                200,
-                40,
-                darkColor
-            )
-            .setAlpha(0.3)
-            .setData(this.luxmeterName)
-            .setVisible(false);
-
-        this.mGlass.on('pointerup', () => this.displayText());
-        this.mGlass2.on('pointerup', () => this.displayText2());
         this.darkRectangle = this.add
             .rectangle(
                 game.config.width / 2,
@@ -142,7 +121,6 @@ export default class PlayScene extends Phaser.Scene {
             'background-color': 'rgba(100,100,100,0.8)',
             width: '220px',
             height: '50px',
-            filter: 'blur(4px)',
         };
 
         const styleTxt = {
@@ -164,22 +142,6 @@ export default class PlayScene extends Phaser.Scene {
             'text-align': 'center',
         };
 
-        var styleOnMGlass = {
-            filter: 'drop-shadow(0 0 0.75rem crimson)',
-        };
-
-        //this.mGlass1 = this.add.dom(this.cache.images.get('mGlass'));
-
-        // luxmetre
-        this.mGlassDom = this.add
-            .dom(
-                game.config.width / 2 + 2,
-                game.config.height / 2 - 68,
-                'div',
-                styleBlur,
-                ''
-            )
-            .setVisible(false);
         this.elementBlur = this.add
             .dom(
                 game.config.width / 2 + 2,
@@ -187,8 +149,8 @@ export default class PlayScene extends Phaser.Scene {
                 'div',
                 styleBlur,
                 ''
-            )
-            .setVisible(false);
+            );
+
         this.elementBoxTxt = this.add
             .dom(
                 game.config.width / 2,
@@ -196,8 +158,7 @@ export default class PlayScene extends Phaser.Scene {
                 'div1',
                 styleTxt,
                 ''
-            )
-            .setVisible(false);
+            );
         this.elementTxt = this.add
             .dom(
                 game.config.width / 2,
@@ -205,8 +166,7 @@ export default class PlayScene extends Phaser.Scene {
                 'div1',
                 styleTxt,
                 this.cache.text.get('luxmeterTitle')
-            )
-            .setVisible(false);
+            );
 
         // bouteille d'eau
         this.elementBlur2 = this.add
@@ -216,8 +176,7 @@ export default class PlayScene extends Phaser.Scene {
                 'div',
                 styleBlur,
                 ''
-            )
-            .setVisible(false);
+            );
         this.elementBoxTxt2 = this.add
             .dom(
                 game.config.width / 4,
@@ -225,8 +184,7 @@ export default class PlayScene extends Phaser.Scene {
                 'div1',
                 styleTxt,
                 ''
-            )
-            .setVisible(false);
+            );
         this.elementTxt2 = this.add
             .dom(
                 game.config.width / 4,
@@ -234,40 +192,25 @@ export default class PlayScene extends Phaser.Scene {
                 'div1',
                 styleTxt,
                 this.cache.text.get('bottleTitle')
-            )
-            .setVisible(false);
+            );
 
         this.bottle = this.add
             .image(game.config.width / 4, game.config.height / 1.3, 'bottle')
-            .setInteractive({ useHandCursor: true })
-            .setVisible(false);
+            .setInteractive({ useHandCursor: true }).setVisible(false);
     }
 
     update() {
-        this.mGlass.on('pointerover', () => {
-            this.showInfos(true);
-        });
-        this.mGlass.on('pointerout', () => {
-            this.showInfos(false);
-        });
-        this.mGlass2.on('pointerover', () => {
-            this.showInfos2(true);
-        });
-        this.mGlass2.on('pointerout', () => {
-            this.showInfos2(false);
-        });
     }
 
     showInfos(bool) {
-        //this.infosRectangle.setVisible(bool);
-        //this.luxmeterName.setVisible(bool);
-        //this.mGlass.setVisible(!bool);
-        this.elementTxt.setVisible(bool);
-        this.elementBlur.setVisible(bool);
+        this.visibilityBool = bool;
+        this.elementTxt.hidden = bool;
+        this.elementBlur.hidden = bool;
     }
 
     showInfos2(bool) {
-        this.elementTxt2.setVisible(bool);
-        this.elementBlur2.setVisible(bool);
+        this.visibilityBool = bool;
+        this.elementTxt2.visibility = bool;
+        this.elementBlur2.visibility = bool;
     }
 }
