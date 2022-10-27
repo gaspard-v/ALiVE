@@ -190,21 +190,23 @@ END; //
 
 CREATE PROCEDURE getObjects(IN object_name VARCHAR(100), 
                             IN object_id BIGINT, 
-                            IN room_id BIGINT)
+                            IN room_id BIGINT
+                            )
 BEGIN
     DECLARE var_query TEXT;
-    SET var_query = "SELECT * FROM Object WHERE TRUE";
+    SET var_query = "SELECT id, name, description, isTool FROM Object ";
+    IF room_id != -1 THEN
+    	SET var_query = CONCAT(var_query," INNER JOIN RoomObject ON Object.id = RoomObject.ObjectId
+                                          INNER JOIN PlaceRoom ON RoomObject.PlaceRoomId = PlaceRoom.id
+                                          INNER JOIN Room ON PlaceRoom.RoomId = Room.id AND Room.id = ", room_id, " ");
+    END IF;
+    SET var_query = CONCAT(var_query, " WHERE TRUE ");
     IF object_name != '' THEN
-    	SET var_query = CONCAT(var_query, "AND name LIKE CONCAT('%', object_name, '%')");
+    	SET var_query = CONCAT(var_query, " AND Object.name LIKE '%", object_name, "%' ");
     END IF;
     IF object_id != -1 THEN
-    	SET var_query = CONCAT(var_query, "AND id = object_id");
+    	SET var_query = CONCAT(var_query, " AND Object.id = ", object_id, " ");
     END IF;
-    IF room_id != -1 THEN
-    	SET var_query = CONCAT(var_query,"INNER JOIN RoomObject ON Object.id = RoomObject.ObjectId
-                                          INNER JOIN PlaceRoom ON RoomObject.PlaceRoomId = PlaceRoom.id
-                                          INNER JOIN Room ON PlaceRoom.RoomId = Room.id AND Room.id = room_id");
-    END IF;
-    EXECUTE var_query;
+    EXECUTE IMMEDIATE var_query;
 END; //
 DELIMITER ;
