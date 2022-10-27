@@ -10,8 +10,11 @@ import { FiUpload } from "react-icons/fi"
 function ObjectCreation(){
 
     const [selectedValue1, setSelectedValue1] = useState("complete");
+
+
+    
     return(
-        <form id="ObjectEditionScreen" className="creation">
+        <form id="ObjectEditionScreen" className="creation" type="submit">
             <label className="objectLabel">Nom de l'objet</label>
             <input className="ObjectName"></input>
             <SegmentedControl
