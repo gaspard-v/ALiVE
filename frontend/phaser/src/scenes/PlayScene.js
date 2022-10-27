@@ -27,10 +27,13 @@ export default class PlayScene extends Phaser.Scene {
         this.textScene.data.set('reactiveScene', this.reactiveScene.bind(this));
         //this.textScene.data.set('displayText', this.displayTextScene.bind(this));
         this.visibilityBool = true;
-        console.log(this.elementBlur)
-        console.log(typeof this.elementBlur)
         this.elementBlur.active = false;
-        //this.elementBlur.setVisible(false);
+        this.elementTxt.setVisible(false);
+        this.elementTxt2.setVisible(false);
+        this.elementBlur.setVisible(false);
+        this.elementBlur2.setVisible(false);
+        this.elementBoxTxt.setVisible(false);
+        this.elementBoxTxt2.setVisible(false);
         this.textScene.scene.start();
         this.desactiveScene();
     }
@@ -90,18 +93,15 @@ export default class PlayScene extends Phaser.Scene {
         glassImg2.classList = ['glassClass'];
         glassImg2.addEventListener('mouseover', ()=> this.showInfos2(true));
         glassImg2.addEventListener('mouseout', ()=> this.showInfos2(false));
-        glassImg2.addEventListener('click', ()=> {this.displayText2(); glassImg2.hidden = true;});
+        glassImg2.addEventListener('click', ()=> {this.displayText2()});
 
         const luxmeterName2 = document.createElement('div');
         console.log(luxmeterName2)
 
-
         this.glassLuxmetre = this.add.dom(game.config.width / 2, game.config.height / 2, glassImg);
         this.glassBottle = this.add.dom(game.config.width / 4, game.config.height / 1.3, glassImg2);
         // this.glassLuxmetre = this.add.image(game.config.width / 2, game.config.height / 2, 'mGlass');
-//        this.luxmeterName2 = this.add.dom(game.config.width / 2 - 100, game.config.height / 2 - 190, luxmeterName2, { fontFamily: 'Arial', fontSize: 32, color: 'white' });
-
-
+        // this.luxmeterName2 = this.add.dom(game.config.width / 2 - 100, game.config.height / 2 - 190, luxmeterName2, { fontFamily: 'Arial', fontSize: 32, color: 'white' });
 
 
         const darkColor = new Phaser.Display.Color(0, 0, 0);
