@@ -9,7 +9,7 @@ import { Navigate, useNavigate  } from "react-router-dom";
 
 function ListMenu({sectionChanger}){
     const navigate = useNavigate();
-    const component = [{id:1,name:"Bouteille",img:"",url:""}]
+    const component = [{id:1,name:"Template",img:"",url:""},{id:2,name:"Template",img:"",url:""},{id:3,name:"Template",img:"",url:""}]
     const listItems = component.map(({id,name,img,url}) => 
             <ListComponent key={id} img={img} name={name} url={url}/>
         ) ;

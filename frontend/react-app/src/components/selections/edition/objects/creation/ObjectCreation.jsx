@@ -5,6 +5,7 @@ import Buttons from "../../buttons/Buttons";
 import { TiTick } from "react-icons/ti"
 import SegmentedControl from "../../segmented/SegmentedControl";
 import { FiUpload } from "react-icons/fi"
+import createObject from "../../../../../api/object/ObjectCall";
 
 
 function ObjectCreation(){
@@ -18,11 +19,11 @@ function ObjectCreation(){
 
     function onSubmit(event){
         event.preventDefault();
-        const response = {"name":objectName,
-                        "description":objectDescription,
-                        "image":objectImg}
-        const body = JSON.stringify(response);
-        console.log(body)
+        const response = {name:objectName,
+                        description:objectDescription,
+                        isTool:1}
+        createObject(response);
+
     }
     
     return(
