@@ -12,6 +12,11 @@ const pool = mariadb.createPool({
 const app = express();
 app.use(express.json());
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 app.get("/api", async (req, res) => {
   res.send("ALiVE api is running.");
 });
@@ -21,7 +26,6 @@ app.get("/api/object/:id", async function (req, res, next) {
 });
 
 app.post("/api/object/create", async function (req, res) {
-  res.set("Access-Control-Allow-Origin", "*");
   let conn;
   try {
     conn = await pool.getConnection();
