@@ -1,0 +1,48 @@
+.creation{
+    grid-template-columns: 1em min-content min-content repeat(3,1fr) 1em;
+    grid-template-rows: 1em repeat(3,min-content) 1fr 1fr 3em min-content 1em;
+    grid-template-areas: ". . . . . . ."
+                        ". ObjLabel SegmentedControl . . . ."
+                        " . ObjectName SegmentedControl . . . ."
+                        ". DescriptionLabel . . . . ."
+                        ". ObjectDescription ObjectDescription ObjectDescription ObjectDescription ObjectDescription ."
+                        ". . . . . . ."
+                        ". ObjImg . . . . . "
+                        ". ObjImg . . . ValButton ."
+                        ". . . . . . .";
+}
+
+.creation > input{
+    margin: 0.5em;
+    border: 0.5px solid grey;
+    border-radius: 2px;
+    background-color: #EDF2F7;
+}
+
+input > #file-upload-button{
+    display: none;
+}
+
+.descriptionLabel{
+    grid-area: DescriptionLabel;
+}
+
+.ObjectName{
+    grid-area: ObjectName;
+    white-space: nowrap;
+    font-size: 1em;
+    align-self: center;
+    justify-self: center;
+    padding:0 1em;
+    
+}
+
+.ObjImg{
+    grid-area: ObjImg;
+}
+
+.ObjectDescription{
+    text-align: justify;
+    grid-area: ObjectDescription;
+    padding: 0 1em;
+}
