@@ -10,17 +10,26 @@ import { FiUpload } from "react-icons/fi"
 function ObjectCreation(){
 
     const [selectedValue1, setSelectedValue1] = useState("complete");
+    // const [form, setFormValue] = useState();
+    const [objectName,setObjectName] = useState("");
+    const segmentedControl = useRef(null)
 
-
+    function onSubmit(event){
+        event.preventDefault();
+        console.log('appel api')
+        console.log(segmentedControl)
+        console.log(selectedValue1)
+        console.log(objectName)
+    }
     
     return(
-        <form id="ObjectEditionScreen" className="creation" type="submit">
+        <form id="ObjectEditionScreen" className="creation" onSubmit={onSubmit}>
             <label className="objectLabel">Nom de l'objet</label>
-            <input className="ObjectName"></input>
+            <input className="ObjectName" value={objectName} onChange={e => setObjectName(e.target.value)}></input>
             <SegmentedControl
                     name="group-1"
                     callback={(val) => setSelectedValue1(val)}
-                    controlRef={useRef()}
+                    controlRef={segmentedControl}
                     segments={[
                     {
                         label: "Objet",
@@ -36,8 +45,8 @@ function ObjectCreation(){
             }/>
             <label className="descriptionLabel">Description de l'objet</label>
             <input className="ObjectDescription"></input>
-            <input className="ObjImg" type="file" name="img" accept="image/*"hidden></input>
-            <Buttons icon={<TiTick className="ButtonIcon"/>} type="validate">Valider</Buttons>
+            <input className="ObjImg" type="file" name="img" accept="image/*"></input>
+            <Buttons icon={<TiTick className="ButtonIcon"/>} color="validate" type="submit">Valider</Buttons>
             
         </form>
     )

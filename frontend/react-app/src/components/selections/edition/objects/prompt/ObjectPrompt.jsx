@@ -34,8 +34,8 @@ function ObjectPrompt(){
 
 </p>
             <img className="ObjImg" alt="Obj img"></img>
-            <Buttons icon={<TiPencil className="ButtonIcon"/>} type="modify">Modifier</Buttons>
-            <Buttons icon={<RiDeleteBin2Line className="ButtonIcon"/>} type="delete">Supprimer</Buttons>
+            <Buttons icon={<TiPencil className="ButtonIcon"/>} color="modify">Modifier</Buttons>
+            <Buttons icon={<RiDeleteBin2Line className="ButtonIcon"/>} color="delete">Supprimer</Buttons>
             
         </div>
     )
