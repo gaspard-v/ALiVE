@@ -1,15 +1,18 @@
 #globalEdition {
-    background-color: #F5EBDF;
+    background-color: #F1F5F9;
     min-height: 100vh;
     white-space: pre-line;
     display: grid;
-    grid-template-columns: 1em 1fr min-content 1fr;
-    grid-template-rows: 1em min-content 3em 1fr;
+    grid-template-columns: 1em  1fr 1em;
+    grid-template-rows: 1em min-content 3em 1fr 1em;
     grid-template-areas:
-        ". . . ."
-        ". SearchBar SearchBar . "
-        ". . . ."
-        ". . Buttons .";
+        ". . ."
+        ". SearchBar ."
+        ". . ."
+        ". Buttons ."
+        ". . . ";
+    align-content: center;
+    justify-items: center;
 }
 
 a:visited {
@@ -64,7 +67,7 @@ a {
     position: relative;
     z-index: 1;
     text-align: center;
-    font-size: 4em;
+    font-size: 2.8em;
     color: aliceblue;
     font-weight: bold ;
 
