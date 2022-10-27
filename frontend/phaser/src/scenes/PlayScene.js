@@ -96,9 +96,9 @@ export default class PlayScene extends Phaser.Scene {
         console.log(luxmeterName2)
 
 
-        // this.glassLuxmetre = this.add.dom(game.config.width / 2, game.config.height / 2, glassImg);
-        // this.glassBottle = this.add.dom(game.config.width / 4, game.config.height / 1.3, glassImg2);
-        this.glassLuxmetre = this.add.image(game.config.width / 2, game.config.height / 2, 'mGlass');
+        this.glassLuxmetre = this.add.dom(game.config.width / 2, game.config.height / 2, glassImg);
+        this.glassBottle = this.add.dom(game.config.width / 4, game.config.height / 1.3, glassImg2);
+        // this.glassLuxmetre = this.add.image(game.config.width / 2, game.config.height / 2, 'mGlass');
 //        this.luxmeterName2 = this.add.dom(game.config.width / 2 - 100, game.config.height / 2 - 190, luxmeterName2, { fontFamily: 'Arial', fontSize: 32, color: 'white' });
 
 
