@@ -27,14 +27,20 @@ app.post("/api/object/create", async function (req, res) {
     console.log("receiving data ...");
     console.log("body is ", req.body);
     ({ name, description, isTool, imagename, image } = req.body);
-    await conn.query(
+    const object_query_response = await conn.query(
       "INSERT INTO Object(name, description, isTool) VALUES (?, ?, ?)",
       [name, description, isTool]
     );
-    await conn.query("INSERT INTO File(filename, data) VALUE (?, ?)", [
-      imagename,
-      image,
+    const file_query_response = await conn.query(
+      "INSERT INTO File(filename, data) VALUES (?, ?)",
+      [imagename, image]
+    );
+    await conn.query("INSERT INTO ObjectFile(ObjectId, FileId) VALUES (?, ?)", [
+      parseInt(object_query_response.insertId),
+      parseInt(file_query_response.insertId),
     ]);
+    await conn.commit();
+    res.send("OK");
   } catch (err) {
     res.send(err);
   } finally {
