@@ -11,7 +11,7 @@ services:
       - "./mariadb.env"
     volumes:
       - mariadb-volume:/var/lib/mysql:rw
-      - ./database/mariadb.sql:/docker-entrypoint-initdb.d/mariadb.sql:ro
+      - ./database/mariadb.sql:/docker-entrypoint-initdb.d/01_mariadb.sql:ro
     networks:
       - mariadb-network
 
