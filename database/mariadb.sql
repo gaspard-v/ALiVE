@@ -169,8 +169,7 @@ ALTER TABLE Sentence
     ),
     ADD CONSTRAINT fk_dialogue_Sentence FOREIGN KEY (DialogueId) REFERENCES Dialogue(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
-CREATE USER 'alive'@'%' IDENTIFIED BY '5e6c&6iP&m6p6aQd$A&f';
-GRANT ALL ON alive TO 'alive'@'%';
+GRANT ALL PRIVILEGES ON alive.* TO 'alive'@'%' IDENTIFIED BY '5e6c&6iP&m6p6aQd$A&f';
 FLUSH PRIVILEGES;
 
 DELIMITER //
