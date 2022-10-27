@@ -18,10 +18,11 @@ function ObjectCreation(){
 
     function onSubmit(event){
         event.preventDefault();
-        const response = {"name":{objectName},
-                        "description":{objectDescription},
-                        "image":{objectImg}}
-        console.log(response)
+        const response = {"name":objectName,
+                        "description":objectDescription,
+                        "image":objectImg}
+        const body = JSON.stringify(response);
+        console.log(body)
     }
     
     return(
