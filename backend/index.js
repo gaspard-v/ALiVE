@@ -1,9 +1,16 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mariadb = require("mariadb");
+
+const pool = mariadb.createPool({
+  host: "localhost",
+  user: "alive",
+  password: "5e6c&6iP&m6p6aQd$A&f",
+  connectionLimit: 5,
+});
 
 const app = express();
 app.use(express.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/api", (req, res) => {
   res.send("ALiVE api is running.");
@@ -14,9 +21,17 @@ app.get("/api/object/:id", function (req, res, next) {
 });
 
 app.post("/api/object/create", function (req, res) {
-  console.log("receiving data ...");
-  console.log("body is ", req.body);
-  res.send(req.body);
+  let conn;
+  try {
+    conn = pool.getConnection();
+    console.log("receiving data ...");
+    console.log("body is ", req.body);
+    res.send(req.body);
+  } catch (err) {
+    console.error(err);
+  } finally {
+    if (conn) conn.end();
+  }
 });
 
 app.listen(8080, () =>
