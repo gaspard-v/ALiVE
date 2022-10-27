@@ -12,14 +12,16 @@ function ObjectCreation(){
     const [selectedValue1, setSelectedValue1] = useState("complete");
     // const [form, setFormValue] = useState();
     const [objectName,setObjectName] = useState("");
+    const [objectDescription,setObjectDescription] = useState("");
+    const [objectImg,setObjectImg] = useState("");
     const segmentedControl = useRef(null)
 
     function onSubmit(event){
         event.preventDefault();
-        console.log('appel api')
-        console.log(segmentedControl)
-        console.log(selectedValue1)
-        console.log(objectName)
+        const response = {"name":{objectName},
+                        "description":{objectDescription},
+                        "image":{objectImg}}
+        console.log(response)
     }
     
     return(
@@ -44,8 +46,8 @@ function ObjectCreation(){
                 ]
             }/>
             <label className="descriptionLabel">Description de l'objet</label>
-            <input className="ObjectDescription"></input>
-            <input className="ObjImg" type="file" name="img" accept="image/*"></input>
+            <input className="ObjectDescription" value={objectDescription} onChange={e => setObjectDescription(e.target.value)}></input>
+            <input className="ObjImg" type="file" name="img" accept="image/*" value={objectImg} onChange={e => setObjectImg(e.target.value)}></input>
             <Buttons icon={<TiTick className="ButtonIcon"/>} color="validate" type="submit">Valider</Buttons>
             
         </form>
