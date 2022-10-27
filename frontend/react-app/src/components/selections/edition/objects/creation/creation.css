@@ -14,6 +14,13 @@
 
 .creation > input{
     margin: 0.5em;
+    border: 0.5px solid grey;
+    border-radius: 2px;
+    background-color: #EDF2F7;
+}
+
+input > #file-upload-button{
+    display: none;
 }
 
 .descriptionLabel{

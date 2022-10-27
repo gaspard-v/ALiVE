@@ -4,6 +4,7 @@ import React from "react";
 import Buttons from "../../buttons/Buttons";
 import { TiTick } from "react-icons/ti"
 import SegmentedControl from "../../segmented/SegmentedControl";
+import { FiUpload } from "react-icons/fi"
 
 
 function ObjectCreation(){
@@ -32,7 +33,7 @@ function ObjectCreation(){
             }/>
             <label className="descriptionLabel">Description de l'objet</label>
             <input className="ObjectDescription"></input>
-            <input className="ObjImg" type="file" name="img" accept="image/*"></input>
+            <input className="ObjImg" type="file" name="img" accept="image/*"hidden></input>
             <Buttons icon={<TiTick className="ButtonIcon"/>} type="validate">Valider</Buttons>
             
         </form>
