@@ -14,16 +14,15 @@ function ListMenu({sectionChanger}){
             <ListComponent key={id} img={img} name={name} url={url}/>
         ) ;
 
-
     return(
         <div className="Menu">
             <SearchBar/>
-            <Buttons icon={<HiHome className="ButtonIcon"/>} type="goHome" trigger={() => navigate("/")}></Buttons> 
+            <Buttons icon={<HiHome className="ButtonIcon"/>} color="goHome" trigger={() => navigate("/")}></Buttons> 
             <h2 className="MenuTitle">Mes objets</h2>
             <ul className="ListMenu">
                 {listItems}
             </ul>
-            <Buttons icon={<HiPlus className="ButtonIcon"/>} type="addObject" trigger={() => sectionChanger(<ObjectCreation/>)}>Nouveau</Buttons>
+            <Buttons icon={<HiPlus className="ButtonIcon"/>} color="addObject" trigger={() => sectionChanger(<ObjectCreation/>)}>Nouveau</Buttons>
         </div>        
         
     )

@@ -10,4 +10,7 @@ function createObject() {
     fetch('https://localhost:8080/api/object/create', requestOptions)
         .then(response => response.json())
         .then(data => this.setState({ postId: data.id }));
+
+    console.log(response)
+    return(response);
 }
