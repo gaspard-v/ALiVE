@@ -1,0 +1,61 @@
+{
+	"info": {
+		"_postman_id": "cf5705e0-1cdf-47ea-9882-635fa705e5fc",
+		"name": "API ALiVE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20872100"
+	},
+	"item": [
+		{
+			"name": "get object",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/object/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"object",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create objects",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"test\",\r\n    \"description\": \"je suis un test\",\r\n    \"isTool\": 1,\r\n    \"imagename\": \"mon_image.png\",\r\n    \"image\": \"base64_de_l'image\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/object/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"object",
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
