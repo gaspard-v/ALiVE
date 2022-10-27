@@ -5,11 +5,11 @@ import ObjectCreation from '../objects/creation/ObjectCreation';
 
 
 
-const Buttons = ({icon, children, type, trigger}) => {
+const Buttons = ({icon, children,color, type, trigger}) => {
 
 
     return(
-        <button className={`ModifyObject ${type}`} onClick={trigger}>
+        <button className={`ModifyObject ${color}`} type={type} onClick={trigger}>
             {icon}
             <p  className='ModifyObjectText'>{children}</p>
         </button>
