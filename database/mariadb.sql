@@ -1,35 +1,42 @@
 CREATE DATABASE alive CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE alive;
 
+CREATE TABLE File (
+    id BIGINT UNSIGNED AUTO_INCREMENT,
+    filename VARCHAR(100) NOT NULL UNIQUE CHECK(filename LIKE "%.%"),
+    description LONGTEXT,
+    option LONGTEXT,
+    data LONGBLOB NOT NULL,
+    PRIMARY KEY(id)
+) ENGINE=InnoDB;
+
 CREATE TABLE Object (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
-    description TEXT,
-    picture BLOB,
+    description LONGTEXT,
     isTool tinyint(1),
     INDEX ix_name_object(name),
     PRIMARY KEY(id)
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE RoomObject (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     Xcoord INT,
     Ycoord INT,
     PRIMARY KEY(id)
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE Room (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
-    picture BLOB,
     INDEX ix_name_room(name),
     PRIMARY KEY(id)
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE PlaceRoom (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     PRIMARY KEY(id)
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE Place (
     id BIGINT UNSIGNED AUTO_INCREMENT,
@@ -38,36 +45,35 @@ CREATE TABLE Place (
     Ycoord INT,
     INDEX ix_name_place(name),
     PRIMARY KEY(id) 
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE Map (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
-    picture BLOB,
     INDEX ix_name_map(name),
     PRIMARY KEY(id)
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE Day (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
-    description TEXT,
+    description LONGTEXT,
     INDEX ix_name_day(name),
     PRIMARY KEY(id)
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE Dialogue (
     id BIGINT UNSIGNED AUTO_INCREMENT,
-    description TEXT,
+    description LONGTEXT,
     PRIMARY KEY(id)
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE Sentence (
     id BIGINT UNSIGNED AUTO_INCREMENT,
-    Content TEXT,
+    Content LONGTEXT,
     Color VARCHAR(20),
     PRIMARY KEY(id)
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE Characters (
     id BIGINT UNSIGNED AUTO_INCREMENT,
@@ -75,21 +81,45 @@ CREATE TABLE Characters (
     color VARCHAR(20),
     INDEX ix_name_characters(name),
     PRIMARY KEY(id)
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE Administrator (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     login VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(300),
     PRIMARY KEY(id)
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE Door (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     Xcoord INT,
     Ycoord INT,
     PRIMARY KEY(id)
-);
+) ENGINE=InnoDB;
+
+CREATE TABLE ObjectFile (
+    ObjectId BIGINT UNSIGNED NOT NULL,
+    FileId BIGINT UNSIGNED NOT NULL,
+    CONSTRAINT fk_Object_ObjectFile FOREIGN KEY (ObjectId) REFERENCES Object (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_File_ObjectFile FOREIGN KEY (FileId) REFERENCES File (id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    PRIMARY KEY(ObjectId, FileId)
+) ENGINE=InnoDB;
+
+CREATE TABLE RoomFile (
+    RoomId BIGINT UNSIGNED NOT NULL,
+    FileId BIGINT UNSIGNED NOT NULL,
+    CONSTRAINT fk_Room_RoomFile FOREIGN KEY (RoomId) REFERENCES Room (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_File_RoomFile FOREIGN KEY (FileId) REFERENCES File (id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    PRIMARY KEY(RoomId, FileId)
+) ENGINE=InnoDB;
+
+CREATE TABLE MapFile (
+    MapId BIGINT UNSIGNED NOT NULL,
+    FileId BIGINT UNSIGNED NOT NULL,
+    CONSTRAINT fk_Map_MapFile FOREIGN KEY (MapId) REFERENCES Map (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_File_MapFile FOREIGN KEY (FileId) REFERENCES File (id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    PRIMARY KEY(MapId, FileId)
+) ENGINE=InnoDB;
 
 ALTER TABLE RoomObject
     ADD COLUMN (
@@ -172,7 +202,8 @@ BEGIN
     END IF;
     IF room_id != -1 THEN
     	SET var_query = CONCAT(var_query,"INNER JOIN RoomObject ON Object.id = RoomObject.ObjectId
-                                          INNER JOIN Room ON RoomObject. ");
+                                          INNER JOIN PlaceRoom ON RoomObject.PlaceRoomId = PlaceRoom.id
+                                          INNER JOIN Room ON PlaceRoom.RoomId = Room.id AND Room.id = room_id");
     END IF;
     EXECUTE var_query;
 END; //
