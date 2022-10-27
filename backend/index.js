@@ -12,4 +12,4 @@ app.post('/api/objet', function(req, res) {
     res.send(req.body);
 });
 
-app.listen(3000, () => console.log('Example app is listening on port 3000.'));
+app.listen(3000, () => console.log('ALiVE app server is listening on port 3000.'));
