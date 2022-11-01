@@ -14,8 +14,9 @@
     min-height: 100vh;
     white-space: pre-line;
     display: grid;
-    grid-template-columns: 2em 24% 73% 2em ;
-    grid-template-rows: 1.2em 93% 1.2em;
+    grid-gap: 1vh;
+    grid-template-columns:2vw  23vw 73vw 2vw ;
+    grid-template-rows: 1.5vh 96vh 1.5vh;
     grid-template-areas:
         ". . . ."
         ". Menu ObjEditionScreen . "
@@ -23,9 +24,6 @@
     justify-content: center; 
     }
 
-#objectEdition > *{
-    margin: 0 1vh;
-}
 
 .objectLabel{
     grid-area: ObjLabel;
