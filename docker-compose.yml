@@ -1,0 +1,33 @@
+version: "3.1"
+
+services:
+  database:
+    image: mariadb:latest
+    restart: always
+    container_name: database
+    ports:
+      - "3306:3306"
+    env_file:
+      - "./mariadb.env"
+    volumes:
+      - mariadb-volume:/var/lib/mysql:rw
+      - ./database/mariadb.sql:/docker-entrypoint-initdb.d/01_mariadb.sql:ro
+      - ./database/dummy_mariadb.sql:/docker-entrypoint-initdb.d/02_dummy_mariadb.sql:ro
+    networks:
+      - mariadb-network
+    hostname: mariadb-database
+
+  adminer:
+    image: adminer:latest
+    restart: always
+    ports:
+      - "9980:8080"
+    networks:
+      - mariadb-network
+
+networks:
+  mariadb-network:
+    driver: bridge
+
+volumes:
+  mariadb-volume:

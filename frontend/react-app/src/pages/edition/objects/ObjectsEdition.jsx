@@ -10,12 +10,9 @@ function ObjectsEdition(){
     const[currentSection,setCurrentSection] = useState(<ObjectPrompt/>)
 
 
-
-
-
     return(
         <div id="objectEdition">
-            <ListMenu sectionChanger={setCurrentSection}/>
+            <ListMenu sectionChanger={setCurrentSection} contextName="Mes objets"/>
             {currentSection}
         </div>
     )
