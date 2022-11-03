@@ -1,10 +1,10 @@
 import "./prompt.css";
 import {useRef, useState} from "react";
 import React from "react";
-import Buttons from "../../buttons/Buttons";
+import Buttons from "../../../../buttons/Buttons";
 import { TiPencil } from "react-icons/ti"
 import { RiDeleteBin2Line } from "react-icons/ri"
-import SegmentedControl from "../../segmented/SegmentedControl";
+import SegmentedControl from "../../../../segmented/SegmentedControl";
 
 
 function ObjectPrompt(){

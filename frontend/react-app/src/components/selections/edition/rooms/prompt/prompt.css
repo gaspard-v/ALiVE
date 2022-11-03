@@ -1,0 +1,21 @@
+#roomPrompt{
+    grid-template-columns: 1em min-content min-content repeat(3,1fr) 1em;
+    grid-template-rows: 1em repeat(2,min-content) 1fr repeat(2, min-content) 1em;
+    grid-template-areas: ". . . . . . ."
+    " . RoomName RoomName . . . ."
+    ". RoomImg RoomImg RoomImg RoomImg RoomImg ."
+    ". RoomImg RoomImg RoomImg RoomImg RoomImg ."
+    ". . . . . ModButton ."
+    ". . . . . DelButton ."
+    ". . . . . . .";
+}
+
+.roomName{
+    grid-area: RoomName;
+
+}
+
+.roomImg{
+    grid-area: RoomImg;
+
+}

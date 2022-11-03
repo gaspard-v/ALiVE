@@ -2,7 +2,7 @@ import "./list.css";
 import React from "react";
 import ListComponent from "../component/ListComponent";
 import SearchBar from "../../../searchbar/SearchBar"
-import Buttons from "../../edition/buttons/Buttons";
+import Buttons from "../../../buttons/Buttons";
 import { HiPlus, HiHome } from "react-icons/hi";
 import ObjectCreation from "../../edition/objects/creation/ObjectCreation";
 import { Navigate, useNavigate  } from "react-router-dom";
