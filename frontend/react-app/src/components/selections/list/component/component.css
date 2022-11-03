@@ -37,7 +37,7 @@
 .objectName{
     margin: 4%;
     grid-area: ObjName;
-    font-size: 15px;
+    font-size: 1.5em;
     font-weight: bold;
     color:#000;
     align-items: center;

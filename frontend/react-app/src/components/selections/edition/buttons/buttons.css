@@ -24,8 +24,9 @@
     grid-area: AddButton;
     background-color: #0063CC;
     margin: 2.5vh 1.5vh;
-    width:  17em;
+    width:  95%;
     height: 2em;
+
 }
 
 .ModifyObject.validate{
