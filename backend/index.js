@@ -26,12 +26,32 @@ app.get("/api/object/:id", async function (req, res, next) {
   res.json({ output: req.params.id });
 });
 
+app.get("/api/object", async function (req, res) {
+  let conn;
+  let jsonResponse;
+  try {
+    conn = await pool.getConnection();
+    // block error 304 chache
+    res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
+
+    conn.query(
+        "SELECT * FROM Object"
+    )
+        .then(result => jsonResponse=result)
+        .then(conn.commit)
+        .then(() => res.send(jsonResponse));
+
+  } catch (err) {
+    res.send(err);
+  } finally {
+    if (conn) await conn.end();
+  }
+});
+
 app.post("/api/object/create", async function (req, res) {
   let conn;
   try {
     conn = await pool.getConnection();
-    console.log("receiving data ...");
-    console.log("body is ", req.body);
     ({ name, description, isTool, imagename, image } = req.body);
     const object_query_response = await conn.query(
       "INSERT INTO Object(name, description, isTool) VALUES (?, ?, ?)",
@@ -50,6 +70,25 @@ app.post("/api/object/create", async function (req, res) {
         ]
       );
     }
+    await conn.commit();
+    res.send({ status: "success" });
+  } catch (err) {
+    res.send(err);
+  } finally {
+    if (conn) conn.end();
+  }
+});
+
+
+app.post("/api/room/create", async function (req, res) {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    ({ name, index } = req.body);
+    const room_query_response = await conn.query(
+      "INSERT INTO Room(name, index) VALUES (?, ?)",
+      [name, index]
+    );
     await conn.commit();
     res.send({ status: "success" });
   } catch (err) {
