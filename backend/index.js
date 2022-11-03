@@ -50,28 +50,6 @@ app.get("/api/object/:id", async function (req, res, next) {
   res.json({ output: req.params.id });
 });
 
-app.get("/api/object", async function (req, res) {
-  let conn;
-  let jsonResponse;
-  try {
-    conn = await pool.getConnection();
-    // block error 304 chache
-    res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
-
-    conn.query(
-        "SELECT * FROM Object"
-    )
-        .then(result => jsonResponse=result)
-        .then(conn.commit)
-        .then(() => res.send(jsonResponse));
-
-  } catch (err) {
-    res.send(err);
-  } finally {
-    if (conn) await conn.end();
-  }
-});
-
 app.post("/api/object/create", async function (req, res) {
   let conn;
   try {
