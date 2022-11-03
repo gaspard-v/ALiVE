@@ -5,3 +5,11 @@ export const objectBigIntToInt = (object) => {
   }
   return return_object;
 };
+
+export const STATUS_SUCCESS = "success";
+export const STATUS_FAILURE = "failure";
+
+export const templateReturn = {
+  status: STATUS_SUCCESS,
+  message: "",
+};
