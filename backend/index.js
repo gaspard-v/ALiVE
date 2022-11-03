@@ -1,7 +1,8 @@
-const express = require("express");
-const mariadb = require("mariadb");
+import express, { json } from "express";
+import { createPool } from "mariadb";
+import { objectBigIntToInt } from "./utils.js";
 
-const pool = mariadb.createPool({
+const pool = createPool({
   host: "localhost",
   user: "alive",
   password: "5e6c&6iP&m6p6aQd$A&f",
@@ -9,16 +10,8 @@ const pool = mariadb.createPool({
   connectionLimit: 5,
 });
 
-objectBigIntToInt = (object) => {
-  let return_object = {};
-  for (const [key, value] of Object.entries(object)) {
-    return_object[key] = typeof value === "bigint" ? parseInt(value) : value;
-  }
-  return return_object;
-};
-
 const app = express();
-app.use(express.json());
+app.use(json());
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -45,7 +38,7 @@ app.get("/api/object", async (req, res, next) => {
       res.send(result);
     })
     .catch((err) => {
-      console.error(err);
+      res.status(503).send({ status: "failed" });
     })
     .finally(() => {
       if (conn) conn.end();
