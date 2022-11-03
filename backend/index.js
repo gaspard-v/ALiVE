@@ -9,6 +9,14 @@ const pool = mariadb.createPool({
   connectionLimit: 5,
 });
 
+objectBigIntToInt = (object) => {
+  let return_object = {};
+  for (const [key, value] of Object.entries(object)) {
+    return_object[key] = typeof value === "bigint" ? parseInt(value) : value;
+  }
+  return return_object;
+};
+
 const app = express();
 app.use(express.json());
 
@@ -20,6 +28,28 @@ app.use((req, res, next) => {
 
 app.get("/api", async (req, res) => {
   res.send("ALiVE api is running.");
+});
+
+app.get("/api/object", async (req, res, next) => {
+  let conn;
+  pool
+    .getConnection()
+    .then((connexion) => {
+      conn = connexion;
+      return conn.query("CALL getObjects(?,?,?)", ["", -1, -1]);
+    })
+    .then((result) => {
+      result = result[0].map((element) => {
+        return objectBigIntToInt(element);
+      });
+      res.send(result);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      if (conn) conn.end();
+    });
 });
 
 app.get("/api/object/:id", async function (req, res, next) {
