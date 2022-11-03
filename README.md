@@ -6,7 +6,7 @@ Pour lancer la configuration requise par le projet il est nécessaire à la raci
 #### DEVELOPPEMENT
 
 Quant au lancement de celui-ci en mode de développement il s'agit de :
-- `cd backend && npm run && cd ../frontend && npm install && cd ..`
+- `cd backend && npm run && cd ../frontend && npm run && cd ..`
 
 #### PRODUCTION
 
