@@ -1,7 +1,9 @@
-const express = require("express");
-const mariadb = require("mariadb");
+import express, { json } from "express";
+import { createPool } from "mariadb";
+import { objectBigIntToInt } from "./utils.js";
+import { handlerError, handlerSuccess } from "./handler.js";
 
-const pool = mariadb.createPool({
+const pool = createPool({
   host: "localhost",
   user: "alive",
   password: "5e6c&6iP&m6p6aQd$A&f",
@@ -10,7 +12,7 @@ const pool = mariadb.createPool({
 });
 
 const app = express();
-app.use(express.json());
+app.use(json());
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -20,6 +22,28 @@ app.use((req, res, next) => {
 
 app.get("/api", async (req, res) => {
   res.send("ALiVE api is running.");
+});
+
+app.get("/api/object", async (req, res, next) => {
+  let conn;
+  pool
+    .getConnection()
+    .then((connexion) => {
+      conn = connexion;
+      return conn.query("CALL getObjects(?,?,?)", ["", -1, -1]);
+    })
+    .then((result) => {
+      result = result[0].map((element) => {
+        return objectBigIntToInt(element);
+      });
+      handlerSuccess(result, req, res, next);
+    })
+    .catch((err) => {
+      handlerError(err, req, res, next);
+    })
+    .finally(() => {
+      if (conn) conn.end();
+    });
 });
 
 app.get("/api/object/:id", async function (req, res, next) {
