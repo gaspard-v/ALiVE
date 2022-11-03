@@ -1,6 +1,7 @@
 import express, { json } from "express";
 import { createPool } from "mariadb";
 import { objectBigIntToInt } from "./utils.js";
+import { handlerError, handlerSuccess } from "./handler.js";
 
 const pool = createPool({
   host: "localhost",
@@ -35,10 +36,10 @@ app.get("/api/object", async (req, res, next) => {
       result = result[0].map((element) => {
         return objectBigIntToInt(element);
       });
-      res.send(result);
+      handlerSuccess(result, req, res, next);
     })
     .catch((err) => {
-      res.status(503).send({ status: "failed" });
+      handlerError(err, req, res, next);
     })
     .finally(() => {
       if (conn) conn.end();
