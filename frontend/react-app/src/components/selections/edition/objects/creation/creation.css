@@ -13,10 +13,9 @@
 }
 
 .creation > input{
-    align-items: none;
-    justify-items: none;
+
     margin: 0.5em;
-    border: 0.5px solid grey;
+    border: 1px solid grey;
     border-radius: 2px;
     background-color: #EDF2F7;
 }

@@ -7,13 +7,15 @@ import { HiPlus, HiHome } from "react-icons/hi";
 import ObjectCreation from "../../edition/objects/creation/ObjectCreation";
 import { Navigate, useNavigate  } from "react-router-dom";
 
-function ListMenu({sectionChanger,contextName}){
+function ListMenu({sectionChanger,contextName,section}){
     const navigate = useNavigate();
     const component = [{id:1,name:"Template",img:"",url:""},{id:2,name:"Template",img:"",url:""},{id:3,name:"Template",img:"",url:""}]
     const listItems = component.map(({id,name,img,url}) => 
             <ListComponent key={id} img={img} name={name} url={url}/>
         ) ;
     const context = contextName;
+    const nextSection = section;
+
 
     return(
         <div className="Menu">
@@ -23,7 +25,7 @@ function ListMenu({sectionChanger,contextName}){
             <ul className="ListMenu">
                 {listItems}
             </ul>
-            <Buttons icon={<HiPlus className="ButtonIcon"/>} color="addObject" trigger={() => sectionChanger(<ObjectCreation/>)}>Nouveau</Buttons>
+            <Buttons icon={<HiPlus className="ButtonIcon"/>} color="addObject" trigger={() => sectionChanger(nextSection)}>Nouveau</Buttons>
         </div>        
         
     )

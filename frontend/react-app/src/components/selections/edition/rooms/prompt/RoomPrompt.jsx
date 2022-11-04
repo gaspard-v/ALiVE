@@ -8,7 +8,7 @@ function RoomPrompt({name,img}){
     const roomName = name
 
     return(
-        <div id="roomPrompt">
+        <div id="RoomEditionScreen">
             <h1 className="roomName">{roomName}</h1>
             <img className="roomImg" src={img} alt='room image'/>
             <Buttons icon={<TiPencil className="ButtonIcon"/>} color="modify">Modifier</Buttons>

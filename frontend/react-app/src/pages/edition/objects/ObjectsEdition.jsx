@@ -12,7 +12,7 @@ function ObjectsEdition(){
 
     return(
         <div id="objectEdition">
-            <ListMenu sectionChanger={setCurrentSection} contextName="Mes objets"/>
+            <ListMenu sectionChanger={setCurrentSection} contextName="Mes objets" section={<ObjectCreation/>} />
             {currentSection}
         </div>
     )
