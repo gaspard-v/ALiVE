@@ -82,7 +82,7 @@ app.post("/api/object/create", async function (req, res) {
   }
 });
 
-app.post("/api/object", async function (req, res, next) {
+app.post("/api/room/create", async function (req, res) {
   let conn;
   const { name, description, isTool, imagename, image } = req.body;
 
@@ -107,28 +107,6 @@ app.post("/api/object", async function (req, res, next) {
       })
       .then(result => {
         //result = objectBigIntToInt(result);
-        handlerSuccess(result, req, res, next);
-      })
-      .catch((err) => {
-        handlerError(err, req, res, next);
-      })
-      .finally(() => {
-        if (conn) conn.end();
-      });
-});
-
-
-app.post("/api/room", async function (req, res, next) {
-  let conn;
-  const { name } = req.body;
-  pool
-      .getConnection()
-      .then((connexion) => {
-        conn = connexion;
-        return conn.query("INSERT INTO Room(name) VALUES (?)", [name]);
-      })
-      .then((result) => {
-        result = objectBigIntToInt(result);
         handlerSuccess(result, req, res, next);
       })
       .catch((err) => {
