@@ -82,22 +82,25 @@ app.post("/api/object/create", async function (req, res) {
 });
 
 
-app.post("/api/room/create", async function (req, res) {
+app.post("/api/room", async function (req, res, next) {
   let conn;
-  try {
-    conn = await pool.getConnection();
-    ({ name, index } = req.body);
-    const room_query_response = await conn.query(
-      "INSERT INTO Room(name, index) VALUES (?, ?)",
-      [name, index]
-    );
-    await conn.commit();
-    res.send({ status: "success" });
-  } catch (err) {
-    res.send(err);
-  } finally {
-    if (conn) conn.end();
-  }
+  const { name } = req.body;
+  pool
+      .getConnection()
+      .then((connexion) => {
+        conn = connexion;
+        return conn.query("INSERT INTO Room(name) VALUES (?)", [name]);
+      })
+      .then((result) => {
+        result = objectBigIntToInt(result);
+        handlerSuccess(result, req, res, next);
+      })
+      .catch((err) => {
+        handlerError(err, req, res, next);
+      })
+      .finally(() => {
+        if (conn) conn.end();
+      });
 });
 
 app.listen(8080, async () =>
