@@ -82,7 +82,43 @@ app.post("/api/object/create", async function (req, res) {
   }
 });
 
-app.post("/api/room/create", async function (req, res) {
+app.post("/api/object", async function (req, res, next) {
+  let conn;
+  const { name, description, isTool, imagename, image } = req.body;
+
+  pool
+      .getConnection()
+      .then(connection => {
+        conn = connection;
+        const object_query_response =  conn.query("INSERT INTO Object(name, description, isTool) VALUES (?, ?, ?)", [name, description, isTool]);
+        if (imagename & image) {
+          const file_query_response = conn.query(
+              "INSERT INTO File(filename, data) VALUES (?, ?)",
+              [imagename, image]
+          );
+          conn.query(
+              "INSERT INTO ObjectFile(ObjectId, FileId) VALUES (?, ?)",
+              [
+                parseInt(object_query_response.insertId),
+                parseInt(file_query_response.insertId),
+              ]
+          );
+        }
+      })
+      .then(result => {
+        //result = objectBigIntToInt(result);
+        handlerSuccess(result, req, res, next);
+      })
+      .catch((err) => {
+        handlerError(err, req, res, next);
+      })
+      .finally(() => {
+        if (conn) conn.end();
+      });
+});
+
+
+app.post("/api/room", async function (req, res, next) {
   let conn;
   const { name } = req.body;
   pool
