@@ -85,12 +85,25 @@ INSERT INTO Place(name, Xcoord, Ycoord, MapId)
         @id_campus_univ
     );
 
-SELECT id INTO @id_classe_bio FROM Place WHERE name = "classe de biologie" LIMIT 1;
+SELECT Place.id INTO @id_classe_bio 
+    FROM Place 
+        WHERE Place.name = "classe de biologie" 
+        AND Place.MapId = @id_campus_univ  
+    LIMIT 1;
+
+SELECT Place.id INTO @id_classe_math 
+    FROM Place 
+        WHERE Place.name = "classe de math"
+        AND Place.MapId = @id_campus_univ
+    LIMIT 1;
 
 INSERT INTO PlaceFile(PlaceId, FileId)
     VALUES (
         @id_classe_bio,
         @id_classe1_jpg 
+    ), (
+        @id_classe_math,
+        @id_classe1_jpg
     );
 
 
