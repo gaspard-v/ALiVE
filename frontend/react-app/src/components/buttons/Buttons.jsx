@@ -1,7 +1,7 @@
 import './buttons.css';
 import React from "react";
 import { useState,useEffect } from 'react';
-import ObjectCreation from '../objects/creation/ObjectCreation';
+import ObjectCreation from '../selections/edition/objects/creation/ObjectCreation';
 
 
 

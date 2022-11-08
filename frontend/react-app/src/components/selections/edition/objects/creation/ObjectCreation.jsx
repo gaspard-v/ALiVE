@@ -1,10 +1,9 @@
 import "./creation.css";
 import {useRef, useState} from "react";
 import React from "react";
-import Buttons from "../../buttons/Buttons";
+import Buttons from "../../../../buttons/Buttons";
 import { TiTick } from "react-icons/ti"
-import SegmentedControl from "../../segmented/SegmentedControl";
-import { FiUpload } from "react-icons/fi"
+import SegmentedControl from "../../../../segmented/SegmentedControl";
 import createObject from "../../../../../api/object/ObjectCall";
 
 
