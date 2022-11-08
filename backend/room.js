@@ -14,10 +14,11 @@ export const Room = (app, pool) => {
         return conn.query("SELECT name FROM Room");
       })
       .then((result) => {
-        handlerSuccess(result[0], req, res, next);
+        const retour = { ...roomObject, ...result[0] };
+        handlerSuccess(retour, req, res, next);
       })
       .catch((err) => {
-        handlerSuccess(err, req, res, next);
+        handlerError(err, req, res, next);
       })
       .finally(() => {
         if (conn) conn.end();
