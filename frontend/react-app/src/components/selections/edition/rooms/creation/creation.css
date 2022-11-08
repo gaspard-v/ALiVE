@@ -1,15 +1,22 @@
 .roomCreation{
     display: grid;
     grid-template-columns: 1vw repeat(3, 1fr) 1vw;
-    grid-template-rows: 1vw min-content 1fr min-content 1vw;
+    grid-template-rows: 1vw repeat(2,min-content) 1fr min-content 1vw;
     grid-template-areas: ". . . . . "
+                        ". roomNameLabel . . ."
                         ". roomName . . . "
                         ". roomImg roomImg roomImg ."
-                        ". . . ValButton .";
+                        ". . . ValButton ."
+                        " . . . . .";
+
 }
 
 .roomName{
     grid-area: roomName;
+}
+
+.roomNameLabel{
+    grid-area: roomNameLabel;
 }
 
 .roomImg{

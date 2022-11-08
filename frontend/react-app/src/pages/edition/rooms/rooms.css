@@ -11,9 +11,13 @@
         ". Menu RoomEditionScreen . "
         ". . . .";
     justify-content: center;
+
 }
 
 #RoomEditionScreen{
     grid-area: RoomEditionScreen;
-
+    border-radius: 5px;
+    background-color: #fff;
+    grid-gap: 5px;
+    filter: drop-shadow(0 0.1rem 0.1rem #787777);
 }

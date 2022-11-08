@@ -3,6 +3,7 @@ import createObject from "../../../../../api/object/ObjectCall";
 import SegmentedControl from "../../../../segmented/SegmentedControl";
 import Buttons from "../../../../buttons/Buttons";
 import {TiTick} from "react-icons/ti";
+import './creation.css';
 
 function RoomCreation(){
 
@@ -10,7 +11,7 @@ function RoomCreation(){
     // const [form, setFormValue] = useState();
     const [roomName,setRoomName] = useState("");
     const [roomImg,setRoomImg] = useState("");
-    const segmentedControl = useRef(null)
+    const segmentedControl = useRef(null);
 
     function onSubmit(event){
         event.preventDefault();
@@ -24,7 +25,8 @@ function RoomCreation(){
 
     return(
         <form id="RoomEditionScreen" className="roomCreation" onSubmit={onSubmit}>
-            <label className="roomName" value={roomName} onChange={e => setRoomName(e.target.value)}></label>
+            <label className="roomNameLabel">Nom de pièce</label>
+            <input className="roomName" value={roomName} onChange={e => setRoomName(e.target.value)}/>
             <input className="roomImg" type="file" name="img" accept="image/*" value={roomImg} onChange={e => setRoomImg(e.target.value)}></input>
             <Buttons icon={<TiTick className="ButtonIcon"/>} color="validate" type="submit">Valider</Buttons>
         </form>
