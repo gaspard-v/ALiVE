@@ -25,6 +25,9 @@ services:
     networks:
       - mariadb-network
 
+  phpmyadmin:
+    image: imageName
+
 networks:
   mariadb-network:
     driver: bridge
