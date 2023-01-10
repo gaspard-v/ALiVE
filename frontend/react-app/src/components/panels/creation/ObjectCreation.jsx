@@ -5,7 +5,7 @@ import Buttons from "../../buttons/Buttons";
 import { TiTick } from "react-icons/ti"
 import SegmentedControl from "../../../../segmented/SegmentedControl";
 import { FiUpload } from "react-icons/fi"
-import createObject from "../../../../../api/object/ObjectCall";
+import {createObject} from "../../../../../api/object/ObjectCall";
 
 
 function ObjectCreation(){
@@ -26,28 +26,11 @@ function ObjectCreation(){
     }
 
     return(
-        <form className="ObjectCreationScreen" id="EditionScreen" onSubmit={onSubmit}>
-            <label className="NameLabel">Nom de l'objet</label>
-            <input className="ModelName" value={objectName} onChange={e => setObjectName(e.target.value)}></input>
-            <SegmentedControl
-                    name="group-1"
-                    callback={(val) => setSelectedValue1(val)}
-                    controlRef={useRef()}
-                    segments={[
-                    {
-                        label: "Objet",
-                        value: true,
-                        ref: useRef()
-                    },
-                    {
-                        label: "Intel",
-                        value: false,
-                        ref: useRef()
-                    },
-                ]
-            }/>
-            <label className="DescriptionLabel">Description de l'objet</label>
-            <textarea className="Description" value={objectDescription} onChange={e => setObjectDescription(e.target.value)}></textarea>
+        <form id="ObjectEditionScreen" className="creation" onSubmit={onSubmit}>
+            <label className="objectLabel">Nom de l'objet</label>
+            <input className="ObjectName" value={objectName} onChange={e => setObjectName(e.target.value)}></input>
+            <label className="descriptionLabel">Description de l'objet</label>
+            <input className="ObjectDescription" value={objectDescription} onChange={e => setObjectDescription(e.target.value)}></input>
             <input className="ObjImg" type="file" name="img" accept="image/*" value={objectImg} onChange={e => setObjectImg(e.target.value)}></input>
             <Buttons icon={<TiTick className="ButtonIcon"/>} color="validate" to="../1" type="submit">Valider</Buttons>
         </form>
