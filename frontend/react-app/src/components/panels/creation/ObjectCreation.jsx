@@ -3,8 +3,9 @@ import {useRef, useState} from "react";
 import React from "react";
 import Buttons from "../../buttons/Buttons";
 import { TiTick } from "react-icons/ti"
-import SegmentedControl from "../../segmented/SegmentedControl";
-import {createObject} from "../../../api/object/ObjectCall";
+import SegmentedControl from "../../../../segmented/SegmentedControl";
+import { FiUpload } from "react-icons/fi"
+import createObject from "../../../../../api/object/ObjectCall";
 
 
 function ObjectCreation(){
@@ -51,6 +52,7 @@ function ObjectCreation(){
             <Buttons icon={<TiTick className="ButtonIcon"/>} color="validate" to="../1" type="submit">Valider</Buttons>
         </form>
     )
+
     }
 
 export default ObjectCreation;

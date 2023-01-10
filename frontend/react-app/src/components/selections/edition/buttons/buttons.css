@@ -1,0 +1,66 @@
+.ModifyObject{
+    display: grid;
+    grid-template-columns: 1fr min-content min-content 1fr;
+    grid-template-rows: 2em;
+    grid-template-areas: ". ButtonIcon NewButtonText .";
+    justify-items: center;
+    align-items: center;
+    color: #fff;
+    border: 0;
+    border-radius: 3px;
+    padding: 0;
+    background-color: black;
+    margin: 0.1em 0;
+}
+
+.ModifyObject.goHome{
+    grid-area: BackButton;
+    width: 2em;
+    height: 2em;
+    background-color: #0063CC;
+}
+
+.ModifyObject.addObject {
+    grid-area: AddButton;
+    background-color: #0063CC;
+    margin: 2.5vh 1.5vh;
+    width:  95%;
+    height: 2em;
+
+}
+
+.ModifyObject.validate{
+    grid-area: ValButton;
+    background-color: green;
+}
+
+.ModifyObject.delete{
+    grid-area: DelButton;
+    background-color: red;
+}
+
+.ModifyObject.modify{
+    grid-area: ModButton;
+    background-color: #0063CC;
+
+
+}
+
+
+.ModifyObject > * {
+    font-weight: bold;
+    padding: 1vh 0;
+}
+
+.ModifyObjectText{
+    grid-area: NewButtonText;
+    margin: 0;
+}
+
+.ButtonIcon{
+    grid-area: ButtonIcon;
+    margin: 0 3px;
+    padding: 0;
+}
+
+
