@@ -24,7 +24,6 @@ function ObjectCreation(){
                         isTool:1}
         createObject(response);
 
-    }
     
     return(
         <form id="ObjectEditionScreen" className="creation" onSubmit={onSubmit}>

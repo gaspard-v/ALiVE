@@ -1,0 +1,29 @@
+.roomPrompt{
+    grid-template-columns: 1vw min-content min-content repeat(3,1fr) 1vw;
+    grid-template-rows: 1vw repeat(2,min-content) 1fr repeat(2, min-content) 1vw;
+    grid-template-areas: ". . . . . . ."
+    " . RoomName RoomName . . . ."
+    ". RoomImg RoomImg RoomImg RoomImg RoomImg ."
+    ". RoomImg RoomImg RoomImg RoomImg RoomImg ."
+    ". . . . . ModButton ."
+    ". . . . . DelButton ."
+    ". . . . . . .";
+    display: grid;
+}
+
+.roomPrompt > .roomName{
+    grid-area: RoomName;
+    white-space: nowrap;
+    font-size: 1em;
+    align-self: center;
+    justify-self: center;
+    padding:0 1em;
+
+
+}
+
+.roomPrompt > .roomImg{
+    grid-area: RoomImg;
+    border: 1px #6e6e6e solid;
+    border-radius: 5px;
+}

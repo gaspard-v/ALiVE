@@ -17,7 +17,7 @@ function ListMenu({sectionChanger}){
     return(
         <div className="Menu">
             <SearchBar/>
-            <Buttons icon={<HiHome className="ButtonIcon"/>} color="goHome" trigger={() => navigate("/")}></Buttons> 
+            <Buttons icon={<HiHome className="ButtonIcon"/>} color="goHome" trigger={() => navigate("/")}></Buttons>
             <h2 className="MenuTitle">Mes objets</h2>
             <ul className="ListMenu">
                 {listItems}

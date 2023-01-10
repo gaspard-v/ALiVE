@@ -82,22 +82,61 @@ app.post("/api/object/create", async function (req, res) {
   }
 });
 
-app.post("/api/room/create", async function (req, res) {
+app.post("/api/object", async function (req, res, next) {
   let conn;
-  try {
-    conn = await pool.getConnection();
-    ({ name, index } = req.body);
-    const room_query_response = await conn.query(
-      "INSERT INTO Room(name, index) VALUES (?, ?)",
-      [name, index]
-    );
-    await conn.commit();
-    res.send({ status: "success" });
-  } catch (err) {
-    res.send(err);
-  } finally {
-    if (conn) conn.end();
-  }
+  const { name, description, isTool, imagename, image } = req.body;
+
+  pool
+      .getConnection()
+      .then(connection => {
+        conn = connection;
+        const object_query_response =  conn.query("INSERT INTO Object(name, description, isTool) VALUES (?, ?, ?)", [name, description, isTool]);
+        if (imagename & image) {
+          const file_query_response = conn.query(
+              "INSERT INTO File(filename, data) VALUES (?, ?)",
+              [imagename, image]
+          );
+          conn.query(
+              "INSERT INTO ObjectFile(ObjectId, FileId) VALUES (?, ?)",
+              [
+                parseInt(object_query_response.insertId),
+                parseInt(file_query_response.insertId),
+              ]
+          );
+        }
+      })
+      .then(result => {
+        //result = objectBigIntToInt(result);
+        handlerSuccess(result, req, res, next);
+      })
+      .catch((err) => {
+        handlerError(err, req, res, next);
+      })
+      .finally(() => {
+        if (conn) conn.end();
+      });
+});
+
+
+app.post("/api/room", async function (req, res, next) {
+  let conn;
+  const { name } = req.body;
+  pool
+      .getConnection()
+      .then((connexion) => {
+        conn = connexion;
+        return conn.query("INSERT INTO Room(name) VALUES (?)", [name]);
+      })
+      .then((result) => {
+        result = objectBigIntToInt(result);
+        handlerSuccess(result, req, res, next);
+      })
+      .catch((err) => {
+        handlerError(err, req, res, next);
+      })
+      .finally(() => {
+        if (conn) conn.end();
+      });
 });
 
 Room(app, pool);
