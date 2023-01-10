@@ -26,7 +26,16 @@ services:
       - mariadb-network
 
   phpmyadmin:
-    image: imageName
+    image: phpmyadmin
+    restart: always
+    environment:
+      - PMA_HOST=mariadb-database
+    depends_on:
+      - database
+    networks:
+      - mariadb-network
+    ports:
+      - 9880:80
 
 networks:
   mariadb-network:
