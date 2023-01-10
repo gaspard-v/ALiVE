@@ -12,10 +12,9 @@ CREATE TABLE File (
 
 CREATE TABLE Object (
     id BIGINT UNSIGNED AUTO_INCREMENT,
-    name VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL UNIQUE,
     description LONGTEXT,
     isTool tinyint(1),
-    INDEX ix_name_object(name),
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
@@ -49,16 +48,14 @@ CREATE TABLE Place (
 
 CREATE TABLE Map (
     id BIGINT UNSIGNED AUTO_INCREMENT,
-    name VARCHAR(100) NOT NULL,
-    INDEX ix_name_map(name),
+    name VARCHAR(100) NOT NULL UNIQUE,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Day (
     id BIGINT UNSIGNED AUTO_INCREMENT,
-    name VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL UNIQUE,
     description LONGTEXT,
-    INDEX ix_name_day(name),
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
@@ -70,14 +67,14 @@ CREATE TABLE Dialogue (
 
 CREATE TABLE Sentence (
     id BIGINT UNSIGNED AUTO_INCREMENT,
-    Content LONGTEXT,
-    Color VARCHAR(20),
+    content LONGTEXT,
+    color VARCHAR(20),
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Characters (
     id BIGINT UNSIGNED AUTO_INCREMENT,
-    name VARCHAR(50),
+    name VARCHAR(50) NOT NULL UNIQUE,
     color VARCHAR(20),
     INDEX ix_name_characters(name),
     PRIMARY KEY(id)
@@ -86,7 +83,7 @@ CREATE TABLE Characters (
 CREATE TABLE Administrator (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     login VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(300),
+    password VARCHAR(300) NOT NULL,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
@@ -121,6 +118,14 @@ CREATE TABLE MapFile (
     PRIMARY KEY(MapId, FileId)
 ) ENGINE=InnoDB;
 
+CREATE TABLE PlaceFile (
+    PlaceId BIGINT UNSIGNED NOT NULL,
+    FileId BIGINT UNSIGNED NOT NULL,
+    CONSTRAINT fk_Place_PlaceFile FOREIGN KEY (PlaceId) REFERENCES Place (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_File_PlaceFile FOREIGN KEY (FileId) REFERENCES File (id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    PRIMARY KEY(PlaceId, FileId)
+) ENGINE=InnoDB;
+
 ALTER TABLE RoomObject
     ADD COLUMN (
         ObjectId BIGINT UNSIGNED NOT NULL,
@@ -144,7 +149,7 @@ ALTER TABLE Place
         MapId BIGINT UNSIGNED NOT NULL
     ),
     ADD CONSTRAINT fk_Map_Place FOREIGN KEY (MapId) REFERENCES Map(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD UNIQUE INDEX ux_Map_Place (MapId);
+    ADD UNIQUE INDEX ix_Name_Map_Place (name, MapId);
 
 ALTER TABLE Door
     ADD COLUMN (
@@ -153,7 +158,7 @@ ALTER TABLE Door
     ),
     ADD CONSTRAINT fk_starting_room_Door FOREIGN KEY (StartingPlaceRoomId) REFERENCES Room(id) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD CONSTRAINT fk_destination_room_Door FOREIGN KEY(DestinationPlaceRoomId) REFERENCES Room(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD UNIQUE INDEX ux_room_Door (StartingPlaceRoomId, DestinationPlaceRoomId);
+    ADD UNIQUE INDEX ux_Room_Door (StartingPlaceRoomId, DestinationPlaceRoomId);
 
 ALTER TABLE Day
     ADD COLUMN (
@@ -161,7 +166,7 @@ ALTER TABLE Day
         MapId BIGINT UNSIGNED NOT NULL UNIQUE
     ),
     ADD CONSTRAINT fk_dialogue_Day FOREIGN KEY (DialogueId) REFERENCES Dialogue(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD CONSTRAINT  fk_map_Day FOREIGN KEY (MapId) REFERENCES Map(id) ON DELETE CASCADE ON UPDATE CASCADE;
+    ADD CONSTRAINT fk_map_Day FOREIGN KEY (MapId) REFERENCES Map(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE Sentence
     ADD COLUMN (

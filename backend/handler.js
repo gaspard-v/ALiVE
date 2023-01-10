@@ -11,6 +11,7 @@ export const handlerError = (error, req, res, next) => {
 export const handlerSuccess = (message, req, res, next) => {
   const retour = templateReturn;
   retour.status = STATUS_SUCCESS;
+  message = message ? message : "";
   retour.message = message;
   res.send(retour);
 };

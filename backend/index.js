@@ -2,6 +2,7 @@ import express, { json } from "express";
 import { createPool } from "mariadb";
 import { objectBigIntToInt } from "./utils.js";
 import { handlerError, handlerSuccess } from "./handler.js";
+import { Room } from "./room.js";
 
 const pool = createPool({
   host: "localhost",
@@ -137,6 +138,8 @@ app.post("/api/room", async function (req, res, next) {
         if (conn) conn.end();
       });
 });
+
+Room(app, pool);
 
 app.listen(8080, async () =>
   console.log("ALiVE app server is listening on port 8080.")
