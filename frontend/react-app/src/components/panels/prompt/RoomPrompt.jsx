@@ -5,14 +5,14 @@ import {RiDeleteBin2Line} from "react-icons/ri";
 import "./prompt.scss";
 
 function RoomPrompt({name,img}){
-   const [roomName,setRoomName] = useState("Nom de pièce");
+    const [roomName,setRoomName] = useState("Nom de pièce");
 
 
     return(
-        <div id="EditionScreen" className="RoomPromptScreen">
-            <h1 className="ModelName">{roomName}</h1>
-            <img className="RoomImg" src={img} alt='room image'/>
-            <Buttons icon={<TiPencil className="ButtonIcon"/>} to="edit" color="modify">Modifier</Buttons>
+        <div id="RoomEditionScreen" className="roomPrompt">
+            <h1 className="roomName">{roomName}</h1>
+            <img className="roomImg" src={img} alt='room image'/>
+            <Buttons icon={<TiPencil className="ButtonIcon"/>} color="modify">Modifier</Buttons>
             <Buttons icon={<RiDeleteBin2Line className="ButtonIcon"/>} color="delete">Supprimer</Buttons>
         </div>
     )

@@ -5,7 +5,6 @@ import Buttons from "../../buttons/Buttons";
 import { TiPencil } from "react-icons/ti"
 import { RiDeleteBin2Line } from "react-icons/ri"
 import SegmentedControl from "../../segmented/SegmentedControl";
-import { useParams } from "react-router";
 
 
 function ObjectPrompt(){
@@ -18,7 +17,7 @@ function ObjectPrompt(){
 
 
     return(
-        <div id="EditionScreen" className="ObjectPromptScreen">
+        <div id="ObjectEditionScreen" className="Prompt">
             <h1 className="ModelName">{objectName}</h1>
             <SegmentedControl
                     disabled={true}

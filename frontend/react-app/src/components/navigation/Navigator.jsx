@@ -1,11 +1,10 @@
 import React from "react";
-import {Routes, Route } from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
+import DaysEdition from "../../components/pages/days/DaysEdition";
 import GlobalEdition from "../../components/pages/global/GlobalEdition";
-import Selection from "../pages/selection/Selection";
-import RoomCreation from "../panels/creation/RoomCreation";
-import RoomPrompt from "../panels/prompt/RoomPrompt";
-import ObjectCreation from "../panels/creation/ObjectCreation";
-import ObjectPrompt from "../panels/prompt/ObjectPrompt";
+import MapsEdition from "../../components/pages/maps/MapsEdition";
+import ObjectsEdition from "../../components/pages/objects/ObjectsEdition";
+import RoomsEdition from "../../components/pages/rooms/RoomsEdition";
 
 export default function Navigator(){
     return(
