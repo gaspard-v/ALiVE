@@ -22,7 +22,6 @@ CREATE TABLE Object (
 
 CREATE TABLE RoomObject (
     id BIGINT UNSIGNED AUTO_INCREMENT,
-    uuid BINARY(16) NOT NULL UNIQUE,
     Xcoord INT,
     Ycoord INT,
     PRIMARY KEY(id)
@@ -38,7 +37,6 @@ CREATE TABLE Room (
 
 CREATE TABLE PlaceRoom (
     id BIGINT UNSIGNED AUTO_INCREMENT,
-    uuid BINARY(16) NOT NULL UNIQUE,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
@@ -199,10 +197,15 @@ DELIMITER //
 --  valeur par default = -1
 
 -- Créer un administrateur OU modifier son mot de passe
-CREATE PROCEDURE changeAdministrator(IN login VARCHAR(50), IN password VARCHAR(50))
+CREATE PROCEDURE setAdministrator(IN login VARCHAR(50), IN password VARCHAR(50))
 BEGIN
     INSERT INTO Administrator(login, password) VALUES (login, password)
     ON DUPLICATE KEY UPDATE password=password;
+END; //
+
+CREATE PROCEDURE CREATE_UUID(OUT uuid BINARY(16))
+BEGIN
+    SELECT UNHEX(REPLACE(UUID(), '-', '')) INTO uuid;
 END; //
 
 CREATE PROCEDURE getObjects(IN object_name VARCHAR(100), 
@@ -226,4 +229,93 @@ BEGIN
     END IF;
     EXECUTE IMMEDIATE var_query;
 END; //
+
+CREATE TRIGGER before_insert_file
+BEFORE INSERT ON File
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_object
+BEFORE INSERT ON Object
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_room
+BEFORE INSERT ON Room
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_place
+BEFORE INSERT ON Place
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_map
+BEFORE INSERT ON Map
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_day
+BEFORE INSERT ON Day
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_dialogue
+BEFORE INSERT ON Dialogue
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_sentence
+BEFORE INSERT ON Sentence
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_characters
+BEFORE INSERT ON Characters
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_door
+BEFORE INSERT ON Door
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_administrator
+BEFORE INSERT ON Administrator
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
 DELIMITER ;
