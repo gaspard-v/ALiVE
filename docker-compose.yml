@@ -12,7 +12,6 @@ services:
     volumes:
       - mariadb-volume:/var/lib/mysql:rw
       - ./database/mariadb.sql:/docker-entrypoint-initdb.d/01_mariadb.sql:ro
-      - ./database/dummy_mariadb.sql:/docker-entrypoint-initdb.d/02_dummy_mariadb.sql:ro
     networks:
       - mariadb-network
     hostname: mariadb-database
