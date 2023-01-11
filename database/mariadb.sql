@@ -3,6 +3,7 @@ USE alive;
 
 CREATE TABLE File (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     filename VARCHAR(100) NOT NULL UNIQUE CHECK(filename LIKE "%.%"),
     description LONGTEXT,
     option LONGTEXT,
@@ -12,6 +13,7 @@ CREATE TABLE File (
 
 CREATE TABLE Object (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL UNIQUE,
     description LONGTEXT,
     isTool tinyint(1),
@@ -20,6 +22,7 @@ CREATE TABLE Object (
 
 CREATE TABLE RoomObject (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     Xcoord INT,
     Ycoord INT,
     PRIMARY KEY(id)
@@ -27,6 +30,7 @@ CREATE TABLE RoomObject (
 
 CREATE TABLE Room (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL,
     INDEX ix_name_room(name),
     PRIMARY KEY(id)
@@ -34,11 +38,13 @@ CREATE TABLE Room (
 
 CREATE TABLE PlaceRoom (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Place (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     name varchar(100) NOT NULL,
     Xcoord INT,
     Ycoord INT,
@@ -48,12 +54,14 @@ CREATE TABLE Place (
 
 CREATE TABLE Map (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL UNIQUE,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Day (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL UNIQUE,
     description LONGTEXT,
     PRIMARY KEY(id)
@@ -61,12 +69,14 @@ CREATE TABLE Day (
 
 CREATE TABLE Dialogue (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     description LONGTEXT,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Sentence (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     content LONGTEXT,
     color VARCHAR(20),
     PRIMARY KEY(id)
@@ -74,6 +84,7 @@ CREATE TABLE Sentence (
 
 CREATE TABLE Characters (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     name VARCHAR(50) NOT NULL UNIQUE,
     color VARCHAR(20),
     INDEX ix_name_characters(name),
@@ -82,6 +93,7 @@ CREATE TABLE Characters (
 
 CREATE TABLE Administrator (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     login VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(300) NOT NULL,
     PRIMARY KEY(id)
@@ -89,6 +101,7 @@ CREATE TABLE Administrator (
 
 CREATE TABLE Door (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     Xcoord INT,
     Ycoord INT,
     PRIMARY KEY(id)
