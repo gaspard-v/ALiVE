@@ -4,7 +4,6 @@ a:visited {
   text-decoration: $link-decoration-none;
 }
 
-
 a {
   text-decoration: $link-decoration-none;
 }
@@ -97,30 +96,3 @@ a {
 
 
 
-#EditionScreen{
-  border-radius:$edition-screen-border-radius;
-  max-height: $edition-screen-max-height;
-  max-width: $edition-screen-max-width;
-  background-color: $edition-screen-background-color;
-  filter: $edition-screen-filter;
-  display: $edition-screen-display;
-  grid-area: $edition-screen-grid-area;
-  grid-gap: $edition-screen-grid-gap;
-}
-
-::-webkit-scrollbar {
-  display: none;
-}
-
-.SelectionPage{
-    background-color: $selection-page-background-color;
-    min-height: $selection-page-min-height;
-    white-space: $selection-page-white-space;
-    display: $selection-page-display;
-    grid-gap: $selection-page-grid-gap;
-    grid-template-columns: $selection-page-column-template;
-    grid-template-rows: $selection-page-rows-template;
-    grid-template-areas: $selection-page-areas-template;
-    justify-content: $justify-center;
-
-}

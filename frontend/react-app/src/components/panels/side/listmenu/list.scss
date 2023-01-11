@@ -1,0 +1,34 @@
+@import "../../../../ressources/stylesheet/variables.scss";
+
+.MenuList{
+    grid-area: List;
+    overflow-y: $menu-list-overflow;
+    max-height: $menu-list-max-height;
+    width: $menu-list-width;
+    padding: $menu-list-padding;
+    margin: $menu-list-margin;
+}
+
+.MenuTitle{
+    grid-area: $menu-title-grid-area;
+    white-space: $menu-title-white-space;
+    font-size: $menu-title-font-size;
+    margin: $menu-title-margin;
+}
+
+.SideMenu{
+    display: $side-menu-display;
+    grid-template-rows: $side-menu-rows-template;
+    grid-template-columns: $side-menu-columns-template;
+    grid-template-areas: $side-menu-area-template;
+    
+    scrollbar-width: $side-menu-scrollbar; 
+    border-radius: $side-menu-border-radius;
+    background-color: $side-menu-background-color;
+    filter: $panels-filter;
+    grid-area: $side-menu-grid-area;
+    width: $side-menu-width;
+    justify-items: $justify-center;
+    
+}
+
