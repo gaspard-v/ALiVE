@@ -562,6 +562,7 @@ paths:
           description: User not found
 components:
   schemas:
+  
     Status:
       type: string
       description: le status de la réponse API
@@ -575,14 +576,59 @@ components:
         name:
           type: string
           example: salle de classe
-        place:
-          $ref: '#/components/schemas/Place'
     Place:
       type: object
       properties:
         name:
           type: string
           example: école d'agriculture
+        Xcoord:
+          type: integer
+          example: 159
+        Ycoord:
+          type: integer
+          example: -76
+    Map:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Région nord est
+    Day:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    Dialogue:
+      type: object
+      properties:
+        description:
+          type: string
+    Sentence:
+      type: object
+      properties:
+        content: 
+          type: string
+        color:
+          type: string
+    Characters:
+      type: object
+      properties:
+        name:
+          type: string
+        color:
+          type: string
+    Door:
+      type: object
+      properties:
+        Xcoord:
+          type: integer
+        Ycoord:
+          type: integer
+        
+    
     Order:
       type: object
       properties:
@@ -713,6 +759,37 @@ components:
             $ref: '#/components/schemas/Room'
         status:
           $ref: '#/components/schemas/Status'
+
+    PlaceRequest:
+      type: object
+      properties:
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/Place'
+        status:
+          $ref: '#/components/schemas/Status'
+    
+    MapRequest:
+      type: object
+      properties:
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/Map'
+        status:
+          $ref: '#/components/schemas/Status'
+    
+    DayRequest:
+      type: object
+      properties:
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/Day'
+        status:
+          $ref: '#/components/schemas/Status'
+    
     ApiResponse:
       type: object
       properties:
@@ -725,6 +802,8 @@ components:
           type: string
       xml:
         name: '##default'
+  
+  
   requestBodies:
     Pet:
       description: Pet object that needs to be added to the store
