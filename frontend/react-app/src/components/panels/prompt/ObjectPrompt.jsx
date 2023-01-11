@@ -1,10 +1,10 @@
-import "./prompt.css";
+import "./prompt.scss";
 import {useRef, useState} from "react";
 import React from "react";
-import Buttons from "../../../../buttons/Buttons";
+import Buttons from "../../buttons/Buttons";
 import { TiPencil } from "react-icons/ti"
 import { RiDeleteBin2Line } from "react-icons/ri"
-import SegmentedControl from "../../../../segmented/SegmentedControl";
+import SegmentedControl from "../../segmented/SegmentedControl";
 
 
 function ObjectPrompt(){
@@ -20,8 +20,8 @@ function ObjectPrompt(){
     }
 
     return(
-        <div id="ObjectEditionScreen" className="prompt">
-            <h1 className="ObjectName">{objectName}</h1>
+        <div id="ObjectEditionScreen" className="Prompt">
+            <h1 className="ModelName">{objectName}</h1>
             <SegmentedControl
                     name="group-1"
                     callback={(val) => setSelectedValue1(val)}
@@ -39,7 +39,7 @@ function ObjectPrompt(){
                     },
                 ]
             }/>
-            <p className="ObjectDescription">{objectDescription}</p>
+            <p className="Description">{objectDescription}</p>
             <img className="ObjImg" alt="Obj img" src={objectImg}></img>
             <Buttons icon={<TiPencil className="ButtonIcon"/>} color="modify">Modifier</Buttons>
             <Buttons icon={<RiDeleteBin2Line className="ButtonIcon"/>} color="delete">Supprimer</Buttons>

@@ -1,0 +1,99 @@
+@import "../../ressources/stylesheet/variables.scss";
+
+a:visited {
+  text-decoration: $link-decoration-none;
+}
+
+a {
+  text-decoration: $link-decoration-none;
+}
+
+#globalEdition {
+  background-color: $global-background-color;
+  min-height: $page-min-height;
+
+  white-space: pre-line;
+
+  display: $grid-display;
+  grid-template-columns: $page-column-frame;
+  grid-template-rows: $global-menu-page-grid-rows;
+  grid-template-areas:$global-menu-page-grid-template;
+
+  align-content: $align-center;
+  justify-items: $justify-center;
+
+
+.GlobalMenu{
+  grid-area: $global-menu-grid-area;
+  display: $grid-display;
+  grid-template-areas: $global-menu-buttons-grid;
+
+  .GlobalMenuButton{
+
+    border: 0;
+    background-color: $transparent-color-background;
+
+    display: $grid-display;
+    grid-gap: $global-menu-grid-gap;
+    grid-area: $global-menu-button-grid-area;
+    grid-template-columns: $global-menu-button-column-template;
+    grid-template-rows: $global-menu-button-row-template;
+    grid-template-areas: $global-menu-button-grid-area;
+    
+    place-content: $global-menu-button-text-alignment;
+    place-items: $global-menu-button-text-alignment;
+    
+
+    max-height: $global-menu-button-height;
+
+
+    img {
+
+      width: $global-menu-button-img-width;
+      height: $global-menu-button-img-height;
+
+      object-fit: $global-menu-button-img-object-fit;
+      border-radius: $global-menu-button-img-border-radius;
+      filter: $global-menu-button-img-drop-shadow;
+    }
+    
+    img:hover{ 
+
+      transform: $global-menu-button-transform-hover;
+      filter: $global-button-drop-shadow-hover;
+    }
+
+    p{
+      position: $global-menu-button-position;
+      z-index: 1;
+      text-align: $global-menu-button-text-alignment;
+      font-size: $global-font-size;
+      color: $global-menu-button-font-color;
+      font-weight: $global-font-weight;
+    }
+  }
+  .GlobalMenuButton > *{
+    grid-area: $global-menu-grid-area;
+  }
+}
+
+#Objects {
+  grid-area: $global-menu-button-objects-grid-area;
+}
+
+#Rooms {
+  grid-area: $global-menu-button-rooms-grid-area;
+}
+
+#Days {
+  grid-area: $global-menu-button-days-grid-area;
+}
+
+#Maps {
+  grid-area: $global-menu-button-maps-grid-area;
+}
+}
+
+
+
+

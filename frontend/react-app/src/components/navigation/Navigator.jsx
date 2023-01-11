@@ -1,10 +1,10 @@
 import React from "react";
 import {Routes, Route} from 'react-router-dom';
-import DaysEdition from "../../pages/edition/days/DaysEdition";
-import GlobalEdition from "../../pages/edition/global/GlobalEdition";
-import MapsEdition from "../../pages/edition/maps/MapsEdition";
-import ObjectsEdition from "../../pages/edition/objects/ObjectsEdition";
-import RoomsEdition from "../../pages/edition/rooms/RoomsEdition";
+import DaysEdition from "../../components/pages/days/DaysEdition";
+import GlobalEdition from "../../components/pages/global/GlobalEdition";
+import MapsEdition from "../../components/pages/maps/MapsEdition";
+import ObjectsEdition from "../../components/pages/objects/ObjectsEdition";
+import RoomsEdition from "../../components/pages/rooms/RoomsEdition";
 
 export default function Navigator(){
     return(

@@ -1,8 +1,8 @@
 import "./rooms.css";
 import React, {useState} from "react";
-import ListMenu from "../../../components/selections/list/menu/ListMenu";
-import RoomPrompt from "../../../components/selections/edition/rooms/prompt/RoomPrompt";
-import RoomCreation from "../../../components/selections/edition/rooms/creation/RoomCreation";
+import ListMenu from "../../panels/side/listmenu/ListMenu";
+import RoomPrompt from "../../../components/panels/prompt/RoomPrompt";
+import RoomCreation from "../../../components/panels/creation/RoomCreation";
 
 function RoomsEdition(){
     const [currentSection,setCurrentSection] = useState(<RoomPrompt/>);

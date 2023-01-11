@@ -1,8 +1,8 @@
 import React, {useRef, useState} from "react";
-import Buttons from "../../../../buttons/Buttons";
+import Buttons from "../../buttons/Buttons";
 import {TiPencil} from "react-icons/ti";
 import {RiDeleteBin2Line} from "react-icons/ri";
-import "./prompt.css";
+import "./prompt.scss";
 
 function RoomPrompt({name,img}){
     const [roomName,setRoomName] = useState("Nom de pièce");

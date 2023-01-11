@@ -1,10 +1,10 @@
-import "./list.css";
+import "./list.scss";
 import React from "react";
-import ListComponent from "../component/ListComponent";
+import ListComponent from "../listcomponent/ListComponent";
 import SearchBar from "../../../searchbar/SearchBar"
-import Buttons from "../../edition/buttons/Buttons";
+import Buttons from "../../../buttons/Buttons";
 import { HiPlus, HiHome } from "react-icons/hi";
-import ObjectCreation from "../../edition/objects/creation/ObjectCreation";
+import ObjectCreation from "../../creation/ObjectCreation";
 import { Navigate, useNavigate  } from "react-router-dom";
 
 function ListMenu({sectionChanger}){
@@ -15,11 +15,11 @@ function ListMenu({sectionChanger}){
         ) ;
 
     return(
-        <div className="Menu">
+        <div className="SideMenu">
             <SearchBar/>
             <Buttons icon={<HiHome className="ButtonIcon"/>} color="goHome" trigger={() => navigate("/")}></Buttons>
             <h2 className="MenuTitle">Mes objets</h2>
-            <ul className="ListMenu">
+            <ul className="MenuList">
                 {listItems}
             </ul>
             <Buttons icon={<HiPlus className="ButtonIcon"/>} color="addObject" trigger={() => sectionChanger(<ObjectCreation/>)}>Nouveau</Buttons>

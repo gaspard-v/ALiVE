@@ -19,7 +19,7 @@
     grid-template-rows: 1.5vh 96vh 1.5vh;
     grid-template-areas:
         ". . . ."
-        ". Menu ObjEditionScreen . "
+        ". SideMenu ObjEditionScreen . "
         ". . . .";
     justify-content: center; 
     }

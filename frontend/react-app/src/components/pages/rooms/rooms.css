@@ -8,7 +8,7 @@
     grid-template-rows: 1.5vh 96vh 1.5vh;
     grid-template-areas:
         ". . . ."
-        ". Menu RoomEditionScreen . "
+        ". SideMenu RoomEditionScreen . "
         ". . . .";
     justify-content: center;
 

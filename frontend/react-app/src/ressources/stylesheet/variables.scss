@@ -1,0 +1,154 @@
+// IMPORTANT VARIABLES //
+$link-decoration-none: none;
+
+$place-content:center;
+$place-items: center;
+$global-font-weight: bold;
+$transparent-color-background: transparent;
+$align-center: center;
+$justify-center: center;
+$global-font-size: 2.8em;
+$justify-text: justify;
+
+// App Page variables //
+
+$global-background-color: #F1F5F9;
+$page-column-frame: 1em 1fr 1em;
+$page-row-frame: 1em 1fr 1em;
+$page-grid-gap: 1em;
+$page-min-height: 100vh;
+$grid-display: grid;
+$global-page-grid-template:
+        ". . ."
+        ". Page ."
+        ". . .";
+
+// Global Menu //
+
+
+$global-menu-page-grid-columns: 1fr;
+$global-menu-page-grid-rows: 1em min-content 3em 1fr 1em;
+$global-menu-page-grid-template:
+        ". . ."
+        ". SearchBar ."
+        ". . ."
+        ". GlobalMenu ."
+        ". . .";
+        
+        
+// Global Menu Buttons //
+$drop-shadow-color: #3b1e00;
+
+$global-menu-grid-gap: 0.3em;
+
+$global-menu-buttons-grid:    
+    "Objects Rooms"
+    "Maps Days";
+
+$global-menu-button-column-template: min-content min-content;
+$global-menu-button-row-template: min-content min-content;
+
+
+  // menu button
+$global-menu-button-width: 70vh;
+$global-menu-button-height: 38vh;
+
+$global-menu-button-transition: 1s;
+$global-menu-button-transform-hover: scale(1.01);
+$global-menu-button-font-color: aliceblue;
+$global-menu-button-text-alignment: center;
+$global-menu-button-position: relative;
+$global-menu-button-intern-grid:"GlobalMenuButton";
+
+
+
+ // menu button img
+
+$global-menu-button-img-width: $global-menu-button-width;
+$global-menu-button-img-height: $global-menu-button-height;
+$global-menu-button-img-border-radius: 12px;
+$global-menu-button-img-object-fit: cover;
+$global-menu-button-img-drop-shadow: drop-shadow(0 0.25rem 0.5rem $drop-shadow-color);
+
+
+
+  // menu button hover
+$global-button-drop-shadow-hover: blur(1px) drop-shadow(0 0.75rem 0.75rem $drop-shadow-color);
+
+  // global menu grid-areas
+$global-menu-button-grid-area: GlobalMenuButton;
+$global-menu-grid-area: GlobalMenu;
+
+$global-menu-button-objects-grid-area: Objects;
+$global-menu-button-rooms-grid-area: Rooms;
+$global-menu-button-days-grid-area: Days;
+$global-menu-button-maps-grid-area: Maps;
+
+// Panels //
+
+$panels-filter:drop-shadow(0 0.1rem 0.1rem #787777);
+
+// Prompt Panel //
+
+$panel-description-grid-area: Description;
+$panel-description-text-alignment: justify;
+$panel-description-padding: 0 1em;
+$panel-description-font-size: 1.5em;
+$panel-padding: 0 1em;
+
+$panel-name-grid-area: ModelName;
+$panel-name-white-space: nowarp;
+$panel-name-font-size: 1em;
+
+ //Object//
+
+$object-prompt-grid-area-template:
+". . . . . . ."
+" . ModelName SegmentedControl . . . ."
+". Description Description Description Description Description ."
+". Description Description Description Description Description ."
+". ObjImg . . . ModButton ."
+". ObjImg . . . DelButton ."
+". . . . . . .";
+
+
+$object-prompt-columns-template: 1em min-content min-content repeat(3,1fr) 1em;
+$object-prompt-rows-template: 1em repeat(2,min-content) 1fr repeat(2, min-content) 1em;
+
+
+// Edition Panel //
+
+// Creation Panel //
+
+
+
+
+// Side Panel//
+
+$menu-list-overflow: scroll;
+$menu-list-max-height: 80vh;
+$menu-list-width: 100%;
+$menu-list-padding: 0;
+$menu-list-margin:0;
+
+$menu-title-grid-area: MenuTitle;
+$menu-title-white-space: nowarp;
+$menu-title-font-size: 1em;
+$menu-title-margin:1vh;
+
+$side-menu-display:grid;
+$side-menu-rows-template:repeat(2,min-content) 1fr min-content;
+$side-menu-columns-template:2.2em 1fr;
+$side-menu-area-template:
+    "BackButton MenuTitle" 
+    "SearchBar SearchBar"
+    "List List"
+    "AddButton AddButton";
+$side-menu-scrollbar:none;
+$side-menu-border-radius:5px;
+$side-menu-background-color:#fff;
+$side-menu-grid-area:SideMenu;
+$side-menu-width:100%;
+
+// Searchbar //
+$searchbar-grid-area: SearchBar;
