@@ -5,10 +5,11 @@ import Buttons from "../../buttons/Buttons";
 import { TiPencil } from "react-icons/ti"
 import { RiDeleteBin2Line } from "react-icons/ri"
 import SegmentedControl from "../../segmented/SegmentedControl";
+import { useParams } from "react-router";
 
 
 function ObjectPrompt(){
-
+    const {id} = useParams();
     const [selectedValue1, setSelectedValue1] = useState("complete");
     const [objectName,setObjectName] = useState("Nom d'objet");
     const [objectDescription,setObjectDescription] = useState(
@@ -18,9 +19,8 @@ function ObjectPrompt(){
     function componentDidMount(){
 
     }
-
     return(
-        <div id="ObjectEditionScreen" className="Prompt">
+        <div id="ObjectEditionScreen" className="ObjectPromptScreen">
             <h1 className="ModelName">{objectName}</h1>
             <SegmentedControl
                     name="group-1"
@@ -41,7 +41,7 @@ function ObjectPrompt(){
             }/>
             <p className="Description">{objectDescription}</p>
             <img className="ObjImg" alt="Obj img" src={objectImg}></img>
-            <Buttons icon={<TiPencil className="ButtonIcon"/>} color="modify">Modifier</Buttons>
+            <Buttons icon={<TiPencil className="ButtonIcon"/>} to="edit"color="modify">Modifier</Buttons>
             <Buttons icon={<RiDeleteBin2Line className="ButtonIcon"/>} color="delete">Supprimer</Buttons>
             
         </div>

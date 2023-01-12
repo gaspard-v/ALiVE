@@ -99,7 +99,7 @@ $panel-description-font-size: 1.5em;
 $panel-padding: 0 1em;
 
 $panel-name-grid-area: ModelName;
-$panel-name-white-space: nowarp;
+$panel-name-white-space: nowrap;
 $panel-name-font-size: 1em;
 
  //Object//
@@ -108,9 +108,9 @@ $object-prompt-grid-area-template:
 ". . . . . . ."
 " . ModelName SegmentedControl . . . ."
 ". Description Description Description Description Description ."
-". Description Description Description Description Description ."
-". ObjImg . . . ModButton ."
-". ObjImg . . . DelButton ."
+". ObjImg ObjImg ObjImg . . ."
+". ObjImg ObjImg ObjImg . ModButton ."
+". ObjImg ObjImg ObjImg . DelButton ."
 ". . . . . . .";
 
 
@@ -141,8 +141,29 @@ $room-prompt-img-max-height: 100%;
 
 // Creation Panel //
 
+  // Objects //
+
+$object-creation-columns-template:1em min-content min-content repeat(3,1fr) 1em;
+$object-creation-rows-template:1em repeat(3,min-content) 1fr 1fr 3em min-content 1em;
+$object-creation-area-template:". . . . . . ."
+". NameLabel SegmentedControl . . . ."
+". ModelName SegmentedControl . . . ."
+". DescriptionLabel . . . . ."
+". Description Description Description Description Description ."
+". ObjImg ObjImg ObjImg . . ."
+". ObjImg ObjImg ObjImg . . . "
+". ObjImg ObjImg ObjImg . ValButton ."
+". . . . . . .";
+
+$object-creation-input-alignment:none;
+$object-creation-input-items:none;
+$object-creation-input-margin:0.5em;
+$object-creation-input-border:0.5px solid grey;
+$object-creation-input-border-radius:2px;
+$object-creation-input-background-color:#EDF2F7;
 
 
+$object-creation-upload-button-display :none;
 
 // Side Panel//
 
@@ -170,6 +191,40 @@ $side-menu-border-radius:5px;
 $side-menu-background-color:#fff;
 $side-menu-grid-area:SideMenu;
 $side-menu-width:100%;
+
+
+$side-component-border: none;
+$side-component-height:6vh;
+$side-component-width:96%;
+$side-component-border-radius:5px;
+$side-component-display: grid;
+$side-component-grid-template:
+". . . . ."
+". ComponentObjectImg . ComponentObjectName ."
+". . . . .";
+$side-component-column-template:5% 20% 5% 65% 5%;
+$side-component-rows-template: 5% 90% 5%;
+$side-component-background-colors:#fff;
+$side-component-z-index:0;
+$side-component-margin:0.6em 2% 0.6em 2%;
+$side-component-align-items: $align-center;
+$side-component-filter: $panels-filter;
+
+$side-component-img-grid-area: ComponentObjectImg;
+$side-component-img-object-fit: conver;
+$side-component-img-border-radius: 8px;
+$side-component-img-height: 100%;
+$side-component-img-width: 100%;
+
+$side-component-hover: drop-shadow(0 0.1rem 0.2rem #262421);
+
+$side-component-object-margin: 4%;
+$side-component-object-grid-area: ComponentObjectName;
+$side-component-object-font-size: 1.5em;
+$side-component-object-font-weight: bold;
+$side-component-object-color: #000;
+$side-component-object-align-items: $align-center;
+
 
 // Searchbar //
 $searchbar-grid-area: SearchBar;

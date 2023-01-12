@@ -1,10 +1,9 @@
-import "./creation.css";
+import "./creation.scss";
 import {useRef, useState} from "react";
 import React from "react";
 import Buttons from "../../buttons/Buttons";
 import { TiTick } from "react-icons/ti"
 import SegmentedControl from "../../segmented/SegmentedControl";
-import { FiUpload } from "react-icons/fi"
 import createObject from "../../../api/object/ObjectCall";
 
 
@@ -23,37 +22,37 @@ function ObjectCreation(){
                         description:objectDescription,
                         isTool:1}
         createObject(response);
+    }
 
-    
     return(
-        <form id="ObjectEditionScreen" className="creation" onSubmit={onSubmit}>
-            <label className="objectLabel">Nom de l'objet</label>
-            <input className="ObjectName" value={objectName} onChange={e => setObjectName(e.target.value)}></input>
+        <form className="ObjectCreationScreen" id="ObjectEditionScreen" onSubmit={onSubmit}>
+            <label className="NameLabel">Nom de l'objet</label>
+            <input className="ModelName" value={objectName} onChange={e => setObjectName(e.target.value)}></input>
             <SegmentedControl
                     name="group-1"
                     callback={(val) => setSelectedValue1(val)}
-                    controlRef={segmentedControl}
+                    controlRef={useRef()}
                     segments={[
                     {
                         label: "Objet",
                         value: "object",
-                      
+                        ref: useRef()
                     },
                     {
                         label: "Intel",
                         value: "intel",
-                      
+                        ref: useRef()
                     },
                 ]
             }/>
-            <label className="descriptionLabel">Description de l'objet</label>
-            <input className="ObjectDescription" value={objectDescription} onChange={e => setObjectDescription(e.target.value)}></input>
+            <label className="DescriptionLabel">Description de l'objet</label>
+            <textarea className="Description" value={objectDescription} onChange={e => setObjectDescription(e.target.value)}></textarea>
             <input className="ObjImg" type="file" name="img" accept="image/*" value={objectImg} onChange={e => setObjectImg(e.target.value)}></input>
             <Buttons icon={<TiTick className="ButtonIcon"/>} color="validate" type="submit">Valider</Buttons>
             
         </form>
     )
     }
-}
+
 
 export default ObjectCreation;

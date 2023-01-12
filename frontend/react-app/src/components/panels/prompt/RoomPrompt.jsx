@@ -12,7 +12,7 @@ function RoomPrompt({name,img}){
         <div id="RoomEditionScreen" className="Prompt">
             <h1 className="ModelName">{roomName}</h1>
             <img className="RoomImg" src={img} alt='room image'/>
-            <Buttons icon={<TiPencil className="ButtonIcon"/>} color="modify">Modifier</Buttons>
+            <Buttons icon={<TiPencil className="ButtonIcon"/>} to="edit" color="modify">Modifier</Buttons>
             <Buttons icon={<RiDeleteBin2Line className="ButtonIcon"/>} color="delete">Supprimer</Buttons>
         </div>
     )

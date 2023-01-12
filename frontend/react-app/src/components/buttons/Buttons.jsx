@@ -1,18 +1,15 @@
 import './buttons.css';
 import React from "react";
-import { useState,useEffect } from 'react';
-import ObjectCreation from '../panels/creation/ObjectCreation';
+import { NavLink } from 'react-router-dom';
 
+const Buttons = ({icon, children,color, type,to}) => {
 
-
-const Buttons = ({icon, children,color, type, trigger}) => {
-
-
+    
     return(
-        <button className={`ModifyObject ${color}`} type={type} onClick={trigger}>
+        <NavLink to={to} className={`ModifyObject ${color}`} type={type}>
             {icon}
-            <p  className='ModifyObjectText'>{children}</p>
-        </button>
+            <p className='ModifyObjectText'>{children}</p>
+        </NavLink>
     )
 }
 

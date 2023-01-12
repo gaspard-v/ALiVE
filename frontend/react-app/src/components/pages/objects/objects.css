@@ -6,6 +6,7 @@
     background-color: #fff;
     filter: drop-shadow(0 0.1rem 0.1rem #787777);
     display: grid;
+    grid-area: ObjEditionScreen;
    
 }
 
@@ -29,10 +30,6 @@
     grid-area: ObjLabel;
     white-space: nowrap;
     font-size: 0.8em;
-}
-
-#ObjectEditionScreen{
-    grid-area: ObjEditionScreen;
 }
 
 ::-webkit-scrollbar {
