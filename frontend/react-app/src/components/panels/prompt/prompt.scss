@@ -30,7 +30,7 @@
     border-radius: 5px;
 }
 
-#RoomEditionScreen{
+.RoomPromptScreen{
     grid-template-columns: $room-prompt-column-template;
     grid-template-rows: $room-prompt-rows-template;
     grid-template-areas: $room-prompt-area-template;

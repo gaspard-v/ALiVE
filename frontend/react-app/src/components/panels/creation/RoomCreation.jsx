@@ -1,13 +1,12 @@
 import React, {useRef, useState} from "react";
 import createObject from "../../../api/object/ObjectCall";
-import SegmentedControl from "../../segmented/SegmentedControl";
 import Buttons from "../../buttons/Buttons";
 import {TiTick} from "react-icons/ti";
-import './creation.css';
+import './creation.scss';
 
 function RoomCreation(){
 
-    const [selectedValue1, setSelectedValue1] = useState("complete");
+    //const [selectedValue1, setSelectedValue1] = useState("complete");
     // const [form, setFormValue] = useState();
     const [roomName,setRoomName] = useState("");
     const [roomImg,setRoomImg] = useState("");
@@ -24,10 +23,10 @@ function RoomCreation(){
     }
 
     return(
-        <form id="RoomEditionScreen" className="roomCreation" onSubmit={onSubmit}>
-            <label className="roomNameLabel">Nom de pièce</label>
-            <input className="roomName" value={roomName} onChange={e => setRoomName(e.target.value)}/>
-            <input className="roomImg" type="file" name="img" accept="image/*" value={roomImg} onChange={e => setRoomImg(e.target.value)}></input>
+        <form id="RoomEditionScreen" className="RoomScreenCreation" onSubmit={onSubmit}>
+            <label className="NameLabel">Nom de pièce</label>
+            <input className="ModelName" value={roomName} onChange={e => setRoomName(e.target.value)}/>
+            <input className="RoomImg" type="file" name="img" accept="image/*" value={roomImg} onChange={e => setRoomImg(e.target.value)}></input>
             <Buttons icon={<TiTick className="ButtonIcon"/>} color="validate" type="submit">Valider</Buttons>
         </form>
     )

@@ -9,7 +9,7 @@ import createObject from "../../../api/object/ObjectCall";
 
 function ObjectCreation(){
 
-    const [selectedValue1, setSelectedValue1] = useState("complete");
+    //const [selectedValue1, setSelectedValue1] = useState("complete");
     // const [form, setFormValue] = useState();
     const [objectName,setObjectName] = useState("");
     const [objectDescription,setObjectDescription] = useState("");
@@ -48,7 +48,7 @@ function ObjectCreation(){
             <label className="DescriptionLabel">Description de l'objet</label>
             <textarea className="Description" value={objectDescription} onChange={e => setObjectDescription(e.target.value)}></textarea>
             <input className="ObjImg" type="file" name="img" accept="image/*" value={objectImg} onChange={e => setObjectImg(e.target.value)}></input>
-            <Buttons icon={<TiTick className="ButtonIcon"/>} color="validate" type="submit">Valider</Buttons>
+            <Buttons icon={<TiTick className="ButtonIcon"/>} color="validate" to="../1" type="submit">Valider</Buttons>
             
         </form>
     )

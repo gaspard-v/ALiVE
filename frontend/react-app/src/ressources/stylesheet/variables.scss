@@ -145,7 +145,8 @@ $room-prompt-img-max-height: 100%;
 
 $object-creation-columns-template:1em min-content min-content repeat(3,1fr) 1em;
 $object-creation-rows-template:1em repeat(3,min-content) 1fr 1fr 3em min-content 1em;
-$object-creation-area-template:". . . . . . ."
+$object-creation-area-template:
+". . . . . . ."
 ". NameLabel SegmentedControl . . . ."
 ". ModelName SegmentedControl . . . ."
 ". DescriptionLabel . . . . ."
@@ -164,6 +165,20 @@ $object-creation-input-background-color:#EDF2F7;
 
 
 $object-creation-upload-button-display :none;
+
+
+
+  // Rooms //
+$room-creation-display: grid;
+$room-creation-columns-template:1vw repeat(3, 1fr) 1vw;
+$room-creation-rows-template:1vw repeat(2,min-content) 1fr min-content 1vw;
+$room-creation-area-template: 
+". . . . . "
+". NameLabel . . ."
+". ModelName . . . "
+". RoomImg RoomImg RoomImg ."
+". . . ValButton ."
+" . . . . .";
 
 // Side Panel//
 
