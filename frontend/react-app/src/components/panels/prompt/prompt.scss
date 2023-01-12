@@ -2,10 +2,14 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .ObjectPromptScreen{
 =======
 #ObjectEditionScreen{
 >>>>>>> 640ba0e (Init react revamp)
+=======
+.ObjectPromptScreen{
+>>>>>>> ad70c80 (Object creation refacto)
     grid-template-columns: $object-prompt-columns-template;
     grid-template-rows: $object-prompt-rows-template; 
     grid-template-areas: $object-prompt-grid-area-template;
@@ -30,6 +34,8 @@
 
 .ObjImg{
     grid-area: ObjImg;
+    border: 0.5px solid grey;
+    border-radius: 5px;
 }
 
 <<<<<<< HEAD

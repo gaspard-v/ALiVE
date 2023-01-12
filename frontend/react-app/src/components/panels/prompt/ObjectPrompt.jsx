@@ -6,9 +6,13 @@ import { TiPencil } from "react-icons/ti"
 import { RiDeleteBin2Line } from "react-icons/ri"
 import SegmentedControl from "../../segmented/SegmentedControl";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useParams } from "react-router";
 =======
 >>>>>>> 640ba0e (Init react revamp)
+=======
+import { useParams } from "react-router";
+>>>>>>> ad70c80 (Object creation refacto)
 
 
 function ObjectPrompt(){
@@ -24,10 +28,14 @@ function ObjectPrompt(){
     }
     return(
 <<<<<<< HEAD
+<<<<<<< HEAD
         <div id="EditionScreen" className="ObjectPromptScreen">
 =======
         <div id="ObjectEditionScreen" className="Prompt">
 >>>>>>> 640ba0e (Init react revamp)
+=======
+        <div id="ObjectEditionScreen" className="ObjectPromptScreen">
+>>>>>>> ad70c80 (Object creation refacto)
             <h1 className="ModelName">{objectName}</h1>
             <SegmentedControl
                     disabled={true}
