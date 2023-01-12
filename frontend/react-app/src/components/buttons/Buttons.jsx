@@ -1,11 +1,6 @@
 import './button.scss';
 import React from "react";
-import { useState,useEffect } from 'react';
-import ObjectCreation from '../panels/creation/ObjectCreation';
-
-
-
-const Buttons = ({icon, children,color, type, trigger}) => {
+import { NavLink } from 'react-router-dom';
 
 const Buttons = ({icon, children,color, type,to}) => {
 

@@ -1,11 +1,7 @@
 @import "../../../ressources/stylesheet/variables.scss";
 
 
-<<<<<<< HEAD
-.ObjectPromptScreen{
-=======
 #ObjectEditionScreen{
->>>>>>> 2ad87f7 (Init react revamp)
     grid-template-columns: $object-prompt-columns-template;
     grid-template-rows: $object-prompt-rows-template; 
     grid-template-areas: $object-prompt-grid-area-template;
@@ -30,9 +26,6 @@
 
 .ObjImg{
     grid-area: ObjImg;
-<<<<<<< HEAD
-    border: 0.5px solid grey;
-    border-radius: 5px;
 }
 
 .RoomPromptScreen{
@@ -49,7 +42,3 @@
     max-width: $room-prompt-img-max-width;
     max-height: $room-prompt-img-max-height;
 }
-=======
-}
-
->>>>>>> 2ad87f7 (Init react revamp)
