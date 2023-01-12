@@ -28,3 +28,17 @@
     grid-area: ObjImg;
 }
 
+#RoomEditionScreen{
+    grid-template-columns: $room-prompt-column-template;
+    grid-template-rows: $room-prompt-rows-template;
+    grid-template-areas: $room-prompt-area-template;
+    display: $room-prompt-display;
+}
+
+.roomImg{
+    grid-area: $room-prompt-img-grid-area;
+    border: $room-prompt-img-border;
+    border-radius: $room-prompt-img-border-radius;
+    max-width: $room-prompt-img-max-width;
+    max-height: $room-prompt-img-max-height;
+}

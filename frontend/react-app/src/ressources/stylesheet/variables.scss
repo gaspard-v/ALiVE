@@ -10,6 +10,8 @@ $justify-center: center;
 $global-font-size: 2.8em;
 $justify-text: justify;
 
+ // Grid Variables //
+
 // App Page variables //
 
 $global-background-color: #F1F5F9;
@@ -115,7 +117,26 @@ $object-prompt-grid-area-template:
 $object-prompt-columns-template: 1em min-content min-content repeat(3,1fr) 1em;
 $object-prompt-rows-template: 1em repeat(2,min-content) 1fr repeat(2, min-content) 1em;
 
+ // Room //
 
+$room-prompt-column-template:1vw min-content min-content repeat(3,1fr) 1vw;
+$room-prompt-rows-template:1vw repeat(2,min-content) 1fr repeat(2, min-content) 1vw;
+$room-prompt-area-template:
+'. . . . . . .'
+" . . ModelName ModelName ModelName ModelName . "
+". RoomImg RoomImg RoomImg RoomImg RoomImg ."
+". RoomImg RoomImg RoomImg RoomImg RoomImg ."
+". . . . . ModButton ."
+". . . . . DelButton ."
+". . . . . . .";
+$room-prompt-display: grid;
+
+$room-prompt-img-grid-area: RoomImg;
+$room-prompt-img-border: 1px #6e6e6e solid;
+$room-prompt-img-border-radius: 5px;
+
+$room-prompt-img-max-width: 100%;
+$room-prompt-img-max-height: 100%;
 // Edition Panel //
 
 // Creation Panel //
