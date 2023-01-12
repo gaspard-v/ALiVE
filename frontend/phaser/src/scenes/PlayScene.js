@@ -11,7 +11,6 @@ export default class PlayScene extends Phaser.Scene {
     }
 
     displayText() {
-        console.log('displayText');
         this.textScene.data.set('reactiveScene', this.reactiveScene.bind(this));
         this.textScene.scene.start();
         this.desactiveScene();
@@ -27,7 +26,6 @@ export default class PlayScene extends Phaser.Scene {
     reactiveScene() {
         this.scene.setActive(true);
         this.scene.bringToTop();
-        console.log('reactiveScene');
         this.blur.active = false;
         this.darkRectangle.setVisible(false);
     }

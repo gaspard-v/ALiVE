@@ -2,17 +2,18 @@ import Phaser from 'phaser';
 
 export default class MainMenuScene extends Phaser.Scene {
     constructor() {
-        super('main-menu');
+        super({ key: 'main-menu', active: true });
     }
 
     init() {
         this.cursors = this.input.keyboard.createCursorKeys();
+        this.getAllJourneyInfos();
     }
 
     preload() {
         this.load.image('glass-panel', '/static/assets/glassPanel.png');
         this.load.image('cursor-hand', '/static/assets/cursor_hand.png');
-        this.load.image('background', '/static/background.png');
+        this.load.image('background', '/static/ancienneClasse.jpeg');
     }
 
     create() {
@@ -85,5 +86,19 @@ export default class MainMenuScene extends Phaser.Scene {
         } else if (spaceJustPressed) {
             this.confirmSelection();
         }
+    }
+
+    getAllJourneyInfos() {
+        // TODO: GET LEVEL DATA HERE OR ALL LEVEL DATA
+        axios.get('https://jsonplaceholder.typicode.com/posts')
+            .then(response => {
+                // Traitement des données reçues
+                console.log(response.data);
+            })
+            .catch(error => {
+                // Traitement des erreurs
+                console.log(error);
+            });
+
     }
 }

@@ -1,6 +1,7 @@
 import * as Phaser from 'phaser';
 import PlayScene from './src/scenes/PlayScene';
 import TextScene from './src/scenes/TextScene';
+import MainMenu from './src/scenes/MainMenu';
 import GrayScalePipelinePlugin from 'phaser3-rex-plugins/plugins/grayscalepipeline-plugin.js';
 import KawaseBlurPipelinePlugin from 'phaser3-rex-plugins/plugins/kawaseblurpipeline-plugin.js';
 
@@ -31,7 +32,7 @@ const config = {
             },
         ],
     },
-    scene: [PlayScene, TextScene],
+    scene: [MainMenu],
 };
 
 window.game = new Phaser.Game(config);
