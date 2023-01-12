@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-01-12T15:18:39.909Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="dLQnkD0-atl-VLh9ePlA" version="20.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2023-01-12T15:24:16.476Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="7FKPCMFbCgu2BThJ6fz5" version="20.4.0" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="716" dy="394" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="4681" math="0" shadow="0">
       <root>
@@ -500,6 +500,9 @@
         </mxCell>
         <mxCell id="vfHWK_SlbxMm8GG0n5J4-138" value="Une fleche indique une référence&lt;br&gt;la fleche par de la classe qui contient dans sa structure une référence vers la classe ou arrive la fleche&lt;br&gt;&lt;br&gt;Dans cette exemple, on comprends: &quot;barClasse contient obligatoirement une référence vers un objet de la classe fooClasse&quot;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#000000;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="2050" y="550" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="vfHWK_SlbxMm8GG0n5J4-139" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;PK: Primary Key&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;UX: Unique Index&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;IX: Index&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;ref: Reference&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;uneReference: ref &quot;uneClasse&quot;&lt;br&gt;compositeReference: UX ref (&quot;une classe&quot;, &quot;autre classe&quot;)&lt;br&gt;&lt;br&gt;C&#39;est une référence composite unique, en d&#39;autre terme il n&#39;est pas possible de créer un une objet ayant les deux exacte meme référence&lt;/span&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#000000;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1820" y="760" width="140" height="180" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
