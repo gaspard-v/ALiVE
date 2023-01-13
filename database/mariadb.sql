@@ -16,7 +16,7 @@ CREATE TABLE Object (
     uuid BINARY(16) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL UNIQUE,
     description LONGTEXT,
-    isTool tinyint(1),
+    isTool TINYINT(1) NOT NULL,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
