@@ -1,0 +1,37 @@
+@import '../../../ressources/stylesheet/variables.scss';
+
+.ObjectCreationScreen{
+    grid-template-columns:$object-creation-columns-template;
+    grid-template-rows: $object-creation-rows-template;
+    grid-template-areas: $object-creation-area-template;
+
+    input{
+
+        align-items:$object-creation-input-alignment;
+        justify-items: $object-creation-input-items;
+        margin: $object-creation-input-margin;
+        border: $object-creation-input-border;
+        border-radius: $object-creation-input-border-radius;
+        background-color: $object-creation-input-background-color;
+
+        #file-upload-button{
+            display: $object-creation-upload-button-display;
+        }
+    }
+}
+
+.NameLabel{
+    grid-area: NameLabel;
+}
+
+.DescriptionLabel{
+    grid-area: DescriptionLabel;
+}
+
+.RoomScreenCreation{
+    display: $room-creation-display;
+    grid-template-columns: $room-creation-columns-template;
+    grid-template-rows: $room-creation-rows-template;
+    grid-template-areas: $room-creation-area-template;
+
+}
