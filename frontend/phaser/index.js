@@ -32,7 +32,7 @@ const config = {
             },
         ],
     },
-    scene: [MainMenu],
+    scene: [MainMenu, PlayScene, TextScene],
 };
 
 window.game = new Phaser.Game(config);

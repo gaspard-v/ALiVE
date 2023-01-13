@@ -5,7 +5,7 @@ export default class TextScene extends Phaser.Scene {
     y = Phaser.Math.Between(64, 128);
 
     constructor() {
-        super({ key: 'TextScene', active: true });
+        super({ key: 'TextScene' });
     }
 
     preload() {

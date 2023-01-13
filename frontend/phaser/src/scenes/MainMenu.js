@@ -1,6 +1,9 @@
 import Phaser from 'phaser';
+import PlayScene from './PlayScene';
 
 export default class MainMenuScene extends Phaser.Scene {
+    mask;
+
     constructor() {
         super({ key: 'main-menu', active: true });
     }
@@ -13,7 +16,7 @@ export default class MainMenuScene extends Phaser.Scene {
     preload() {
         this.load.image('glass-panel', '/static/assets/glassPanel.png');
         this.load.image('cursor-hand', '/static/assets/cursor_hand.png');
-        this.load.image('background', '/static/ancienneClasse.jpeg');
+        this.load.image('background', '/static/mainMenu.jpg');
     }
 
     create() {
@@ -23,6 +26,12 @@ export default class MainMenuScene extends Phaser.Scene {
         this.add
             .image(width * 0.5, height * 0.5, 'background')
             .setDisplaySize(width, height);
+
+        // PlayScene button
+        const playSceneButton = document.createElement('button');
+        playSceneButton.addEventListener('click', () => {this.changeScene('PlayScene')});
+        playSceneButton.appendChild(document.createTextNode('Go to PlayScene'));
+        document.body.appendChild(playSceneButton);
 
         // Play button
         const playButton = this.add
@@ -56,6 +65,24 @@ export default class MainMenuScene extends Phaser.Scene {
         this.add
             .text(creditsButton.x, creditsButton.y, 'Credits')
             .setOrigin(0.5);
+
+        // set the mask
+        // TODO: continue main view
+        // const styleMask = {
+        //  'background-color': 'rgba(255,255,255)',
+        //  width: '220px',
+        //  height: '50px',
+        // };
+
+        // this.mask = this.add.dom(
+        //  400,
+        //  300,
+        //  'div',
+        //  styleMask,
+        //  ''
+        // )
+        // this.mask.visibility = true;
+        // this.mask.setVisible(true);
     }
 
     selectButton(index) {
@@ -86,6 +113,8 @@ export default class MainMenuScene extends Phaser.Scene {
         } else if (spaceJustPressed) {
             this.confirmSelection();
         }
+
+        // this.mask.setVisible();
     }
 
     getAllJourneyInfos() {
@@ -99,6 +128,12 @@ export default class MainMenuScene extends Phaser.Scene {
                 // Traitement des erreurs
                 console.log(error);
             });
+    }
 
+    changeScene(sceneToGo) {
+        this.scene.setActive(false);
+        if (sceneToGo == "PlayScene") {
+            this.scene.start(sceneToGo);
+        }
     }
 }
