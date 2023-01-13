@@ -185,7 +185,8 @@ ALTER TABLE Sentence
         CharacterId BIGINT UNSIGNED NOT NULL
     ),
     ADD CONSTRAINT fk_dialogue_Sentence FOREIGN KEY (DialogueId) REFERENCES Dialogue(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD CONSTRAINT fk_dialogue_Characters FOREIGN KEY (CharacterId) REFERENCES Characters(id) ON DELETE CASCADE ON UPDATE CASCADE;
+    ADD CONSTRAINT fk_dialogue_Characters FOREIGN KEY (CharacterId) REFERENCES Characters(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD UNIQUE INDEX ux_order_Dialogue_Character (order, DialogueId, CharacterId);
 
 GRANT ALL PRIVILEGES ON alive.* TO 'alive'@'%' IDENTIFIED BY '5e6c&6iP&m6p6aQd$A&f';
 FLUSH PRIVILEGES;
