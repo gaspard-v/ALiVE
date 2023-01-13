@@ -43,7 +43,7 @@ CREATE TABLE PlaceRoom (
 CREATE TABLE Place (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     uuid BINARY(16) NOT NULL UNIQUE,
-    name varchar(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
     Xcoord INT NOT NULL,
     Ycoord INT NOT NULL,
     INDEX ix_name_place(name),
