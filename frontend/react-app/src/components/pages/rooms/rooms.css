@@ -8,14 +8,14 @@
     grid-template-rows: 1.5vh 96vh 1.5vh;
     grid-template-areas:
         ". . . ."
-        ". SideMenu RoomEditionScreen . "
+        ". SideMenu EditionScreen . "
         ". . . .";
     justify-content: center;
 
 }
 
-#RoomEditionScreen{
-    grid-area: RoomEditionScreen;
+#EditionScreen{
+    grid-area: EditionScreen;
     border-radius: 5px;
     background-color: #fff;
     grid-gap: 5px;

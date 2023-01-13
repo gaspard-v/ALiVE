@@ -1,12 +1,12 @@
 
-#ObjectEditionScreen{
+#EditionScreen{
     border-radius: 5px;
     max-height: 100%;
     max-width: 100%;
     background-color: #fff;
     filter: drop-shadow(0 0.1rem 0.1rem #787777);
     display: grid;
-    grid-area: ObjEditionScreen;
+    grid-area: EditionScreen;
    
 }
 
@@ -20,7 +20,7 @@
     grid-template-rows: 1.5vh 96vh 1.5vh;
     grid-template-areas:
         ". . . ."
-        ". SideMenu ObjEditionScreen . "
+        ". SideMenu EditionScreen . "
         ". . . .";
     justify-content: center; 
     }

@@ -23,11 +23,11 @@ function RoomCreation(){
     }
 
     return(
-        <form id="RoomEditionScreen" className="RoomScreenCreation" onSubmit={onSubmit}>
+        <form id="EditionScreen" className="RoomScreenCreation" onSubmit={onSubmit}>
             <label className="NameLabel">Nom de pièce</label>
             <input className="ModelName" value={roomName} onChange={e => setRoomName(e.target.value)}/>
             <input className="RoomImg" type="file" name="img" accept="image/*" value={roomImg} onChange={e => setRoomImg(e.target.value)}></input>
-            <Buttons icon={<TiTick className="ButtonIcon"/>} color="validate" type="submit">Valider</Buttons>
+            <Buttons icon={<TiTick className="ButtonIcon"/>} color="validate" to='../1' type="submit">Valider</Buttons>
         </form>
     )
 

@@ -9,7 +9,7 @@ import createObject from "../../../api/object/ObjectCall";
 
 function ObjectCreation(){
 
-    //const [selectedValue1, setSelectedValue1] = useState("complete");
+    const [selectedValue1, setSelectedValue1] = useState("complete");
     // const [form, setFormValue] = useState();
     const [objectName,setObjectName] = useState("");
     const [objectDescription,setObjectDescription] = useState("");
@@ -25,7 +25,7 @@ function ObjectCreation(){
     }
 
     return(
-        <form className="ObjectCreationScreen" id="ObjectEditionScreen" onSubmit={onSubmit}>
+        <form className="ObjectCreationScreen" id="EditionScreen" onSubmit={onSubmit}>
             <label className="NameLabel">Nom de l'objet</label>
             <input className="ModelName" value={objectName} onChange={e => setObjectName(e.target.value)}></input>
             <SegmentedControl

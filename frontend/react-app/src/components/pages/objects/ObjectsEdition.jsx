@@ -1,4 +1,4 @@
-import "./objects.css";
+import "../page.scss";
 import React from "react";
 import ListMenu from "../../panels/side/ListMenu";
 import { Outlet } from "react-router";
@@ -6,7 +6,7 @@ import { Outlet } from "react-router";
 function ObjectsEdition(){
 
     return(
-        <div id="objectEdition">
+        <div className="EditionPage">
             <ListMenu contextName="Mes objets"/>
             <Outlet/>
         </div>

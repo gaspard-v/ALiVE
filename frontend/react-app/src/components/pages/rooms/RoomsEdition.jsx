@@ -5,7 +5,7 @@ import { Outlet } from "react-router";
 
 function RoomsEdition(){
     return(
-        <div id="roomEdition">
+        <div className="EditionPage">
         <ListMenu  contextName="Mes Pièces"/>
         <Outlet/>
         </div>

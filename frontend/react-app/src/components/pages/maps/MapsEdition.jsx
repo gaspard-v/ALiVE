@@ -1,4 +1,4 @@
-import "./maps.css";
+import "../page.scss";
 import React from "react";
 
 function MapsEdition(){
