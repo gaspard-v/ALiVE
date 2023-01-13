@@ -35,12 +35,12 @@ function ObjectCreation(){
                     segments={[
                     {
                         label: "Objet",
-                        value: "object",
+                        value: true,
                         ref: useRef()
                     },
                     {
                         label: "Intel",
-                        value: "intel",
+                        value: false,
                         ref: useRef()
                     },
                 ]
@@ -49,7 +49,6 @@ function ObjectCreation(){
             <textarea className="Description" value={objectDescription} onChange={e => setObjectDescription(e.target.value)}></textarea>
             <input className="ObjImg" type="file" name="img" accept="image/*" value={objectImg} onChange={e => setObjectImg(e.target.value)}></input>
             <Buttons icon={<TiTick className="ButtonIcon"/>} color="validate" to="../1" type="submit">Valider</Buttons>
-            
         </form>
     )
     }
