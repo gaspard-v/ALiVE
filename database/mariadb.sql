@@ -20,7 +20,7 @@ CREATE TABLE Object (
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
-CREATE TABLE RoomObject (
+CREATE TABLE PlaceRoomObject (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     Xcoord INT,
     Ycoord INT,
@@ -137,7 +137,7 @@ CREATE TABLE PlaceFile (
     PRIMARY KEY(PlaceId, FileId)
 ) ENGINE=InnoDB;
 
-ALTER TABLE RoomObject
+ALTER TABLE PlaceRoomObject
     ADD COLUMN (
         ObjectId BIGINT UNSIGNED NOT NULL,
         PlaceRoomId BIGINT UNSIGNED NOT NULL
@@ -160,15 +160,15 @@ ALTER TABLE Place
         MapId BIGINT UNSIGNED NOT NULL
     ),
     ADD CONSTRAINT fk_Map_Place FOREIGN KEY (MapId) REFERENCES Map(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD UNIQUE INDEX ix_Name_Map_Place (name, MapId);
+    ADD UNIQUE INDEX ux_Name_Map_Place (name, MapId);
 
 ALTER TABLE Door
     ADD COLUMN (
         StartingPlaceRoomId BIGINT UNSIGNED NOT NULL,
         DestinationPlaceRoomId BIGINT UNSIGNED NOT NULL
     ),
-    ADD CONSTRAINT fk_starting_room_Door FOREIGN KEY (StartingPlaceRoomId) REFERENCES Room(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD CONSTRAINT fk_destination_room_Door FOREIGN KEY(DestinationPlaceRoomId) REFERENCES Room(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT fk_starting_room_Door FOREIGN KEY (StartingPlaceRoomId) REFERENCES PlaceRoom(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT fk_destination_room_Door FOREIGN KEY(DestinationPlaceRoomId) REFERENCES PlaceRoom(id) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD UNIQUE INDEX ux_Room_Door (StartingPlaceRoomId, DestinationPlaceRoomId);
 
 ALTER TABLE Day
