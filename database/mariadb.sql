@@ -85,7 +85,6 @@ CREATE TABLE Characters (
     uuid BINARY(16) NOT NULL UNIQUE,
     name VARCHAR(50) NOT NULL UNIQUE,
     color VARCHAR(20),
-    INDEX ix_name_characters(name),
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
