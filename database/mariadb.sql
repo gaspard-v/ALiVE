@@ -22,8 +22,8 @@ CREATE TABLE Object (
 
 CREATE TABLE PlaceRoomObject (
     id BIGINT UNSIGNED AUTO_INCREMENT,
-    Xcoord INT,
-    Ycoord INT,
+    Xcoord INT NOT NULL,
+    Ycoord INT NOT NULL,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
@@ -44,8 +44,8 @@ CREATE TABLE Place (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     uuid BINARY(16) NOT NULL UNIQUE,
     name varchar(100) NOT NULL,
-    Xcoord INT,
-    Ycoord INT,
+    Xcoord INT NOT NULL,
+    Ycoord INT NOT NULL,
     INDEX ix_name_place(name),
     PRIMARY KEY(id) 
 ) ENGINE=InnoDB;
@@ -76,7 +76,7 @@ CREATE TABLE Sentence (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     uuid BINARY(16) NOT NULL UNIQUE,
     order INT UNSIGNED NOT NULL,
-    content LONGTEXT,
+    content LONGTEXT NOT NULL,
     color VARCHAR(20),
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
@@ -85,7 +85,7 @@ CREATE TABLE Characters (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     uuid BINARY(16) NOT NULL UNIQUE,
     name VARCHAR(50) NOT NULL UNIQUE,
-    color VARCHAR(20),
+    color VARCHAR(20) NOT NULL,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
@@ -100,8 +100,8 @@ CREATE TABLE Administrator (
 CREATE TABLE Door (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     uuid BINARY(16) NOT NULL UNIQUE,
-    Xcoord INT,
-    Ycoord INT,
+    Xcoord INT NOT NULL,
+    Ycoord INT NOT NULL,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
