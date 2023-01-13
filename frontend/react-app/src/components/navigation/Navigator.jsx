@@ -1,7 +1,7 @@
 import React from "react";
 import {Routes, Route } from 'react-router-dom';
 import GlobalEdition from "../../components/pages/global/GlobalEdition";
-import Selection from "../pages/selection/Edition";
+import Selection from "../pages/selection/Selection";
 import RoomCreation from "../panels/creation/RoomCreation";
 import RoomPrompt from "../panels/prompt/RoomPrompt";
 import ObjectCreation from "../panels/creation/ObjectCreation";
