@@ -4,7 +4,7 @@ import React from "react";
 import Buttons from "../../buttons/Buttons";
 import { TiTick } from "react-icons/ti"
 import SegmentedControl from "../../segmented/SegmentedControl";
-import createObject from "../../../api/object/ObjectCall";
+import {createObject} from "../../../api/object/ObjectCall";
 
 
 function ObjectCreation(){

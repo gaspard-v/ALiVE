@@ -10,6 +10,14 @@ $justify-center: center;
 $global-font-size: 2.8em;
 $justify-text: justify;
 
+//Button Colors//
+
+$blue-button :#0063CC;
+$green-button: green;
+$red-button: red;
+
+ // Grid Variables //
+
 // App Page variables //
 
 $global-background-color: #F1F5F9;
@@ -34,9 +42,9 @@ $global-menu-page-grid-template:
         ". . ."
         ". GlobalMenu ."
         ". . .";
-        
-        
-// Global Menu Buttons //
+
+
+  // Global Menu Buttons //
 $drop-shadow-color: #3b1e00;
 
 $global-menu-grid-gap: 0.3em;
@@ -49,7 +57,7 @@ $global-menu-button-column-template: min-content min-content;
 $global-menu-button-row-template: min-content min-content;
 
 
-  // menu button
+   // menu button
 $global-menu-button-width: 70vh;
 $global-menu-button-height: 38vh;
 
@@ -62,7 +70,7 @@ $global-menu-button-intern-grid:"GlobalMenuButton";
 
 
 
- // menu button img
+   // menu button img
 
 $global-menu-button-img-width: $global-menu-button-width;
 $global-menu-button-img-height: $global-menu-button-height;
@@ -72,10 +80,10 @@ $global-menu-button-img-drop-shadow: drop-shadow(0 0.25rem 0.5rem $drop-shadow-c
 
 
 
-  // menu button hover
+    // menu button hover
 $global-button-drop-shadow-hover: blur(1px) drop-shadow(0 0.75rem 0.75rem $drop-shadow-color);
 
-  // global menu grid-areas
+    // global menu grid-areas
 $global-menu-button-grid-area: GlobalMenuButton;
 $global-menu-grid-area: GlobalMenu;
 
@@ -84,9 +92,34 @@ $global-menu-button-rooms-grid-area: Rooms;
 $global-menu-button-days-grid-area: Days;
 $global-menu-button-maps-grid-area: Maps;
 
+
+    //Selection Page //
+$selection-page-background-color:#F1F5F9;
+$selection-page-min-height:100vh;
+$selection-page-white-space: pre-line;
+$selection-page-display:grid;
+$selection-page-grid-gap:1vh;
+$selection-page-column-template: 2vw 23vw 73vw 2vw;
+$selection-page-rows-template: 1.5vh 96vh 1.5vh;
+$selection-page-areas-template:
+". . . ."
+". SideMenu EditionScreen . "
+". . . .";
+
+// EditionScreen //
+
+$edition-screen-border-radius:5px;
+$edition-screen-max-height: 100%;
+$edition-screen-max-width: 100%;
+$edition-screen-background-color: #fff;
+$edition-screen-filter:drop-shadow(0 0.1rem 0.1rem #787777);
+$edition-screen-display: grid;
+$edition-screen-grid-area: EditionScreen;
+$edition-screen-grid-gap: 5px;
+
 // Panels //
 
-$panels-filter:drop-shadow(0 0.1rem 0.1rem #787777);
+$panels-filter: $edition-screen-filter;
 
 // Prompt Panel //
 
@@ -115,6 +148,26 @@ $object-prompt-grid-area-template:
 $object-prompt-columns-template: 1em min-content min-content repeat(3,1fr) 1em;
 $object-prompt-rows-template: 1em repeat(2,min-content) 1fr repeat(2, min-content) 1em;
 
+ // Room //
+
+$room-prompt-column-template:1vw min-content min-content repeat(3,1fr) 1vw;
+$room-prompt-rows-template:1vw repeat(2,min-content) 1fr repeat(2, min-content) 1vw;
+$room-prompt-area-template:
+'. . . . . . .'
+" . . ModelName ModelName ModelName ModelName . "
+". RoomImg RoomImg RoomImg RoomImg RoomImg ."
+". RoomImg RoomImg RoomImg RoomImg RoomImg ."
+". . . . . ModButton ."
+". . . . . DelButton ."
+". . . . . . .";
+$room-prompt-display: grid;
+
+$room-prompt-img-grid-area: RoomImg;
+$room-prompt-img-border: 1px #6e6e6e solid;
+$room-prompt-img-border-radius: 5px;
+
+$room-prompt-img-max-width: 100%;
+$room-prompt-img-max-height: 100%;
 // Edition Panel //
 
 // Creation Panel //
@@ -123,7 +176,8 @@ $object-prompt-rows-template: 1em repeat(2,min-content) 1fr repeat(2, min-conten
 
 $object-creation-columns-template:1em min-content min-content repeat(3,1fr) 1em;
 $object-creation-rows-template:1em repeat(3,min-content) 1fr 1fr 3em min-content 1em;
-$object-creation-area-template:". . . . . . ."
+$object-creation-area-template:
+". . . . . . ."
 ". NameLabel SegmentedControl . . . ."
 ". ModelName SegmentedControl . . . ."
 ". DescriptionLabel . . . . ."
@@ -142,6 +196,20 @@ $object-creation-input-background-color:#EDF2F7;
 
 
 $object-creation-upload-button-display :none;
+
+
+
+  // Rooms //
+$room-creation-display: grid;
+$room-creation-columns-template:1vw repeat(3, 1fr) 1vw;
+$room-creation-rows-template:1vw repeat(2,min-content) 1fr min-content 1vw;
+$room-creation-area-template: 
+". . . . . "
+". NameLabel . . ."
+". ModelName . . . "
+". RoomImg RoomImg RoomImg ."
+". . . ValButton ."
+" . . . . .";
 
 // Side Panel//
 
@@ -206,3 +274,50 @@ $side-component-object-align-items: $align-center;
 
 // Searchbar //
 $searchbar-grid-area: SearchBar;
+
+
+
+// Button // 
+
+$modify-object-display: grid;
+$modify-object-columns-template: 1fr min-content min-content 1fr;
+$modify-object-rows-template: 2em;
+$modify-object-areas-template:  ". ButtonIcon NewButtonText .";
+$modify-object-color: white;
+$modify-object-border: 0;
+$modify-object-border-radius: 3px;
+$modify-object-padding:0;
+$modify-object-background-color: black;
+$modify-object-margin: 0.1em 0;
+
+$modify-object-goHome-grid-area : BackButton;
+$modify-object-goHome-width: 2em;
+$modify-object-goHome-height: 2em;
+$modify-object-goHome-background: $blue-button;
+
+$modify-object-addObject-grid-area: AddButton;
+$modify-object-addObject-background-color: $blue-button;
+$modify-object-addObject-margin: 2.5vh 1.5vh;
+$modify-object-addObject-width: 95%;
+$modify-object-addObject-height: 2em;
+
+$modify-object-validate-grid-area: ValButton;
+$modify-object-validate-background-color: $green-button;
+
+$modify-object-delete-grid:DelButton;
+$modify-object-delete-background:$red-button;
+
+$modify-object-modify-grid-area:ModButton;
+$modify-object-modify-background: $blue-button;
+
+
+
+$modify-font-weight: bold;
+$modify-padding: 1vh 0;
+
+$modify-object-text-grid-area: NewButtonText;
+$modify-object-text-margin:0;
+
+$button-icon-grid-area: ButtonIcon;
+$button-icon-margin: 0 3px;
+$button-icon-padding: 0;

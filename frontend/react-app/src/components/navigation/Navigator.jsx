@@ -1,10 +1,5 @@
 import React from "react";
 import {Routes, Route, NavLink} from 'react-router-dom';
-import DaysEdition from "../../components/pages/days/DaysEdition";
-import GlobalEdition from "../../components/pages/global/GlobalEdition";
-import MapsEdition from "../../components/pages/maps/MapsEdition";
-import ObjectsEdition from "../../components/pages/objects/ObjectsEdition";
-import RoomsEdition from "../../components/pages/rooms/RoomsEdition";
 import RoomCreation from "../panels/creation/RoomCreation";
 import RoomPrompt from "../panels/prompt/RoomPrompt";
 import ObjectCreation from "../panels/creation/ObjectCreation";
