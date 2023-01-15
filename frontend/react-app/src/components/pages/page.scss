@@ -98,29 +98,29 @@ a {
 }
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
 
 .SelectionPage{
-  background-color: #F1F5F9;
-      min-height: 100vh;
-      white-space: pre-line;
+  background-color: $selection-page-background-color;
+      min-height: $selection-page-min-height;
+      white-space: $selection-page-white-space;
       display: grid;
-      grid-gap: 1vh;
-      grid-template-columns:2vw  23vw 73vw 2vw ;
-      grid-template-rows: 1.5vh 96vh 1.5vh;
-      grid-template-areas:
-          ". . . ."
-          ". SideMenu EditionScreen . "
-          ". . . .";
+      grid-gap: $selection-page-grid-gap;
+      grid-template-columns: $selection-page-column-template ;
+      grid-template-rows: $selection-page-rows-template;
+      grid-template-areas: $selection-page-areas-template;
       justify-content: center; 
 }
 
 .EditionScreen{
   grid-area: EditionScreen;
-  border-radius: 5px;
-  max-height: 100%;
-  max-width: 100%;
-  background-color: #fff;
-  filter: drop-shadow(0 0.1rem 0.1rem #787777);
+  border-radius: $edition-screen-border-radius;
+  max-height: $edition-screen-max-height;
+  max-width: $edition-screen-max-width;
+  background-color: $edition-screen-background-color;
+  filter: $edition-screen-filter;
   display: grid;
 }
 

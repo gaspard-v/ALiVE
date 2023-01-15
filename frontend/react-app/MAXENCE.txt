@@ -1,7 +1,0 @@
-Variabiliser le css
-travail effectué à ce jour: 
-- Modification complete de l'architecture du projet 
-- varialbles.scss dans resources/stylesheet
-- Suivre le plan de variabilisation
-
-Actuellement en train de travailler sur le global
