@@ -51,12 +51,7 @@ function ObjectCreation(){
             <Buttons icon={<TiTick className="ButtonIcon"/>} color="validate" to="../1" type="submit">Valider</Buttons>
         </form>
     )
-<<<<<<< HEAD
-
-    }}
-=======
     }
 
->>>>>>> ad70c80 (Object creation refacto)
 
 export default ObjectCreation;

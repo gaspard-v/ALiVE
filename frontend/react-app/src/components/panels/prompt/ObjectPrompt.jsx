@@ -5,15 +5,8 @@ import Buttons from "../../buttons/Buttons";
 import { TiPencil } from "react-icons/ti"
 import { RiDeleteBin2Line } from "react-icons/ri"
 import SegmentedControl from "../../segmented/SegmentedControl";
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { useParams } from "react-router";
-=======
->>>>>>> 640ba0e (Init react revamp)
-=======
-import { useParams } from "react-router";
->>>>>>> ad70c80 (Object creation refacto)
 
+import { useParams } from "react-router";
 
 function ObjectPrompt(){
     const {id} = useParams();
@@ -27,16 +20,8 @@ function ObjectPrompt(){
 
     }
     return(
-<<<<<<< HEAD
-<<<<<<< HEAD
         <div id="EditionScreen" className="ObjectPromptScreen">
-=======
-        <div id="ObjectEditionScreen" className="Prompt">
->>>>>>> 640ba0e (Init react revamp)
-=======
-        <div id="ObjectEditionScreen" className="ObjectPromptScreen">
->>>>>>> ad70c80 (Object creation refacto)
-            <h1 className="ModelName">{objectName}</h1>
+        <h1 className="ModelName">{objectName}</h1>
             <SegmentedControl
                     disabled={true}
                     name="group-1"
