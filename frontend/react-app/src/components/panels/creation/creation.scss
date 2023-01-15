@@ -4,6 +4,7 @@
     grid-template-columns:$object-creation-columns-template;
     grid-template-rows: $object-creation-rows-template;
     grid-template-areas: $object-creation-area-template;
+    display: grid;
 
     input{
 
@@ -28,3 +29,9 @@
     grid-area: DescriptionLabel;
 }
 
+.RoomScreenCreation{
+    display: $room-creation-display;
+    grid-template-columns: $room-creation-columns-template;
+    grid-template-rows: $room-creation-rows-template;
+    grid-template-areas: $room-creation-area-template;
+}

@@ -9,7 +9,7 @@ function RoomPrompt({name,img}){
 
 
     return(
-        <div id="RoomEditionScreen" className="Prompt">
+        <div id="EditionScreen" className="RoomPromptScreen">
             <h1 className="ModelName">{roomName}</h1>
             <img className="RoomImg" src={img} alt='room image'/>
             <Buttons icon={<TiPencil className="ButtonIcon"/>} to="edit" color="modify">Modifier</Buttons>

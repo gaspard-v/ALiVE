@@ -1,6 +1,5 @@
 import React, {useRef, useState} from "react";
-import createObject from "../../../api/object/ObjectCall";
-import SegmentedControl from "../../segmented/SegmentedControl";
+import {createObject} from "../../../api/object/ObjectCall";
 import Buttons from "../../buttons/Buttons";
 import {TiTick} from "react-icons/ti";
 import './creation.scss';

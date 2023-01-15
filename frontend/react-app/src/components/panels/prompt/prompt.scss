@@ -1,7 +1,7 @@
 @import "../../../ressources/stylesheet/variables.scss";
 
 
-#ObjectEditionScreen{
+.ObjectPromptScreen{
     grid-template-columns: $object-prompt-columns-template;
     grid-template-rows: $object-prompt-rows-template; 
     grid-template-areas: $object-prompt-grid-area-template;

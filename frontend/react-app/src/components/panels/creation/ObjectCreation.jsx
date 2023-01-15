@@ -4,7 +4,7 @@ import React from "react";
 import Buttons from "../../buttons/Buttons";
 import { TiTick } from "react-icons/ti"
 import SegmentedControl from "../../segmented/SegmentedControl";
-import createObject from "../../../api/object/ObjectCall";
+import {createObject} from "../../../api/object/ObjectCall";
 
 
 function ObjectCreation(){
@@ -25,7 +25,7 @@ function ObjectCreation(){
     }
 
     return(
-        <form className="ObjectCreationScreen" id="ObjectEditionScreen" onSubmit={onSubmit}>
+        <form className="ObjectCreationScreen" id="EditionScreen" onSubmit={onSubmit}>
             <label className="NameLabel">Nom de l'objet</label>
             <input className="ModelName" value={objectName} onChange={e => setObjectName(e.target.value)}></input>
             <SegmentedControl
