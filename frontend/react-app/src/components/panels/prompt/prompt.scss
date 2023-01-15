@@ -1,7 +1,7 @@
 @import "../../../ressources/stylesheet/variables.scss";
 
 
-.ObjectPromptScreen{
+#ObjectPromptScreen{
     grid-template-columns: $object-prompt-columns-template;
     grid-template-rows: $object-prompt-rows-template; 
     grid-template-areas: $object-prompt-grid-area-template;
@@ -28,4 +28,19 @@
     grid-area: ObjImg;
     border: 0.5px solid grey;
     border-radius: 5px;
+}
+
+#RoomPromptScreen{
+    grid-template-columns: $room-prompt-column-template;
+    grid-template-rows: $room-prompt-rows-template;
+    grid-template-areas: $room-prompt-area-template;
+    display: $room-prompt-display;
+}
+
+.RoomImg{
+    grid-area: $room-prompt-img-grid-area;
+    border: $room-prompt-img-border;
+    border-radius: $room-prompt-img-border-radius;
+    max-width: $room-prompt-img-max-width;
+    max-height: $room-prompt-img-max-height;
 }

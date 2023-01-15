@@ -25,7 +25,7 @@ function ObjectCreation(){
     }
 
     return(
-        <form className="ObjectCreationScreen" id="ObjectEditionScreen" onSubmit={onSubmit}>
+        <form className="EditionScreen" id="ObjectCreationScreen" onSubmit={onSubmit}>
             <label className="NameLabel">Nom de l'objet</label>
             <input className="ModelName" value={objectName} onChange={e => setObjectName(e.target.value)}></input>
             <SegmentedControl

@@ -20,7 +20,7 @@ function ObjectPrompt(){
 
     }
     return(
-        <div id="EditionScreen" className="ObjectPromptScreen">
+        <div className="EditionScreen" id="ObjectPromptScreen">
         <h1 className="ModelName">{objectName}</h1>
             <SegmentedControl
                     disabled={true}

@@ -23,7 +23,7 @@ function RoomCreation(){
     }
 
     return(
-        <form id="EditionScreen" className="RoomScreenCreation" onSubmit={onSubmit}>
+        <form id="RoomScreenCreation" className="EditionScreen" onSubmit={onSubmit}>
             <label className="NameLabel">Nom de pièce</label>
             <input className="ModelName" value={roomName} onChange={e => setRoomName(e.target.value)}/>
             <input className="RoomImg" type="file" name="img" accept="image/*" value={roomImg} onChange={e => setRoomImg(e.target.value)}></input>
