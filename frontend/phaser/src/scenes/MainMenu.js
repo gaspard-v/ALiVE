@@ -32,21 +32,26 @@ export default class MainMenuScene extends Phaser.Scene {
             .setDisplaySize(width, height);
 
         // PlayScene button
-        const playSceneButton = document.createElement('button');
-        playSceneButton.addEventListener('click', () => {this.changeScene('PlayScene')});
-        playSceneButton.appendChild(document.createTextNode('Go to PlayScene'));
-        document.body.appendChild(playSceneButton);
+        //const playSceneButton = document.createElement('button');
+        //playSceneButton.addEventListener('click', () => {this.changeScene('PlayScene')});
+        //playSceneButton.appendChild(document.createTextNode('Go to PlayScene'));
+        //document.body.appendChild(playSceneButton);
 
         // Play button
         const playButton = this.add
-            .image(width * 0.5, height * 0.6, 'glass-panel')
-            .setDisplaySize(150, 50);
+            .sprite(width * 0.5, height * 0.6, 'glass-panel')
+            .setDisplaySize(150, 50)
+            .setInteractive();
+        playButton.on('pointerdown', ()=>{
+            this.changeScene('PlayScene');
+            console.log('aaaaaaaaaaaaa')
+        })
 
         this.add.text(playButton.x, playButton.y, 'Play').setOrigin(0.5);
 
         // Settings button
         const settingsButton = this.add
-            .image(
+            .sprite(
                 playButton.x,
                 playButton.y + playButton.displayHeight + 10,
                 'glass-panel'
@@ -121,20 +126,12 @@ export default class MainMenuScene extends Phaser.Scene {
         // this.mask.setVisible();
     }
 
-    changeScene(sceneToGo) {
-        this.scene.setActive(false);
-        if (sceneToGo == "PlayScene") {
-            this.scene.start(sceneToGo);
-        }
-    }
-
     getAllJourneyInfos() {
         // TODO: GET LEVEL DATA HERE OR ALL LEVEL DATA
         axios.get('https://jsonplaceholder.typicode.com/posts')
             .then(response => {
                 // Traitement des données reçues
-                this.allData = response.data;
-                this.oneJourneyInfosSimple = response.data[1];
+                console.log(response.data);
             })
             .catch(error => {
                 // Traitement des erreurs

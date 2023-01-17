@@ -37,6 +37,7 @@ const config = {
         ],
     },
     scene: [MainMenu, PlayScene, TextScene],
+    url :"http://localhost.io"
 };
 
 window.game = new Phaser.Game(config);
