@@ -1,3 +1,5 @@
+START TRANSACTION;
+
 CREATE DATABASE alive CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE alive;
 
@@ -75,7 +77,7 @@ CREATE TABLE Dialogue (
 CREATE TABLE Sentence (
     id BIGINT UNSIGNED AUTO_INCREMENT,
     uuid BINARY(16) NOT NULL UNIQUE,
-    order INT UNSIGNED NOT NULL,
+    ordre INT UNSIGNED NOT NULL,
     content LONGTEXT NOT NULL,
     color VARCHAR(20),
     PRIMARY KEY(id)
@@ -186,7 +188,7 @@ ALTER TABLE Sentence
     ),
     ADD CONSTRAINT fk_dialogue_Sentence FOREIGN KEY (DialogueId) REFERENCES Dialogue(id) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD CONSTRAINT fk_dialogue_Characters FOREIGN KEY (CharacterId) REFERENCES Characters(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD UNIQUE INDEX ux_order_Dialogue_Character (order, DialogueId, CharacterId);
+    ADD UNIQUE INDEX ux_order_Dialogue_Character (ordre, DialogueId, CharacterId);
 
 GRANT ALL PRIVILEGES ON alive.* TO 'alive'@'%' IDENTIFIED BY '5e6c&6iP&m6p6aQd$A&f';
 FLUSH PRIVILEGES;
@@ -322,3 +324,5 @@ SET new.uuid = @uuid;
 END; //
 
 DELIMITER ;
+
+COMMIT;
