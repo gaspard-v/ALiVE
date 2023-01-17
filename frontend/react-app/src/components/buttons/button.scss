@@ -1,0 +1,67 @@
+@import "../../ressources/stylesheet/variables.scss";
+
+.ModifyObject{
+    display: $modify-object-display;
+    grid-template-columns: $modify-object-columns-template;
+    grid-template-rows: $modify-object-rows-template;
+    grid-template-areas: $modify-object-areas-template;
+    justify-items: $justify-center;
+    align-items: $align-center;
+    color: $modify-object-color;
+    border: $modify-object-border;
+    border-radius: $modify-object-border-radius;
+    padding: $modify-object-padding;
+    background-color:$modify-object-background-color;
+    margin: $modify-object-margin;
+
+    &.goHome{
+        grid-area: $modify-object-goHome-grid-area;
+        width: $modify-object-goHome-width;
+        height: $modify-object-goHome-height;
+        background-color: $modify-object-goHome-background;
+    }
+    &.addObject {
+        grid-area: $modify-object-addObject-grid-area;
+        background-color:$modify-object-addObject-background-color;
+        margin: $modify-object-addObject-margin;
+        width:  $modify-object-addObject-width;
+        height: $modify-object-addObject-height;
+    
+    }
+    &.validate{
+        grid-area: $modify-object-validate-grid-area;
+        background-color: $modify-object-validate-background-color;
+    }
+    &.delete{
+        grid-area: $modify-object-delete-grid;
+        background-color: $modify-object-delete-background;
+    }
+    
+    &.modify{
+        grid-area: $modify-object-modify-grid-area;
+        background-color: $modify-object-modify-background;
+    
+    
+    }
+    & > * {
+        font-weight: $modify-font-weight;
+        padding: $modify-padding;
+    }
+}
+
+
+
+
+
+.ModifyObjectText{
+    grid-area: $modify-object-text-grid-area;
+    margin: $modify-object-text-margin;
+}
+
+.ButtonIcon{
+    grid-area: $button-icon-grid-area;
+    margin: $button-icon-margin;
+    padding: $button-icon-padding;
+}
+
+

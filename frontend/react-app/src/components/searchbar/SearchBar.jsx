@@ -1,5 +1,5 @@
 import React from "react";
-import "./searchbar.css";
+import "./searchbar.scss";
 import glass from"../../ressources/img/component/search_bar_glass.png"
 
 export default function SearchBar(){

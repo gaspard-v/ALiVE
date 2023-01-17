@@ -87,56 +87,69 @@ app.post("/api/object", async function (req, res, next) {
   const { name, description, isTool, imagename, image } = req.body;
 
   pool
-      .getConnection()
-      .then(connection => {
-        conn = connection;
-        const object_query_response =  conn.query("INSERT INTO Object(name, description, isTool) VALUES (?, ?, ?)", [name, description, isTool]);
-        if (imagename & image) {
-          const file_query_response = conn.query(
-              "INSERT INTO File(filename, data) VALUES (?, ?)",
-              [imagename, image]
-          );
-          conn.query(
-              "INSERT INTO ObjectFile(ObjectId, FileId) VALUES (?, ?)",
-              [
-                parseInt(object_query_response.insertId),
-                parseInt(file_query_response.insertId),
-              ]
-          );
-        }
-      })
-      .then(result => {
-        //result = objectBigIntToInt(result);
-        handlerSuccess(result, req, res, next);
-      })
-      .catch((err) => {
-        handlerError(err, req, res, next);
-      })
-      .finally(() => {
-        if (conn) conn.end();
-      });
+    .getConnection()
+    .then((connection) => {
+      conn = connection;
+      const object_query_response = conn.query(
+        "INSERT INTO Object(name, description, isTool) VALUES (?, ?, ?)",
+        [name, description, isTool]
+      );
+      if (imagename & image) {
+        const file_query_response = conn.query(
+          "INSERT INTO File(filename, data) VALUES (?, ?)",
+          [imagename, image]
+        );
+        conn.query("INSERT INTO ObjectFile(ObjectId, FileId) VALUES (?, ?)", [
+          parseInt(object_query_response.insertId),
+          parseInt(file_query_response.insertId),
+        ]);
+      }
+    })
+    .then((result) => {
+      //result = objectBigIntToInt(result);
+      handlerSuccess(result, req, res, next);
+    })
+    .catch((err) => {
+      handlerError(err, req, res, next);
+    })
+    .finally(() => {
+      if (conn) conn.end();
+    });
 });
-
 
 app.post("/api/room", async function (req, res, next) {
   let conn;
-  const { name } = req.body;
+  const { name, description, isTool, imagename, image } = req.body;
+
   pool
-      .getConnection()
-      .then((connexion) => {
-        conn = connexion;
-        return conn.query("INSERT INTO Room(name) VALUES (?)", [name]);
-      })
-      .then((result) => {
-        result = objectBigIntToInt(result);
-        handlerSuccess(result, req, res, next);
-      })
-      .catch((err) => {
-        handlerError(err, req, res, next);
-      })
-      .finally(() => {
-        if (conn) conn.end();
-      });
+    .getConnection()
+    .then((connection) => {
+      conn = connection;
+      const object_query_response = conn.query(
+        "INSERT INTO Object(name, description, isTool) VALUES (?, ?, ?)",
+        [name, description, isTool]
+      );
+      if (imagename & image) {
+        const file_query_response = conn.query(
+          "INSERT INTO File(filename, data) VALUES (?, ?)",
+          [imagename, image]
+        );
+        conn.query("INSERT INTO ObjectFile(ObjectId, FileId) VALUES (?, ?)", [
+          parseInt(object_query_response.insertId),
+          parseInt(file_query_response.insertId),
+        ]);
+      }
+    })
+    .then((result) => {
+      //result = objectBigIntToInt(result);
+      handlerSuccess(result, req, res, next);
+    })
+    .catch((err) => {
+      handlerError(err, req, res, next);
+    })
+    .finally(() => {
+      if (conn) conn.end();
+    });
 });
 
 Room(app, pool);

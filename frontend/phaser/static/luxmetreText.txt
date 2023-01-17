@@ -1,1 +1,1 @@
-Ceci est le texte du luxmètre.
+Ceci est le descriptif de l'objet.
