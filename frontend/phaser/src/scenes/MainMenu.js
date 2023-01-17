@@ -2,16 +2,10 @@ import Phaser from 'phaser';
 import PlayScene from './PlayScene';
 
 export default class MainMenuScene extends Phaser.Scene {
-<<<<<<< Updated upstream
     mask;
-
-=======
     allData;
     oneJourneyInfosSimple;
-    mask;
 
-
->>>>>>> Stashed changes
     constructor() {
         super({ key: 'main-menu', active: true });
     }
@@ -125,7 +119,6 @@ export default class MainMenuScene extends Phaser.Scene {
         }
 
         // this.mask.setVisible();
-<<<<<<< Updated upstream
     }
 
     getAllJourneyInfos() {
@@ -146,8 +139,6 @@ export default class MainMenuScene extends Phaser.Scene {
         if (sceneToGo == "PlayScene") {
             this.scene.start(sceneToGo);
         }
-=======
->>>>>>> Stashed changes
     }
 
     getAllJourneyInfos() {
