@@ -2,13 +2,23 @@ import Phaser from 'phaser';
 import PlayScene from './PlayScene';
 
 export default class MainMenuScene extends Phaser.Scene {
+<<<<<<< Updated upstream
     mask;
 
+=======
+    allData;
+    oneJourneyInfosSimple;
+    mask;
+
+
+>>>>>>> Stashed changes
     constructor() {
         super({ key: 'main-menu', active: true });
     }
 
     init() {
+        this.allData = {};
+        this.oneJourneyInfosSimple = {};
         this.cursors = this.input.keyboard.createCursorKeys();
         this.getAllJourneyInfos();
     }
@@ -115,6 +125,7 @@ export default class MainMenuScene extends Phaser.Scene {
         }
 
         // this.mask.setVisible();
+<<<<<<< Updated upstream
     }
 
     getAllJourneyInfos() {
@@ -134,6 +145,29 @@ export default class MainMenuScene extends Phaser.Scene {
         this.scene.setActive(false);
         if (sceneToGo == "PlayScene") {
             this.scene.start(sceneToGo);
+        }
+=======
+>>>>>>> Stashed changes
+    }
+
+    getAllJourneyInfos() {
+        // TODO: GET LEVEL DATA HERE OR ALL LEVEL DATA
+        axios.get('https://jsonplaceholder.typicode.com/posts')
+            .then(response => {
+                // Traitement des données reçues
+                this.allData = response.data;
+                this.oneJourneyInfosSimple = response.data[1];
+            })
+            .catch(error => {
+                // Traitement des erreurs
+                console.log(error);
+            });
+    }
+
+    changeScene(sceneToGo) {
+        this.scene.setActive(false);
+        if (sceneToGo == "PlayScene") {
+            this.scene.start(sceneToGo, {globalInformations: this.oneJourneyInfosSimple});
         }
     }
 }

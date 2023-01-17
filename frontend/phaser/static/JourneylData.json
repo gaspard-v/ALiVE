@@ -1,4 +1,52 @@
 {
+<<<<<<< Updated upstream
   "name": "",
   "description": ""
+=======
+  "name": "Journey 1",
+  "description": "Première journée du jeu !",
+  "characters": [
+    {
+      "name": "Babette",
+      "color": "magenta"
+    },
+    {
+      "name": "Thierry",
+      "color": "green"
+    },
+    {
+      "name": "Claude",
+      "color": "kingBlue"
+    }
+  ],
+  "map": {
+    "name": "mapName",
+    "image": "urlImage"
+  },
+  "rooms": [
+    {
+      "name": "room 1",
+      "objects": [
+        {
+          "name": "Bouteille d'eau",
+          "description": "Ceci est une bouteille d'eau.",
+          "isTool": true
+        },
+        {
+          "name": "Luxmetre",
+          "description": "Ceci est un luxmetre.",
+          "isTool": true
+        }
+      ]
+    },
+    {
+      "name": "room 2",
+      "objects": []
+    },
+    {
+      "name": "room 3",
+      "objects": []
+    }
+  ]
+>>>>>>> Stashed changes
 }

@@ -1,8 +1,30 @@
 import * as Phaser from 'phaser';
+import levelList from '../../static/allJourneysData.json';
 
 export default class PlayScene extends Phaser.Scene {
+<<<<<<< Updated upstream
+=======
+
+    luxmeterName;
+    bottleName;
+    elementBlur;
+    elementBoxTxt;
+    elementTxt;
+    mGlass1;
+    objectListNumber;
+    objectList;
+    visibilityBool;
+    levelData;
+
+>>>>>>> Stashed changes
     constructor() {
         super({ key: 'PlayScene'});
+    }
+
+    init(data)
+    {
+        this.levelData = data;
+        this.getAllInfos(this.levelData);
     }
 
     preload() {
@@ -61,5 +83,18 @@ export default class PlayScene extends Phaser.Scene {
             )
             .setAlpha(0.7)
             .setVisible(false);
+    }
+
+    getAllInfos(data) {
+        console.log(data);
+        // TODO: Get level name
+        this.levelData = levelList.levelList[0];
+
+        // TODO: Get all infos of that level
+        console.log(this.levelData);
+    }
+
+    createAllObject() {
+        this.levelData;
     }
 }
