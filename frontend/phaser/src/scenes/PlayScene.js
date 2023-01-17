@@ -12,12 +12,15 @@ export default class PlayScene extends Phaser.Scene {
     objectList;
     visibilityBool;
     levelData;
+    urlDatabase;
+
     constructor() {
         super({ key: 'PlayScene'});
     }
 
     init(data)
     {
+        this.urlDatabase = '',
         this.levelData = data;
         this.getAllInfos(this.levelData);
     }
@@ -118,7 +121,6 @@ export default class PlayScene extends Phaser.Scene {
         glassImg2.addEventListener('click', ()=> {this.displayText2()});
 
         const luxmeterName2 = document.createElement('div');
-        console.log(luxmeterName2)
 
         this.glassLuxmetre = this.add.dom(game.config.width / 2, game.config.height / 2, glassImg);
         this.glassBottle = this.add.dom(game.config.width / 4, game.config.height / 1.3, glassImg2);
@@ -244,6 +246,26 @@ export default class PlayScene extends Phaser.Scene {
 
         // TODO: Get all infos of that level
         console.log(this.levelData);
+    }
+
+
+    getAllInfosWithFetch(levelId) {
+        console.log(levelId);
+        // TODO: Get level name
+        /*axios.get(urlDatabase)
+            .then(response => {
+                // Traitement des données reçues
+                this.levelData = response.data;
+                // this.oneJourneyInfosSimple = response.data[1];
+            })
+            .catch(error => {
+                // Traitement des erreurs
+                console.log(error);
+            });*/
+        this.levelData = levelList.levelList[0];
+
+        // TODO: Get all infos of that level
+        // console.log(this.levelData);
     }
 
     createAllObject() {

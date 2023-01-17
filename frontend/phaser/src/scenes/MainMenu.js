@@ -121,19 +121,6 @@ export default class MainMenuScene extends Phaser.Scene {
         // this.mask.setVisible();
     }
 
-    getAllJourneyInfos() {
-        // TODO: GET LEVEL DATA HERE OR ALL LEVEL DATA
-        axios.get('https://jsonplaceholder.typicode.com/posts')
-            .then(response => {
-                // Traitement des données reçues
-                console.log(response.data);
-            })
-            .catch(error => {
-                // Traitement des erreurs
-                console.log(error);
-            });
-    }
-
     changeScene(sceneToGo) {
         this.scene.setActive(false);
         if (sceneToGo == "PlayScene") {
