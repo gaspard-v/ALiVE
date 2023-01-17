@@ -11,7 +11,8 @@ const SegmentedControl = ({
   segments,
   callback,
   defaultIndex = 0,
-  controlRef
+  controlRef,
+  disabled
 }) => {
   const [activeIndex, setActiveIndex] = useState(defaultIndex);
   const componentReady = useRef();
@@ -51,6 +52,7 @@ const SegmentedControl = ({
               name={name}
               onChange={() => onInputChange(item.value, i)}
               checked={i === activeIndex}
+              disabled={disabled}
             />
             <label htmlFor={item.label}>{item.label}</label>
           </div>
