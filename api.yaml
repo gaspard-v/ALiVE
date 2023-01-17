@@ -1,0 +1,362 @@
+openapi: 3.0.3
+info:
+  title: API ALiVE
+  description: |-
+    Cette interface est la documentation de l'API ALiVE
+
+  contact:
+    email: gaspard.vandecasteele@student.junia.com
+  version: "1.0"
+externalDocs:
+  description: Retrouver le jeu ALiVE
+  url: http://exemple.com
+servers:
+  - url: https://exemple.com
+tags:
+  - name: map
+    description: accès au map
+  - name: object
+    description: accès aux objets
+  - name: place
+    description: accès aux places
+  - name: room
+    description: accès aux pièces
+
+paths:
+  /api/room:
+    get:
+      tags:
+        - room
+      summary: Récupère toutes les pièces
+      description: Récupère toutes les pièces
+      operationId: getRooms
+      responses:
+        '200':
+          $ref: '#/components/responses/RoomSucces'
+
+        '404':
+          description: Aucune pièces trouvées
+  /api/room/{room_uuid}:
+    get:
+      tags:
+        - room
+      summary: Récupère une pièce précise
+      description: Récupère une pièce précise grâce a sont uuid
+      parameters:
+        - $ref: '#/components/parameters/RoomParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/RoomSucces'          
+
+        '400':
+          description: Invalid input
+    patch:
+      tags:
+        - room
+      summary: Modifie une pièce
+      description: modifie une pièce deja existante
+      parameters:
+        - $ref: '#/components/parameters/RoomParam'
+      requestBody:
+        $ref: '#/components/requestBodies/RoomBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/RoomSucces'          
+
+        '400':
+          description: Invalid input
+    delete:
+      tags:
+        - room
+      summary: Supprime une pièce
+      description: Supprime une pièce précise
+      parameters:
+        - $ref: '#/components/parameters/RoomParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteSucces'
+  /api/place/{place_uuid}/room:
+    post:
+      tags:
+        - place
+        - room
+      summary: Ajoute une nouvelle pièce
+      description: Ajoute une nouvelle pièce dans une place
+      operationId: addRoom
+      parameters:
+        - $ref: '#/components/parameters/PlaceParam'
+      requestBody:
+        $ref: '#/components/requestBodies/RoomBody' 
+            
+      responses:
+        '200':
+          $ref: '#/components/responses/RoomSucces'          
+
+        '400':
+          description: Invalid input
+  /api/map:
+    get:
+      tags:
+        - map
+      summary: Récupère toutes les cartes
+      description: Récupère toutes les cartes et leurs informations
+      responses:
+        '200':
+          $ref: '#/components/responses/MapSucces'
+    post:
+      tags:
+        - map
+      summary: Créé une nouvelle carte
+      description: Créé une nouvelle carte et retourne ses informations
+      requestBody:
+        $ref: '#/components/requestBodies/MapBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/MapSucces'
+
+components:
+  schemas:
+  
+    Status:
+      type: string
+      description: le status de la réponse API
+      example: success
+      enum:
+        - success
+        - error
+    
+    uuid:
+      type: string
+    
+    Uuid:
+      type: object
+      properties:
+        uuid:
+          $ref: '#/components/schemas/uuid'
+    
+    Coordinates:
+      type: object
+      properties:
+        x:
+          type: integer
+          example: 176
+        y:
+          type: integer
+          example: 34
+    Room:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          example: salle de classe
+    Place:
+      type: object
+      properties:
+        name:
+          type: string
+          example: école d'agriculture
+        coordinates:
+          $ref: '#/components/schemas/Coordinates'
+    Map:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Région nord est
+    Day:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    Dialogue:
+      type: object
+      properties:
+        description:
+          type: string
+    Sentence:
+      type: object
+      properties:
+        content: 
+          type: string
+        color:
+          type: string
+    Characters:
+      type: object
+      properties:
+        name:
+          type: string
+        color:
+          type: string
+    Object:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        isTool:
+          type: integer
+    Door:
+      type: object
+      properties:
+        coordinates:
+          $ref: '#/components/schemas/Coordinates'
+        distinationDoor:
+          $ref: '#/components/schemas/uuid'
+
+    RoomUuid:
+      allOf:
+        - $ref: '#/components/schemas/Room'
+        - $ref: '#/components/schemas/Uuid'
+    PlaceUuid:
+      allOf:
+        - $ref: '#/components/schemas/Place'
+        - $ref: '#/components/schemas/Uuid'
+    MapUuid:
+      allOf:
+        - $ref: '#/components/schemas/Map'
+        - $ref: '#/components/schemas/Uuid'
+    DayUuid:
+      allOf:
+        - $ref: '#/components/schemas/Day'
+        - $ref: '#/components/schemas/Uuid'
+    DialogueUuid:
+      allOf:
+        - $ref: '#/components/schemas/Dialogue'
+        - $ref: '#/components/schemas/Uuid'
+    SentenceUuid:
+      allOf:
+        - $ref: '#/components/schemas/Sentence'
+        - $ref: '#/components/schemas/Uuid'
+    CharactersUuid:
+      allOf:
+        - $ref: '#/components/schemas/Characters'
+        - $ref: '#/components/schemas/Uuid'
+    ObjectUuid:
+      allOf:
+        - $ref: '#/components/schemas/Object'
+        - $ref: '#/components/schemas/Uuid'
+    DoorUuid:
+      allOf:
+        - $ref: '#/components/schemas/Door'
+        - $ref: '#/components/schemas/Uuid'
+    WholeDay:
+      allOf:
+        - $ref: '#/components/schemas/DayUuid'
+        - type: object
+          properties:
+            maps:
+              type: array
+              items:
+                allOf:
+                  - $ref: '#/components/schemas/MapUuid'
+                  - type: object
+                    properties:
+                      places:
+                        type: array
+                        items:
+                          allOf:
+                            - $ref: '#/components/schemas/PlaceUuid'
+                            - type: object
+                              properties:
+                                rooms:
+                                  type: array
+                                  items:
+                                    allOf:
+                                     - $ref: '#/components/schemas/RoomUuid'
+                                     -  type: object
+                                        properties:
+                                          objects:
+                                            type: array
+                                            items:
+                                              allOf:
+                                                - $ref: '#/components/schemas/ObjectUuid'
+                                              
+                                          doors:
+                                            type: array
+                                            items:
+                                              allOf:
+                                                - $ref: '#/components/schemas/DoorUuid'
+          
+        
+    
+  
+  responses:
+    DeleteSucces:
+      description: Un objet quelconque à été supprimé
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/Status'
+              content:
+                $ref: '#/components/schemas/Uuid' 
+    RoomSucces:
+      description: Une room à été créé, modifié ou récupéré
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/Status'
+              content:
+                type: array
+                items:
+                  allOf:
+                    - $ref: '#/components/schemas/Room'
+                    - $ref: '#/components/schemas/Uuid'
+    
+    MapSucces:
+      description: Une map à été créé, modifié ou récupéré
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/Status'
+              content:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WholeDay'
+  requestBodies:
+    RoomBody:
+      required: true
+      description: |- 
+          Ajoute ou modifie une pièce
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Room'
+    MapBody:
+      required: true
+      description: |- 
+          Ajoute ou modifie une map
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Map'
+  parameters:
+    RoomParam:
+      in: path
+      name: room_uuid
+      schema:
+        $ref: '#/components/schemas/uuid'
+      required: true
+      description: uuid d'une room
+    PlaceParam:
+      in: path
+      name: place_uuid
+      schema:
+        $ref: '#/components/schemas/uuid'
+      description: l'uuid de la place
+      required: true
+  
+  # securitySchemes:

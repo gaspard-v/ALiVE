@@ -12,7 +12,6 @@ services:
     volumes:
       - mariadb-volume:/var/lib/mysql:rw
       - ./database/mariadb.sql:/docker-entrypoint-initdb.d/01_mariadb.sql:ro
-      - ./database/dummy_mariadb.sql:/docker-entrypoint-initdb.d/02_dummy_mariadb.sql:ro
     networks:
       - mariadb-network
     hostname: mariadb-database
@@ -20,6 +19,7 @@ services:
   adminer:
     image: adminer:latest
     restart: always
+    container_name: adminer
     ports:
       - "9980:8080"
     networks:
@@ -28,6 +28,7 @@ services:
   phpmyadmin:
     image: phpmyadmin
     restart: always
+    container_name: phpmyadmin
     environment:
       - PMA_HOST=mariadb-database
     depends_on:
@@ -36,6 +37,13 @@ services:
       - mariadb-network
     ports:
       - 9880:80
+
+  swagger-editor:
+    image: swaggerapi/swagger-editor
+    container_name: swagger-editor
+    restart: always
+    ports:
+      - 8880:8080
 
 networks:
   mariadb-network:

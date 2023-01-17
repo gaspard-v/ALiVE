@@ -3,6 +3,7 @@ USE alive;
 
 CREATE TABLE File (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     filename VARCHAR(100) NOT NULL UNIQUE CHECK(filename LIKE "%.%"),
     description LONGTEXT,
     option LONGTEXT,
@@ -12,21 +13,23 @@ CREATE TABLE File (
 
 CREATE TABLE Object (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL UNIQUE,
     description LONGTEXT,
-    isTool tinyint(1),
+    isTool TINYINT(1) NOT NULL,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
-CREATE TABLE RoomObject (
+CREATE TABLE PlaceRoomObject (
     id BIGINT UNSIGNED AUTO_INCREMENT,
-    Xcoord INT,
-    Ycoord INT,
+    Xcoord INT NOT NULL,
+    Ycoord INT NOT NULL,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Room (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL,
     INDEX ix_name_room(name),
     PRIMARY KEY(id)
@@ -39,21 +42,24 @@ CREATE TABLE PlaceRoom (
 
 CREATE TABLE Place (
     id BIGINT UNSIGNED AUTO_INCREMENT,
-    name varchar(100) NOT NULL,
-    Xcoord INT,
-    Ycoord INT,
+    uuid BINARY(16) NOT NULL UNIQUE,
+    name VARCHAR(100) NOT NULL,
+    Xcoord INT NOT NULL,
+    Ycoord INT NOT NULL,
     INDEX ix_name_place(name),
     PRIMARY KEY(id) 
 ) ENGINE=InnoDB;
 
 CREATE TABLE Map (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL UNIQUE,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Day (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL UNIQUE,
     description LONGTEXT,
     PRIMARY KEY(id)
@@ -61,27 +67,31 @@ CREATE TABLE Day (
 
 CREATE TABLE Dialogue (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     description LONGTEXT,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Sentence (
     id BIGINT UNSIGNED AUTO_INCREMENT,
-    content LONGTEXT,
+    uuid BINARY(16) NOT NULL UNIQUE,
+    order INT UNSIGNED NOT NULL,
+    content LONGTEXT NOT NULL,
     color VARCHAR(20),
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Characters (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     name VARCHAR(50) NOT NULL UNIQUE,
-    color VARCHAR(20),
-    INDEX ix_name_characters(name),
+    color VARCHAR(20) NOT NULL,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Administrator (
     id BIGINT UNSIGNED AUTO_INCREMENT,
+    uuid BINARY(16) NOT NULL UNIQUE,
     login VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(300) NOT NULL,
     PRIMARY KEY(id)
@@ -89,8 +99,9 @@ CREATE TABLE Administrator (
 
 CREATE TABLE Door (
     id BIGINT UNSIGNED AUTO_INCREMENT,
-    Xcoord INT,
-    Ycoord INT,
+    uuid BINARY(16) NOT NULL UNIQUE,
+    Xcoord INT NOT NULL,
+    Ycoord INT NOT NULL,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
@@ -126,7 +137,7 @@ CREATE TABLE PlaceFile (
     PRIMARY KEY(PlaceId, FileId)
 ) ENGINE=InnoDB;
 
-ALTER TABLE RoomObject
+ALTER TABLE PlaceRoomObject
     ADD COLUMN (
         ObjectId BIGINT UNSIGNED NOT NULL,
         PlaceRoomId BIGINT UNSIGNED NOT NULL
@@ -149,15 +160,15 @@ ALTER TABLE Place
         MapId BIGINT UNSIGNED NOT NULL
     ),
     ADD CONSTRAINT fk_Map_Place FOREIGN KEY (MapId) REFERENCES Map(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD UNIQUE INDEX ix_Name_Map_Place (name, MapId);
+    ADD UNIQUE INDEX ux_Name_Map_Place (name, MapId);
 
 ALTER TABLE Door
     ADD COLUMN (
         StartingPlaceRoomId BIGINT UNSIGNED NOT NULL,
         DestinationPlaceRoomId BIGINT UNSIGNED NOT NULL
     ),
-    ADD CONSTRAINT fk_starting_room_Door FOREIGN KEY (StartingPlaceRoomId) REFERENCES Room(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD CONSTRAINT fk_destination_room_Door FOREIGN KEY(DestinationPlaceRoomId) REFERENCES Room(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT fk_starting_room_Door FOREIGN KEY (StartingPlaceRoomId) REFERENCES PlaceRoom(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT fk_destination_room_Door FOREIGN KEY(DestinationPlaceRoomId) REFERENCES PlaceRoom(id) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD UNIQUE INDEX ux_Room_Door (StartingPlaceRoomId, DestinationPlaceRoomId);
 
 ALTER TABLE Day
@@ -170,9 +181,12 @@ ALTER TABLE Day
 
 ALTER TABLE Sentence
     ADD COLUMN (
-        DialogueId BIGINT UNSIGNED NOT NULL
+        DialogueId BIGINT UNSIGNED NOT NULL,
+        CharacterId BIGINT UNSIGNED NOT NULL
     ),
-    ADD CONSTRAINT fk_dialogue_Sentence FOREIGN KEY (DialogueId) REFERENCES Dialogue(id) ON DELETE CASCADE ON UPDATE CASCADE;
+    ADD CONSTRAINT fk_dialogue_Sentence FOREIGN KEY (DialogueId) REFERENCES Dialogue(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT fk_dialogue_Characters FOREIGN KEY (CharacterId) REFERENCES Characters(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD UNIQUE INDEX ux_order_Dialogue_Character (order, DialogueId, CharacterId);
 
 GRANT ALL PRIVILEGES ON alive.* TO 'alive'@'%' IDENTIFIED BY '5e6c&6iP&m6p6aQd$A&f';
 FLUSH PRIVILEGES;
@@ -186,10 +200,15 @@ DELIMITER //
 --  valeur par default = -1
 
 -- Créer un administrateur OU modifier son mot de passe
-CREATE PROCEDURE changeAdministrator(IN login VARCHAR(50), IN password VARCHAR(50))
+CREATE PROCEDURE setAdministrator(IN login VARCHAR(50), IN password VARCHAR(50))
 BEGIN
     INSERT INTO Administrator(login, password) VALUES (login, password)
     ON DUPLICATE KEY UPDATE password=password;
+END; //
+
+CREATE PROCEDURE CREATE_UUID(OUT uuid BINARY(16))
+BEGIN
+    SELECT UNHEX(REPLACE(UUID(), '-', '')) INTO uuid;
 END; //
 
 CREATE PROCEDURE getObjects(IN object_name VARCHAR(100), 
@@ -213,4 +232,93 @@ BEGIN
     END IF;
     EXECUTE IMMEDIATE var_query;
 END; //
+
+CREATE TRIGGER before_insert_file
+BEFORE INSERT ON File
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_object
+BEFORE INSERT ON Object
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_room
+BEFORE INSERT ON Room
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_place
+BEFORE INSERT ON Place
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_map
+BEFORE INSERT ON Map
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_day
+BEFORE INSERT ON Day
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_dialogue
+BEFORE INSERT ON Dialogue
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_sentence
+BEFORE INSERT ON Sentence
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_characters
+BEFORE INSERT ON Characters
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_door
+BEFORE INSERT ON Door
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
+CREATE TRIGGER before_insert_administrator
+BEFORE INSERT ON Administrator
+FOR EACH ROW
+BEGIN
+CALL CREATE_UUID(@uuid);
+SET new.uuid = @uuid;
+END; //
+
 DELIMITER ;
