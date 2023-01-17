@@ -205,42 +205,82 @@ components:
       properties:
         coordinates:
           $ref: '#/components/schemas/Coordinates'
+        distinationDoor:
+          $ref: '#/components/schemas/uuid'
 
-    WholeMap:
+    RoomUuid:
+      allOf:
+        - $ref: '#/components/schemas/Room'
+        - $ref: '#/components/schemas/Uuid'
+    PlaceUuid:
+      allOf:
+        - $ref: '#/components/schemas/Place'
+        - $ref: '#/components/schemas/Uuid'
+    MapUuid:
       allOf:
         - $ref: '#/components/schemas/Map'
         - $ref: '#/components/schemas/Uuid'
+    DayUuid:
+      allOf:
+        - $ref: '#/components/schemas/Day'
+        - $ref: '#/components/schemas/Uuid'
+    DialogueUuid:
+      allOf:
+        - $ref: '#/components/schemas/Dialogue'
+        - $ref: '#/components/schemas/Uuid'
+    SentenceUuid:
+      allOf:
+        - $ref: '#/components/schemas/Sentence'
+        - $ref: '#/components/schemas/Uuid'
+    CharactersUuid:
+      allOf:
+        - $ref: '#/components/schemas/Characters'
+        - $ref: '#/components/schemas/Uuid'
+    ObjectUuid:
+      allOf:
+        - $ref: '#/components/schemas/Object'
+        - $ref: '#/components/schemas/Uuid'
+    DoorUuid:
+      allOf:
+        - $ref: '#/components/schemas/Door'
+        - $ref: '#/components/schemas/Uuid'
+    WholeDay:
+      allOf:
+        - $ref: '#/components/schemas/DayUuid'
         - type: object
           properties:
-            place:
+            maps:
               type: array
               items:
                 allOf:
-                  - $ref: '#/components/schemas/Place'
-                  - $ref: '#/components/schemas/Uuid'
+                  - $ref: '#/components/schemas/MapUuid'
                   - type: object
                     properties:
-                      rooms:
+                      places:
                         type: array
                         items:
                           allOf:
-                           - $ref: '#/components/schemas/Room'
-                           - $ref: '#/components/schemas/Uuid'
-                           -  type: object
+                            - $ref: '#/components/schemas/PlaceUuid'
+                            - type: object
                               properties:
-                                objects:
+                                rooms:
                                   type: array
                                   items:
                                     allOf:
-                                      - $ref: '#/components/schemas/Object'
-                                      - $ref: '#/components/schemas/Uuid'
-                                    
-                                doors:
-                                  type: array
-                                  items:
-                                    allOf:
-                                      - $ref: '#/components/schemas/Door'
-                                      - $ref: '#/components/schemas/Uuid'
+                                     - $ref: '#/components/schemas/RoomUuid'
+                                     -  type: object
+                                        properties:
+                                          objects:
+                                            type: array
+                                            items:
+                                              allOf:
+                                                - $ref: '#/components/schemas/ObjectUuid'
+                                              
+                                          doors:
+                                            type: array
+                                            items:
+                                              allOf:
+                                                - $ref: '#/components/schemas/DoorUuid'
           
         
     
@@ -285,7 +325,7 @@ components:
               content:
                 type: array
                 items:
-                  $ref: '#/components/schemas/WholeMap'
+                  $ref: '#/components/schemas/WholeDay'
   requestBodies:
     RoomBody:
       required: true
