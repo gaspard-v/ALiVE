@@ -16,11 +16,20 @@ export const Map = (app, pool) => {
         Place.Xcoord as place_x,
         Place.Ycoord as place_y,
         Room.uuid as room_uuid,
-        Room.name as room_name
-        FROM Map 
+        Room.name as room_name,
+        Door.uuid as door_uuid,
+        Door.Xcoord as door_x,
+        Door.Ycoord as door_y,
+        DistinationPlace.uuid as destination_place_uuid,
+        DestinationRoom.uuid as destination_room_uuid
+        FROM Map
         LEFT JOIN Place ON Map.id = Place.MapId
         LEFT JOIN PlaceRoom ON Place.id = PlaceRoom.PlaceId
         LEFT JOIN Room ON Room.id = PlaceRoom.RoomId
+        LEFT JOIN Door ON Door.StartingPlaceRoomId = PlaceRoom.id
+		    LEFT JOIN PlaceRoom as PlaceRoomDoor ON Door.DestinationPlaceRoomId = PlaceRoomDoor.id
+        LEFT JOIN Room as DestinationRoom ON DestinationRoom.id = PlaceRoomDoor.RoomId
+        LEFT JOIN Place as DistinationPlace ON DistinationPlace.id = PlaceRoomDoor.PlaceId
         `);
       })
       .then((result) => {
