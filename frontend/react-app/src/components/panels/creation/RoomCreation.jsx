@@ -1,15 +1,10 @@
 import React, { useRef, useState } from "react";
-import {
-  createObject,
-  createObjectv2,
-  getObjects,
-} from "../../../api/object/ObjectCall";
 import Buttons from "../../buttons/Buttons";
 import { TiTick } from "react-icons/ti";
 import "./creation.scss";
+import {createRoom} from "../../../api/room/RoomCall";
 
-function RoomCreation() {
-  //const [selectedValue1, setSelectedValue1] = useState("complete");
+export default function RoomCreation() {
   // const [form, setFormValue] = useState();
   const [roomName, setRoomName] = useState("");
   const [roomImg, setRoomImg] = useState("");
@@ -19,14 +14,13 @@ function RoomCreation() {
     event.preventDefault();
     const response = {
       name: roomName,
-      img: roomImg,
-      isTool: 1,
+      img: roomImg
     };
-    createObject(response);
+    createRoom(response);
   }
 
   return (
-    <form id="RoomScreenCreation" className="EditionScreen" onSubmit={onSubmit}>
+    <form id="RoomMapCreationScreen" className="EditionScreen" onSubmit={onSubmit}>
       <label className="NameLabel">Nom de pièce</label>
       <input
         className="ModelName"
@@ -34,7 +28,7 @@ function RoomCreation() {
         onChange={(e) => setRoomName(e.target.value)}
       />
       <input
-        className="RoomImg"
+        className="RoomMapImg"
         type="file"
         name="img"
         accept="image/*"

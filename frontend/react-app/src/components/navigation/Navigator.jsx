@@ -6,6 +6,11 @@ import RoomPrompt from "../panels/prompt/RoomPrompt";
 import ObjectCreation from "../panels/creation/ObjectCreation";
 import ObjectPrompt from "../panels/prompt/ObjectPrompt";
 import Selection from "../pages/selection/Selection";
+import ObjectEdition from "../panels/edition/ObjectEdition";
+import RoomEdition from "../panels/edition/RoomEdition";
+import MapCreation from "../panels/creation/MapCreation";
+import MapEdition from "../panels/edition/MapEdition";
+import MapPrompt from "../panels/prompt/MapPrompt";
 
 export default function Navigator(){
     return(
@@ -16,12 +21,13 @@ export default function Navigator(){
                     <Route index element={<ObjectPrompt/>}/>
                     <Route path="new" element={<ObjectCreation/>}/>
                     <Route path=":id" element={<ObjectPrompt/>}/>
-                    <Route path=":id/edit" element={<></>}></Route>
+                    <Route path=":id/edit" element={<ObjectEdition/>}/>
                 </Route>
                 <Route path={"/rooms"} element={<Selection context="Pièces"/>}>
                     <Route index element={<RoomPrompt/>}/>
                     <Route path="new" element={<RoomCreation/>}/>
                     <Route path=":id" element={<RoomPrompt/>}/>
+                    <Route path=":id/edit" element={<RoomEdition/>}/>
                 </Route>
                 <Route path={"/days"} element={<Selection context="Jours"/>}>
                     <Route index element={<div></div>}/>
@@ -29,9 +35,10 @@ export default function Navigator(){
                     <Route path=":id" element={<div/>}/>
                 </Route>
                 <Route path={"/maps"} element={<Selection context="Cartes"/>}>
-                    <Route index element={<div/>}/>
-                    <Route path="new" element={<div/>}/>
-                    <Route path=":id" element={<div/>}/>
+                    <Route index element={<MapPrompt/>}/>
+                    <Route path="new" element={<MapCreation/>}/>
+                    <Route path=":id" element={<MapPrompt/>}/>
+                    <Route path=":id/edit" element={<MapEdition/>}/>
                 </Route>
             </Routes>
         </>
