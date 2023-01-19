@@ -30,14 +30,14 @@
     border-radius: 5px;
 }
 
-#RoomPromptScreen{
+#RoomMapPromptScreen{
     grid-template-columns: $room-prompt-column-template;
     grid-template-rows: $room-prompt-rows-template;
     grid-template-areas: $room-prompt-area-template;
     display: $room-prompt-display;
 }
 
-.RoomImg{
+.RoomMapImg{
     grid-area: $room-prompt-img-grid-area;
     border: $room-prompt-img-border;
     border-radius: $room-prompt-img-border-radius;

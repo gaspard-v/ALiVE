@@ -1,6 +1,6 @@
 @import '../../../ressources/stylesheet/variables.scss';
 
-#ObjectCreationScreen{
+#ObjectEditionScreen{
     grid-template-columns:$object-creation-columns-template;
     grid-template-rows: $object-creation-rows-template;
     grid-template-areas: $object-creation-area-template;
@@ -28,7 +28,7 @@
     grid-area: DescriptionLabel;
 }
 
-#RoomMapCreationScreen{
+#RoomMapEditionScreen{
     display: $room-creation-display;
     grid-template-columns: $room-creation-columns-template;
     grid-template-rows: $room-creation-rows-template;

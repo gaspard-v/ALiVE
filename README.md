@@ -10,9 +10,9 @@ Afin d'installer les packets nécessaire veuillez executer :
 #### DEVELOPPEMENT
 
 Quant au lancement de celui-ci en mode de développement il s'agit de ces 3 commandes à executer dans des terminaux différents :
-- `cd backend && npm install && npm run`
-- `cd frontend/phaser && npm install && npm run`
-- `cd frontend/react-app && npm install && npm run`
+- `cd backend && npm install && npm run run`
+- `cd frontend/phaser && npm install && npm run start`
+- `cd frontend/react-app && npm install && npm run start`
 
 
 #### BDD
