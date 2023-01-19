@@ -1,41 +1,19 @@
-import * as Phaser from 'phaser';
-import PlayScene from './src/scenes/PlayScene';
-import TextScene from './src/scenes/TextScene';
-import GrayScalePipelinePlugin from 'phaser3-rex-plugins/plugins/grayscalepipeline-plugin.js';
-import KawaseBlurPipelinePlugin from 'phaser3-rex-plugins/plugins/kawaseblurpipeline-plugin.js';
+import * as Phaser from "phaser";
 
-const config = {
-    name: 'ALiVE',
-    type: Phaser.AUTO,
-    backgroundColor: '#282828',
-    scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        parent: 'ALiVE',
-        width: 1920,
-        height: 1080,
-    },
-    dom: {
-        createContainer: true,
-    },
-    autoCenter: true,
-    antialias: true,
-    autoFocus: true,
-    plugins: {
-        global: [
-            {
-                key: 'rexGrayScalePipeline',
-                plugin: GrayScalePipelinePlugin,
-                start: true,
-            },
-            {
-                key: 'rexKawaseBlurPipeline',
-                plugin: KawaseBlurPipelinePlugin,
-                start: true,
-            },
-        ],
-    },
-    scene: [PlayScene, TextScene],
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game'), Main = function () {};
+
+Main.prototype = {
+  preload: function () {
+    game.load.image('loading',  'assets/images/loading.png');
+    game.load.script('splash',  'states/Splash.js');
+  },
+
+  create: function () {
+    game.state.add('Splash', Splash);
+    game.state.start('Splash');
+  }
+
 };
 
-window.game = new Phaser.Game(config);
+game.state.add('Main', Main);
+game.state.start('Main');
