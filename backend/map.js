@@ -10,18 +10,18 @@ export const Map = (app, pool) => {
         return conn.query(`
         SELECT 
         Map.name as map_name, 
-        Map.uuid as map_uuid, 
-        Place.uuid as place_uuid,
+        HEX(Map.uuid) as map_uuid, 
+        HEX(Place.uuid) as place_uuid,
         Place.name as place_name,
         Place.Xcoord as place_x,
         Place.Ycoord as place_y,
-        Room.uuid as room_uuid,
+        HEX(Room.uuid) as room_uuid,
         Room.name as room_name,
-        Door.uuid as door_uuid,
+        HEX(Door.uuid) as door_uuid,
         Door.Xcoord as door_x,
         Door.Ycoord as door_y,
-        DistinationPlace.uuid as destination_place_uuid,
-        DestinationRoom.uuid as destination_room_uuid
+        HEX(DistinationPlace.uuid) as destination_place_uuid,
+        HEX(DestinationRoom.uuid) as destination_room_uuid
         FROM Map
         LEFT JOIN Place ON Map.id = Place.MapId
         LEFT JOIN PlaceRoom ON Place.id = PlaceRoom.PlaceId
@@ -33,8 +33,8 @@ export const Map = (app, pool) => {
         `);
       })
       .then((result) => {
-        const retour = { ...roomObject, ...result[0] };
-        handlerSuccess(retour, req, res, next);
+        const data = JSON.parse(result);
+        handlerSuccess(result, req, res, next);
       })
       .catch((err) => {
         handlerError(err, req, res, next);
