@@ -39,8 +39,8 @@
             {
               "uuid": "door02",
               "coordinates": {
-                "x": 1576,
-                "y": 734
+                "x": 1776,
+                "y": 834
               },
               "destinationRoom": "class002"
             }
@@ -55,7 +55,7 @@
             "name": "Couteau suisse",
             "description": "Ceci est un Couteau qui coupe.",
             "isTool": true,
-            "x":1150,
+            "x":720,
             "y":720
           },
           {
@@ -63,7 +63,7 @@
             "name": "Boite",
             "description": "Ceci est une Boite.",
             "isTool": true,
-            "x":1600,
+            "x":1200,
             "y":600
           }],
           "doors": [

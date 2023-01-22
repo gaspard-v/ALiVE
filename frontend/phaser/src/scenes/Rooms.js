@@ -1,4 +1,5 @@
 import { SearchIcon } from "../gameObjects/mainMenu/Button";
+import PromptObject from "./PromptObject";
 
 export default class Rooms extends Phaser.Scene{
     constructor(handle){
@@ -44,7 +45,7 @@ export default class Rooms extends Phaser.Scene{
                     objectData.y,
                     'searchIcon',
                     this,
-                    ()=>{console.log(objectData.name)},
+                    ()=>{this.bringPrompt(objectData.uuid)},
                     1
                 )
 
@@ -75,7 +76,10 @@ export default class Rooms extends Phaser.Scene{
 
     bringPrompt(key){
         if (!this.scene.isActive('key')){
+            const promptObject = new PromptObject(key)
+            this.scene.add(key,promptObject,true)
         }
+        this.scene.bringToTop(key)
     }
 
 
