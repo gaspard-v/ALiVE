@@ -1,6 +1,9 @@
 {"status":"success",
 "content":
     [{
+        "name": "salle de classe",
+        "uuid": "class001",
+        "image": "class001.jpeg",
         "objects":[
         {
             "uuid":"waterbottle1",

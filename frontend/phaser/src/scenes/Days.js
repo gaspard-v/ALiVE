@@ -37,16 +37,3 @@ class PromptObject extends Phaser.Scene{
         
     }
 }
-
-//class SearchIcons extends Phaser.Scene{
-    //constructor(){
-
-    //}
-    //preload(){
-
-    //}
-    //create(){
-        
-    //}
-
-//}

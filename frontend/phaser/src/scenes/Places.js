@@ -6,10 +6,14 @@ export default class Places extends Phaser.Scene{
 
     }
     preload(){
+
+        // Load the room background
         const placeData = this.cache.json.get('placeData')
-        const loadRoomBackground = placeData.content[0].rooms.map(
+        // Change the rooms variable 
+        const rooms = placeData.content[0].rooms
+
+        const loadRoomBackground = rooms.map(
             (room)=>{
-                console.log(room)
                 this.load.image(room.uuid,'/static/assets/images/rooms/'+room.image)
             }
         )
@@ -17,22 +21,16 @@ export default class Places extends Phaser.Scene{
     create(){
         const placeData = this.cache.json.get('placeData');
         
-        const rooms = placeData.content.map(
-            (place)=>{ 
-                if (place.uuid == this.scene.key){
-                    place.rooms.map(
-                        (roomData) =>{
-                            console.log(roomData.uuid);
-                            if (!this.scene.isActive(roomData.uuid)){
-                                const room = new Rooms(roomData.uuid)
-                                this.scene.add(room.uuid,room,true)
-                            }
-                        
-                        }
-                    )
-                }
-            }
-        )
+        // Find an other solution to this double map
+        placeData.content
+            .filter(({ uuid }) => uuid === this.scene.key)
+            .map(({ rooms }) => rooms)
+            .flat()
+            .filter(({ uuid }) => !this.scene.isActive(uuid))
+            .forEach(({ uuid }) => {
+            const room = new Rooms(uuid);
+            this.scene.add(uuid, room, true);
+        })
     }
 
 }

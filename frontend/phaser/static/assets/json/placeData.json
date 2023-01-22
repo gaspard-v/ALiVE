@@ -14,31 +14,35 @@
               "uuid": "waterbottle01",
               "name": "Bouteille d'eau",
               "description": "Ceci est une bouteille d'eau.",
-              "isTool": true
+              "isTool": true,
+              "x":1150,
+              "y":720
             },
             {
               "uuid": "luxmeter01",
               "name": "Luxmetre",
               "description": "Ceci est un luxmetre.",
-              "isTool": true
+              "isTool": true,
+              "x":1600,
+              "y":600
             }
           ],
           "doors": [
             {
               "uuid": "door01",
               "coordinates": {
-                "x": 176,
-                "y": 34
+                "x": 76,
+                "y": 634
               },
-              "destinationRoom": ""
+              "destinationRoom": "class003"
             },
             {
               "uuid": "door02",
               "coordinates": {
-                "x": 176,
-                "y": 34
+                "x": 1576,
+                "y": 734
               },
-              "destinationRoom": ""
+              "destinationRoom": "class002"
             }
           ]
         },
@@ -46,23 +50,38 @@
           "uuid": "class002",
           "image": "class002.jpg",
           "name": "Pas la salle de classe",
-          "objects": [],
+          "objects": [{
+            "uuid": "knife",
+            "name": "Couteau suisse",
+            "description": "Ceci est un Couteau qui coupe.",
+            "isTool": true,
+            "x":1150,
+            "y":720
+          },
+          {
+            "uuid": "box",
+            "name": "Boite",
+            "description": "Ceci est une Boite.",
+            "isTool": true,
+            "x":1600,
+            "y":600
+          }],
           "doors": [
             {
               "uuid": "door03",
               "coordinates": {
-                "x": 176,
-                "y": 34
+                "x": 376,
+                "y": 554
               },
-              "destinationRoom": ""
+              "destinationRoom": "class001"
             },
             {
               "uuid": "door04",
               "coordinates": {
-                "x": 176,
-                "y": 34
+                "x": 776,
+                "y": 534
               },
-              "destinationRoom": ""
+              "destinationRoom": "class003"
             }
           ]
         },
@@ -70,23 +89,25 @@
           "uuid": "class003",
           "image": "class003.jpg",
           "name": "UNE AUTRE SALLE",
-          "objects": [],
+          "objects": [{
+
+          }],
           "doors": [
             {
-              "uuid": "string",
+              "uuid": "door5",
               "coordinates": {
-                "x": 176,
-                "y": 34
+                "x": 76,
+                "y": 634
               },
-              "destinationRoom": ""
+              "destinationRoom": "class001"
             },
             {
-              "uuid": "string",
+              "uuid": "door6",
               "coordinates": {
-                "x": 176,
-                "y": 34
+                "x": 476,
+                "y": 934
               },
-              "destinationRoom": ""
+              "destinationRoom": "class002"
             }
           ]
         }
