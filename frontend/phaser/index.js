@@ -1,19 +1,20 @@
-import * as Phaser from "phaser";
+import * as Phaser from 'phaser';
+import {MainMenu} from "./src/scenes/Main";
 
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game'), Main = function () {};
-
-Main.prototype = {
-  preload: function () {
-    game.load.image('loading',  'assets/images/loading.png');
-    game.load.script('splash',  'states/Splash.js');
-  },
-
-  create: function () {
-    game.state.add('Splash', Splash);
-    game.state.start('Splash');
-  }
-
+const config = {
+    name: 'ALiVE',
+    type: Phaser.AUTO,
+    backgroundColor: '#282828',
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 1920,
+        height: 1080,
+      },
+    dom: {
+        createContainer: true,
+    },
+    scene: [MainMenu],
 };
 
-game.state.add('Main', Main);
-game.state.start('Main');
+var game = new Phaser.Game(config);

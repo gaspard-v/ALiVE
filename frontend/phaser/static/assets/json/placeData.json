@@ -1,0 +1,93 @@
+{
+  "status": "success",
+  "content": [
+    {
+      "name": "Lille",
+      "uuid": "place1",
+      "rooms": [
+        {
+          "name": "salle de classe",
+          "uuid": "class001",
+          "objects": [
+            {
+              "uuid": "waterbottle01",
+              "name": "Bouteille d'eau",
+              "description": "Ceci est une bouteille d'eau.",
+              "isTool": true
+            },
+            {
+              "uuid": "luxmeter01",
+              "name": "Luxmetre",
+              "description": "Ceci est un luxmetre.",
+              "isTool": true
+            }
+          ],
+          "doors": [
+            {
+              "uuid": "door01",
+              "coordinates": {
+                "x": 176,
+                "y": 34
+              },
+              "destinationRoom": ""
+            },
+            {
+              "uuid": "door02",
+              "coordinates": {
+                "x": 176,
+                "y": 34
+              },
+              "destinationRoom": ""
+            }
+          ]
+        },
+        {
+          "uuid": "class002",
+          "name": "Pas la salle de classe",
+          "objects": [],
+          "doors": [
+            {
+              "uuid": "door03",
+              "coordinates": {
+                "x": 176,
+                "y": 34
+              },
+              "destinationRoom": ""
+            },
+            {
+              "uuid": "door04",
+              "coordinates": {
+                "x": 176,
+                "y": 34
+              },
+              "destinationRoom": ""
+            }
+          ]
+        },
+        {
+          "uuid": "class003",
+          "name": "UNE AUTRE SALLE",
+          "objects": [],
+          "doors": [
+            {
+              "uuid": "string",
+              "coordinates": {
+                "x": 176,
+                "y": 34
+              },
+              "destinationRoom": ""
+            },
+            {
+              "uuid": "string",
+              "coordinates": {
+                "x": 176,
+                "y": 34
+              },
+              "destinationRoom": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
