@@ -6,9 +6,13 @@ export default class Places extends Phaser.Scene{
 
     }
     preload(){
-        const mapData = this.cache.json.get('mapData')
-        const background = mapData.content[0].backgroundPath
-        this.load.image('img',background)
+        const placeData = this.cache.json.get('placeData')
+        const loadRoomBackground = placeData.content[0].rooms.map(
+            (room)=>{
+                console.log(room)
+                this.load.image(room.uuid,'/static/assets/images/rooms/'+room.image)
+            }
+        )
     }
     create(){
         const placeData = this.cache.json.get('placeData');

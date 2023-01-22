@@ -1,40 +1,8 @@
 {
     "status":"success",
     "content":[
-            {
-            "uuid":"place1",
-            "rooms":
-                {"class001":{
-                    "background":"img",
-                    "objects":[
-                        {"uuid":"waterbottle1",
-                        "name":"Bouteille d'eau",
-                        "description": "Ceci est une bouteille d'eau.",
-                        "isTool":true,
-                        "x":500,
-                        "y":500
-                    },
-                    {
-                        "uuid": "luxmeter01",
-                        "name": "Luxmetre",
-                        "description": "Ceci est un luxmetre.",
-                        "isTool": true,
-                        "x":600,
-                        "y":500
-                    }
-                    ],
-                    "doors":[
-                        {
-                            "uuid": "door01",
-                            "coordinates": {
-                              "x": 176,
-                              "y": 34
-                            },
-                            "destinationRoom": ""
-                        }
-                    ]
-                }
-            }
+        {
+            
         }
     ]
 }

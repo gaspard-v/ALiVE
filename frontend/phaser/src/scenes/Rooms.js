@@ -14,7 +14,7 @@ export default class Rooms extends Phaser.Scene{
         const {width,height} = this.scale;
         const classData = this.cache.json.get('class1');
 
-        this.add.sprite(width/2,height/2,'img'); 
+        this.add.sprite(width/2,height/2,this.scene.key); 
         
         const createObjects = classData.content[0].objects.map(
             (objectData)=>{

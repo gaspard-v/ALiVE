@@ -8,6 +8,7 @@
         {
           "name": "salle de classe",
           "uuid": "class001",
+          "image": "class001.jpeg",
           "objects": [
             {
               "uuid": "waterbottle01",
@@ -43,6 +44,7 @@
         },
         {
           "uuid": "class002",
+          "image": "class002.jpg",
           "name": "Pas la salle de classe",
           "objects": [],
           "doors": [
@@ -66,6 +68,7 @@
         },
         {
           "uuid": "class003",
+          "image": "class003.jpg",
           "name": "UNE AUTRE SALLE",
           "objects": [],
           "doors": [
