@@ -1,4 +1,5 @@
 import { handlerError, handlerSuccess } from "./handler.js";
+import { getPlace } from "./place.js";
 
 export function getMap(pool, map_uuid = "", full = false) {
   let query = "SELECT name, HEX(uuid) as uuid FROM Map";
@@ -14,7 +15,16 @@ export function getMap(pool, map_uuid = "", full = false) {
       conn = connexion;
       return conn.query(query, parameters);
     })
-    .then((result) => result)
+    .then((result) => {
+      if (!full) return result;
+      return result.map((element) => {
+        return getPlace(pool, "", element.uuid, true).then((result_place) => {
+          element["places"] = result_place;
+          return element;
+        });
+      });
+    })
+    .then((promises) => Promise.all(promises))
     .finally(() => {
       if (conn) conn.end();
     });
@@ -22,7 +32,7 @@ export function getMap(pool, map_uuid = "", full = false) {
 
 export const Map = (app, pool) => {
   app.get("/api/map", async function (req, res, next) {
-    getMap(pool)
+    getMap(pool, "")
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })
