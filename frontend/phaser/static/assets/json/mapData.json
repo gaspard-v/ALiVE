@@ -1,0 +1,31 @@
+{
+    "status":"success",
+    "content":[
+    {
+        "name":"carte1",
+        "uuid":"map1",
+        "backgroundPath":"/static/assets/images/maps/mapTest1.png",
+        "places":[
+            {
+                "name":"Lille",
+                "uuid":"place1",
+                "x":1526.4,
+                "y":497.5
+
+            },
+            {
+                "name":"Lens",
+                "uuid":"place2",
+                "x":1370.5,
+                "y":497.5
+            },
+            {
+                "name":"Paris",
+                "uuid":"place3",
+                "x":1270,
+                "y":615.5
+            }
+        ]
+    }
+    ]
+}
