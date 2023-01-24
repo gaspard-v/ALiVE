@@ -14,6 +14,7 @@
               "uuid": "waterbottle01",
               "name": "Bouteille d'eau",
               "description": "Ceci est une bouteille d'eau.",
+              "image": "/static/assets/images/utils/papyrus.jfif",
               "isTool": true,
               "x":1150,
               "y":720
@@ -22,6 +23,7 @@
               "uuid": "luxmeter01",
               "name": "Luxmetre",
               "description": "Ceci est un luxmetre.",
+              "image": "/static/assets/images/utils/papyrus.jfif",
               "isTool": true,
               "x":1600,
               "y":600
@@ -54,6 +56,7 @@
             "uuid": "knife",
             "name": "Couteau suisse",
             "description": "Ceci est un Couteau qui coupe.",
+            "image": "/static/assets/images/utils/papyrus.jfif",
             "isTool": true,
             "x":720,
             "y":720
@@ -62,6 +65,7 @@
             "uuid": "box",
             "name": "Boite",
             "description": "Ceci est une Boite.",
+            "image": "/static/assets/images/utils/papyrus.jfif",
             "isTool": true,
             "x":1200,
             "y":600
