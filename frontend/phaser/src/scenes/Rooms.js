@@ -7,7 +7,7 @@ export default class Rooms extends Phaser.Scene{
 
     }
     preload(){
-        this.load.json('class1','/static/assets/json/objectData.json')
+        this.load.json('class1','/static/assets/json/objectData.json') 
     }
     create(){
         
@@ -45,7 +45,7 @@ export default class Rooms extends Phaser.Scene{
                     objectData.y,
                     'searchIcon',
                     this,
-                    ()=>{this.bringPrompt(objectData)},
+                    ()=>{this.bringPrompt(objectData.uuid)},
                     1
                 )
 
@@ -74,13 +74,11 @@ export default class Rooms extends Phaser.Scene{
         this.scene.bringToTop(key);
     }
 
-    bringPrompt(objectData){
-        const key = objectData.uuid
-        if (!this.scene.isActive(key)){
-            const promptObject = new PromptObject(key,this.scene.key,objectData)
+    bringPrompt(key){
+        if (!this.scene.isActive('key')){
+            const promptObject = new PromptObject(key)
             this.scene.add(key,promptObject,true)
         }
-        console.log("created")
         this.scene.bringToTop(key)
     }
 
