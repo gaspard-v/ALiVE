@@ -4,6 +4,7 @@ import { objectBigIntToInt } from "./utils.js";
 import { handlerError, handlerSuccess } from "./handler.js";
 import { Room } from "./room.js";
 import { Map } from "./map.js";
+import { Place } from "./place.js";
 
 const pool = createPool({
   host: "localhost",
@@ -155,6 +156,7 @@ app.post("/api/room", async function (req, res, next) {
 
 Room(app, pool);
 Map(app, pool);
+Place(app, pool);
 
 app.listen(8080, async () =>
   console.log("ALiVE app server is listening on port 8080.")

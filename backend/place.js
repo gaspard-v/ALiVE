@@ -1,12 +1,17 @@
 import { handlerError, handlerSuccess } from "./handler.js";
 
-export function getMap(pool, map_uuid = "", full = false) {
-  let query = "SELECT name, HEX(uuid) as uuid FROM Map";
+export function getPlace(pool, place_uuid = "", map_uuid = "", full = false) {
   let parameters = [];
   let conn;
+  let query =
+    "SELECT HEX(Place.uuid) as uuid, Place.name as name, Place.Xcoord as x, Place.Ycoord as y FROM Place ";
+  if (place_uuid) {
+    query += " WHERE Place.uuid = UNHEX(?) ";
+    parameters.push(place_uuid);
+  }
   if (map_uuid) {
-    query = "SELECT name, HEX(uuid) as uuid FROM Map WHERE uuid = UNHEX(?)";
-    parameters = [map_uuid];
+    query += " INNER JOIN Map ON Map.id = Place.MapId AND Map.uuid = UNHEX(?) ";
+    parameters.push(map_uuid);
   }
   return pool
     .getConnection()
@@ -20,9 +25,9 @@ export function getMap(pool, map_uuid = "", full = false) {
     });
 }
 
-export const Map = (app, pool) => {
-  app.get("/api/map", async function (req, res, next) {
-    getMap(pool)
+export const Place = (app, pool) => {
+  app.get("/api/place", async function (req, res, next) {
+    getPlace(pool)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })
@@ -30,9 +35,9 @@ export const Map = (app, pool) => {
         handlerError(err, req, res, next);
       });
   });
-  app.get("/api/map/:uuid", async function (req, res, next) {
+  app.get("/api/place/:uuid", async function (req, res, next) {
     const uuid = req.params.uuid;
-    getMap(pool, uuid)
+    getPlace(pool, uuid)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })
