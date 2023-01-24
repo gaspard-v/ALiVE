@@ -4,7 +4,7 @@ import Days from "../scenes/Days";
 
 class DaysMenu extends Phaser.Scene{
     constructor(handle){
-        super(handle);
+        super(handle)
     }
     preload(){
         this.load.image('button','/static/assets/images/menu/Bouton.png')
@@ -40,6 +40,7 @@ export class MainMenu extends Phaser.Scene{
         this.load.image('gray','/static/assets/images/menu/grayBackground.jpg');
         this.load.image('transitionIcon','/static/assets/images/utils/transitionIcon.png')
         this.load.image('green','/static/assets/images/utils/green.jpg')
+
     }
     create(){
 
