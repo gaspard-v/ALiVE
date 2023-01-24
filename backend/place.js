@@ -1,4 +1,5 @@
 import { handlerError, handlerSuccess } from "./handler.js";
+import { getRoom } from "./room.js";
 
 export function getPlace(pool, place_uuid = "", map_uuid = "", full = false) {
   let parameters = [];
@@ -19,7 +20,16 @@ export function getPlace(pool, place_uuid = "", map_uuid = "", full = false) {
       conn = connexion;
       return conn.query(query, parameters);
     })
-    .then((result) => result)
+    .then((result) => {
+      if (!full) return result;
+      return result.map((element) => {
+        return getRoom(pool, "", element.uuid, true).then((result_room) => {
+          element["rooms"] = result_room;
+          return element;
+        });
+      });
+    })
+    .then((promises) => Promise.all(promises))
     .finally(() => {
       if (conn) conn.end();
     });
