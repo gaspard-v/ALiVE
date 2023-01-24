@@ -7,7 +7,7 @@ export default class Rooms extends Phaser.Scene{
 
     }
     preload(){
-        this.load.json('class1','/static/assets/json/objectData.json') 
+        this.load.json('class1','/static/assets/json/objectData.json')
     }
     create(){
         
@@ -45,16 +45,14 @@ export default class Rooms extends Phaser.Scene{
                     objectData.y,
                     'searchIcon',
                     this,
-                    ()=>{this.bringPrompt(objectData.uuid)},
+                    ()=>{this.bringPrompt(objectData)},
                     1
                 )
-
             }
         )
 
         doors.map(
             (doorData)=>{
-                console.log(doorData)
                 const door = new SearchIcon(
                     doorData.destinationRoom,
                     doorData.coordinates.x,
@@ -64,23 +62,29 @@ export default class Rooms extends Phaser.Scene{
                     ()=>{this.chargeRoom(doorData.destinationRoom)},
                     1
                 )
-
-                
             }
         )
         
     }
     chargeRoom(key){
         this.scene.bringToTop(key);
+        
     }
 
-    bringPrompt(key){
-        if (!this.scene.isActive('key')){
-            const promptObject = new PromptObject(key)
+    bringPrompt(objectData){
+        const key = objectData.uuid
+        if (!this.scene.isActive(key)){
+            const promptObject = new PromptObject(key,this.scene.key,objectData)
             this.scene.add(key,promptObject,true)
         }
+        console.log("created")
         this.scene.bringToTop(key)
     }
-
+    update(){
+        if(!this.scene.isActive('reflectionButton'))
+        {
+            this.scene.bringToTop('reflectionButton')
+        }
+    }
 
 }
