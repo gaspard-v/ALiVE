@@ -26,14 +26,4 @@ export default class Days extends Phaser.Scene{
     }
 }
 
-class PromptObject extends Phaser.Scene{
-    constructor(handle){
-        super(handle)
-    }
-    preload(){
 
-    }
-    create(){
-        
-    }
-}
