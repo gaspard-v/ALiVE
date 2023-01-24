@@ -6,6 +6,7 @@ import { Room } from "./room.js";
 import { Map } from "./map.js";
 import { Place } from "./place.js";
 import { Object } from "./object.js";
+import { Characters } from "./characters.js";
 
 const pool = createPool({
   host: "localhost",
@@ -159,6 +160,7 @@ Room(app, pool);
 Map(app, pool);
 Place(app, pool);
 Object(app, pool);
+Characters(app, pool);
 
 app.listen(8080, async () =>
   console.log("ALiVE app server is listening on port 8080.")

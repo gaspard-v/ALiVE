@@ -32,7 +32,7 @@ export function getMap(pool, map_uuid = "", full = false) {
 
 export const Map = (app, pool) => {
   app.get("/api/map", async function (req, res, next) {
-    getMap(pool, "", true)
+    getMap(pool)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })
