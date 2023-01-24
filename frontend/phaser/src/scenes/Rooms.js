@@ -2,42 +2,23 @@ import { SearchIcon } from "../gameObjects/mainMenu/Button";
 import PromptObject from "./PromptObject";
 
 export default class Rooms extends Phaser.Scene{
-    constructor(handle){
-        super(handle)
+    constructor(handle,objectsData,doorsData){
+        super(handle);
+        this.objects = objectsData;
+        this.doors = doorsData;
 
     }
     preload(){
-        this.load.json('class1','/static/assets/json/objectData.json')
     }
     create(){
         
         const {width,height} = this.scale;
-        const classData = this.cache.json.get('class1');
-
+      
         // Background must be added first  
         this.add.sprite(width/2,height/2,this.scene.key); 
-       
-        // objects and door variables can be changed
-        const placeData = this.cache.json.get('placeData');
-        const objects = placeData.content
-                        .filter(({uuid}) => uuid === "place1")
-                        .map(({rooms}) => rooms)
-                        .flat()
-                        .filter(({uuid}) => uuid === this.scene.key)
-                        .map(({objects}) =>objects)
-                        .flat()
-                        
-  
-        const doors =  placeData.content
-                        .filter(({uuid}) => uuid === "place1")
-                        .map(({rooms}) => rooms)
-                        .flat()
-                        .filter(({uuid}) => uuid === this.scene.key)
-                        .map(({doors}) =>doors)
-                        .flat()
-                        
+                            
         
-        objects.map((objectData)=>{
+        this.objects.map((objectData)=>{
             console.log(objectData)
             const object = new SearchIcon(
                 objectData.name,
@@ -51,7 +32,7 @@ export default class Rooms extends Phaser.Scene{
             }
         )
 
-        doors.map(
+        this.doors.map(
             (doorData)=>{
                 const door = new SearchIcon(
                     doorData.destinationRoom,
