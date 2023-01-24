@@ -12,7 +12,7 @@ const pool = createPool({
   user: "alive",
   password: "5e6c&6iP&m6p6aQd$A&f",
   database: "alive",
-  connectionLimit: 5,
+  connectionLimit: 100,
 });
 
 const app = express();

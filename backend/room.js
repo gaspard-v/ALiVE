@@ -1,4 +1,5 @@
 import { handlerError, handlerSuccess } from "./handler.js";
+import { getObject } from "./object.js";
 
 export function getRoom(pool, room_uuid = "", place_uuid = "", full = false) {
   let query = "SELECT Room.name as name, HEX(Room.uuid) as uuid FROM Room ";
@@ -20,7 +21,18 @@ export function getRoom(pool, room_uuid = "", place_uuid = "", full = false) {
       conn = connexion;
       return conn.query(query, parameters);
     })
-    .then((result) => result)
+    .then((result) => {
+      if (!full || !place_uuid) return result;
+      return result.map((element) => {
+        return getObject(pool, "", element.uuid, place_uuid, true).then(
+          (result_object) => {
+            element["objects"] = result_object;
+            return element;
+          }
+        );
+      });
+    })
+    .then((promises) => Promise.all(promises))
     .finally(() => {
       if (conn) conn.end();
     });
@@ -46,4 +58,17 @@ export const Room = (app, pool) => {
         handlerError(err, req, res, next);
       });
   });
+  app.get(
+    "/api/place/:place_uuid/room/:room_uuid",
+    async function (req, res, next) {
+      const uuid = req.params.uuid;
+      getRoom(pool, uuid)
+        .then((result) => {
+          handlerSuccess(result, req, res, next);
+        })
+        .catch((err) => {
+          handlerError(err, req, res, next);
+        });
+    }
+  );
 };
