@@ -48,13 +48,11 @@ export default class Rooms extends Phaser.Scene{
                     ()=>{this.bringPrompt(objectData)},
                     1
                 )
-
             }
         )
 
         doors.map(
             (doorData)=>{
-                console.log(doorData)
                 const door = new SearchIcon(
                     doorData.destinationRoom,
                     doorData.coordinates.x,
@@ -64,14 +62,13 @@ export default class Rooms extends Phaser.Scene{
                     ()=>{this.chargeRoom(doorData.destinationRoom)},
                     1
                 )
-
-                
             }
         )
         
     }
     chargeRoom(key){
         this.scene.bringToTop(key);
+        
     }
 
     bringPrompt(objectData){
@@ -83,6 +80,11 @@ export default class Rooms extends Phaser.Scene{
         console.log("created")
         this.scene.bringToTop(key)
     }
-
+    update(){
+        if(!this.scene.isActive('reflectionButton'))
+        {
+            this.scene.bringToTop('reflectionButton')
+        }
+    }
 
 }

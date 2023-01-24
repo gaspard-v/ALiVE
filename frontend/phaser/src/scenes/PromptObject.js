@@ -32,15 +32,6 @@ export default class PromptObject extends Phaser.Scene{
         color,
         depth = undefined
     ){
-
-        //const graphics = this.add.graphics();
-        //graphics.generateTexture('promptBackground',width,height);
-        //const rectangle = graphics.fillRoundedRect(0, 0, width, height, radius);
-        //rectangle.setX(x);
-        //rectangle.setY(y);
-
-
-
         this.add.sprite(x,y,'promptBackground')
             .setAngle(90)
             .setScale(10)
@@ -53,29 +44,17 @@ export default class PromptObject extends Phaser.Scene{
         closeButton.setX(0);
         closeButton.setY(0);
         closeButton.on('pointerdown', () => this.stopScene());
-
-        // var texture = this.textures.createCanvas('canvasTexture',800, 600);
-        // var papyrusExample =  this.textures.get('promptBackground').getSourceImage();
-        // texture.draw(300,100,papyrusExample);
-        // this.add.image(500,)
     }
 
 
     create(){
 
         const {width,height} = this.scale;
-        // this.add.sprite(width/2,height/2,'green')
-        //     .setAlpha(0.5)
-        //     .setScale(5)
-        //     .setAngle(90)
-
-
+    
         this.add.sprite(width/2,height/2,'promptBackground')
             .setAngle(90)
             .setScale(6)
-            .setAlpha(0.8);
-
-
+            .setAlpha(0.5);
         const closeButton = this.add
             .image(width - width/4, 100, 'closeIcon')
             .setInteractive({ useHandCursor: true });
