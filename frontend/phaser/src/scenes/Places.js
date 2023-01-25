@@ -5,8 +5,6 @@ export default class Places extends Phaser.Scene{
     constructor(handle,roomsData){
         super(handle);
         this.rooms = roomsData;
-        console.log(roomsData);
-
     }
     preload(){
         const loadRoomBackground = this.rooms.map(

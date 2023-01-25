@@ -19,7 +19,7 @@ export default class Rooms extends Phaser.Scene{
                             
         
         this.objects.map((objectData)=>{
-            console.log(objectData)
+   
             const object = new SearchIcon(
                 objectData.name,
                     objectData.x,
