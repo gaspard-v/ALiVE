@@ -2,9 +2,9 @@ import Places from "./Places";
 import {SearchIcon } from "../gameObjects/mainMenu/Button";
 
 export default class Maps extends Phaser.Scene{
-    constructor(handle,places){
+    constructor(handle,mapData){
         super(handle);
-    
+        this.map = mapData;
     }
     preload(){
         this.load.json('placeData','/static/assets/json/placeData.json');
@@ -15,15 +15,12 @@ export default class Maps extends Phaser.Scene{
         // Load all interesting variables
         const {width,height} = this.scale;
         
-        // Get json from the mapData
-        const mapData = this.cache.json.get('mapData');
-        
         // Create sprite for the map  
         this.add.sprite(width/2,height/2,'testmap').setScale(1.3);
         
         // Parsing data and creating the map buttons
-         
-        const accessiblePlaces = mapData.content[0].places.map((place)=>{
+        
+        const accessiblePlaces = this.map.map((place)=>{
 
         const button = new SearchIcon(
             place.name,
@@ -31,15 +28,15 @@ export default class Maps extends Phaser.Scene{
             place.y,
                 'mapbutton',
                 this,
-                () => {this.chargePlace(place.uuid)},
+                () => {this.chargePlace(place)},
                 0.080
             )
 
         })
         
     }   
-    chargePlace(key){
-        const place = new Places(key);
-        this.scene.add(key,place,true);
+    chargePlace(placeData){
+        const place = new Places(placeData.uuid, placeData.rooms);
+        this.scene.add(placeData.key,place,true);
     }
 }
