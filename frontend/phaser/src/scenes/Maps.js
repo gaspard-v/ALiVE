@@ -1,5 +1,6 @@
-import Places from "./Places";
+
 import {SearchIcon } from "../gameObjects/mainMenu/Button";
+import PromptRoom from "./PromptRoom";
 
 export default class Maps extends Phaser.Scene{
     constructor(handle,mapData){
@@ -28,15 +29,20 @@ export default class Maps extends Phaser.Scene{
             place.y,
                 'mapbutton',
                 this,
-                () => {this.chargePlace(place)},
+                () => {this.displayRoomInfo(place)},
                 0.080
             )
 
         })
         
     }   
-    chargePlace(placeData){
-        const place = new Places(placeData.uuid, placeData.rooms);
-        this.scene.add(placeData.key,place,true);
+    
+    displayRoomInfo(place){
+        const key = place.uuid+"Prompt";
+        if(!this.scene.isActive(key)){
+            const display = new PromptRoom(key,this,place);
+            this.scene.add(key,display,true);
+        }
+        this.scene.bringToTop(key);
     }
 }
