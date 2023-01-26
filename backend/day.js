@@ -37,7 +37,7 @@ export function getDay(pool, day_uuid = "", full = false) {
 
 export const Day = (app, pool) => {
   app.get("/api/day", async function (req, res, next) {
-    getDay(pool)
+    getDay(pool, "", true)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })

@@ -1,23 +1,25 @@
 import { handlerError, handlerSuccess } from "./handler.js";
-import { getSentence } from "./sentence.js";
+import { getCharacters } from "./characters.js";
 
-export function getDialogue(
+export function getSentence(
   pool,
+  sentence_uuid = "",
   dialogue_uuid = "",
-  day_uuid = "",
   full = false
 ) {
   let conn;
   let parameters = [];
-  let query = `SELECT HEX(Dialogue.uuid) as uuid, Dialogue.description as description FROM Dialogue `;
-  if (dialogue_uuid) {
-    query += " WHERE Dialogue.uuid = UNHEX(?) ";
-    parameters.push(dialogue_uuid);
+  let query = `SELECT HEX(Sentence.uuid) as uuid, Sentence.ordre as ordre, Sentence.content as content, Sentence.color as color 
+               FROM (Sentence, Dialogue) 
+               WHERE 1=1 `;
+  if (sentence_uuid) {
+    query += ` AND Sentence.uuid = UNHEX(?) `;
+    parameters.push(sentence_uuid);
   }
-  if (day_uuid) {
-    query += ` INNER JOIN Day ON Dialogue.id = Day.DialogueId 
-               AND Day.uuid = UNHEX(?) `;
-    parameters.push(day_uuid);
+  if (dialogue_uuid) {
+    query += ` AND Dialogue.id = Sentence.DialogueId 
+               AND Dialogue.uuid = UNHEX(?) `;
+    parameters.push(dialogue_uuid);
   }
   return pool
     .getConnection()
@@ -28,9 +30,9 @@ export function getDialogue(
     .then((result) => {
       if (!full) return result;
       return result.map((element) => {
-        return getSentence(pool, "", element.uuid, true).then(
-          (result_place) => {
-            element["places"] = result_place;
+        return getCharacters(pool, "", element.uuid, true).then(
+          (result_characters) => {
+            element["character"] = result_characters;
             return element;
           }
         );
@@ -42,9 +44,9 @@ export function getDialogue(
     });
 }
 
-export const Dialogue = (app, pool) => {
-  app.get("/api/dialogue", async function (req, res, next) {
-    getDialogue(pool)
+export const Sentence = (app, pool) => {
+  app.get("/api/sentence", async function (req, res, next) {
+    getSentence(pool)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })
@@ -52,9 +54,9 @@ export const Dialogue = (app, pool) => {
         handlerError(err, req, res, next);
       });
   });
-  app.get("/api/dialogue/:uuid", async function (req, res, next) {
+  app.get("/api/sentence/:uuid", async function (req, res, next) {
     const uuid = req.params.uuid;
-    getDialogue(pool, uuid)
+    getSentence(pool, uuid)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })
