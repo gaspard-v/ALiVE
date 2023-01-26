@@ -1,4 +1,5 @@
 import { handlerError, handlerSuccess } from "./handler.js";
+import { getDialogue } from "./dialogue.js";
 
 export function getDay(pool, day_uuid = "", full = false) {
   let conn;
@@ -9,7 +10,7 @@ export function getDay(pool, day_uuid = "", full = false) {
   let parameters = [];
   if (day_uuid) {
     query += ` AND Day.uuid = UNHEX(?) `;
-    parameters.append(day_uuid);
+    parameters.push(day_uuid);
   }
   return pool
     .getConnection()
@@ -17,7 +18,18 @@ export function getDay(pool, day_uuid = "", full = false) {
       conn = connexion;
       return conn.query(query, parameters);
     })
-    .then((result) => result)
+    .then((result) => {
+      if (!full) return result;
+      return result.map((element) => {
+        return getDialogue(pool, "", element.uuid, true).then(
+          (result_dialogue) => {
+            element["dialogues"] = result_dialogue;
+            return element;
+          }
+        );
+      });
+    })
+    .then((promises) => Promise.all(promises))
     .finally(() => {
       if (conn) conn.end();
     });
