@@ -10,48 +10,42 @@ export default class PromptObject extends Phaser.Scene{
         this.titleData = objectData.name;
         this.texteData = objectData.description;
         this.imageData = objectData.image;
-        console.log(this.imageData);
+        console.log("image data val : ",this.imageData);
     }
     preload(){
-        this.load.text('luxmetreText', '../../static/luxmetreText.txt');
-        this.load.text('bottleText', '../../static/bottleText.txt');
         this.load.image('closeIcon', '../../static/assets/images/utils/close2.png');
-        this.load.image('promptBackground',this.imageData);
+        this.load.image('promptBackground','../../static/assets/images/utils/papyrus.jfif');
     }
 
     stopScene() {
         this.scene.bringToTop(this.parentSceneKey)
     }
 
-    createRectangle(
-        x,
-        y,
-        width,
-        height,
-        radius,
-        color,
-        depth = undefined
-    ){
-
-        this.add.sprite(x,y,'promptBackground')
-            .setAngle(90)
-            .setScale(10)
-            .setAlpha(0.8);
-
-
-        const closeButton = this.add
-            .image(0, 0, 'closeIcon')
-            .setInteractive({ useHandCursor: true });
-        closeButton.setX(0);
-        closeButton.setY(0);
-        closeButton.on('pointerdown', () => this.stopScene());
-
+    dataURItoBlob(dataURI) {
+        var byteString = atob(dataURI.split(',')[1]);
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        var blob = new Blob([ab], { type: mimeString });
+        return blob;
     }
 
 
     create(){
 
         const {width,height} = this.scale;
+
+        // Convert base64Image to blob
+        var imgBlob = this.dataURItoBlob(this.imageData);
+
+        // Create a new image and set its source to the blob
+        var img = new Image();
+        img.src = window.URL.createObjectURL(imgBlob);
+
+        console.log(img)
 
         this.add.sprite(width/2,height/2,'promptBackground')
             .setAngle(90)
@@ -74,6 +68,14 @@ export default class PromptObject extends Phaser.Scene{
             }
         )
 
+        this.imageEncodedTest = this.add.image(
+            20,
+            30,
+            img
+        );
+
+        console.log(atob(this.imageData));
+
         this.texte = this.add.text(
             width / 4,
             height / 4,
@@ -83,6 +85,12 @@ export default class PromptObject extends Phaser.Scene{
                 fontSize: 64,
             }
         )
+
+        /*this.imageObject = this.add.image(
+            width / 2,
+            width / 2,
+            atob(this.imageData)
+        );*/
     }
 
 }
