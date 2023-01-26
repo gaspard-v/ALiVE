@@ -7,6 +7,7 @@ export default class PromptObject extends Phaser.Scene{
     constructor(handle,parentScene,objectData){
         super(handle)
         this.parentSceneKey = parentScene;
+        this.titleData = objectData.name;
         this.texteData = objectData.description;
         this.imageData = objectData.image;
         console.log(this.imageData);
@@ -62,6 +63,16 @@ export default class PromptObject extends Phaser.Scene{
             .setInteractive({ useHandCursor: true });
 
             closeButton.on('pointerdown', () => this.stopScene());
+
+        this.titleText = this.add.text(
+            width / 3,
+            40,
+            this.titleData,
+            {
+                fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+                fontSize: 86,
+            }
+        )
 
         this.texte = this.add.text(
             width / 4,
