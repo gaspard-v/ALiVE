@@ -19,7 +19,6 @@ export default class PromptObject extends Phaser.Scene{
     }
 
     stopScene() {
-        console.log(this);
         this.scene.bringToTop(this.parentSceneKey)
     }
 
