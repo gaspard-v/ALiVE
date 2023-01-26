@@ -2,10 +2,13 @@ import { handlerError, handlerSuccess } from "./handler.js";
 
 export function getDay(pool, day_uuid = "", full = false) {
   let conn;
-  let query = `SELECT HEX(Day.uuid) as uuid, Day.name as name, Day.description as description `;
+  let query = `SELECT HEX(Day.uuid) as uuid, Day.name as name, Day.description as description, HEX(Map.uuid) as map_uuid 
+               FROM Day, Map
+               WHERE
+               Map.id = Day.id `;
   let parameters = [];
   if (day_uuid) {
-    query += ` WHERE Day.uuid = UNHEX(?) `;
+    query += ` AND Day.uuid = UNHEX(?) `;
     parameters.append(day_uuid);
   }
   return pool
