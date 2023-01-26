@@ -10,6 +10,7 @@ import { Characters } from "./characters.js";
 import { Day } from "./day.js";
 import { Dialogue } from "./dialogue.js";
 import { Sentence } from "./sentence.js";
+import { File } from "./file.js";
 
 const pool = createPool({
   host: "localhost",
@@ -167,6 +168,7 @@ Characters(app, pool);
 Day(app, pool);
 Dialogue(app, pool);
 Sentence(app, pool);
+File(app, pool);
 
 app.listen(8080, async () =>
   console.log("ALiVE app server is listening on port 8080.")
