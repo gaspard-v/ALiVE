@@ -8,7 +8,7 @@ export function getDialogue(
 ) {
   let conn;
   let parameters = [];
-  let query = `SELECT HEX(Dialogue.uuid) as uuid, Dialogue.description as description `;
+  let query = `SELECT HEX(Dialogue.uuid) as uuid, Dialogue.description as description FROM Dialogue `;
   if (dialogue_uuid) {
     query += " WHERE Dialogue.uuid = UNHEX(?) ";
     parameters.push(dialogue_uuid);
@@ -29,3 +29,25 @@ export function getDialogue(
       if (conn) conn.end();
     });
 }
+
+export const Dialogue = (app, pool) => {
+  app.get("/api/dialogue", async function (req, res, next) {
+    getDialogue(pool)
+      .then((result) => {
+        handlerSuccess(result, req, res, next);
+      })
+      .catch((err) => {
+        handlerError(err, req, res, next);
+      });
+  });
+  app.get("/api/dialogue/:uuid", async function (req, res, next) {
+    const uuid = req.params.uuid;
+    getDialogue(pool, uuid)
+      .then((result) => {
+        handlerSuccess(result, req, res, next);
+      })
+      .catch((err) => {
+        handlerError(err, req, res, next);
+      });
+  });
+};
