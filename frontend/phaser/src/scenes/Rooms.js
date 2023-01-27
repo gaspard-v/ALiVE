@@ -80,7 +80,6 @@ export default class Rooms extends Phaser.Scene{
             const promptObject = new PromptObject(key,this.scene.key,objectData)
             this.scene.add(key,promptObject,true)
         }
-        console.log("created")
         this.scene.bringToTop(key)
     }
 
