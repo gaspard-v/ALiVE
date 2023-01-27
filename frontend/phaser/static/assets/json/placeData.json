@@ -93,9 +93,7 @@
           "uuid": "class003",
           "image": "class003.jpg",
           "name": "UNE AUTRE SALLE",
-          "objects": [{
-
-          }],
+          "objects": [],
           "doors": [
             {
               "uuid": "door5",

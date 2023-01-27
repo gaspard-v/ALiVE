@@ -9,17 +9,19 @@ export default class Days extends Phaser.Scene{
         this.load.json('mapData','static/assets/json/mapData.json');
     }
     create(){
-        const data = this.cache.json.get('mapData');
+        const response = this.cache.json.get('mapData');
 
-        if (data.status !== "success"){
-            console.log(data)
+        if (response.status !== "success"){
+            console.log(response)
         }
 
-        const mapKey = data.content[0].uuid;
-        const places = data.content[0].places;
+        // This will be changed once we get the day endpoint
+
+        const mapKey = response.content[0].uuid;
+        const placesData = response.content[0].places;
 
         if (!this.scene.isActive(mapKey)){
-            const map = new Maps(mapKey,places);
+            const map = new Maps(mapKey,placesData);
             this.scene.add(mapKey,map,true);
         } 
         this.scene.bringToTop(mapKey);
