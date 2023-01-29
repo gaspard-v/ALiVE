@@ -19,7 +19,6 @@ export default class PromptRoom extends Phaser.Scene{
             this.load.image('placeValidationButton','/static/assets/images/menu/placeValidationButton.png')
     }
     create(){
-        console.log(this.scene.key)
         const {width,height} = this.scale;
     
         this.add.sprite(width/2,height/2,'promptBackground')

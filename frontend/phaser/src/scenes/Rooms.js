@@ -55,10 +55,10 @@ export default class Rooms extends Phaser.Scene{
     bringPrompt(objectData){
         const key = objectData.uuid
         if (!this.scene.isActive(key)){
+            console.log("bring ............. : ",objectData);
             const promptObject = new PromptObject(key,this.scene.key,objectData)
             this.scene.add(key,promptObject,true)
         }
-        console.log("created")
         this.scene.bringToTop(key)
     }
     update(){
