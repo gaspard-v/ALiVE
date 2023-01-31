@@ -84,5 +84,4 @@ export const Room = (app, pool) => {
         });
     }
   );
-  app.get("/api/place/:place_uuid", async function (req, res, next) {});
 };
