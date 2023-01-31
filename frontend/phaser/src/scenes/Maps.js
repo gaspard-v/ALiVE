@@ -1,12 +1,14 @@
-
 import {SearchIcon } from "../gameObjects/mainMenu/Button";
 import PromptRoom from "./PromptRoom";
 
 export default class Maps extends Phaser.Scene{
+    map;
+
     constructor(handle,mapData){
         super(handle);
         this.map = mapData;
     }
+
     preload(){
         this.load.json('placeData','/static/assets/json/placeData.json');
         this.load.image('testmap',"/static/assets/images/maps/mapTest1.png" );
@@ -16,6 +18,7 @@ export default class Maps extends Phaser.Scene{
         this.load.image('placeValidationButton','/static/assets/images/menu/placeValidationButton.png');
 
     }
+
     create(){
         // Load all interesting variables
         
@@ -29,15 +32,15 @@ export default class Maps extends Phaser.Scene{
         
         const accessiblePlaces = this.map.map((place)=>{
 
-        const button = new SearchIcon(
-            place.name,
-            place.x,
-            place.y,
-                'mapbutton',
-                this,
-                () => {this.displayRoomInfo(place)},
-                0.080
-            )
+            const button = new SearchIcon(
+                place.name,
+                place.x,
+                place.y,
+                    'mapbutton',
+                    this,
+                    () => {this.displayRoomInfo(place)},
+                    0.080
+                )
 
         })
         
