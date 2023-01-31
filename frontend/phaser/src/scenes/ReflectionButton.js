@@ -1,8 +1,8 @@
 import { Button } from "../gameObjects/mainMenu/Button";
 
-const flag = {};
+const isReflectionDelayOver = {};
 
-Object.defineProperty(flag, "bool", {
+Object.defineProperty(isReflectionDelayOver, "bool", {
   get() {
     return this._bool;
   },
@@ -10,7 +10,7 @@ Object.defineProperty(flag, "bool", {
     this._bool = value;
   }
 });
-export {flag};
+export {isReflectionDelayOver};
 
 export default class ReflectionButton extends Phaser.Scene {
     constructor(handle) {
@@ -18,14 +18,14 @@ export default class ReflectionButton extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('startReflectionButton','/static/assets/images/menu/reflectionButton.png')
+        this.load.image('reflectionButton','/static/assets/images/menu/reflectionButton.png')
     }
 
     create() {
         const {width,height} = this.scale;
         const xbutton = width - 300;
         const ybutton = height - 50;
-        const startReflection = new Button(xbutton,ybutton,'startReflectionButton',this,()=>{this.onClick()},1.5)
+        const reflection = new Button(xbutton,ybutton,'reflectionButton',this,()=>{this.onClick()},1.5)
     }
 
     onClick() {

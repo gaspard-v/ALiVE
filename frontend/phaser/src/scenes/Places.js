@@ -1,5 +1,5 @@
 import Rooms from "./Rooms";
-import {flag} from "./ReflectionButton.js"
+import {isReflectionDelayOver} from "./ReflectionButton.js"
 import ReflectionButton from "./ReflectionButton"
 import { Button } from "../gameObjects/mainMenu/Button";
 
@@ -7,7 +7,7 @@ export default class Places extends Phaser.Scene{
     constructor(handle,roomsData){
         super(handle);
         this.rooms = roomsData;
-        flag.bool = false
+        isReflectionDelayOver.bool = false
     }
     preload(){
         const loadRoomBackground = this.rooms.map(
@@ -32,9 +32,7 @@ export default class Places extends Phaser.Scene{
     onTimerEnd()
     {
         console.log("End Timer")
-        console.log(flag.bool)
-        flag.bool = true
-        console.log(flag.bool)
+        isReflectionDelayOver.bool = true
         if(!this.scene.isActive('reflectionButton')){
             const reflectionButton = new ReflectionButton('reflectionButton');
             this.scene.add('reflectionButton',reflectionButton,true);
