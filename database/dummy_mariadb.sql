@@ -136,6 +136,18 @@ INSERT INTO `Door` (`id`, `uuid`, `Xcoord`, `Ycoord`, `StartingPlaceRoomId`, `De
 INSERT INTO `Sentence` (`id`, `uuid`, `ordre`, `content`, `color`, `DialogueId`, `CharacterId`) VALUES
 (1, 0x082410a0967411edaa340242ac1b0003, 1, 'C\'est la fin du monde...', NULL, 1, 1),
 (2, 0x08242d88967411edaa340242ac1b0003, 2, 'Non...', NULL, 1, 2);
+
+INSERT INTO RoomFile (RoomId, FileId) VALUES
+(1, 13),
+(2, 14);
+
+INSERT INTO ObjectFile (ObjectId, FileId) VALUES
+(9, 11),
+(10, 12);
+
+INSERT INTO MapFile (MapId, FileId) VALUES
+(1, 3);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

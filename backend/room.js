@@ -35,6 +35,7 @@ export function getRoom(pool, room_uuid = "", place_uuid = "", full = false) {
     })
     .then((promises) => Promise.all(promises))
     .then((result) => {
+      if (!full || !place_uuid) return result;
       return result.map((element) => {
         return getDoor(pool, "", place_uuid, element.uuid, true).then(
           (result_door) => {
@@ -52,7 +53,8 @@ export function getRoom(pool, room_uuid = "", place_uuid = "", full = false) {
 
 export const Room = (app, pool) => {
   app.get("/api/room", async function (req, res, next) {
-    getRoom(pool)
+    const ask_full = req.query.full !== undefined;
+    getRoom(pool, "", "", ask_full)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })
@@ -62,7 +64,8 @@ export const Room = (app, pool) => {
   });
   app.get("/api/room/:uuid", async function (req, res, next) {
     const uuid = req.params.uuid;
-    getRoom(pool, uuid)
+    const ask_full = req.query.full !== undefined;
+    getRoom(pool, uuid, "", ask_full)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })
@@ -75,7 +78,8 @@ export const Room = (app, pool) => {
     async function (req, res, next) {
       const place_uuid = req.params.place_uuid;
       const room_uuid = req.params.room_uuid;
-      getRoom(pool, room_uuid, place_uuid)
+      const ask_full = req.query.full !== undefined;
+      getRoom(pool, room_uuid, place_uuid, ask_full)
         .then((result) => {
           handlerSuccess(result, req, res, next);
         })
@@ -84,5 +88,4 @@ export const Room = (app, pool) => {
         });
     }
   );
-  app.get("/api/place/:place_uuid", async function (req, res, next) {});
 };

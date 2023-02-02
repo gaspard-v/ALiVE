@@ -10,9 +10,9 @@ export function getDoor(
   let conn;
   let query = `
 SELECT
-  HEX(Door.uuid) AS UUID,
-  Door.Xcoord AS X,
-  Door.Ycoord AS Y,
+  HEX(Door.uuid) AS uuid,
+  Door.Xcoord AS x,
+  Door.Ycoord AS y,
   HEX(DestinationPlace.uuid) AS destination_place_uuid,
   HEX(DestinationRoom.uuid) AS destination_room_uuid,
   HEX(StartingPlace.uuid) AS starting_place_uuid,
