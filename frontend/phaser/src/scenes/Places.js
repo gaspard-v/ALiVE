@@ -18,6 +18,7 @@ export default class Places extends Phaser.Scene{
     }
 
     create(){
+        console.log('log into Places : ', this);
         // Timer for the scene
         let timer = this.time.addEvent({ delay: 20000, callback: this.onTimerEnd, callbackScope: this });
 
@@ -28,6 +29,7 @@ export default class Places extends Phaser.Scene{
             const room = new Rooms(uuid,objects,doors);
             this.scene.add(uuid, room, true);
         })
+        this.scene.stop();
     }
     onTimerEnd()
     {

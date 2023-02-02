@@ -23,8 +23,9 @@ export default class Days extends Phaser.Scene{
         if (!this.scene.isActive(mapKey)){
             const map = new Maps(mapKey,placesData);
             this.scene.add(mapKey,map,true);
-        } 
+        }
         this.scene.bringToTop(mapKey);
+        this.scene.stop();
     }
 }
 

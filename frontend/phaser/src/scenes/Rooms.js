@@ -13,7 +13,6 @@ export default class Rooms extends Phaser.Scene{
     preload(){
     }
     create(){
-        
         const {width,height} = this.scale;
       
         // Background must be added first  
@@ -47,7 +46,11 @@ export default class Rooms extends Phaser.Scene{
                 )
             }
         )
-        
+
+        console.log("bring to top into Room");
+        this.scene.bringToTop('MainMenu');
+        this.scene.bringToTop('DaysMenu');
+
     }
     chargeRoom(key){
         this.scene.bringToTop(key);
@@ -56,7 +59,7 @@ export default class Rooms extends Phaser.Scene{
                 const reflectionButton = new ReflectionButton('reflectionButton');
                 this.scene.add('reflectionButton',reflectionButton,true);
             }
-            this.scene.bringToTop('reflectionButton')
+            this.scene.bringToTop('reflectionButton');
         }
     }
 

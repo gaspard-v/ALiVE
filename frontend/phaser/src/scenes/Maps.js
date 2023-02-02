@@ -13,6 +13,7 @@ export default class Maps extends Phaser.Scene{
         this.load.image('mapbutton','/static/assets/images/utils/blackdot.png');
     }
     create(){
+        console.log(this);
         // Load all interesting variables
         const {width,height} = this.scale;
         

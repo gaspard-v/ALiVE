@@ -23,7 +23,8 @@ class DaysMenu extends Phaser.Scene{
             const day = new Days(key);
             this.scene.add(key,day,true);
         }
-        this.scene.bringToTop(key)
+        this.scene.bringToTop(key);
+        // this.scene.stop();
     }
 }
 

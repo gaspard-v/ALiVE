@@ -19,6 +19,7 @@ export default class PromptRoom extends Phaser.Scene{
             this.load.image('placeValidationButton','/static/assets/images/menu/placeValidationButton.png')
     }
     create(){
+        console.log('log into PromptRoom : ', this);
         const {width,height} = this.scale;
     
         this.add.sprite(width/2,height/2,'promptBackground')
@@ -60,6 +61,7 @@ export default class PromptRoom extends Phaser.Scene{
             this.scene.add(placeData.key,place,true);
         }
         this.scene.bringToTop(placeData.key);
+        this.scene.stop();
     }
 
     stopScene() {
