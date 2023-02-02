@@ -37,7 +37,8 @@ export function getPlace(pool, place_uuid = "", map_uuid = "", full = false) {
 
 export const Place = (app, pool) => {
   app.get("/api/place", async function (req, res, next) {
-    getPlace(pool)
+    const ask_full = req.query.full !== undefined;
+    getPlace(pool, "", "", ask_full)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })
@@ -47,7 +48,8 @@ export const Place = (app, pool) => {
   });
   app.get("/api/place/:uuid", async function (req, res, next) {
     const uuid = req.params.uuid;
-    getPlace(pool, uuid)
+    const ask_full = req.query.full !== undefined;
+    getPlace(pool, uuid, "", ask_full)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })

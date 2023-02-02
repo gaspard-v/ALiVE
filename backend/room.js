@@ -54,7 +54,7 @@ export function getRoom(pool, room_uuid = "", place_uuid = "", full = false) {
 export const Room = (app, pool) => {
   app.get("/api/room", async function (req, res, next) {
     const ask_full = req.query.full !== undefined;
-    getRoom(pool, ask_full)
+    getRoom(pool, "", "", ask_full)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })
@@ -65,7 +65,7 @@ export const Room = (app, pool) => {
   app.get("/api/room/:uuid", async function (req, res, next) {
     const uuid = req.params.uuid;
     const ask_full = req.query.full !== undefined;
-    getRoom(pool, uuid, ask_full)
+    getRoom(pool, uuid, "", ask_full)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })

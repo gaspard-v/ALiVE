@@ -44,7 +44,8 @@ export function getDialogue(
 
 export const Dialogue = (app, pool) => {
   app.get("/api/dialogue", async function (req, res, next) {
-    getDialogue(pool)
+    const ask_full = req.query.full !== undefined;
+    getDialogue(pool, "", "", ask_full)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })
@@ -54,7 +55,8 @@ export const Dialogue = (app, pool) => {
   });
   app.get("/api/dialogue/:uuid", async function (req, res, next) {
     const uuid = req.params.uuid;
-    getDialogue(pool, uuid)
+    const ask_full = req.query.full !== undefined;
+    getDialogue(pool, uuid, "", ask_full)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })

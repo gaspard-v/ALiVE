@@ -46,7 +46,8 @@ export function getSentence(
 
 export const Sentence = (app, pool) => {
   app.get("/api/sentence", async function (req, res, next) {
-    getSentence(pool)
+    const ask_full = req.query.full !== undefined;
+    getSentence(pool, "", "", ask_full)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })
@@ -56,7 +57,8 @@ export const Sentence = (app, pool) => {
   });
   app.get("/api/sentence/:uuid", async function (req, res, next) {
     const uuid = req.params.uuid;
-    getSentence(pool, uuid)
+    const ask_full = req.query.full !== undefined;
+    getSentence(pool, uuid, "", ask_full)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })
