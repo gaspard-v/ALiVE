@@ -14,11 +14,6 @@ export default class PromptObject extends Phaser.Scene{
         this.base64 = objectData.image;
     }
     preload(){
-        const dataURI = this.base64;
-        const imageTest = new Image();
-        imageTest.src = dataURI
-        
-        this.textures.addBase64('image'+this.scene.key,dataURI);
         this.load.image('closeIcon', '../../static/assets/images/utils/close2.png');
         this.load.image('promptBackground','../../static/assets/images/utils/papyrus.jfif');
     }
@@ -43,7 +38,7 @@ export default class PromptObject extends Phaser.Scene{
             .setScale(6)
             .setAlpha(0.8);
 
-        this.add.sprite(width/2,height/2,'image'+this.scene.key)
+        this.add.sprite(width/2,height/2,'image_'+this.scene.key)
             .setScale(0.7);
 
         const closeButton = this.add
