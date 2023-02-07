@@ -69,7 +69,14 @@ export function postPlace(pool, { uuid, map_uuid, name, x, y }) {
       conn = connexion;
       return conn.query(query, parameters);
     })
-    .then((result) => objectBigIntToInt(result))
+    .then((result) => {
+      const search_uuid = uuid ? uuid : 0;
+      return conn.query(
+        `SELECT HEX(uuid) as uuid FROM Place WHERE id = ? OR uuid = UNHEX(?)`,
+        [result.insertId, search_uuid]
+      );
+    })
+    .then((result) => result)
     .finally(() => {
       if (conn) conn.end();
     });
@@ -107,7 +114,7 @@ export const Place = (app, pool) => {
         handlerError(err, req, res, next);
       });
   });
-  app.post("/api/map/:uuid", async function (req, res, next) {
+  app.post("/api/place/:uuid", async function (req, res, next) {
     const uuid = req.params.uuid;
     const data = { ...req.body, uuid: uuid };
     postPlace(pool, data)
