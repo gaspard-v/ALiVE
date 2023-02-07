@@ -1,4 +1,6 @@
 import * as Phaser from 'phaser';
+import {isReflectionDelayOver} from "./ReflectionButton.js"
+
 
 export default class PromptObject extends Phaser.Scene{
     x = Phaser.Math.Between(400, 600);
@@ -23,6 +25,13 @@ export default class PromptObject extends Phaser.Scene{
     
     stopScene() {
         this.scene.bringToTop(this.parentSceneKey)
+        if (isReflectionDelayOver) {
+            if(!this.scene.isActive('reflectionButton')){
+                const reflectionButton = new ReflectionButton('reflectionButton');
+                this.scene.add('reflectionButton',reflectionButton,true);
+            }
+            this.scene.bringToTop('reflectionButton')
+        }
     }
     
     create(){

@@ -1,5 +1,7 @@
 import { SearchIcon } from "../gameObjects/mainMenu/Button";
 import PromptObject from "./PromptObject";
+import {isReflectionDelayOver} from "./ReflectionButton.js"
+import ReflectionButton from "./ReflectionButton"
 
 export default class Rooms extends Phaser.Scene{
     constructor(handle,objectsData,doorsData){
@@ -49,7 +51,13 @@ export default class Rooms extends Phaser.Scene{
     }
     chargeRoom(key){
         this.scene.bringToTop(key);
-        
+        if (isReflectionDelayOver) {
+            if(!this.scene.isActive('reflectionButton')){
+                const reflectionButton = new ReflectionButton('reflectionButton');
+                this.scene.add('reflectionButton',reflectionButton,true);
+            }
+            this.scene.bringToTop('reflectionButton')
+        }
     }
 
     bringPrompt(objectData){
@@ -60,10 +68,11 @@ export default class Rooms extends Phaser.Scene{
             this.scene.add(key,promptObject,true)
         }
         this.scene.bringToTop(key)
-    }
-    update(){
-        if(!this.scene.isActive('reflectionButton'))
-        {
+        if (isReflectionDelayOver) {
+            if(!this.scene.isActive('reflectionButton')){
+                const reflectionButton = new ReflectionButton('reflectionButton');
+                this.scene.add('reflectionButton',reflectionButton,true);
+            }
             this.scene.bringToTop('reflectionButton')
         }
     }
