@@ -48,8 +48,8 @@ export default class Rooms extends Phaser.Scene{
         )
 
         console.log("bring to top into Room");
-        this.scene.bringToTop('MainMenu');
-        this.scene.bringToTop('DaysMenu');
+        this.scene.bringToTop('place1');
+        // this.scene.bringToTop('DaysMenu');
 
     }
     chargeRoom(key){

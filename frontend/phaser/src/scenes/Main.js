@@ -70,7 +70,8 @@ export class MainMenu extends Phaser.Scene{
             const setting = new DaysMenu(key);
             this.scene.add(key,setting,true);
         }
-        this.scene.bringToTop('DaysMenu')
+        this.scene.bringToTop('DaysMenu');
+        this.scene.stop()
     }
 
 }

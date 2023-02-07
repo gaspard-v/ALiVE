@@ -25,6 +25,7 @@ export default class Days extends Phaser.Scene{
             this.scene.add(mapKey,map,true);
         }
         this.scene.bringToTop(mapKey);
+        console.log(' days : ',this.scene);
         this.scene.stop();
     }
 }
