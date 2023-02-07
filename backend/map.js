@@ -1,6 +1,7 @@
 import { handlerError, handlerSuccess } from "./handler.js";
 import { getPlace } from "./place.js";
 import MapObject from "../objects/map.mjs";
+import { objectBigIntToInt } from "./utils.js";
 
 export function getMap(pool, map_uuid = "", full = false) {
   let query = "SELECT name, HEX(uuid) as uuid FROM Map";
@@ -32,14 +33,15 @@ export function getMap(pool, map_uuid = "", full = false) {
 }
 
 export function postMap(pool, { name, uuid }) {
+  let conn;
   if (!name) {
-    throw new Error(`variable "name" maquant !`);
+    return Promise.reject(new Error(`variable "name" maquant !`));
   }
-  let query = `INSERT INTO Map (name) VALUES (?) `;
-  let parameters = [name];
+  let query = `INSERT INTO Map (name) VALUES (?) ON DUPLICATE KEY UPDATE Map.name = ?`;
+  let parameters = [name, name];
   if (uuid) {
     query = `UPDATE Map SET Map.name = ? WHERE Map.uuid = UNHEX(?) `;
-    let parameters = [name, uuid];
+    parameters = [name, uuid];
   }
   return pool
     .getConnection()
@@ -47,7 +49,7 @@ export function postMap(pool, { name, uuid }) {
       conn = connexion;
       return conn.query(query, parameters);
     })
-    .then((result) => result)
+    .then((result) => objectBigIntToInt(result))
     .finally(() => {
       if (conn) conn.end();
     });
@@ -77,6 +79,17 @@ export const Map = (app, pool) => {
   });
   app.post("/api/map", async function (req, res, next) {
     const data = { ...MapObject, ...req.body };
+    postMap(pool, data)
+      .then((result) => {
+        handlerSuccess(result, req, res, next);
+      })
+      .catch((err) => {
+        handlerError(err, req, res, next);
+      });
+  });
+  app.post("/api/map/:uuid", async function (req, res, next) {
+    const uuid = req.params.uuid;
+    const data = { ...MapObject, ...req.body, uuid: uuid };
     postMap(pool, data)
       .then((result) => {
         handlerSuccess(result, req, res, next);
