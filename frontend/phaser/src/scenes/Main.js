@@ -1,6 +1,8 @@
 import * as Phaser from "phaser";
 import {Button} from "../gameObjects/mainMenu/Button";
 import Days from "../scenes/Days";
+import Maps from "./Maps";
+import axios from "axios";
 
 class DaysMenu extends Phaser.Scene{
     constructor(handle){
@@ -13,7 +15,16 @@ class DaysMenu extends Phaser.Scene{
         const xbutton = width*0.34;
         const ybutton1 = height*0.35;
         this.add.sprite(width/2,height/2,'background');
-        const day1 = new Button(xbutton,ybutton1,'button',this,()=>{this.chargeScene(Days,'DayOne')},1.5)
+
+        axios.get('http://localhost:8080/api/map')
+            .then(function (response)
+            {
+                //initMap(response.data);
+                console.log(response.data);
+            })
+            .catch((e) => console.log(e));
+
+        const day1 = new Button(xbutton,ybutton1,'button',this,()=>{this.chargeDay('DayOne')},1.5)
         
     }
     chargeScene(sceneObject,key){
