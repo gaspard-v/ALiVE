@@ -57,6 +57,15 @@ export function getFile(pool, file_uuid = "", other_join = ["", ""]) {
     });
 }
 
+export function createFile(
+    pool,
+    name,
+    description,
+    isTool
+){
+  const createFileQuery = "INSERT INTO File (description, isTool, name) VALUES ($1, $2, $3);"
+}
+
 export const File = (app, pool) => {
   app.get("/api/file", async function (req, res, next) {
     getFile(pool)

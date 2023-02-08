@@ -43,6 +43,23 @@ export function getObject(
     });
 }
 
+export function createObject(
+    pool,
+    name,
+    description,
+    isTool
+){
+  const createObjectQuery = "INSERT INTO Object (description, isTool, name) VALUES (?, ?, ?);";
+  pool.getConnection()
+      .then(conn =>
+        conn.query(createObjectQuery, [description, isTool, name])
+      ).then(result => {
+        console.log(result);
+      })
+      .catch(err => console.error('An exception has occurred while creating object', err))
+//  pool.query(createObjectQuery)
+}
+
 export const Object = (app, pool) => {
   app.get("/api/object", async function (req, res, next) {
     getObject(pool)

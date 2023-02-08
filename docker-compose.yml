@@ -7,8 +7,9 @@ services:
     container_name: database
     ports:
       - "3306:3306"
-    env_file:
-      - "./mariadb.env"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_HOST: '%'
     volumes:
       - mariadb-volume:/var/lib/mysql:rw
       - ./database/mariadb.sql:/docker-entrypoint-initdb.d/01_mariadb.sql:ro
@@ -59,7 +60,6 @@ services:
 
 networks:
   mariadb-network:
-    driver: bridge
 
 volumes:
   mariadb-volume:
