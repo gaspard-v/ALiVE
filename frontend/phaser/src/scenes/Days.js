@@ -3,8 +3,12 @@ import Maps from "./Maps";
 import axios from "axios";
 
 export default class Days extends Phaser.Scene{
-    constructor(handle){
+    day;
+
+    constructor(handle, dayData){
         super(handle);
+        this.day = dayData;
+        console.log('days constructor : ', this.day);
     }
 
     create(){
@@ -13,7 +17,7 @@ export default class Days extends Phaser.Scene{
         const initMap = (response) => {
             axiosExperiment = response.message;
 
-            const mapKey = axiosExperiment[0].uuid;
+            const mapKey = axiosExperiment[0]["map_uuid"];
 
             if (!this.scene.isActive(mapKey)){
                 const map = new Maps(mapKey,axiosExperiment);
@@ -22,20 +26,7 @@ export default class Days extends Phaser.Scene{
             this.scene.bringToTop(mapKey);
         }
 
-        axios.get('http://localhost:8080/api/place')
-            .then(function (response)
-            {
-                //initMap(response.data);
-                console.log("\napi place : \n");
-                console.log(response.data);
-            })
-            .catch((e) => console.log(e));
-
-        axios.get('http://localhost:8080/api/map', {
-            params: {
-                full: true
-            }
-        })
+        axios.get(`http://localhost:8080/api/day/${this.day}`)
             .then(function (response)
             {
                 console.log("\napi map : \n");

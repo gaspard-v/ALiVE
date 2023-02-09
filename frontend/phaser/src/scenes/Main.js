@@ -16,16 +16,34 @@ class DaysMenu extends Phaser.Scene{
         const ybutton1 = height*0.35;
         this.add.sprite(width/2,height/2,'background');
 
-        axios.get('http://localhost:8080/api/map')
+        // const chargeDay = (res) => {
+        //     axiosDay = res.message;
+        //
+        //     const dayKey = axiosDay[0].uuid;
+        //
+        //     if (!this.scene.isActive(dayKey)){
+        //         const day = new Days(dayKey,axiosDay);
+        //         this.scene.add(dayKey,day,true);
+        //     }
+        //     this.scene.bringToTop(dayKey);
+        // }
+
+        axios.get('http://localhost:8080/api/day', {
+            params: {
+                full: true
+            }
+        })
             .then(function (response)
             {
-                //initMap(response.data);
+                // initDay(response.data);
                 console.log(response.data);
             })
             .catch((e) => console.log(e));
 
-        const day1 = new Button(xbutton,ybutton1,'button',this,()=>{this.chargeDay('DayOne')},1.5)
-        
+        var axiosDay = "";
+
+        const day1 = new Button(xbutton,ybutton1,'button',this,()=>{this.chargeDay('C5E769E5A14611ED9D200242AC140003')},1.5)
+
     }
     chargeScene(sceneObject,key){
         if (!this.scene.isActive(key)){
