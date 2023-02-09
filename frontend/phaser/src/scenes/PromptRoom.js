@@ -23,8 +23,8 @@ export default class PromptRoom extends Phaser.Scene{
     
         this.add.sprite(width/2,height/2,'promptBackground')
             .setAngle(90)
-            .setScale(6)
-            .setAlpha(0.5);
+            .setScale(6);
+            // .setAlpha(0.5);
         const closeButton = this.add
             .image(width - width/4, 100, 'closeIcon')
             .setInteractive({ useHandCursor: true });
@@ -39,6 +39,7 @@ export default class PromptRoom extends Phaser.Scene{
             {
                 fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
                 fontSize: 64,
+                color: '#000000'
             }
         )
 
