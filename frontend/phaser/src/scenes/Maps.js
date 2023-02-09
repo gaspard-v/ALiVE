@@ -8,6 +8,7 @@ export default class Maps extends Phaser.Scene{
     constructor(handle,mapData){
         super(handle);
         this.map = mapData;
+        console.log(this.map);
     }
 
     preload(){
@@ -91,12 +92,25 @@ export default class Maps extends Phaser.Scene{
     displayRoomInfo(place){
         const key = place.uuid+"Prompt";
 
-        if(this.scene.isActive(key) === null){
-            const display = new PromptRoom(key,this,place);
-            this.scene.add(key,display,true);
+            const mapKey = axiosExperiment[0].uuid;
+
+            if (!this.scene.isActive(mapKey)){
+                const map = new Maps(mapKey,axiosExperiment);
+                this.scene.add(mapKey,map,true);
+            }
+            this.scene.bringToTop(mapKey);
         }
-        this.scene.launch(key);
-        this.scene.setActive(false);
+
+        axios.get(`http://localhost:8080/api/map/${this.map[0]["map_uuid"]}`, {
+            params: {
+                full: true
+            }
+        })
+            .then(function (response)
+            {
+                initMap(response.data);
+            })
+            .catch((e) => console.log(e));
     }
 
     chargeRoomBackground = async (response) => {
