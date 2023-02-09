@@ -20,7 +20,7 @@ export default class PromptObject extends Phaser.Scene{
     
     stopScene() {
         this.scene.bringToTop(this.parentSceneKey)
-        if (isReflectionDelayOver) {
+        if (isReflectionDelayOver.bool == true) {
             if(!this.scene.isActive('reflectionButton')){
                 const reflectionButton = new ReflectionButton('reflectionButton');
                 this.scene.add('reflectionButton',reflectionButton,true);

@@ -57,7 +57,8 @@ export default class Rooms extends Phaser.Scene{
     }
     chargeRoom(key){
         this.scene.bringToTop(key);
-        if (isReflectionDelayOver) {
+        console.log(isReflectionDelayOver);
+        if (isReflectionDelayOver.bool == true) {
             if(!this.scene.isActive('reflectionButton')){
                 const reflectionButton = new ReflectionButton('reflectionButton');
                 this.scene.add('reflectionButton',reflectionButton,true);
@@ -73,7 +74,7 @@ export default class Rooms extends Phaser.Scene{
             this.scene.add(key,promptObject,true)
         }
         this.scene.bringToTop(key)
-        if (isReflectionDelayOver) {
+        if (isReflectionDelayOver.bool == true) {
             if(!this.scene.isActive('reflectionButton')){
                 const reflectionButton = new ReflectionButton('reflectionButton');
                 this.scene.add('reflectionButton',reflectionButton,true);
