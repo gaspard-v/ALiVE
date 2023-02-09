@@ -108,9 +108,12 @@ export default class Maps extends Phaser.Scene{
         })
             .then(function (response)
             {
-                initMap(response.data);
+                //initMap(response.data);
+                getAccessiblePlaces(response.data);
+
             })
             .catch((e) => console.log(e));
+
     }
 
     chargeRoomBackground = async (response) => {
