@@ -2,13 +2,15 @@ import { SearchIcon } from "../gameObjects/mainMenu/Button";
 import PromptObject from "./PromptObject";
 import {isReflectionDelayOver} from "./ReflectionButton.js"
 import ReflectionButton from "./ReflectionButton"
+import axios from "axios";
 
 export default class Rooms extends Phaser.Scene{
     constructor(handle,objectsData,doorsData){
         super(handle);
         this.objects = objectsData;
         this.doors = doorsData;
-
+        console.log(objectsData);
+        console.log(doorsData);
     }
     preload(){
         
@@ -40,17 +42,34 @@ export default class Rooms extends Phaser.Scene{
             }
         )
 
+        const getNameDestinationRoom = async (uuid) => {
+            try {
+                const response = await axios.get(`http://localhost:8080/api/room/${uuid}`)
+                console.log("\nget name destination room : \n");
+                console.log(response.data);
+                console.log(response.data.message);
+                console.log(response.data.message[0]['name']);
+                return (response.data.message[0]['name']);
+            } catch(err) {
+                console.error(err)
+            }
+
+        }
+
         this.doors.map(
             (doorData)=>{
-                const door = new SearchIcon(
-                    doorData.destinationRoom,
-                    doorData.coordinates.x,
-                    doorData.coordinates.y,
-                    'transitionIcon',
-                    this,
-                    ()=>{this.chargeRoom(doorData.destinationRoom)},
-                    1
-                )
+                getNameDestinationRoom(doorData["destination_room_uuid"]).then((name_destination_room) => {
+                    const door = new SearchIcon(
+                        name_destination_room,
+                        doorData.x,
+                        doorData.y,
+                        'transitionIcon',
+                        this,
+                        ()=>{this.chargeRoom(doorData["destination_place_uuid"],
+                            doorData["destination_room_uuid"])},
+                        1
+                    )
+                })
             }
         )
         

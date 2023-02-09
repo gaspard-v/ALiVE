@@ -44,6 +44,22 @@ export default class Maps extends Phaser.Scene{
             this.scene.bringToTop(mapKey);
         }
 
+        const getAccessiblePlaces = (response) => {
+            // Parsing data and creating the map buttons
+            console.log('debug : ', response.message[0]);
+            response.message[0].places.map((place) => {
+                const button = new SearchIcon(
+                    place.name,
+                    place.x,
+                    place.y,
+                    'mapbutton',
+                    this,
+                    () => {this.displayRoomInfo(place)},
+                    0.080
+                )
+            })
+        }
+
         axios.get(`http://localhost:8080/api/map/${this.map[0]["map_uuid"]}`, {
             params: {
                 full: true
@@ -51,35 +67,21 @@ export default class Maps extends Phaser.Scene{
         })
             .then(function (response)
             {
-                initMap(response.data);
+                //initMap(response.data);
+                getAccessiblePlaces(response.data);
+
             })
             .catch((e) => console.log(e));
+
     }
 
-        // Parsing data and creating the map buttons
-
-        // const accessiblePlaces = this.map.map((place)=>{
-        //
-        //     const button = new SearchIcon(
-        //         place.name,
-        //         place.x,
-        //         place.y,
-        //             'mapbutton',
-        //             this,
-        //             () => {this.displayRoomInfo(place)},
-        //             0.080
-        //         )
-        //
-        // })
-
-    // }
-    //
-    // displayRoomInfo(place){
-    //     const key = place.uuid+"Prompt";
-    //     if(!this.scene.isActive(key)){
-    //         const display = new PromptRoom(key,this,place);
-    //         this.scene.add(key,display,true);
-    //     }
-    //     this.scene.bringToTop(key);
-    // }
+    displayRoomInfo(place){
+        console.log('diplayRoom place infos : ', place);
+        const key = place.uuid+"Prompt";
+        if(!this.scene.isActive(key)){
+            const display = new PromptRoom(key,this,place);
+            this.scene.add(key,display,true);
+        }
+        this.scene.bringToTop(key);
+    }
 }

@@ -11,6 +11,7 @@ export default class PromptRoom extends Phaser.Scene{
         this.parentScene = parentScene;
         this.texteData = placeData.name;
         this.place = placeData
+        console.log('Prompt room constructor : ', this.place);
     }
 
     preload(){
