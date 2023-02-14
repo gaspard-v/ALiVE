@@ -13,6 +13,7 @@ export default class Rooms extends Phaser.Scene{
         console.log(doorsData);
     }
     preload(){
+        
     }
     create(){
         
@@ -23,6 +24,11 @@ export default class Rooms extends Phaser.Scene{
                             
         
         this.objects.map((objectData)=>{
+            const objectKey = 'image_'+objectData.uuid
+            
+            if(!this.textures.exists(objectKey)){
+                this.textures.addBase64(objectKey,objectData.image)
+            }
    
             const object = new SearchIcon(
                 objectData.name,
@@ -70,7 +76,8 @@ export default class Rooms extends Phaser.Scene{
     }
     chargeRoom(key, placekey){
         this.scene.bringToTop(key);
-        if (isReflectionDelayOver) {
+        console.log(isReflectionDelayOver);
+        if (isReflectionDelayOver.bool == true) {
             if(!this.scene.isActive('reflectionButton')){
                 const reflectionButton = new ReflectionButton('reflectionButton');
                 this.scene.add('reflectionButton',reflectionButton,true);
@@ -83,12 +90,11 @@ export default class Rooms extends Phaser.Scene{
         console.log('start bringPrompt object : ', objectData);
         const key = objectData.uuid
         if (!this.scene.isActive(key)){
-            console.log("bring ............. : ",objectData);
             const promptObject = new PromptObject(key,this.scene.key,objectData)
             this.scene.add(key,promptObject,true)
         }
         this.scene.bringToTop(key)
-        if (isReflectionDelayOver) {
+        if (isReflectionDelayOver.bool == true) {
             if(!this.scene.isActive('reflectionButton')){
                 const reflectionButton = new ReflectionButton('reflectionButton');
                 this.scene.add('reflectionButton',reflectionButton,true);

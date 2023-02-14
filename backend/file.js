@@ -8,7 +8,7 @@ export function getFile(pool, file_uuid = "", other_join = ["", ""]) {
                       File.filename as filename, 
                       File.description as description, 
                       File.option as option, 
-                      CONVERT(File.data USING utf8) as data
+                      File.data as data
                 FROM File `;
   if (file_uuid) {
     query += " WHERE File.uuid = UNHEX(?) ";

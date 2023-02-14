@@ -1,5 +1,6 @@
 import { handlerError, handlerSuccess } from "./handler.js";
 import { getRoom } from "./room.js";
+import { objectBigIntToInt } from "./utils.js";
 
 export function getPlace(pool, place_uuid = "", map_uuid = "", full = false) {
   let parameters = [];
@@ -35,6 +36,52 @@ export function getPlace(pool, place_uuid = "", map_uuid = "", full = false) {
     });
 }
 
+export function postPlace(pool, { uuid, map_uuid, name, x, y }) {
+  let conn;
+  let parameters = [];
+  let query = "";
+  query = `INSERT INTO Place SET `;
+  if (uuid) query = `UPDATE Place SET `;
+  if (name) {
+    query += ` name = ? , `;
+    parameters.push(name);
+  }
+  if (x) {
+    query += ` Xcoord = ? , `;
+    parameters.push(x);
+  }
+  if (y) {
+    query += ` Ycoord = ? , `;
+    parameters.push(y);
+  }
+  if (map_uuid) {
+    query += ` MapId = (SELECT Map.id FROM Map WHERE Map.uuid = UNHEX (?) ) , `;
+    parameters.push(map_uuid);
+  }
+  query = query.slice(0, -2);
+  if (uuid) {
+    query += ` WHERE Place.uuid = UNHEX(?) `;
+    parameters.push(uuid);
+  }
+  return pool
+    .getConnection()
+    .then((connexion) => {
+      conn = connexion;
+      return conn.query(query, parameters);
+    })
+    .then((result) => {
+      const search_uuid = uuid ? uuid : 0;
+      return conn.query(
+        `SELECT HEX(uuid) as uuid FROM Place WHERE id = ? OR uuid = UNHEX(?)`,
+        [result.insertId, search_uuid]
+      );
+    })
+    .then((result) => result)
+    .finally(() => {
+      if (conn) conn.end();
+    });
+}
+
 export const Place = (app, pool) => {
   app.get("/api/place", async function (req, res, next) {
     const ask_full = req.query.full !== undefined;
@@ -50,6 +97,27 @@ export const Place = (app, pool) => {
     const uuid = req.params.uuid;
     const ask_full = req.query.full !== undefined;
     getPlace(pool, uuid, "", ask_full)
+      .then((result) => {
+        handlerSuccess(result, req, res, next);
+      })
+      .catch((err) => {
+        handlerError(err, req, res, next);
+      });
+  });
+  app.post("/api/place", async function (req, res, next) {
+    const data = { ...req.body };
+    postPlace(pool, data)
+      .then((result) => {
+        handlerSuccess(result, req, res, next);
+      })
+      .catch((err) => {
+        handlerError(err, req, res, next);
+      });
+  });
+  app.post("/api/place/:uuid", async function (req, res, next) {
+    const uuid = req.params.uuid;
+    const data = { ...req.body, uuid: uuid };
+    postPlace(pool, data)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })

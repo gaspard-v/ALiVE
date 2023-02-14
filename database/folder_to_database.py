@@ -3,6 +3,7 @@
 import os
 import sys
 import mariadb
+import base64
 
 
 def file_to_database(filepath, db):
@@ -10,9 +11,9 @@ def file_to_database(filepath, db):
     filename = os.path.basename(filepath)
     with open(filepath, 'rb') as f:
         content = f.read()
-    content_hex = f"0x{content.hex()}"
-    query = "INSERT INTO File (filename, data) VALUES ( %s, TO_BASE64(%s) )"
-    cursor.execute(query, (filename, content_hex))
+    content_base64 = base64.b64encode(content)
+    query = "INSERT INTO File (filename, data) VALUES ( %s, %s )"
+    cursor.execute(query, (filename, content_base64))
 
 
 def files_in_folder(directory, db):

@@ -14,18 +14,13 @@ export default class PromptObject extends Phaser.Scene{
         this.base64 = objectData.image;
     }
     preload(){
-        const dataURI = this.base64;
-        const imageTest = new Image();
-        imageTest.src = dataURI
-        
-        this.textures.addBase64('image'+this.scene.key,dataURI);
         this.load.image('closeIcon', '../../static/assets/images/utils/close2.png');
         this.load.image('promptBackground','../../static/assets/images/utils/papyrus.jfif');
     }
     
     stopScene() {
         this.scene.bringToTop(this.parentSceneKey)
-        if (isReflectionDelayOver) {
+        if (isReflectionDelayOver.bool == true) {
             if(!this.scene.isActive('reflectionButton')){
                 const reflectionButton = new ReflectionButton('reflectionButton');
                 this.scene.add('reflectionButton',reflectionButton,true);
@@ -40,10 +35,10 @@ export default class PromptObject extends Phaser.Scene{
 
         this.add.sprite(width/2,height/2,'promptBackground')
             .setAngle(90)
-            .setScale(6)
-            .setAlpha(0.8);
+            .setScale(6);
+            // .setAlpha(0.8);
 
-        this.add.sprite(width/2,height/2,'image'+this.scene.key)
+        this.add.sprite(width/2,height/2,'image_'+this.scene.key)
             .setScale(0.7);
 
         const closeButton = this.add
@@ -59,6 +54,7 @@ export default class PromptObject extends Phaser.Scene{
             {
                 fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
                 fontSize: 86,
+                color: '#000000'
             }
         )
 
@@ -69,6 +65,7 @@ export default class PromptObject extends Phaser.Scene{
             {
                 fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
                 fontSize: 64,
+                color: '#000000'
             }
         )
 
