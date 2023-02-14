@@ -20,12 +20,15 @@ export default class Days extends Phaser.Scene{
         const mapKey = response.content[0].uuid;
         const placesData = response.content[0].places;
 
-        if (!this.scene.isActive(mapKey)){
+        if (this.scene.isActive(mapKey) === null){
             const map = new Maps(mapKey,placesData);
             this.scene.add(mapKey,map,true);
         } 
         this.scene.bringToTop(mapKey);
+        this.scene.setActive(false)
     }
+
+    
 }
 
 

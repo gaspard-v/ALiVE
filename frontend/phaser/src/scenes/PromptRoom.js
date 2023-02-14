@@ -17,8 +17,10 @@ export default class PromptRoom extends Phaser.Scene{
             this.load.image('closeIcon','/static/assets/images/utils/close2.png')
             this.load.image('promptBackground','/static/assets/images/utils/papyrus.jfif');
             this.load.image('placeValidationButton','/static/assets/images/menu/placeValidationButton.png')
+
     }
     create(){
+
         const {width,height} = this.scale;
     
         this.add.sprite(width/2,height/2,'promptBackground')
@@ -61,9 +63,11 @@ export default class PromptRoom extends Phaser.Scene{
             this.scene.add(placeData.key,place,true);
         }
         this.scene.bringToTop(placeData.key);
+        this.scene.setActive(false)
     }
-
+    
     stopScene() {
+        this.scene.start(this.parentScene)
         this.scene.bringToTop(this.parentScene);
     }
 }

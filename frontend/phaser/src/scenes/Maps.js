@@ -14,7 +14,9 @@ export default class Maps extends Phaser.Scene{
     }
     create(){
         // Load all interesting variables
+        
         const {width,height} = this.scale;
+
         
         // Create sprite for the map  
         this.add.sprite(width/2,height/2,'testmap').setScale(1.3);
@@ -39,10 +41,12 @@ export default class Maps extends Phaser.Scene{
     
     displayRoomInfo(place){
         const key = place.uuid+"Prompt";
-        if(!this.scene.isActive(key)){
+        if(this.scene.isActive(key) === null){
             const display = new PromptRoom(key,this,place);
             this.scene.add(key,display,true);
         }
+        this.scene.setActive(false)
+        this.scene.start(key)
         this.scene.bringToTop(key);
     }
 }
