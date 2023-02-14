@@ -1,4 +1,6 @@
 import { handlerError, handlerSuccess } from "./handler.js";
+import {objectBigIntToInt} from "./utils.js";
+import {createFile, createObjectFile} from "./file.js";
 
 export function getObject(
   pool,
@@ -43,21 +45,34 @@ export function getObject(
     });
 }
 
+/*
+étape 1: écrire la requete dans phpmyadmin
+étape 2: copier la requete dans la fonction correspondante
+étape 3: remplacer les les paramètres par des ? (pour éviter les injections sql)
+étape 4: exécuter la requete avec la fonction pool.
+ */
+
 export function createObject(
     pool,
     name,
     description,
     isTool
 ){
-  const createObjectQuery = "INSERT INTO Object (description, isTool, name) VALUES (?, ?, ?);";
-  pool.getConnection()
-      .then(conn =>
-        conn.query(createObjectQuery, [description, isTool, name])
-      ).then(result => {
-        console.log(result);
-      })
-      .catch(err => console.error('An exception has occurred while creating object', err))
-//  pool.query(createObjectQuery)
+  let conn;
+  const createObjectQuery = "INSERT INTO Object (description, isTool, name) VALUES (?, ?, ?) RETURNING id, HEX(uuid) as uuid, description, isTool, name;";
+  return pool.getConnection()
+      .then(conn => {
+        return conn.query(createObjectQuery, [description, isTool, name])
+      }).then(result => {
+        let formatedResult = objectBigIntToInt(result[0]);
+        console.log("id :", formatedResult.id);
+        console.log("uuid :", formatedResult.uuid);
+        return formatedResult;
+      }).finally(() => {
+        if (conn) conn.end();
+          }).catch(err => {
+            console.error('An exception has occurred while creating object', err)
+          });
 }
 
 export const Object = (app, pool) => {
@@ -79,5 +94,26 @@ export const Object = (app, pool) => {
       .catch((err) => {
         handlerError(err, req, res, next);
       });
+  });
+  app.post("/api/object", function(req, res) {
+    let result, resultBis;
+    const { name, description, isTool, fileName, fileData } = req.body;
+    createObject(pool, name, description, isTool)
+        .then((result) => {
+          console.log("sa marche clap clap")
+          createFile(pool, fileName, fileData).then((resultBis) => {
+            console.log("file creation...");
+            console.log("objectId : ", result.id);
+            console.log("fileId : ", resultBis.id);
+            createObjectFile(pool, result.id, resultBis.id).then((resultThird) => {
+              console.log("Just before handlerSuccess.");
+              handlerSuccess(objectBigIntToInt(resultThird), req, res);
+              console.log("file created MOTHAFUCKA");
+            })
+          })
+        })
+        .catch((err) => {
+          handlerError(err, req, res);
+        });
   });
 };

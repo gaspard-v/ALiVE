@@ -1,4 +1,6 @@
 import { handlerError, handlerSuccess } from "./handler.js";
+import {objectBigIntToInt} from "./utils.js";
+import {createObject} from "./object.js";
 
 export function getFile(pool, file_uuid = "", other_join = ["", ""]) {
   let conn;
@@ -59,11 +61,64 @@ export function getFile(pool, file_uuid = "", other_join = ["", ""]) {
 
 export function createFile(
     pool,
-    name,
-    description,
-    isTool
+    filename,
+    data
 ){
-  const createFileQuery = "INSERT INTO File (description, isTool, name) VALUES ($1, $2, $3);"
+  let conn;
+  const createFileQuery = "INSERT INTO File (filename, data) VALUES (?, ?) RETURNING id, HEX(uuid) as uuid, filename;"
+  return pool.getConnection()
+      .then(conn => {
+        return conn.query(createFileQuery, [filename, data])
+      }).then(result => {
+        let formatedResult = objectBigIntToInt(result[0]);
+        console.log("id :", formatedResult.id);
+        console.log("uuid :", formatedResult.uuid);
+        return formatedResult;
+      }).finally(() => {
+        if (conn) conn.end();
+      }).catch(err => {
+        console.error('An exception has occurred while creating file', err)
+      });
+//  pool.query(createObjectQuery)
+}
+
+export function createObjectFile(
+    pool,
+    objectId,
+    fileId
+){
+  let conn;
+  const createObjectFileQuery = "INSERT INTO ObjectFile (ObjectId, FileId) VALUES (?, ?);"
+  return pool.getConnection()
+      .then(conn => {
+        return conn.query(createObjectFileQuery, [objectId, fileId])
+      }).then(result => {
+        console.log("result :", result);
+        return result;
+      }).finally(() => {
+        if (conn) conn.end();
+      }).catch(err => {
+        console.error('An exception has occurred while creating object\'s file', err)
+      });
+}
+export function createRoomFile(
+    pool,
+    roomId,
+    fileId
+){
+  let conn;
+  const createRoomFileQuery = "INSERT INTO RoomFile (RoomId, FileId) VALUES (?, ?);"
+  return pool.getConnection()
+      .then(conn => {
+        return conn.query(createRoomFileQuery, [roomId, fileId])
+      }).then(result => {
+        console.log("result :", result);
+        return result;
+      }).finally(() => {
+        if (conn) conn.end();
+      }).catch(err => {
+        console.error('An exception has occurred while creating object\'s file', err)
+      });
 }
 
 export const File = (app, pool) => {
