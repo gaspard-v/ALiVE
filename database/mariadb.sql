@@ -9,7 +9,7 @@ CREATE TABLE File (
     filename VARCHAR(100) NOT NULL UNIQUE CHECK(filename LIKE "%.%"),
     description LONGTEXT,
     option LONGTEXT,
-    data LONGBLOB NOT NULL,
+    data LONGTEXT NOT NULL,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
