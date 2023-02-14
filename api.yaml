@@ -11,7 +11,7 @@ externalDocs:
   description: Retrouver le jeu ALiVE
   url: http://exemple.com
 servers:
-  - url: https://exemple.com
+  - url: http://localhost:8080
 tags:
   - name: map
     description: accès au map
@@ -365,5 +365,5 @@ components:
         $ref: '#/components/schemas/uuid'
       description: l'uuid de la place
       required: true
-  
+
   # securitySchemes:

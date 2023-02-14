@@ -19,3 +19,10 @@ Quant au lancement de celui-ci en mode de développement il s'agit de ces 3 comm
 
 Pour le lancement de la BDD il faut executer la commande suivante :
 - `docker-compose up -d`
+
+#### TESTS
+
+Nous avons fait le choix d'utiliser JEST pour effectuer nos tests. 
+Pour lancer ces tests, il faut exécuter cette ligne de commande dans le dossier backend :
+-  node --experimental-vm-modules node_modules/jest/bin/jest.js
+

@@ -46,6 +46,7 @@ services:
     restart: always
     ports:
       - 8880:8080
+
   swagger-ui:
     image: swaggerapi/swagger-ui
     container_name: swagger-ui
