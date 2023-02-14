@@ -11,6 +11,7 @@ import { Day } from "./day.js";
 import { Dialogue } from "./dialogue.js";
 import { Sentence } from "./sentence.js";
 import { File } from "./file.js";
+import { Door } from "./door.js";
 
 const pool = createPool({
   host: "localhost",
@@ -169,6 +170,7 @@ Day(app, pool);
 Dialogue(app, pool);
 Sentence(app, pool);
 File(app, pool);
+Door(app, pool);
 
 app.listen(8080, async () =>
   console.log("ALiVE app server is listening on port 8080.")

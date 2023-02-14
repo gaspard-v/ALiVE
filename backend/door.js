@@ -55,8 +55,8 @@ WHERE
     });
 }
 
-export const Object = (app, pool) => {
-  app.get("/api/object", async function (req, res, next) {
+export const Door = (app, pool) => {
+  app.get("/api/door", async function (req, res, next) {
     getDoor(pool)
       .then((result) => {
         handlerSuccess(result, req, res, next);
