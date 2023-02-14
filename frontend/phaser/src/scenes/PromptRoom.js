@@ -67,7 +67,7 @@ export default class PromptRoom extends Phaser.Scene{
     }
     
     stopScene() {
-        this.scene.start(this.parentScene)
+        this.scene.start(this.parentScene);
         this.scene.bringToTop(this.parentScene);
     }
 }

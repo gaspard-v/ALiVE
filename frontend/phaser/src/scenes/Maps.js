@@ -45,8 +45,7 @@ export default class Maps extends Phaser.Scene{
             const display = new PromptRoom(key,this,place);
             this.scene.add(key,display,true);
         }
-        this.scene.setActive(false)
-        this.scene.start(key)
+        this.scene.setActive(false);
         this.scene.bringToTop(key);
     }
 }
