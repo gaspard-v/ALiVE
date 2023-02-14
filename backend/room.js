@@ -51,6 +51,35 @@ export function getRoom(pool, room_uuid = "", place_uuid = "", full = false) {
     });
 }
 
+export function postRoom(pool, { uuid, name }) {
+  let conn;
+  let parameters = [];
+  let query = "";
+  query = `INSERT INTO Room SET `;
+  if (uuid) query = `UPDATE Room SET `;
+  if (name) {
+    query += ` Room.name = ? `;
+    parameters = [name];
+  }
+  return pool
+    .getConnection()
+    .then((connexion) => {
+      conn = connexion;
+      return conn.query(query, parameters);
+    })
+    .then((result) => {
+      const search_uuid = uuid ? uuid : 0;
+      return conn.query(
+        `SELECT HEX(uuid) as uuid FROM Room WHERE id = ? OR uuid = UNHEX(?)`,
+        [result.insertId, search_uuid]
+      );
+    })
+    .then((result) => result)
+    .finally(() => {
+      if (conn) conn.end();
+    });
+}
+
 export const Room = (app, pool) => {
   app.get("/api/room", async function (req, res, next) {
     const ask_full = req.query.full !== undefined;
@@ -88,4 +117,25 @@ export const Room = (app, pool) => {
         });
     }
   );
+  app.post("/api/room", async function (req, res, next) {
+    const data = { ...req.body };
+    postRoom(pool, data)
+      .then((result) => {
+        handlerSuccess(result, req, res, next);
+      })
+      .catch((err) => {
+        handlerError(err, req, res, next);
+      });
+  });
+  app.post("/api/room/:uuid", async function (req, res, next) {
+    const uuid = req.params.uuid;
+    const data = { ...req.body, uuid: uuid };
+    postRoom(pool, data)
+      .then((result) => {
+        handlerSuccess(result, req, res, next);
+      })
+      .catch((err) => {
+        handlerError(err, req, res, next);
+      });
+  });
 };

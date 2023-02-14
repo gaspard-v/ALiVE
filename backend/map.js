@@ -1,5 +1,7 @@
 import { handlerError, handlerSuccess } from "./handler.js";
 import { getPlace } from "./place.js";
+import MapObject from "../objects/map.mjs";
+import { objectBigIntToInt } from "./utils.js";
 
 export function getMap(pool, map_uuid = "", full = false) {
   let query = "SELECT name, HEX(uuid) as uuid FROM Map";
@@ -30,6 +32,29 @@ export function getMap(pool, map_uuid = "", full = false) {
     });
 }
 
+export function postMap(pool, { name, uuid }) {
+  let conn;
+  if (!name) {
+    return Promise.reject(new Error(`variable "name" maquant !`));
+  }
+  let query = `INSERT INTO Map (name) VALUES (?) ON DUPLICATE KEY UPDATE Map.name = ?`;
+  let parameters = [name, name];
+  if (uuid) {
+    query = `UPDATE Map SET Map.name = ? WHERE Map.uuid = UNHEX(?) `;
+    parameters = [name, uuid];
+  }
+  return pool
+    .getConnection()
+    .then((connexion) => {
+      conn = connexion;
+      return conn.query(query, parameters);
+    })
+    .then((result) => objectBigIntToInt(result))
+    .finally(() => {
+      if (conn) conn.end();
+    });
+}
+
 export const Map = (app, pool) => {
   app.get("/api/map", async function (req, res, next) {
     const ask_full = req.query.full !== undefined;
@@ -45,6 +70,27 @@ export const Map = (app, pool) => {
     const uuid = req.params.uuid;
     const ask_full = req.query.full !== undefined;
     getMap(pool, uuid, ask_full)
+      .then((result) => {
+        handlerSuccess(result, req, res, next);
+      })
+      .catch((err) => {
+        handlerError(err, req, res, next);
+      });
+  });
+  app.post("/api/map", async function (req, res, next) {
+    const data = { ...MapObject, ...req.body };
+    postMap(pool, data)
+      .then((result) => {
+        handlerSuccess(result, req, res, next);
+      })
+      .catch((err) => {
+        handlerError(err, req, res, next);
+      });
+  });
+  app.post("/api/map/:uuid", async function (req, res, next) {
+    const uuid = req.params.uuid;
+    const data = { ...MapObject, ...req.body, uuid: uuid };
+    postMap(pool, data)
       .then((result) => {
         handlerSuccess(result, req, res, next);
       })

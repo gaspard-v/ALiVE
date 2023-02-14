@@ -1,4 +1,0 @@
-const sentence = {
-  content: "",
-  color: "",
-};
