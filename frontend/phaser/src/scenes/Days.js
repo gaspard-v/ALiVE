@@ -44,8 +44,6 @@ export default class Days extends Phaser.Scene{
         axios.get(`http://localhost:8080/api/day/${this.day}`)
             .then(function (response)
             {
-                console.log("\napi map : \n");
-                console.log(response.data);
                 initMap(response.data);
             })
             .catch((e) => console.log(e));

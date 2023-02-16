@@ -8,7 +8,6 @@ export default class Maps extends Phaser.Scene{
     constructor(handle,mapData){
         super(handle);
         this.map = mapData;
-        console.log(this.map);
     }
 
     preload(){
