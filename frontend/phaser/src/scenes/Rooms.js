@@ -55,31 +55,34 @@ export default class Rooms extends Phaser.Scene{
         )
         
     }
+
     chargeRoom(key){
-        this.scene.bringToTop(key);
-        console.log(isReflectionDelayOver);
+        this.scene.start(key);
+        // We should talk about reducing this code 
         if (isReflectionDelayOver.bool == true) {
             if(!this.scene.isActive('reflectionButton')){
                 const reflectionButton = new ReflectionButton('reflectionButton');
                 this.scene.add('reflectionButton',reflectionButton,true);
             }
-            this.scene.bringToTop('reflectionButton')
+            this.scene.bringToTop('reflectionButton');
         }
     }
 
     bringPrompt(objectData){
-        const key = objectData.uuid
-        if (!this.scene.isActive(key)){
-            const promptObject = new PromptObject(key,this.scene.key,objectData)
-            this.scene.add(key,promptObject,true)
+        const key = objectData.uuid;
+        if (this.scene.isActive(key) === null){
+            const promptObject = new PromptObject(key,this.scene.key,objectData);
+            this.scene.add(key,promptObject,true);
         }
-        this.scene.bringToTop(key)
+        this.scene.launch(key);
+        this.scene.setActive(false);
+        // Again copy/paste
         if (isReflectionDelayOver.bool == true) {
             if(!this.scene.isActive('reflectionButton')){
                 const reflectionButton = new ReflectionButton('reflectionButton');
                 this.scene.add('reflectionButton',reflectionButton,true);
             }
-            this.scene.bringToTop('reflectionButton')
+            this.scene.bringToTop('reflectionButton');
         }
     }
 
