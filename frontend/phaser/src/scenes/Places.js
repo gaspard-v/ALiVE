@@ -8,7 +8,6 @@ export default class Places extends Phaser.Scene{
         super(handle);
         this.rooms = roomsData;
         isReflectionDelayOver.bool = false
-        console.log('place constructor : ', roomsData);
     }
     preload(){
         const loadRoomBackground = this.rooms.map(

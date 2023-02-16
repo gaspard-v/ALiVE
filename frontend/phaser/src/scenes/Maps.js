@@ -38,7 +38,6 @@ export default class Maps extends Phaser.Scene{
 
         const getAccessiblePlaces = (response) => {
             // Parsing data and creating the map buttons
-            console.log('debug : ', response.message[0]);
             response.message[0].places.map((place) => {
                 const button = new SearchIcon(
                     place.name,
