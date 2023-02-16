@@ -100,20 +100,6 @@ export default class Maps extends Phaser.Scene{
             this.scene.bringToTop(mapKey);
         }
 
-        axios.get(`http://localhost:8080/api/map/${this.map[0]["map_uuid"]}`, {
-            params: {
-                full: true
-            }
-        })
-            .then(function (response)
-            {
-                //initMap(response.data);
-                getAccessiblePlaces(response.data);
-
-            })
-            .catch((e) => console.log(e));
-
-    }
 
     chargeRoomBackground = async (response) => {
         const uuidRoomBackground = response["uuid"];
