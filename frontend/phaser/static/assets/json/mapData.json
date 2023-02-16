@@ -126,13 +126,23 @@
               "name":"Lens",
               "uuid":"place2",
               "x":1370.5,
-              "y":497.5
+              "y":497.5,
+              "rooms":[
+                {
+                  "objects":[]
+                }
+              ]
           },
           {
               "name":"Paris",
               "uuid":"place3",
               "x":1270,
-              "y":615.5
+              "y":615.5,
+              "rooms":[
+                {
+                  "objects":[]
+                }
+              ]
           }
         ]
       }
