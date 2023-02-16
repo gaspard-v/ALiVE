@@ -11,6 +11,10 @@ export default class Maps extends Phaser.Scene{
         this.load.json('placeData','/static/assets/json/placeData.json');
         this.load.image('testmap',"/static/assets/images/maps/mapTest1.png" );
         this.load.image('mapbutton','/static/assets/images/utils/reddot.png');
+        this.load.image('closeIcon','/static/assets/images/utils/close2.png')
+        this.load.image('promptBackground','/static/assets/images/utils/papyrus.jfif');
+        this.load.image('placeValidationButton','/static/assets/images/menu/placeValidationButton.png');
+
     }
     create(){
         // Load all interesting variables
@@ -41,11 +45,12 @@ export default class Maps extends Phaser.Scene{
     
     displayRoomInfo(place){
         const key = place.uuid+"Prompt";
+
         if(this.scene.isActive(key) === null){
             const display = new PromptRoom(key,this,place);
             this.scene.add(key,display,true);
         }
+        this.scene.launch(key);
         this.scene.setActive(false);
-        this.scene.bringToTop(key);
     }
 }

@@ -14,10 +14,6 @@ export default class PromptRoom extends Phaser.Scene{
     }
 
     preload(){
-            this.load.image('closeIcon','/static/assets/images/utils/close2.png')
-            this.load.image('promptBackground','/static/assets/images/utils/papyrus.jfif');
-            this.load.image('placeValidationButton','/static/assets/images/menu/placeValidationButton.png')
-
     }
     create(){
 
@@ -58,16 +54,19 @@ export default class PromptRoom extends Phaser.Scene{
 
     }
     chargePlace(placeData){
-        if (!this.scene.isActive(placeData.uuid)){
+
+        // Verify if the scene exists in the scene 
+        
+        if (this.scene.isActive(placeData.uuid) === null){
             const place = new Places(placeData.uuid, placeData.rooms);
             this.scene.add(placeData.key,place,true);
         }
-        this.scene.bringToTop(placeData.key);
-        this.scene.setActive(false)
+
+        this.scene.start(placeData.key);
+        this.scene.remove();
     }
     
     stopScene() {
-        this.scene.start(this.parentScene);
-        this.scene.bringToTop(this.parentScene);
+        this.scene.start(this.parentScene)
     }
 }
