@@ -9,8 +9,6 @@ export default class Rooms extends Phaser.Scene{
         super(handle);
         this.objects = objectsData;
         this.doors = doorsData;
-        console.log(objectsData);
-        console.log(doorsData);
     }
     preload(){
         
@@ -45,10 +43,6 @@ export default class Rooms extends Phaser.Scene{
         const getNameDestinationRoom = async (uuid) => {
             try {
                 const response = await axios.get(`http://localhost:8080/api/room/${uuid}`)
-                console.log("\nget name destination room : \n");
-                console.log(response.data);
-                console.log(response.data.message);
-                console.log(response.data.message[0]['name']);
                 return (response.data.message[0]['name']);
             } catch(err) {
                 console.error(err)
@@ -76,7 +70,6 @@ export default class Rooms extends Phaser.Scene{
     }
     chargeRoom(key, placekey){
         this.scene.bringToTop(key);
-        console.log(isReflectionDelayOver);
         if (isReflectionDelayOver.bool == true) {
             if(!this.scene.isActive('reflectionButton')){
                 const reflectionButton = new ReflectionButton('reflectionButton');
@@ -87,7 +80,6 @@ export default class Rooms extends Phaser.Scene{
     }
 
     bringPrompt(objectData){
-        console.log('start bringPrompt object : ', objectData);
         const key = objectData.uuid
         if (!this.scene.isActive(key)){
             const promptObject = new PromptObject(key,this.scene.key,objectData)
