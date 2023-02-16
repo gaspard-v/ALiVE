@@ -1,4 +1,5 @@
 import { Button } from "../gameObjects/mainMenu/Button";
+import Reflection from "./Reflection";
 
 const isReflectionDelayOver = {};
 
@@ -29,6 +30,9 @@ export default class ReflectionButton extends Phaser.Scene {
     }
 
     onClick() {
-        console.log("Clicketi Clicketa :)")
+      const key = 'reflection';
+      this.scene.add(key,Reflection)
+      this.scene.start(key)
+
     }
 }
