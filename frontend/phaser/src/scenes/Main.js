@@ -42,7 +42,7 @@ class DaysMenu extends Phaser.Scene{
 
         var axiosDay = "";
 
-        const day1 = new Button(xbutton,ybutton1,'button',this,()=>{this.chargeDay('C5E769E5A14611ED9D200242AC140003')},1.5)
+        const day1 = new Button(xbutton,ybutton1,'button',this,()=>{this.chargeDay('3FFDF1D6AB1A11ED8EE90242AC1B0003')},1.5)
 
     }
     chargeScene(sceneObject,key){

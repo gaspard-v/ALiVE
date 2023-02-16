@@ -8,12 +8,10 @@ export default class Maps extends Phaser.Scene{
     constructor(handle,mapData){
         super(handle);
         this.map = mapData;
-        console.log(this.map);
     }
 
     preload(){
         this.load.json('placeData','/static/assets/json/placeData.json');
-        this.load.image('testmap',"/static/assets/images/maps/mapTest1.png" );
         this.load.image('mapbutton','/static/assets/images/utils/reddot.png');
         this.load.image('closeIcon','/static/assets/images/utils/close2.png')
         this.load.image('promptBackground','/static/assets/images/utils/papyrus.jfif');
@@ -28,7 +26,7 @@ export default class Maps extends Phaser.Scene{
 
         
         // Create sprite for the map  
-        this.add.sprite(width/2,height/2,'testmap').setScale(1.3);
+        this.add.sprite(width/2,height/2,this.textures.get(this.map[0]["mapFile"])).setScale(1.3);
 
         var axiosExperiment = "";
 
@@ -76,7 +74,6 @@ export default class Maps extends Phaser.Scene{
     }
 
     displayRoomInfo(place){
-        console.log('diplayRoom place infos : ', place);
         const key = place.uuid+"Prompt";
         if(!this.scene.isActive(key)){
             const display = new PromptRoom(key,this,place);
