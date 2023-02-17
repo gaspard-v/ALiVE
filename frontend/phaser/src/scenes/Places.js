@@ -12,18 +12,13 @@ export default class Places extends Phaser.Scene{
         isReflectionDelayOver.bool = false
     }
     preload(){
-        const loadRoomBackground = this.rooms.map(
-            (room)=>{
-                this.load.image(room.uuid,'/static/assets/images/rooms/'+'class001.jpeg');
-                // this.load.image(room.uuid,'/static/assets/images/rooms/'+room.image);
-            }
-        )
+
     }
 
 
     async create() {
         // Timer for the scene
-        let timer = this.time.addEvent({ delay: 1000, callback: this.onTimerEnd, callbackScope: this });
+        let timer = this.time.addEvent({delay: 35000, callback: this.onTimerEnd, callbackScope: this});
 
         // Find an other solution to this double map
         this.rooms

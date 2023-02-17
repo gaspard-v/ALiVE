@@ -55,8 +55,7 @@ export default class Rooms extends Phaser.Scene{
                         doorData.y,
                         'transitionIcon',
                         this,
-                        ()=>{this.chargeRoom(doorData["destination_place_uuid"],
-                            doorData["destination_room_uuid"])},
+                        ()=>{this.chargeRoom(doorData["destination_room_uuid"])},
                         1
                     )
                 })

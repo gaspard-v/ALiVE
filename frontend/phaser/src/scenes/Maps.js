@@ -71,7 +71,7 @@ export default class Maps extends Phaser.Scene{
                     () => {
                         this.displayRoomInfo(place)
                     },
-                    1
+                    0.080
                 )
             })
         }
