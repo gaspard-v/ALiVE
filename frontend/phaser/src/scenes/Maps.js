@@ -36,16 +36,21 @@ export default class Maps extends Phaser.Scene{
             this.scene.bringToTop(mapKey);
         }
 
-        const getAccessiblePlaces = (response) => {
+        const getAccessiblePlaces = async (response) => {
             // Parsing data and creating the map buttons
-            response.message[0].places.map((place) => {
+            response.message[0].places.map(async (place) => {
+                await this.chargePlaceInfo(place).then(res => {
+                    place = res;
+                });
                 const button = new SearchIcon(
                     place.name,
                     place.x,
                     place.y,
                     'mapbutton',
                     this,
-                    () => {this.displayRoomInfo(place)},
+                    () => {
+                        this.displayRoomInfo(place)
+                    },
                     0.080
                 )
             })
@@ -56,10 +61,8 @@ export default class Maps extends Phaser.Scene{
                 full: true
             }
         })
-            .then(function (response)
-            {
-                getAccessiblePlaces(response.data);
-
+            .then(async function (response) {
+                await getAccessiblePlaces(response.data);
             })
             .catch((e) => console.log(e));
 
@@ -73,4 +76,47 @@ export default class Maps extends Phaser.Scene{
         }
         this.scene.bringToTop(key);
     }
+
+    chargeRoomBackground = async (response) => {
+        const uuidRoomBackground = response["uuid"];
+        return await axios.get(`http://localhost:8080/api/file/room/${uuidRoomBackground}`)
+            .then(async (responseFetch) => {
+                const roomBackgroundKey = 'image_' + responseFetch.data.message[0]["uuid"];
+                response['roomFile'] = roomBackgroundKey;
+                if (!this.textures.exists(roomBackgroundKey)) {
+                    this.textures.addBase64(roomBackgroundKey, responseFetch.data.message[0]["data"])
+                }
+                await this.chargeRoomObjects(response['objects']).then((res) => response['objects'] = res);
+            })
+            .catch((e) => console.log(e));
+    }
+
+    chargeRoomObjects = async (response) => {
+        let objectsList = []
+        for (let object of response) {
+            const uuidObject = object["uuid"];
+            await axios.get(`http://localhost:8080/api/file/object/${uuidObject}`)
+                .then((responseFetch) => {
+                    if (responseFetch.data.message.length !== 0) {
+                        const objectKey = 'image_' + responseFetch.data.message[0]["uuid"];
+                        object['objectFile'] = objectKey;
+                        if (!this.textures.exists(objectKey)) {
+                            this.textures.addBase64(objectKey, responseFetch.data.message[0]["data"])
+                        }
+                    }
+                    objectsList.push(object);
+                })
+                .catch((e) => console.log(e));
+        }
+        return objectsList;
+    }
+
+    chargePlaceInfo = async (place) => {
+        for (let room of place["rooms"]) {
+            room = await this.chargeRoomBackground(room);
+        }
+        return place;
+    }
+
+
 }

@@ -5,29 +5,26 @@ import ReflectionButton from "./ReflectionButton"
 import axios from "axios";
 
 export default class Rooms extends Phaser.Scene{
-    constructor(handle,objectsData,doorsData){
+    constructor(handle,objectsData,doorsData, roomFile){
         super(handle);
         this.objects = objectsData;
         this.doors = doorsData;
+        this.uuid = handle
+        this.roomFile = roomFile;
+        // console.log('textures : ', this.textures.get(this.roomFile));
     }
     preload(){
         
     }
+
     create(){
         
         const {width,height} = this.scale;
       
         // Background must be added first  
-        this.add.sprite(width/2,height/2,this.scene.key); 
-                            
-        
+        this.add.sprite(width / 2, height / 2, this.roomFile);
+
         this.objects.map((objectData)=>{
-            const objectKey = 'image_'+objectData.uuid
-            
-            if(!this.textures.exists(objectKey)){
-                this.textures.addBase64(objectKey,objectData.image)
-            }
-   
             const object = new SearchIcon(
                 objectData.name,
                     objectData.x,
@@ -59,8 +56,7 @@ export default class Rooms extends Phaser.Scene{
                         doorData.y,
                         'transitionIcon',
                         this,
-                        ()=>{this.chargeRoom(doorData["destination_place_uuid"],
-                            doorData["destination_room_uuid"])},
+                        ()=>{this.chargeRoom(doorData["destination_room_uuid"])},
                         1
                     )
                 })
@@ -68,7 +64,7 @@ export default class Rooms extends Phaser.Scene{
         )
         
     }
-    chargeRoom(key, placekey){
+    chargeRoom(key){
         this.scene.bringToTop(key);
         if (isReflectionDelayOver.bool == true) {
             if(!this.scene.isActive('reflectionButton')){

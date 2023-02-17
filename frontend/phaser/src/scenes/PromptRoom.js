@@ -11,7 +11,6 @@ export default class PromptRoom extends Phaser.Scene{
         this.parentScene = parentScene;
         this.texteData = placeData.name;
         this.place = placeData
-        console.log('Prompt room constructor : ', this.place);
     }
 
     preload(){
@@ -57,11 +56,11 @@ export default class PromptRoom extends Phaser.Scene{
 
     }
     chargePlace(placeData){
-        console.log('charge place : ', placeData);
         if (!this.scene.isActive(placeData.uuid)){
             const place = new Places(placeData.uuid, placeData.rooms);
             this.scene.add(placeData.key,place,true);
         }
+        this.scene.stop();
         this.scene.bringToTop(placeData.key);
     }
 

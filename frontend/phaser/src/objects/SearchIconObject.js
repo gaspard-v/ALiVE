@@ -4,8 +4,6 @@ class SearchIconObject extends Phaser.GameObjects.Image {
     {
         super(scene, x, y, 'searchIcon');
 
-        console.log("Constructor of SearchIconObject");
-
         this.setScale(4);
     }
 
