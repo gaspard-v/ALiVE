@@ -17,7 +17,7 @@ export default class Days extends Phaser.Scene{
             const uuidMapImg = response[0]["map_uuid"];
             return axios.get(`http://localhost:8080/api/file/map/${uuidMapImg}`)
                 .then((responseFetch) => {
-                    const objectKey = 'image_' + responseFetch.data.message[0]["uuid"]; // generate key
+                    const objectKey = 'image_' + responseFetch.data.message[0]["uuid"];
                     response[0]['mapFile'] = objectKey;
                     if (!this.textures.exists(objectKey)) {
                         this.textures.addBase64(objectKey, responseFetch.data.message[0]["data"])

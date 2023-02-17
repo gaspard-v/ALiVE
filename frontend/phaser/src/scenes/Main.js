@@ -5,6 +5,7 @@ import Maps from "./Maps";
 import axios from "axios";
 
 class DaysMenu extends Phaser.Scene{
+    days;
     constructor(handle){
         super(handle)
     }
@@ -15,28 +16,17 @@ class DaysMenu extends Phaser.Scene{
         const xbutton = width*0.34;
         const ybutton1 = height*0.35;
         this.add.sprite(width/2,height/2,'background');
-
-        // const chargeDay = (res) => {
-        //     axiosDay = res.message;
-        //
-        //     const dayKey = axiosDay[0].uuid;
-        //
-        //     if (!this.scene.isActive(dayKey)){
-        //         const day = new Days(dayKey,axiosDay);
-        //         this.scene.add(dayKey,day,true);
-        //     }
-        //     this.scene.bringToTop(dayKey);
-        // }
+        this.days = "";
 
         axios.get('http://localhost:8080/api/day', {
             params: {
                 full: true
             }
         })
-            .then(function (response)
+            .then( (response) =>
             {
                 // initDay(response.data);
-                console.log(response.data);
+                this.days = response.data;
             })
             .catch((e) => console.log(e));
 
