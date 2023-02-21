@@ -43,6 +43,31 @@ export function getObject(
     });
 }
 
+/*
+étape 1: écrire la requete dans phpmyadmin
+étape 2: copier la requete dans la fonction correspondante
+étape 3: remplacer les les paramètres par des ? (pour éviter les injections sql)
+étape 4: exécuter la requete avec la fonction pool.
+ */
+
+export function createObject(pool, name, description, isTool) {
+  let conn;
+  const createObjectQuery =
+    "INSERT INTO Object (description, isTool, name) VALUES (?, ?, ?) RETURNING id, HEX(uuid) as uuid, description, isTool, name";
+  return pool
+    .getConnection()
+    .then((conn) => {
+      return conn.query(createObjectQuery, [description, isTool, name]);
+    })
+    .then((result) => {
+      let formatedResult = objectBigIntToInt(result[0]);
+      return formatedResult;
+    })
+    .finally(() => {
+      if (conn) conn.end();
+    });
+}
+
 export const Object = (app, pool) => {
   app.get("/api/object", async function (req, res, next) {
     getObject(pool)
@@ -61,6 +86,25 @@ export const Object = (app, pool) => {
       })
       .catch((err) => {
         handlerError(err, req, res, next);
+      });
+  });
+  app.post("/api/object", function (req, res) {
+    let result, resultBis;
+    const { name, description, isTool, fileName, fileData } = req.body;
+    createObject(pool, name, description, isTool)
+      .then((result) => {
+        createFile(pool, fileName, fileData).then((resultBis) => {
+          createObjectFile(pool, result.id, resultBis.id).then(
+            (resultThird) => {
+              console.log("Just before handlerSuccess.");
+              handlerSuccess(objectBigIntToInt(resultThird), req, res);
+              console.log("file created MOTHAFUCKA");
+            }
+          );
+        });
+      })
+      .catch((err) => {
+        handlerError(err, req, res);
       });
   });
 };
