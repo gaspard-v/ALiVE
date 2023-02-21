@@ -112,6 +112,14 @@ export function postDoor(
     parameters.push(y);
   }
   query = query.slice(0, -2);
+  query += ` RETURNING 
+  HEX(Door.uuid) AS uuid,
+  Door.Xcoord AS x,
+  Door.Ycoord AS y,
+  HEX(DestinationPlace.uuid) AS destination_place_uuid,
+  HEX(DestinationRoom.uuid) AS destination_room_uuid,
+  HEX(StartingPlace.uuid) AS starting_place_uuid,
+  HEX(StartingRoom.uuid) AS starting_room_uuid `;
   return pool
     .getConnection()
     .then((connexion) => {
