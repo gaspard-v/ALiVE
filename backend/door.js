@@ -122,7 +122,7 @@ export function postDoor(
       conn = connexion;
       return conn.query(query, parameters);
     })
-    .then((result) => objectBigIntToInt(result))
+    .then((result) => objectBigIntToInt(result[0]))
     .finally(() => {
       if (conn) conn.end();
     });
