@@ -1,4 +1,5 @@
 import { handlerError, handlerSuccess } from "./handler.js";
+import { objectBigIntToInt } from "./utils.js";
 
 export function getFile(pool, file_uuid = "", other_join = ["", ""]) {
   let conn;
@@ -59,11 +60,52 @@ export function getFile(pool, file_uuid = "", other_join = ["", ""]) {
 
 export async function createFile(pool, filename, data) {
   const createFileQuery =
-    "INSERT INTO File (filename, data) VALUES (?, ?) RETURNING id, HEX(uuid) as uuid, filename;";
+    "INSERT INTO File (filename, data) VALUES (?, ?) RETURNING HEX(uuid) as uuid, filename";
   const conn = await pool.getConnection();
   const response = await conn.query(createFileQuery, [filename, data]);
   if (conn) conn.end();
-  return objectBigIntToInt(result[0]);
+  return objectBigIntToInt(response[0]);
+}
+
+export async function addFileRelation(
+  pool,
+  file_uuid,
+  [join_table, join_uuid]
+) {
+  let query;
+  const formatted_join_table = join_table.toLocaleLowerCase();
+  switch (formatted_join_table) {
+    case "object":
+      query = `INSERT INTO ObjectFile SET ObjectId = (
+        SELECT id FROM Object WHERE uuid = UNHEX(?) 
+      ) `;
+      break;
+    case "place":
+      query = `INSERT INTO PlaceFile SET ObjectId = (
+        SELECT id FROM Place WHERE uuid = UNHEX(?) 
+      ) `;
+      break;
+    case "room":
+      query = `INSERT INTO RoomFile SET RoomId = (
+        SELECT id FROM Room WHERE uuid = UNHEX(?) 
+      ) `;
+      break;
+    case "map":
+      query = `INSERT INTO MapFile SET FileId = (
+        SELECT id FROM Map WHERE uuid = UNHEX(?) 
+      ) `;
+      break;
+    default:
+      throw new Error(`Table '${join_table}' doesn't exist !`);
+  }
+  query += `, FileId = (
+    SELECT id FROM File WHERE uuid = UNHEX(?) 
+  ) `;
+  const parameters = [join_uuid, file_uuid];
+  const conn = await pool.getConnection();
+  const result = await conn.query(query, parameters);
+  if (conn) conn.end();
+  return objectBigIntToInt(result);
 }
 
 export const File = (app, pool) => {
@@ -96,5 +138,14 @@ export const File = (app, pool) => {
       .catch((err) => {
         handlerError(err, req, res, next);
       });
+  });
+  app.post("/api/file", async function (req, res, next) {
+    try {
+      const { filename, data } = req.body;
+      const result = await createFile(pool, filename, data);
+      handlerSuccess(result, req, res, next);
+    } catch (err) {
+      handlerError(err, req, res, next);
+    }
   });
 };
