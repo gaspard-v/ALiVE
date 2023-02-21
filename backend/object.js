@@ -55,7 +55,7 @@ export function getObject(
 export function createObject(pool, name, description, isTool) {
   let conn;
   const createObjectQuery =
-    "INSERT INTO Object (description, isTool, name) VALUES (?, ?, ?) RETURNING HEX(uuid) as uuid, description, isTool, name";
+    "INSERT INTO Object (description, isTool, name) VALUES (?, ?, ?) RETURNING id, HEX(uuid) as uuid, description, isTool, name";
   return pool
     .getConnection()
     .then((conn) => {
@@ -90,19 +90,23 @@ export const Object = (app, pool) => {
         handlerError(err, req, res, next);
       });
   });
-  app.post("/api/object", async function (req, res, next) {
-    try {
-      const { name, description, isTool, image_name, image_data } = req.body;
-      const result_object = await createObject(pool, name, description, isTool);
-      const result_create_file = await createFile(pool, image_name, image_data);
-      const result_join_file = await addFileRelation(
-        pool,
-        result_create_file["uuid"],
-        ["object", result_object["uuid"]]
-      );
-      handlerSuccess(result_object, req, res, next);
-    } catch (err) {
-      handlerError(err, req, res, next);
-    }
+  app.post("/api/object", function (req, res) {
+    let result, resultBis;
+    const { name, description, isTool, fileName, fileData } = req.body;
+    createObject(pool, name, description, isTool)
+      .then((result) => {
+        createFile(pool, fileName, fileData).then((resultBis) => {
+          createObjectFile(pool, result.id, resultBis.id).then(
+            (resultThird) => {
+              console.log("Just before handlerSuccess.");
+              handlerSuccess(objectBigIntToInt(resultThird), req, res);
+              console.log("file created MOTHAFUCKA");
+            }
+          );
+        });
+      })
+      .catch((err) => {
+        handlerError(err, req, res);
+      });
   });
 };
