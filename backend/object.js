@@ -1,4 +1,5 @@
 import { handlerError, handlerSuccess } from "./handler.js";
+import { objectBigIntToInt } from "./utils.js";
 
 export function getObject(
   pool,
@@ -53,7 +54,7 @@ export function getObject(
 export function createObject(pool, name, description, isTool) {
   let conn;
   const createObjectQuery =
-    "INSERT INTO Object (description, isTool, name) VALUES (?, ?, ?) RETURNING id, HEX(uuid) as uuid, description, isTool, name";
+    "INSERT INTO Object (description, isTool, name) VALUES (?, ?, ?) RETURNING HEX(uuid) as uuid, description, isTool, name";
   return pool
     .getConnection()
     .then((conn) => {
@@ -88,23 +89,13 @@ export const Object = (app, pool) => {
         handlerError(err, req, res, next);
       });
   });
-  app.post("/api/object", function (req, res) {
-    let result, resultBis;
-    const { name, description, isTool, fileName, fileData } = req.body;
-    createObject(pool, name, description, isTool)
-      .then((result) => {
-        createFile(pool, fileName, fileData).then((resultBis) => {
-          createObjectFile(pool, result.id, resultBis.id).then(
-            (resultThird) => {
-              console.log("Just before handlerSuccess.");
-              handlerSuccess(objectBigIntToInt(resultThird), req, res);
-              console.log("file created MOTHAFUCKA");
-            }
-          );
-        });
-      })
-      .catch((err) => {
-        handlerError(err, req, res);
-      });
+  app.post("/api/object", async function (req, res, next) {
+    const { name, description, isTool } = req.body;
+    try {
+      const result = await createObject(pool, name, description, isTool);
+      handlerSuccess(result, req, res, next);
+    } catch (err) {
+      handlerError(err, req, res, next);
+    }
   });
 };
