@@ -4,18 +4,19 @@ import { ItemContainer } from '../objects/ItemsContainer';
 export default class Reflection extends Phaser.Scene{
     constructor(handle){
         super(handle);
-        this.inventory = [];
+        this.inventory = [{}, {}, {}];
         this.itemsSelection = [];
     }
     preload(){
     }
-   
+
     create(){
         const borderRadius = 20;
         const x = 480;
         const y = 540;
         this.getObjectData();
 
+        // Item list part
         // Create a sprite and add it to the scene
         const sprite = this.add.sprite(x, y, 'itemGroup');
         const xRectTopLeft = x - sprite.width/2;
@@ -25,15 +26,31 @@ export default class Reflection extends Phaser.Scene{
         const maskGraphics = this.make.graphics()
                     .fillStyle(0xffffff, 1)
                     .fillRoundedRect(xRectTopLeft, yRectTopLeft, sprite.width, sprite.height, borderRadius);
-        
+
         const mask = maskGraphics.createGeometryMask();
-        
+
         // Set the mask on the sprite
         sprite.setMask(mask);
 
-        const items = new ItemContainer(x,y,this.itemsSelection,this,mask,xRectTopLeft,yRectTopLeft);           
-       
-        
+        const items = new ItemContainer(x,y,this.itemsSelection,this,mask,xRectTopLeft,yRectTopLeft);
+
+        // Inventory part
+        // Create a sprite and it to the scene
+        const spriteInventory = this.add.sprite(3*x, y, 'itemGroup');
+        const xInventoryRectTopLeft = 3*x - spriteInventory.width/2;
+        const yInventoryRectTopLeft = y - spriteInventory.height/2;
+
+        // Create a graphics object for the mask
+        const inventoryMaskGraphics = this.make.graphics()
+            .fillStyle(0xffffff, 1)
+            .fillRoundedRect(xInventoryRectTopLeft, yInventoryRectTopLeft, spriteInventory.width, spriteInventory.height, borderRadius);
+
+        const inventoryMask = inventoryMaskGraphics.createGeometryMask();
+
+        // Set the mask on the sprite
+        spriteInventory.setMask(inventoryMask);
+
+        const itemsInventory = new ItemContainer(x+960, y, this.inventory, this, inventoryMask, xInventoryRectTopLeft, yInventoryRectTopLeft);
     }
   
 
@@ -52,7 +69,6 @@ export default class Reflection extends Phaser.Scene{
                     })
                 })                          
             })
-    
         })
     }
     
