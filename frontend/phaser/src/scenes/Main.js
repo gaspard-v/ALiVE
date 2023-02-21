@@ -1,6 +1,7 @@
 import * as Phaser from "phaser";
 import {Button} from "../gameObjects/mainMenu/Button";
 import Days from "../scenes/Days";
+import ReflectionPhase from "./ReflectionPhase";
 
 class DaysMenu extends Phaser.Scene{
     constructor(handle){
@@ -61,15 +62,20 @@ export class MainMenu extends Phaser.Scene{
     chargeDaysMenu(){
         // The scene aimed is the Days menu.
 
-        const key = 'DaysMenu';
+        // const key = 'DaysMenu';
         
-        if (!this.scene.isActive('DayMenu')){
-            // Creates a scene if it doesn't exist    
+        // if (!this.scene.isActive('DayMenu')){
+        //     // Creates a scene if it doesn't exist    
 
-            const setting = new DaysMenu(key);
-            this.scene.add(key,setting,true);
+        //     const setting = new DaysMenu(key);
+        //     this.scene.add(key,setting,true);
+        // }
+        // this.scene.bringToTop('DaysMenu')
+        if (!this.scene.isActive("ReflectionPhase")){
+            const reflectionPhase = new ReflectionPhase()
+            this.scene.add("ReflectionPhase", reflectionPhase, true)
         }
-        this.scene.bringToTop('DaysMenu')
+        this.scene.bringToTop("ReflectionPhase")
     }
 
 }
