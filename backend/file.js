@@ -57,6 +57,15 @@ export function getFile(pool, file_uuid = "", other_join = ["", ""]) {
     });
 }
 
+export async function createFile(pool, filename, data) {
+  const createFileQuery =
+    "INSERT INTO File (filename, data) VALUES (?, ?) RETURNING id, HEX(uuid) as uuid, filename;";
+  const conn = await pool.getConnection();
+  const response = await conn.query(createFileQuery, [filename, data]);
+  if (conn) conn.end();
+  return objectBigIntToInt(result[0]);
+}
+
 export const File = (app, pool) => {
   app.get("/api/file", async function (req, res, next) {
     getFile(pool)
