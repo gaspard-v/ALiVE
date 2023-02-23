@@ -7,6 +7,7 @@ export class ItemContainer{
         this.objectData = objectData[1];
         this.title = objectData[0];
         const container = scene.add.container(x,y)
+        container.setName('dayInventoryContainer')
         
         let xObject = -100;
         let yObject = -250;
