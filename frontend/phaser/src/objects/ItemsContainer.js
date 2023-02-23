@@ -7,6 +7,7 @@ export class ItemContainer{
         this.objectData = objectData[1];
         this.title = objectData[0];
         const container = scene.add.container(x,y)
+        container.setName('dayInventoryContainer')
         
         let xObject = -100;
         let yObject = -250;
@@ -25,6 +26,7 @@ export class ItemContainer{
         this.objectData.forEach((object,index)=>{
             const frame = scene.add.sprite(xObject,yObject,'itemFrame');
             const padding = frame.height/4;
+
 
             if(index%2 === 0 && index!==0){
                 yObject = yObject + frame.height + padding;
@@ -51,26 +53,7 @@ export class ItemContainer{
 
         });
         container.setMask(mask);
-            // console.log("inventory")
-            // for (let i=0; i<maxObjectInventory; i++) {
-            //     console.log(i);
-            //     const frame = scene.add.sprite(xObject,yObject,'itemFrame');
-            //     console.log(scene);
-            //     const padding = frame.height/4;
-            //     if(i%2 == 0){
-            //         xObject = xObject*(-1);
-            //     }
-            //     else{
-            //         yObject = yObject + frame.height + padding;
-            //     }
-            //
-            //     frame.setPosition(xObject,yObject);
-            //     container.add(frame);
-            //     console.log('frame : ', frame);
-            //     // Le masque permet de couper les objets
-            //     container.setMask(mask);
-            // }
-        //}
+            
     
 
     }
