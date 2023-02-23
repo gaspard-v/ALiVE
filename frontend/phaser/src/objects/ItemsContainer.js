@@ -1,39 +1,65 @@
 import ItemSelect from "./ItemSelect";
 
 export class ItemContainer{
+    objectData;
+    title;
     constructor(x,y,objectData,scene,mask,xRectTopLeft,yRectTopLeft){
-
+        this.objectData = objectData[1];
+        this.title = objectData[0];
         const container = scene.add.container(x,y)
         container.setName('dayInventoryContainer')
         
-        let xObject = 100;
-        let yObject = -250; 
-    
-        objectData.map((object,index)=>{
+        let xObject = -100;
+        let yObject = -250;
+
+        scene.add.text(
+            xRectTopLeft + 80 - this.title.toString().length/2,
+            yRectTopLeft - 50,
+            this.title,
+            {
+                fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+                fontSize: 32,
+                color: '#ffffff'
+            }
+        );
+
+        this.objectData.forEach((object,index)=>{
             const frame = scene.add.sprite(xObject,yObject,'itemFrame');
             const padding = frame.height/4;
-            const imageObject = scene.add.sprite(xObject,yObject,"image_"+object.object)
 
-            // Creates the Objects by pair  
 
-            if(index%2 == 0){
-                xObject = xObject*(-1);
-            }
-            else{
+            if(index%2 === 0 && index!==0){
                 yObject = yObject + frame.height + padding;
             }
-            frame.setPosition(xObject,yObject);
-            imageObject.setScale(frame.width/imageObject.width,frame.height/imageObject.height)
 
-            // Add the objects to the container
-            container.add(imageObject);
+            if (object.object) {
+                const imageObject = scene.add.sprite(xObject,yObject,"image_"+object.object);
+                imageObject.setPosition(xObject,yObject);
+                imageObject.setScale(frame.width/imageObject?.width,frame.height/imageObject?.height);
+                imageObject.setInteractive();
+                imageObject.on('pointerdown', function () {
+                    let info = object;
+                    console.log(info);
+                    this.scene.events.emit("addObject",info);
+                });
+                container.add(imageObject);
+            }
+
+            frame.setPosition(xObject,yObject);
             container.add(frame);
+            xObject = xObject*(-1);
+
+            // Le masque permet de couper les objets
+
+        });
+        container.setMask(mask);
             
-            
-            container.setMask(mask);
-            
-        });   
-        container.height= yObject;
+    
+
+    }
+
+    setObjectData(objectData) {
+        this.objectData = objectData;
     }
 
 }
