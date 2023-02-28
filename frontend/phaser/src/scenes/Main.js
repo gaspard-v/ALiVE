@@ -1,38 +1,56 @@
 import * as Phaser from "phaser";
 import {Button} from "../gameObjects/mainMenu/Button";
 import Days from "../scenes/Days";
+import Maps from "./Maps";
+import axios from "axios";
 
 class DaysMenu extends Phaser.Scene{
+    days;
     constructor(handle){
         super(handle)
     }
     preload(){
+        this.load.image('button','/static/assets/images/menu/Bouton.png')
+        this.load.image('background','/static/assets/images/menu/mainMenuBackground.jpg');
     }
     create(){
         const {width,height} = this.scale;
         const xbutton = width*0.34;
         const ybutton1 = height*0.35;
         this.add.sprite(width/2,height/2,'background');
-        const day1 = new Button(xbutton,ybutton1,'button',this,()=>{this.chargeScene(Days,'DayOne')},1.5)
-        
+        this.days = "";
+
+        axios.get('http://localhost:8080/api/day', {
+            params: {
+                full: true
+            }
+        })
+            .then( (response) =>
+            {
+                // initDay(response.data);
+                this.days = response.data;
+            })
+            .catch((e) => console.log(e));
+
+        var axiosDay = "";
+
+        const day1 = new Button(xbutton,ybutton1,'button',this,()=>{this.chargeDay('3FFDF1D6AB1A11ED8EE90242AC1B0003')},1.5)
+
     }
-    chargeScene(sceneObject,key){
+    chargeDay(key){
         if (!this.scene.isActive(key)){
-            const day = new sceneObject(key);
+            const day = new Days(key, '3FFDF1D6AB1A11ED8EE90242AC1B0003');
             this.scene.add(key,day,true);
         }
-        this.scene.start(key)
-        this.scene.remove(this.scene.key)
-
+        this.scene.bringToTop(key)
     }
 }
 
 export class MainMenu extends Phaser.Scene{
     constructor(){
-        super("MainMenu");
+        super({ĸey:"MainMenu",active:true});
     }
     preload(){
-        this.load.image('button','/static/assets/images/menu/Bouton.png')
         this.load.image('roomBackground','/static/assets/images/rooms/ancienneClasse.jpeg');
         this.load.image('searchIcon','/static/assets/images/utils/searchIcon.png');
         this.load.image('background','/static/assets/images/menu/mainMenuBackground.jpg');
@@ -55,19 +73,22 @@ export class MainMenu extends Phaser.Scene{
         this.add.image(width/2,height/2,'background');
 
         // Create buttons based on the prior position and loaded images
-        const playButton = new Button(xbutton,ybutton1,'playbutton',this,() => {this.chargeScene(DaysMenu,"DaysMenu")},1.5)
+        const playButton = new Button(xbutton,ybutton1,'playbutton',this,() => {this.chargeDaysMenu()},1.5)
         const settingButton = new Button(xbutton,ybutton2,'settingButton',this,()=> console.log("game settigns"),1.5)
     }
 
-    chargeScene(sceneObject,key){
-        if (this.scene.isActive(key) === null){
-            const day = new sceneObject(key);
-            this.scene.add(key,day,true);
-        } 
-        // Start the designated scene and stop the rendering of the present one
-        this.scene.start(key)
-        // Be warned : Remove deletes the scene 
+    chargeDaysMenu(){
+        // The scene aimed is the Days menu.
+
+        const key = 'DaysMenu';
         
+        if (!this.scene.isActive('DayMenu')){
+            // Creates a scene if it doesn't exist    
+
+            const setting = new DaysMenu(key);
+            this.scene.add(key,setting,true);
+        }
+        this.scene.bringToTop('DaysMenu')
     }
 
 }
