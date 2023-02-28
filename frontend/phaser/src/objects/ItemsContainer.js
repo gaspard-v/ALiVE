@@ -3,12 +3,12 @@ import ItemSelect from "./ItemSelect";
 export class ItemContainer{
     objectData;
     title;
-    constructor(x,y,objectData,scene,mask,xRectTopLeft,yRectTopLeft){
-        this.objectData = objectData[1];
-        this.title = objectData[0];
+    constructor(x,y, {title, data},scene,mask,xRectTopLeft,yRectTopLeft){
+        this.title = title;
+        this.objectData = data;
         const container = scene.add.container(x,y)
         container.setName('dayInventoryContainer')
-        
+
         let xObject = -100;
         let yObject = -250;
 
@@ -37,9 +37,7 @@ export class ItemContainer{
                 imageObject.setScale(frame.width/imageObject?.width,frame.height/imageObject?.height);
                 imageObject.setInteractive();
                 imageObject.on('pointerdown', function () {
-                    let info = object;
-                    console.log(info);
-                    this.scene.events.emit("addObject",info);
+                    this.scene.events.emit("addObject", {title, info: object});
                 });
                 container.add(imageObject);
             }

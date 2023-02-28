@@ -1,25 +1,51 @@
 import * as Phaser from 'phaser';
 import { ItemContainer } from '../objects/ItemsContainer';
 
+const DISCOVERED_OBJECTS = "Objets découverts";
+const BACKPACK = "Mon sac à dos";
+
+
 export default class Reflection extends Phaser.Scene{
     items;
     itemsInventory;
+
 
     constructor(handle){
         super(handle);
         this.inventory = [{}, {}, {}];
         this.itemsSelection = [];
-        this.scroller ;
+        this.scroller;
     }
     preload(){
     }
 
+    stateValues(place) {
+        console.log(place);
+        this.stateDiscovered();
+        this.stateInventory();
+    }
+
+    stateDiscovered() {
+        console.log('discovered list : ', this.itemsSelection);
+    }
+
+    stateInventory() {
+        console.log('discovered list : ', this.inventory);
+    }
+
     addToSelection(object) {
+        this.itemsSelection.push(object);
         this.removeToInventory(object);
+        this.stateValues('add to selection : ');
     }
 
     removeToInventory(object) {
-
+        for (let i = 0; i < this.inventory.length; i++) {
+            if (this.inventory[i].object === object.object) {
+                this.inventory[i] = {};
+                break;
+            }
+        }
     }
 
     removeToSelection(object) {
@@ -62,7 +88,10 @@ export default class Reflection extends Phaser.Scene{
         background.setMask(mask);
 
         // Creates the content from the item selection
-        new ItemContainer(x,y,this.itemsSelection,this,mask,xRectTopLeft,yRectTopLeft);           
+        this.items = new ItemContainer(x,y,{
+            title: DISCOVERED_OBJECTS,
+            data: this.itemsSelection
+        },this,mask,xRectTopLeft,yRectTopLeft);
         
         // Get the created container
         const container = this.children.getByName('dayInventoryContainer');
@@ -92,7 +121,10 @@ export default class Reflection extends Phaser.Scene{
 
         });
 
-        this.items = new ItemContainer(x,y,["Objets découverts",this.itemsSelection],this,mask,xRectTopLeft,yRectTopLeft);
+        // this.items = new ItemContainer(x,y, {
+        //     title: "Objets découverts",
+        //     data: this.itemsSelection
+        // },this,mask,xRectTopLeft,yRectTopLeft);
 
         // Inventory part
         // Create a sprite and it to the scene
@@ -110,11 +142,18 @@ export default class Reflection extends Phaser.Scene{
         // Set the mask on the sprite
         spriteInventory.setMask(inventoryMask);
 
-        this.itemsInventory = new ItemContainer(x+960, y, ["Mon sac à dos",this.inventory], this, inventoryMask, xInventoryRectTopLeft, yInventoryRectTopLeft);
+        const objectData = {
+            title: BACKPACK,
+            data: this.inventory
+        }
+        this.itemsInventory = new ItemContainer(x+960, y, objectData, this, inventoryMask, xInventoryRectTopLeft, yInventoryRectTopLeft);
 
-        this.events.on('addObject',  (info) => {
-            this.addToInventory(info); // ajout d'un objet dans l'inventaire (sac à dos)
-            // comment dissocier le sens en fonction de l'endroit
+        this.events.on('addObject',  ({title, info}) => {
+            if (title === DISCOVERED_OBJECTS) {
+                this.addToInventory(info); // ajout d'un objet dans l'inventaire (sac à dos)
+            } else {
+                this.addToSelection(info); // retirer un objet de la liste du sac à dos
+            }
         });
     }
 
@@ -136,6 +175,7 @@ export default class Reflection extends Phaser.Scene{
     }
 
     addToInventory(object) {
+        this.stateValues('add to inventory : ');
         for (let i = 0; i < this.inventory.length; i++) {
             if (!this.inventory[i].object) {
                 this.inventory[i] = object;
