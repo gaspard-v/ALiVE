@@ -60,4 +60,9 @@ export class ItemContainer{
         this.objectData = objectData;
     }
 
+    update() {
+        this.objectData = data;
+        console.log('update : ', this.objectData);
+    }
+
 }
