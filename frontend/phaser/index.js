@@ -14,7 +14,7 @@ const config = {
     dom: {
         createContainer: true,
     },
-    scene: [MainMenu],
+    scene: [MainMenu]
 };
 
 var game = new Phaser.Game(config);

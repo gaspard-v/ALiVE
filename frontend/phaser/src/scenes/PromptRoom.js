@@ -16,18 +16,14 @@ export default class PromptRoom extends Phaser.Scene{
     preload(){
     }
     create(){
-
         const {width,height} = this.scale;
+        this.add.image(width / 2, height / 2, 'mapBackground');
+        this.add.image(150, 100, 'mapLabel');
     
-        this.add.sprite(width/2,height/2,'promptBackground')
-            .setAngle(90)
-            .setScale(6);
-            // .setAlpha(0.5);
-        const closeButton = this.add
-            .image(width - width/4, 100, 'closeIcon')
-            .setInteractive({ useHandCursor: true });
-
-            closeButton.on('pointerdown', () => this.stopScene());
+        // this.add.sprite(width/2,height/2,'promptBackground')
+        //     .setAngle(90)
+        //     .setScale(6);
+        //     // .setAlpha(0.5);
 
 
         this.texte = this.add.text(
@@ -41,18 +37,26 @@ export default class PromptRoom extends Phaser.Scene{
             }
         )
 
-        const validation = new Button(
-            width/2,
+        const back = new Button(
+            width/2 - 200,
             height-100,
-            'placeValidationButton',
+            'backButton',
             this,
-            () =>{this.chargePlace(
-                this.place
-            )},
+            () =>{this.stopScene()},
+            1
+        )
+
+        const validation = new Button(
+            width/2+200,
+            height-100,
+            'visitButton',
+            this,
+            () =>{this.chargePlace(this.place)},
             1
         )
 
     }
+
     chargePlace(placeData){
 
         // Verify if the scene exists in the scene 

@@ -33,16 +33,17 @@ export default class PromptObject extends Phaser.Scene{
 
         const {width,height} = this.scale;
 
+        this.add.sprite(width/2,height/2,this.parentSceneKey)
         this.add.sprite(width/2,height/2,'promptBackground')
-            .setAngle(90)
-            .setScale(6);
+            //.setAngle(90)
+            //.setScale(6);
             // .setAlpha(0.8);
 
         this.add.sprite(width/2,height/2,'image_'+this.scene.key)
             .setScale(0.7);
 
         const closeButton = this.add
-            .image(width - width/4, 100, 'closeIcon')
+            .image(width - width/4, 100, 'closeIconWhite')
             .setInteractive({ useHandCursor: true });
 
             closeButton.on('pointerdown', () => this.stopScene());
@@ -54,7 +55,7 @@ export default class PromptObject extends Phaser.Scene{
             {
                 fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
                 fontSize: 86,
-                color: '#000000'
+                color: '#FFFFFF'
             }
         )
 
@@ -65,7 +66,7 @@ export default class PromptObject extends Phaser.Scene{
             {
                 fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
                 fontSize: 64,
-                color: '#000000'
+                color: '#FFFFFF'
             }
         )
 
