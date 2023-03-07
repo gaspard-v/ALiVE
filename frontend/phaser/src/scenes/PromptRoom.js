@@ -69,7 +69,7 @@ export default class PromptRoom extends Phaser.Scene{
         this.scene.start(placeData.key);
         this.scene.remove();
     }
-    
+
     stopScene() {
         this.scene.start(this.parentScene)
     }

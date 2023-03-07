@@ -9,8 +9,7 @@ export default class PromptObject extends Phaser.Scene{
     constructor(handle,parentScene,objectData){
         super(handle)
         this.parentSceneKey = parentScene;
-        this.titleData = objectData.name;
-        this.texteData = objectData.description;
+        this.objectData = objectData;
         this.base64 = objectData.image;
     }
     preload(){
@@ -38,8 +37,7 @@ export default class PromptObject extends Phaser.Scene{
             //.setAngle(90)
             //.setScale(6);
             // .setAlpha(0.8);
-
-        this.add.sprite(width/2,height/2,'image_'+this.scene.key)
+        this.add.sprite(width/2,height/2,this.objectData["objectFile"])
             .setScale(0.7);
 
         const closeButton = this.add
@@ -51,7 +49,7 @@ export default class PromptObject extends Phaser.Scene{
         this.titleText = this.add.text(
             width / 3,
             40,
-            this.titleData,
+            this.objectData.name,
             {
                 fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
                 fontSize: 86,
@@ -62,7 +60,7 @@ export default class PromptObject extends Phaser.Scene{
         this.texte = this.add.text(
             width / 4,
             height / 4,
-            this.texteData,
+            this.objectData.description,
             {
                 fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
                 fontSize: 64,

@@ -2,32 +2,29 @@ import { SearchIcon } from "../gameObjects/mainMenu/Button";
 import PromptObject from "./PromptObject";
 import {isReflectionDelayOver} from "./ReflectionButton.js"
 import ReflectionButton from "./ReflectionButton"
+import axios from "axios";
 
 export default class Rooms extends Phaser.Scene{
-    constructor(handle,objectsData,doorsData){
+    constructor(handle,objectsData,doorsData, roomFile){
         super(handle);
         this.objects = objectsData;
         this.doors = doorsData;
-
+        this.uuid = handle
+        this.roomFile = roomFile;
+        // console.log('textures : ', this.textures.get(this.roomFile));
     }
     preload(){
         
     }
+
     create(){
         
         const {width,height} = this.scale;
       
         // Background must be added first  
-        this.add.sprite(width/2,height/2,this.scene.key); 
-                            
-        
+        this.add.sprite(width / 2, height / 2, this.roomFile);
+
         this.objects.map((objectData)=>{
-            const objectKey = 'image_'+objectData.uuid
-            
-            if(!this.textures.exists(objectKey)){
-                this.textures.addBase64(objectKey,objectData.image)
-            }
-   
             const object = new SearchIcon(
                 objectData.name,
                     objectData.x,
@@ -40,25 +37,36 @@ export default class Rooms extends Phaser.Scene{
             }
         )
 
+        const getNameDestinationRoom = async (uuid) => {
+            try {
+                const response = await axios.get(`http://localhost:8080/api/room/${uuid}`)
+                return (response.data.message[0]['name']);
+            } catch(err) {
+                console.error(err)
+            }
+
+        }
+
         this.doors.map(
             (doorData)=>{
-                const door = new SearchIcon(
-                    doorData.destinationRoom,
-                    doorData.coordinates.x,
-                    doorData.coordinates.y,
-                    'transitionIcon',
-                    this,
-                    ()=>{this.chargeRoom(doorData.destinationRoom)},
-                    1
-                )
+                getNameDestinationRoom(doorData["destination_room_uuid"]).then((name_destination_room) => {
+                    const door = new SearchIcon(
+                        name_destination_room,
+                        doorData.x,
+                        doorData.y,
+                        'transitionIcon',
+                        this,
+                        ()=>{this.chargeRoom(doorData["destination_room_uuid"])},
+                        1
+                    )
+                })
             }
         )
         
     }
 
     chargeRoom(key){
-        this.scene.start(key);
-        // We should talk about reducing this code 
+        this.scene.bringToTop(key);
         if (isReflectionDelayOver.bool == true) {
             if(!this.scene.isActive('reflectionButton')){
                 const reflectionButton = new ReflectionButton('reflectionButton');
