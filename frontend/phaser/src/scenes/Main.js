@@ -22,7 +22,7 @@ class DaysMenu extends Phaser.Scene{
 
         this.add.image(600,height/2,'blackBanner');
         this.add.image(600,200,'levelLabel');
-        const day1 = new Button(xbutton,ybutton1,'dayOneButton',this,()=>{this.chargeScene(Days,'DayOne')},1.5);
+        const day1 = new Button(xbutton,ybutton1,'dayOneButton',this,()=>{this.chargeScene(Days,'3FFDF1D6AB1A11ED8EE90242AC1B0003')},1.5);
 
         this.days = "";
 
@@ -40,14 +40,16 @@ class DaysMenu extends Phaser.Scene{
 
 //        var axiosDay = "";
 
-        
+
     }
-    chargeDay(key){
-        if (!this.scene.isActive(key)){
-            const day = new Days(key, '3FFDF1D6AB1A11ED8EE90242AC1B0003');
+    chargeScene(sceneObject,key){
+        if (this.scene.isActive(key) === null){
+            const day = new sceneObject(key);
             this.scene.add(key,day,true);
-        }
-        this.scene.bringToTop(key)
+        } 
+        // Start the designated scene and stop the rendering of the present one
+        this.scene.start(key)
+        // Be warned : Remove deletes the scene 
     }
 }
 
@@ -84,6 +86,7 @@ export class MainMenu extends Phaser.Scene{
         this.add.image(600,200,'menuLabel');
         // Create buttons based on the prior position and loaded images
         const playButton = new Button(xbutton,ybutton1,'playbutton',this,() => {this.chargeScene(DaysMenu,"DaysMenu")},1.5)
+
     }
 
     chargeScene(sceneObject,key){
