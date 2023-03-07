@@ -9,10 +9,6 @@ export default class Maps extends Phaser.Scene{
     }
     preload(){
         this.load.json('placeData','/static/assets/json/placeData.json');
-        this.load.image('testmap',"/static/assets/images/maps/mapTest1.png" );
-        this.load.image('mapbutton','/static/assets/images/utils/reddot.png');
-        this.load.image('closeIcon','/static/assets/images/utils/close2.png')
-        this.load.image('placeValidationButton','/static/assets/images/menu/placeValidationButton.png');
 
         this.load.image('mapBackground',"/static/assets/images/map/mapBackground.png");
         this.load.image('mapLabel',"/static/assets/images/map/mapLabel.png");

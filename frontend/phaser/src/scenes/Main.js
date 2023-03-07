@@ -36,18 +36,13 @@ export class MainMenu extends Phaser.Scene{
 
     preload(){
         this.load.image('dayOneButton','/static/assets/images/menu/dayOneButton.png')
-        this.load.image('roomBackground','/static/assets/images/rooms/ancienneClasse.jpeg');
         this.load.image('searchIcon','/static/assets/images/utils/searchIcon.png');
         this.load.image('background','/static/assets/images/menu/menuBackground.png');
         this.load.image('playbutton', '/static/assets/images/menu/playButton.png');
-        this.load.image('settingButton','/static/assets/images/menu/settingsButton.png');
-        this.load.image('gray','/static/assets/images/menu/grayBackground.jpg');
         this.load.image('transitionIcon','/static/assets/images/utils/transitionIcon.png')
-        this.load.image('green','/static/assets/images/utils/green.jpg')
         this.load.image('blackBanner','/static/assets/images/utils/blackBanner.png')
         this.load.image('menuLabel','/static/assets/images/utils/menuLabel.png')
         this.load.image('levelLabel','/static/assets/images/menu/levelLabel.png')
-
     }
 
     create(){
