@@ -8,6 +8,7 @@ const BACKPACK = "Mon sac à dos";
 export default class Reflection extends Phaser.Scene{
     items;
     itemsInventory;
+    container;
 
 
     constructor(handle){
@@ -57,9 +58,38 @@ export default class Reflection extends Phaser.Scene{
         }
     }
 
-    update() {
-        this.items.setObjectData(this.itemsSelection);
-        this.itemsInventory.setObjectData(this.inventory);
+    update = () =>{    
+
+            let xObject = -100;
+            let yObject = -250;
+            this.itemsSelection.forEach((object,index)=>{
+                console.log(this)
+                const frame = this.add.sprite(xObject,yObject,'itemFrame');
+                const padding = frame.height/4;
+        
+        
+                if(index%2 === 0 && index!==0){
+                    yObject = yObject + frame.height + padding;
+                }
+        
+                if (object.object) {
+                    const imageObject = this.add.sprite(xObject,yObject,"image_"+object.object);
+                    imageObject.setPosition(xObject,yObject);
+                    imageObject.setScale(frame.width/imageObject?.width,frame.height/imageObject?.height);
+                    imageObject.setInteractive();
+                    imageObject.on('pointerdown', function () {
+                        this.events.emit("addObject", {title, info: object});
+                    });
+                    container.add(imageObject);
+                }
+        
+                frame.setPosition(xObject,yObject);
+                container.add(frame);
+                xObject = xObject*(-1);
+        
+                // Le masque permet de couper les objets
+        
+            });
     }
 
     create(){

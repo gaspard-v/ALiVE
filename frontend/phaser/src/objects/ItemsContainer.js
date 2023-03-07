@@ -9,9 +9,7 @@ export class ItemContainer{
         const container = scene.add.container(x,y)
         container.setName('dayInventoryContainer')
 
-        let xObject = -100;
-        let yObject = -250;
-
+        
         scene.add.text(
             xRectTopLeft + 80 - this.title.toString().length/2,
             yRectTopLeft - 50,
@@ -77,10 +75,4 @@ export class ItemContainer{
     setObjectData(objectData) {
         this.objectData = objectData;
     }
-
-    update() {
-        this.objectData = data;
-        console.log('update : ', this.objectData);
-    }
-
 }
