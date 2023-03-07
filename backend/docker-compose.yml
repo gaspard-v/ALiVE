@@ -9,11 +9,11 @@ services:
       - "3306:3306"
     volumes:
       - mariadb-volume:/var/lib/mysql:rw
-      - ./mariadb.sql:/docker-entrypoint-initdb.d/01_mariadb.sql:ro
-      - ./dummy_mariadb.sql:/docker-entrypoint-initdb.d/03_dummy.sql:ro
-      - ./dummy_file.sql:/docker-entrypoint-initdb.d/02_file.sql:ro
+      - ./database/mariadb.sql:/docker-entrypoint-initdb.d/01_mariadb.sql:ro
+      - ./database/dummy_mariadb.sql:/docker-entrypoint-initdb.d/03_dummy.sql:ro
+      - ./database/dummy_file.sql:/docker-entrypoint-initdb.d/02_file.sql:ro
     env_file:
-      - ../.env
+      - ./.env
     networks:
       - mariadb-network
     hostname: mariadb-database
@@ -30,7 +30,18 @@ services:
       - mariadb-network
     ports:
       - 9880:80
-
+  backend:
+    image: xosh/alive-backend
+    restart: always
+    container_name: alive-backend
+    depends_on:
+      - database
+    env_file:
+      - ./.env
+    networks:
+      - mariadb-network
+    ports:
+      - 8080:8080
 networks:
   mariadb-network:
 
