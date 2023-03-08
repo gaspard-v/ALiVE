@@ -1,6 +1,6 @@
 import { handlerError, handlerSuccess } from "./handler.js";
 import { getPlace } from "./place.js";
-import MapObject from "../objects/map.mjs";
+import MapObject from "./objects/map.mjs";
 import { objectBigIntToInt } from "./utils.js";
 
 export function getMap(pool, map_uuid = "", full = false) {

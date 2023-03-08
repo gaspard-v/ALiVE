@@ -17,6 +17,7 @@
         "webpack-dev-server": "^4.11.1"
     },
     "scripts": {
-        "start": "npx webpack serve --config ./webpack.config.dev.js"
+        "start": "npx webpack serve --config ./webpack.config.dev.js",
+        "build": "npx webpack build --config ./webpack.config.prod.js"
     }
 }

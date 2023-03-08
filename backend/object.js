@@ -1,4 +1,6 @@
 import { handlerError, handlerSuccess } from "./handler.js";
+import { objectBigIntToInt } from "./utils.js";
+import { createFile, addFileRelation } from "./file.js";
 
 export function getObject(
   pool,
@@ -43,6 +45,31 @@ export function getObject(
     });
 }
 
+/*
+étape 1: écrire la requete dans phpmyadmin
+étape 2: copier la requete dans la fonction correspondante
+étape 3: remplacer les les paramètres par des ? (pour éviter les injections sql)
+étape 4: exécuter la requete avec la fonction pool.
+ */
+
+export function createObject(pool, name, description, isTool) {
+  let conn;
+  const createObjectQuery =
+    "INSERT INTO Object (description, isTool, name) VALUES (?, ?, ?) RETURNING HEX(uuid) as uuid, description, isTool, name";
+  return pool
+    .getConnection()
+    .then((conn) => {
+      return conn.query(createObjectQuery, [description, isTool, name]);
+    })
+    .then((result) => {
+      let formatedResult = objectBigIntToInt(result[0]);
+      return formatedResult;
+    })
+    .finally(() => {
+      if (conn) conn.end();
+    });
+}
+
 export const Object = (app, pool) => {
   app.get("/api/object", async function (req, res, next) {
     getObject(pool)
@@ -62,5 +89,20 @@ export const Object = (app, pool) => {
       .catch((err) => {
         handlerError(err, req, res, next);
       });
+  });
+  app.post("/api/object", async function (req, res, next) {
+    try {
+      const { name, description, isTool, image_name, image_data } = req.body;
+      const result_object = await createObject(pool, name, description, isTool);
+      const result_create_file = await createFile(pool, image_name, image_data);
+      const result_join_file = await addFileRelation(
+        pool,
+        result_create_file["uuid"],
+        ["object", result_object["uuid"]]
+      );
+      handlerSuccess(result_object, req, res, next);
+    } catch (err) {
+      handlerError(err, req, res, next);
+    }
   });
 };

@@ -112,13 +112,17 @@ export function postDoor(
     parameters.push(y);
   }
   query = query.slice(0, -2);
+  query += ` RETURNING
+  HEX(Door.uuid) AS uuid,
+  Door.Xcoord AS x,
+  Door.Ycoord AS y `;
   return pool
     .getConnection()
     .then((connexion) => {
       conn = connexion;
       return conn.query(query, parameters);
     })
-    .then((result) => objectBigIntToInt(result))
+    .then((result) => objectBigIntToInt(result[0]))
     .finally(() => {
       if (conn) conn.end();
     });
