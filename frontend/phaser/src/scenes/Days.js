@@ -11,6 +11,8 @@ export default class Days extends Phaser.Scene{
     }
 
     create(){
+
+        
         var axiosExperiment = "";
         
         const chargeMapImage = async (response) => {
@@ -48,5 +50,6 @@ export default class Days extends Phaser.Scene{
                 initMap(response.data);
             })
             .catch((e) => console.log(e));
-    }
-}
+
+        }
+    } 
