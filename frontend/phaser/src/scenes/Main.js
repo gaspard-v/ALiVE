@@ -23,21 +23,27 @@ class DaysMenu extends Phaser.Scene{
                 full: true
             }
         })
-            .then( (response) =>
+            .then((response) =>
             {
-                // initDay(response.data);
-                this.days = response.data;
+                const dayKey = this.getDayKey(response.data)
+                const day1 = new Button(xbutton,ybutton1,'button',this,()=>{this.chargeDay(dayKey,response.data)},1.5)
             })
             .catch((e) => console.log(e));
-
+            
         var axiosDay = "";
 
-        const day1 = new Button(xbutton,ybutton1,'button',this,()=>{this.chargeDay('3FFDF1D6AB1A11ED8EE90242AC1B0003')},1.5)
+        
+
 
     }
-    chargeScene(sceneObject,key){
+    getDayKey(response){
+        return response["message"][0]["uuid"]
+    }
+
+
+    chargeDay(key,data){
         if (!this.scene.isActive(key)){
-            const day = new sceneObject(key);
+            const day = new Days(key,data);
             this.scene.add(key,day,true);
         }
         this.scene.start(key)
