@@ -4,16 +4,18 @@ import os
 import sys
 import mariadb
 import base64
-
+import mimetypes 
 
 def file_to_database(filepath, db):
     cursor = db.cursor()
     filename = os.path.basename(filepath)
+    (mime,_) = mimetypes.guess_type(filename)
     with open(filepath, 'rb') as f:
         content = f.read()
     content_base64 = base64.b64encode(content)
+    content_all = f"data:{mime};base64, {content_base64}"
     query = "INSERT INTO File (filename, data) VALUES ( %s, %s )"
-    cursor.execute(query, (filename, content_base64))
+    cursor.execute(query, (filename, content_all))
 
 
 def files_in_folder(directory, db):
@@ -33,8 +35,8 @@ def main():
         print("Il faut donner un dossier !")
         exit(1)
     db = mariadb.connect(user="alive",
-                         password="5e6c&6iP&m6p6aQd$A&f",
-                         host="localhost",
+                         password="root",
+                         host="127.0.0.1",
                          database="alive")
     files_in_folder(sys.argv[1], db)
     db.commit()
