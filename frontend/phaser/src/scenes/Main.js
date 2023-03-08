@@ -25,21 +25,27 @@ class DaysMenu extends Phaser.Scene{
                 full: true
             }
         })
-            .then( (response) =>
+            .then((response) =>
             {
-                // initDay(response.data);
-                this.days = response.data;
+                const dayKey = this.getDayKey(response.data)
+                const day1 = new Button(xbutton,ybutton1,'button',this,()=>{this.chargeDay(dayKey,response.data)},1.5)
             })
             .catch((e) => console.log(e));
-
+            
         var axiosDay = "";
 
-        const day1 = new Button(xbutton,ybutton1,'button',this,()=>{this.chargeDay('3FFDF1D6AB1A11ED8EE90242AC1B0003')},1.5)
+        
+
 
     }
-    chargeDay(key){
+    getDayKey(response){
+        return response["message"][0]["uuid"]
+    }
+
+
+    chargeDay(key,data){
         if (!this.scene.isActive(key)){
-            const day = new Days(key, '3FFDF1D6AB1A11ED8EE90242AC1B0003');
+            const day = new Days(key,data);
             this.scene.add(key,day,true);
         }
         this.scene.bringToTop(key)
@@ -59,6 +65,7 @@ export class MainMenu extends Phaser.Scene{
         this.load.image('gray','/static/assets/images/menu/grayBackground.jpg');
         this.load.image('transitionIcon','/static/assets/images/utils/transitionIcon.png')
         this.load.image('green','/static/assets/images/utils/green.jpg')
+        this.load.json('pam','/static/assets/json/mapData.json')
 
     }
     create(){
