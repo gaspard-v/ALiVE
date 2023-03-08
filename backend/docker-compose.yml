@@ -1,0 +1,49 @@
+version: "3.1"
+
+services:
+  database:
+    image: mariadb:latest
+    restart: always
+    container_name: database
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb-volume:/var/lib/mysql:rw
+      - ./database/mariadb.sql:/docker-entrypoint-initdb.d/01_mariadb.sql:ro
+      - ./database/dummy_mariadb.sql:/docker-entrypoint-initdb.d/03_dummy.sql:ro
+      - ./database/dummy_file.sql:/docker-entrypoint-initdb.d/02_file.sql:ro
+    env_file:
+      - ./.env
+    networks:
+      - mariadb-network
+    hostname: mariadb-database
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    container_name: phpmyadmin
+    environment:
+      - PMA_HOST=mariadb-database
+    depends_on:
+      - database
+    networks:
+      - mariadb-network
+    ports:
+      - 9880:80
+  backend:
+    image: xosh/alive-backend
+    restart: always
+    container_name: alive-backend
+    depends_on:
+      - database
+    env_file:
+      - ./.env
+    networks:
+      - mariadb-network
+    ports:
+      - 8080:8080
+networks:
+  mariadb-network:
+
+volumes:
+  mariadb-volume:

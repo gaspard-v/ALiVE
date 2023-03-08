@@ -1,4 +1,5 @@
 import express, { json } from "express";
+import * as dotenv from "dotenv";
 import { createPool } from "mariadb";
 import { objectBigIntToInt } from "./utils.js";
 import { handlerError, handlerSuccess } from "./handler.js";
@@ -14,11 +15,13 @@ import { File } from "./file.js";
 import { room_place } from "./room_place.js";
 import { Door } from "./door.js";
 
+dotenv.config();
+
 const pool = createPool({
-  host: "localhost",
-  user: "alive",
-  password: "5e6c&6iP&m6p6aQd$A&f",
-  database: "alive",
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
   connectionLimit: 100,
 });
 
