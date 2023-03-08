@@ -22,7 +22,6 @@ class DaysMenu extends Phaser.Scene{
 
         this.add.image(600,height/2,'blackBanner');
         this.add.image(600,200,'levelLabel');
-        const day1 = new Button(xbutton,ybutton1,'dayOneButton',this,()=>{this.chargeScene(Days,'3FFDF1D6AB1A11ED8EE90242AC1B0003')},1.5);
 
         this.days = "";
 
@@ -31,20 +30,27 @@ class DaysMenu extends Phaser.Scene{
                 full: true
             }
         })
-            .then( (response) =>
+            .then((response) =>
             {
-                // initDay(response.data);
-                this.days = response.data;
+                const dayKey = this.getDayKey(response.data)
+                const day1 = new Button(xbutton,ybutton1,'button',this,()=>{this.chargeDay(dayKey,response.data)},1.5)
             })
             .catch((e) => console.log(e));
+            
+        var axiosDay = "";
 
-//        var axiosDay = "";
+        
 
 
     }
-    chargeScene(sceneObject,key){
-        if (this.scene.isActive(key) === null){
-            const day = new sceneObject(key);
+    getDayKey(response){
+        return response["message"][0]["uuid"]
+    }
+
+
+    chargeDay(key,data){
+        if (!this.scene.isActive(key)){
+            const day = new Days(key,data);
             this.scene.add(key,day,true);
         } 
         // Start the designated scene and stop the rendering of the present one

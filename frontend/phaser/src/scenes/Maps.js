@@ -42,19 +42,19 @@ export default class Maps extends Phaser.Scene{
         // Create sprite for the map  
         this.add.sprite(width/2,height/2,this.textures.get(this.map[0]["mapFile"])).setScale(1.3);
 
-        var axiosExperiment = "";
-
-        const initMap = (response) => {
-            axiosExperiment = response.message;
-
-            const mapKey = axiosExperiment[0].uuid;
-
-            if (!this.scene.isActive(mapKey)){
-                const map = new Maps(mapKey,axiosExperiment);
-                this.scene.add(mapKey,map,true);
-            }
-            this.scene.bringToTop(mapKey);
-        }
+//        var axiosExperiment = "";
+//
+//        const initMap = (response) => {
+//            axiosExperiment = response.message;
+//
+//            const mapKey = axiosExperiment[0].uuid;
+//
+//            if (!this.scene.isActive(mapKey)){
+//                const map = new Maps(mapKey,axiosExperiment);
+//                this.scene.add(mapKey,map,true);
+//            }
+//            this.scene.bringToTop(mapKey);
+//        }
 
         const getAccessiblePlaces = async (response) => {
             // Parsing data and creating the map buttons
