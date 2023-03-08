@@ -13,7 +13,7 @@ def file_to_database(filepath, db):
     with open(filepath, 'rb') as f:
         content = f.read()
     content_base64 = base64.b64encode(content)
-    content_all = f"data:{mime};base64, {content_base64.decode('utf-8')}"
+    content_all = f"data:{mime};base64, {content_base64}"
     query = "INSERT INTO File (filename, data) VALUES ( %s, %s )"
     cursor.execute(query, (filename, content_all))
 
