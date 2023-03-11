@@ -107,40 +107,63 @@ export default class Reflection extends Phaser.Scene{
         this.events.on('addObject',  ({title, info}) => {
             if (title === DISCOVERED_OBJECTS) {
                 this.addToInventory(info);
-                this.removeFromSelection(info);
+                console.log(this.items);
+                console.log(this.itemsInventory)
             
             } else {
                 this.addToSelection(info); // retirer un objet de la liste du sac à dos
+                console.log(this.items);
+                console.log(this.itemsInventory)
+
             }
         });
-
         
-
     }
     addToInventory(object) {
         //this.stateValues('add to inventory : ');
         for (let i = 0; i < this.inventory.length; i++){
             if(!this.inventory[i].object){
                 this.inventory[i] = object;
-                //this.calculateCoords(this.itemsInventory,object);
-                this.addToView(this.itemsInventory,object);
-                this.delFromView(this.items,object)
-                return
+               switch(i){
+                        case 0:
+                             object.xObject = -100;
+                             object.yObject = -250;
+                             break;
+                        case 1:
+                             object.xObject = 100;
+                             object.yObject = -250;
+                             break
+                        case 2:
+                            object.xObject = -100;
+                            object.yObject = -100;
+                            break
+                    }
+                    this.calculateCoords(this.itemsInventory,object);
+                    this.addToView(this.itemsInventory,object);
+                    this.delFromView(this.items,object)
+                    break
+                }
+            }
+            this.removeFromSelection(object);
+        }
+        
+        addToSelection(object) {
+        for(let i = 0; i< this.items.objectData.length; i++){    
+            console.log(i)
+            console.log(this.itemsInventory)
+            if(!this.items.objectData[i].object){
+                this.items.objectData[i] = object;
+                const frame = this.items.container.getByName("frame_"+object.index)
+                object.xObject = frame.x;
+                object.yObject = frame.y;
+                console.log(frame)
+                break
             }
         }
-        this.removeFromSelection(object);
-    }
-    
-    addToSelection(object) {
-        for(let i = 0; i< this.itemsInventory.objectData.length; i++){
-            if(i === object.index){
-                this.itemsInventory.objectData[i] = object;
-            }
-            this.removeFromInventory(object);
-            this.calculateCoords(this.items,object);
-            this.addToView(this.items,object);
-            this.delFromView(this.itemsInventory,object);
-        }
+        this.calculateCoords(this.items,object);
+        this.delFromView(this.itemsInventory,object);
+        this.removeFromInventory(object);
+        this.addToView(this.items,object);
         // this.stateValues('add to selection : ');
     }
 
@@ -153,7 +176,7 @@ export default class Reflection extends Phaser.Scene{
     removeFromInventory(object) {
         for (let i = 0; i < this.inventory.length; i++) {
             if (this.inventory[i].object === object.object) {
-                this.inventory[i] = {};
+                this.inventory[i] = {"index":i};
                 break;
             }
         }
@@ -162,7 +185,7 @@ export default class Reflection extends Phaser.Scene{
     removeFromSelection(object) {
         for (let i = 0; i < this.itemsSelection.length; i++) {
             if (this.itemsSelection[i].object === object.object) {
-                this.itemsSelection[i] = {};
+                this.itemsSelection[i] = {"index":i};
                 break;
             }
         }
@@ -182,6 +205,7 @@ export default class Reflection extends Phaser.Scene{
     }
  
     delFromView(items,object){
+        console.log(`${object.object} has been removed`)
         const sprite = items.container.getByName("image_"+object.object)
         items.container.remove(sprite)        
     }
@@ -206,10 +230,6 @@ export default class Reflection extends Phaser.Scene{
                 room.objects.map((object)=>{
                     this.itemsSelection.push({
                         "object":object.uuid,
-                        "image":object.image,
-                        "xObject":null,
-                        "yObject":null,
-                        "index":null
                     })
                 })                          
             })
