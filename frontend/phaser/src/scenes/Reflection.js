@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import { ItemContainer } from '../objects/ItemsContainer';
+import axios from 'axios';
 
 const DISCOVERED_OBJECTS = "Objets découverts";
 const BACKPACK = "Mon sac à dos";
@@ -11,14 +12,14 @@ export default class Reflection extends Phaser.Scene{
     container;
     
     
-    constructor(handle){
+    constructor(handle,data){
         super(handle);
         this.inventory = [{}, {}, {}];
-        this.itemsSelection = [];
+        this.itemsSelection = data;
         this.scroller;
     }   
    create(){
-        this.getObjectData();
+    
         const x = 480;
         const y = 540;
 
@@ -219,22 +220,6 @@ export default class Reflection extends Phaser.Scene{
     update = () =>{    
     }
     
-    
-    getObjectData(){
-        // If you want to change the data, you get it here
-        const mapData = this.cache.json.get('mapData');
-        const placeData = mapData.content[0].places;
-        
-        placeData.map((place)=>{
-            place.rooms.map((room)=>{
-                room.objects.map((object)=>{
-                    this.itemsSelection.push({
-                        "object":object.uuid,
-                    })
-                })                          
-            })
-        })
-    }
 
     
 }

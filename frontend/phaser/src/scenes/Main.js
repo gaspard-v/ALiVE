@@ -10,6 +10,8 @@ class DaysMenu extends Phaser.Scene{
         super(handle)
     }
     preload(){
+        this.load.image('button','/static/assets/images/menu/Bouton.png')
+        this.load.image('background','/static/assets/images/menu/mainMenuBackground.jpg');
     }
     create(){
         const {width,height} = this.scale;
@@ -46,18 +48,15 @@ class DaysMenu extends Phaser.Scene{
             const day = new Days(key,data);
             this.scene.add(key,day,true);
         }
-        this.scene.start(key)
-        this.scene.remove(this.scene.key)
-
+        this.scene.bringToTop(key)
     }
 }
 
 export class MainMenu extends Phaser.Scene{
     constructor(){
-        super("MainMenu");
+        super({ĸey:"MainMenu",active:true});
     }
     preload(){
-        this.load.image('button','/static/assets/images/menu/Bouton.png')
         this.load.image('roomBackground','/static/assets/images/rooms/ancienneClasse.jpeg');
         this.load.image('searchIcon','/static/assets/images/utils/searchIcon.png');
         this.load.image('background','/static/assets/images/menu/mainMenuBackground.jpg');
@@ -82,19 +81,22 @@ export class MainMenu extends Phaser.Scene{
         this.add.image(width/2,height/2,'background');
 
         // Create buttons based on the prior position and loaded images
-        const playButton = new Button(xbutton,ybutton1,'playbutton',this,() => {this.chargeScene(DaysMenu,"DaysMenu")},1.5)
+        const playButton = new Button(xbutton,ybutton1,'playbutton',this,() => {this.chargeDaysMenu()},1.5)
         const settingButton = new Button(xbutton,ybutton2,'settingButton',this,()=> console.log("game settigns"),1.5)
     }
 
-    chargeScene(sceneObject,key){
-        if (this.scene.isActive(key) === null){
-            const day = new sceneObject(key);
-            this.scene.add(key,day,true);
-        } 
-        // Start the designated scene and stop the rendering of the present one
-        this.scene.start(key)
-        // Be warned : Remove deletes the scene 
+    chargeDaysMenu(){
+        // The scene aimed is the Days menu.
+
+        const key = 'DaysMenu';
         
+        if (!this.scene.isActive('DayMenu')){
+            // Creates a scene if it doesn't exist    
+
+            const setting = new DaysMenu(key);
+            this.scene.add(key,setting,true);
+        }
+        this.scene.bringToTop('DaysMenu')
     }
 
 }
