@@ -46,8 +46,8 @@ export class ItemContainer{
                     scene.events.emit("addObject", {title, info: object});
                 });
                 this.container.add(imageObject);
-            }
-            
+                frame.setName('frame_'+object.index)
+            }            
     
             frame.setPosition(xObject,yObject);
             this.container.add(frame);
