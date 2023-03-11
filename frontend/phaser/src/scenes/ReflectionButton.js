@@ -1,5 +1,6 @@
 import { Button } from "../gameObjects/mainMenu/Button";
 import Reflection from "./Reflection";
+import axios from "axios";
 
 const isReflectionDelayOver = {};
 
@@ -16,6 +17,7 @@ export {isReflectionDelayOver};
 export default class ReflectionButton extends Phaser.Scene {
     constructor(handle) {
         super(handle)
+        this.items = []
     }
 
     preload() {
@@ -23,6 +25,7 @@ export default class ReflectionButton extends Phaser.Scene {
     }
 
     create() {
+      this.getObjectData();
         const {width,height} = this.scale;
         const xbutton = width - 300;
         const ybutton = height - 50;
@@ -31,8 +34,25 @@ export default class ReflectionButton extends Phaser.Scene {
 
     onClick() {
       const key = 'reflection';
-      this.scene.add(key,Reflection)
-      this.scene.start(key)
+      const ref = new Reflection(key,this.items);
+      this.scene.add(key,ref);
+      this.scene.start(key);
 
     }
+        
+    async getObjectData(){
+      // If you want to change the data, you get it here
+     
+      try {
+          const response = await axios.get(`http://localhost:8080/api/object`)
+          response.data["message"].map((object)=>{
+              this.items.push({
+                  "object":object.uuid
+              })
+          })
+      } catch(err) {
+          console.error(err)
+      }
+  }
+
 }

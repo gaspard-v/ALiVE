@@ -82,6 +82,8 @@ export default class Maps extends Phaser.Scene{
         })
             .then(async function (response) {
                 await getAccessiblePlaces(response.data);
+                console.log(response.data)
+                console.log("thomaS2")
             })
             .catch((e) => console.log(e));
 
@@ -102,6 +104,7 @@ export default class Maps extends Phaser.Scene{
 
 
     chargeRoomBackground = async (response) => {
+        console.log("thomaS1")
         const uuidRoomBackground = response["uuid"];
         return await axios.get(`http://localhost:8080/api/file/room/${uuidRoomBackground}`)
             .then(async (responseFetch) => {
@@ -125,6 +128,7 @@ export default class Maps extends Phaser.Scene{
                         const objectKey = 'image_' + responseFetch.data.message[0]["uuid"];
                         object['objectFile'] = objectKey;
                         if (!this.textures.exists(objectKey)) {
+                            console.log("aaaaaaaaaaa")
                             this.textures.addBase64(objectKey, responseFetch.data.message[0]["data"])
                         }
                     }
