@@ -16,25 +16,7 @@ export default class Reflection extends Phaser.Scene{
         this.inventory = [{}, {}, {}];
         this.itemsSelection = [];
         this.scroller;
-    }
-   // preload(){
-   // }
-   // 
-   // stateValues(place) {
-   //     console.log(place);
-   //     this.stateDiscovered();
-   //     this.stateInventory();
-   // }
-   // 
-   // stateDiscovered() {
-   //     console.log('discovered list : ', this.itemsSelection);
-   // }
-
-   // stateInventory() {
-   //     console.log('discovered list : ', this.inventory);
-   // }
-    
-   
+    }   
    create(){
         this.getObjectData();
         const x = 480;
@@ -126,6 +108,7 @@ export default class Reflection extends Phaser.Scene{
             if (title === DISCOVERED_OBJECTS) {
                 this.addToInventory(info);
                 this.removeFromSelection(info);
+            
             } else {
                 this.addToSelection(info); // retirer un objet de la liste du sac à dos
             }
@@ -139,6 +122,7 @@ export default class Reflection extends Phaser.Scene{
         for (let i = 0; i < this.inventory.length; i++){
             if(!this.inventory[i].object){
                 this.inventory[i] = object;
+                //this.calculateCoords(this.itemsInventory,object);
                 this.addToView(this.itemsInventory,object);
                 this.delFromView(this.items,object)
                 return
@@ -148,11 +132,22 @@ export default class Reflection extends Phaser.Scene{
     }
     
     addToSelection(object) {
-        this.itemsSelection.push(object);
-        this.removeFromInventory(object);
-        this.addToView(this.items,object);
-        this.delFromView(this.itemsInventory,object);
+        for(let i = 0; i< this.itemsInventory.objectData.length; i++){
+            if(i === object.index){
+                this.itemsInventory.objectData[i] = object;
+            }
+            this.removeFromInventory(object);
+            this.calculateCoords(this.items,object);
+            this.addToView(this.items,object);
+            this.delFromView(this.itemsInventory,object);
+        }
         // this.stateValues('add to selection : ');
+    }
+
+    calculateCoords(items,object){
+    
+        
+
     }
  
     removeFromInventory(object) {
@@ -167,8 +162,7 @@ export default class Reflection extends Phaser.Scene{
     removeFromSelection(object) {
         for (let i = 0; i < this.itemsSelection.length; i++) {
             if (this.itemsSelection[i].object === object.object) {
-                this.itemsSelection.splice(i, 1);
-                this.removeFromSelection(object)
+                this.itemsSelection[i] = {};
                 break;
             }
         }
@@ -214,7 +208,8 @@ export default class Reflection extends Phaser.Scene{
                         "object":object.uuid,
                         "image":object.image,
                         "xObject":null,
-                        "yObject":null
+                        "yObject":null,
+                        "index":null
                     })
                 })                          
             })
