@@ -26,6 +26,7 @@ export class ItemContainer{
 
         this.objectData.forEach((object,index)=>{
             const frame = scene.add.sprite(xObject,yObject,'itemFrame');
+            frame.setScale(1.2);
             const padding = frame.height/4;
     
     
@@ -38,19 +39,14 @@ export class ItemContainer{
                 object.yObject = yObject;
                 const imageObject = scene.add.sprite(xObject,yObject,"image_"+object.object);
                 imageObject.setPosition(xObject,yObject).setName("image_"+object.object);
-                imageObject.setScale(frame.width/imageObject?.width,frame.height/imageObject?.height);
+                imageObject.setScale(frame.height/imageObject?.height);
                 imageObject.setInteractive();
                 imageObject.on('pointerdown', function () {
                     scene.events.emit("addObject", {title, info: object});
                 });
                 this.container.add(imageObject);
             }
-            else{
-                const imageObject = scene.add.sprite(xObject,yObject,'itemFrame');
-                imageObject.setName("img_"+index);
-                console.log(imageObject)
-                this.container.add(imageObject);
-            }
+            
     
             frame.setPosition(xObject,yObject);
             this.container.add(frame);
