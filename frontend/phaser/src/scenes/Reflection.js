@@ -34,66 +34,8 @@ export default class Reflection extends Phaser.Scene{
    //     console.log('discovered list : ', this.inventory);
    // }
     
-    addToInventory(object) {
-        //this.stateValues('add to inventory : ');
-        for (let i = 0; i < this.inventory.length; i++){
-            if(!this.inventory[i].object){
-                this.inventory[i] = object;
-                return
-            }
-        }
-        this.removeFromSelection(object);
-    }
-    
-    addToSelection(object) {
-        this.itemsSelection.push(object);
-        this.removeFromInventory(object);
-        // this.stateValues('add to selection : ');
-    }
-
-    removeFromInventory(object) {
-        for (let i = 0; i < this.inventory.length; i++) {
-            if (this.inventory[i].object === object.object) {
-                this.inventory[i] = {};
-                break;
-            }
-        }
-    }
-
-    removeFromSelection(object) {
-        for (let i = 0; i < this.itemsSelection.length; i++) {
-            if (this.itemsSelection[i].object === object.object) {
-                this.itemsSelection.splice(i, 1);
-                break;
-            }
-        }
-    }
-
-    addToInventoryView(object){                
-        // ajout d'un objet dans l'inventaire (sac à dos)
-        const sprite = this.add.sprite(object.xObject,object.yObject,"image_"+object.object)
-        this.items.container.remove(this.items.container.getByName("image_"+object.object))
-        this.itemsInventory.container.add(sprite)
-    }
-
-    delFromInvenroyView(){
-        const sprite = this.add.sprite(object.xObject,object.yObject,"image_"+object.object)
-        this.itemsInventory.container.remove(this.itemsInventory.container.getByName("image_"+object.object))
-        this.items.add(sprite)
-        
-    }
-
-    updateInventoryView(){     
-
-    }
-    
-    updateDayItemsView(){    
-    }
-    
-    update = () =>{    
-    }
-    
-    create(){
+   
+   create(){
         this.getObjectData();
         const x = 480;
         const y = 540;
@@ -109,15 +51,15 @@ export default class Reflection extends Phaser.Scene{
 
 
         // Create a sprite and add it to the scene
-        const background = this.add.sprite(x, y, 'itemGroup');
-        const xRectTopLeft = x - background.width/2;
-        var yRectTopLeft = y - background.height/2;
+        const inventoryBackground = this.add.sprite(x, y, 'itemGroup');
+        const xRectTopLeft = x - inventoryBackground.width/2;
+        var yRectTopLeft = y - inventoryBackground.height/2;
         var topBound = yRectTopLeft;
         
         // Create a graphics object for the mask
         const maskGraphics = this.make.graphics()
-                    .fillStyle(0xffffff, 1)
-                    .fillRoundedRect(xRectTopLeft, yRectTopLeft, background.width, background.height, borderRadius);
+        .fillStyle(0xffffff, 1)
+        .fillRoundedRect(xRectTopLeft, yRectTopLeft, inventoryBackground.width, inventoryBackground.height, borderRadius);
         
         const mask = maskGraphics.createGeometryMask();
         
@@ -125,9 +67,8 @@ export default class Reflection extends Phaser.Scene{
         const inventoryMaskGraphics = this.make.graphics()
             .fillStyle(0xffffff, 1)
             .fillRoundedRect(xInventoryRectTopLeft, yInventoryRectTopLeft, spriteInventory.width, spriteInventory.height, borderRadius);
-
         const inventoryMask = inventoryMaskGraphics.createGeometryMask();
-        background.setMask(mask);
+        inventoryBackground.setMask(mask);
 
         // Creates the content from the item selection
         this.items = new ItemContainer(x,y,{
@@ -140,16 +81,17 @@ export default class Reflection extends Phaser.Scene{
         
         
         
-        if (container.height > background.height){
-            bottomBound = y - container.height + background.height;
+        if (container.height > inventoryBackground.height){
+            bottomBound = y - container.height + inventoryBackground.height;
         } 
         else{
             bottomBound = y;
         }
 
-        // Scroller is a plugin using the background sprite as a 
+        // Scroller is a plugin using the inventoryBackground sprite as a 
+        
     
-        this.scroller = this.plugins.get('rexScroller').add(background, {
+        this.scroller = this.plugins.get('rexScroller').add(inventoryBackground, {
             bounds: [
                 bottomBound,
                 topBound
@@ -183,16 +125,83 @@ export default class Reflection extends Phaser.Scene{
         this.events.on('addObject',  ({title, info}) => {
             if (title === DISCOVERED_OBJECTS) {
                 this.addToInventory(info);
-                this.addToInventoryView(info)
-                this.updateInventoryView(info)
+                this.removeFromSelection(info);
             } else {
                 this.addToSelection(info); // retirer un objet de la liste du sac à dos
             }
         });
 
+        
 
     }
-
+    addToInventory(object) {
+        //this.stateValues('add to inventory : ');
+        for (let i = 0; i < this.inventory.length; i++){
+            if(!this.inventory[i].object){
+                this.inventory[i] = object;
+                this.addToView(this.itemsInventory,object);
+                this.delFromView(this.items,object)
+                return
+            }
+        }
+        this.removeFromSelection(object);
+    }
+    
+    addToSelection(object) {
+        this.itemsSelection.push(object);
+        this.removeFromInventory(object);
+        this.addToView(this.items,object);
+        this.delFromView(this.itemsInventory,object);
+        // this.stateValues('add to selection : ');
+    }
+ 
+    removeFromInventory(object) {
+        for (let i = 0; i < this.inventory.length; i++) {
+            if (this.inventory[i].object === object.object) {
+                this.inventory[i] = {};
+                break;
+            }
+        }
+    }
+ 
+    removeFromSelection(object) {
+        for (let i = 0; i < this.itemsSelection.length; i++) {
+            if (this.itemsSelection[i].object === object.object) {
+                this.itemsSelection.splice(i, 1);
+                this.removeFromSelection(object)
+                break;
+            }
+        }
+    }
+ 
+    addToView(items,object){                
+        // ajout d'un objet dans l'inventaire (sac à dos)
+        const sprite = this.add.sprite(object.xObject,object.yObject,"image_"+object.object);
+        sprite.setName("image_"+object.object)
+                .setScale(120/sprite?.height)
+        const title = items.title;
+        sprite.setInteractive()
+                .on('pointerdown', function () {
+                    this.scene.events.emit("addObject", {title, info: object});
+                });
+        items.container.add(sprite)
+    }
+ 
+    delFromView(items,object){
+        const sprite = items.container.getByName("image_"+object.object)
+        items.container.remove(sprite)        
+    }
+ 
+    updateInventoryView(){     
+    }
+    
+    updateDayItemsView(){    
+    }
+    
+    update = () =>{    
+    }
+    
+    
     getObjectData(){
         // If you want to change the data, you get it here
         const mapData = this.cache.json.get('mapData');
