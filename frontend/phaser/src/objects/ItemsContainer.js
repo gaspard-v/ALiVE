@@ -25,6 +25,7 @@ export class ItemContainer{
         let yObject = -250;
 
         this.objectData.forEach((object,index)=>{
+            object.index= index;
             const frame = scene.add.sprite(xObject,yObject,'itemFrame');
             frame.setScale(1.2);
             const padding = frame.height/4;
