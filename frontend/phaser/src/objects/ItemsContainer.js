@@ -3,11 +3,11 @@ import ItemSelect from "./ItemSelect";
 export class ItemContainer{
     objectData;
     title;
+    container
     constructor(x,y, {title, data},scene,mask,xRectTopLeft,yRectTopLeft){
         this.title = title;
         this.objectData = data;
-        const container = scene.add.container(x,y)
-        container.setName('dayInventoryContainer')
+        this.container = scene.add.container(x,y).setName('dayInventoryContainer')
 
         
         scene.add.text(
@@ -20,56 +20,48 @@ export class ItemContainer{
                 color: '#ffffff'
             }
         );
+        
+        let xObject = -100;
+        let yObject = -250;
 
         this.objectData.forEach((object,index)=>{
             const frame = scene.add.sprite(xObject,yObject,'itemFrame');
             const padding = frame.height/4;
-
+    
+    
             if(index%2 === 0 && index!==0){
                 yObject = yObject + frame.height + padding;
             }
-
+    
             if (object.object) {
+                object.xObject = xObject;
+                object.yObject = yObject;
                 const imageObject = scene.add.sprite(xObject,yObject,"image_"+object.object);
-                imageObject.setPosition(xObject,yObject);
+                imageObject.setPosition(xObject,yObject).setName("image_"+object.object);
                 imageObject.setScale(frame.width/imageObject?.width,frame.height/imageObject?.height);
                 imageObject.setInteractive();
                 imageObject.on('pointerdown', function () {
-                    this.scene.events.emit("addObject", {title, info: object});
+                    scene.events.emit("addObject", {title, info: object});
                 });
-                container.add(imageObject);
+                this.container.add(imageObject);
             }
-
-            frame.setPosition(xObject,yObject);
-            container.add(frame);
-            xObject = xObject*(-1);
-
-            // Le masque permet de couper les objets
-
-        });
-        container.setMask(mask);
-            // console.log("inventory")
-            // for (let i=0; i<maxObjectInventory; i++) {
-            //     console.log(i);
-            //     const frame = scene.add.sprite(xObject,yObject,'itemFrame');
-            //     console.log(scene);
-            //     const padding = frame.height/4;
-            //     if(i%2 == 0){
-            //         xObject = xObject*(-1);
-            //     }
-            //     else{
-            //         yObject = yObject + frame.height + padding;
-            //     }
-            //
-            //     frame.setPosition(xObject,yObject);
-            //     container.add(frame);
-            //     console.log('frame : ', frame);
-            //     // Le masque permet de couper les objets
-            //     container.setMask(mask);
-            // }
-        //}
+            else{
+                const imageObject = scene.add.sprite(xObject,yObject,'itemFrame');
+                imageObject.setName("img_"+index);
+                console.log(imageObject)
+                this.container.add(imageObject);
+            }
     
+            frame.setPosition(xObject,yObject);
+            this.container.add(frame);
+            xObject = xObject*(-1);
+    
+            // Le masque permet de couper les objets
+    
+        });
 
+        this.container.setMask(mask);
+        
     }
 
     setObjectData(objectData) {
