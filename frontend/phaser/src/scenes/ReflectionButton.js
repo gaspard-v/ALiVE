@@ -40,19 +40,14 @@ export default class ReflectionButton extends Phaser.Scene {
 
     }
         
-    async getObjectData(){
+    getObjectData(){
       // If you want to change the data, you get it here
-     
-      try {
-          const response = await axios.get(`http://localhost:8080/api/object`)
-          response.data["message"].map((object)=>{
-              this.items.push({
-                  "object":object.uuid
-              })
-          })
-      } catch(err) {
-          console.error(err)
-      }
+    
+      const response = this.cache.json.get('mapObjects') 
+      response["objects"].forEach(element => {
+        this.items.push({"object":element.uuid});
+      });
+          
   }
 
 }

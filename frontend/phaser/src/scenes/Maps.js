@@ -30,6 +30,8 @@ export default class Maps extends Phaser.Scene{
     }
 
     create(){
+        this.mapObjects={"objects":[]};
+        // Load all interesting variables
         const {width,height} = this.scale;
         this.add.image(width / 2, height / 2, 'mapBackground');
         this.add.image(150, 100, 'mapLabel');
@@ -90,16 +92,13 @@ export default class Maps extends Phaser.Scene{
 
     displayRoomInfo(place){
         const key = place.uuid+"Prompt";
-
-            const mapKey = axiosExperiment[0].uuid;
-
-            if (!this.scene.isActive(mapKey)){
-                const map = new Maps(mapKey,axiosExperiment);
-                this.scene.add(mapKey,map,true);
-            }
-            this.scene.bringToTop(mapKey);
+        if(!this.scene.isActive(key)){
+            const display = new PromptRoom(key,this,place,this.mapObjects);
+            this.scene.add(key,display,true);
         }
-
+        console.log(this.mapObjects)
+        this.scene.bringToTop(key);
+    }
 
     chargeRoomBackground = async (response) => {
         const uuidRoomBackground = response["uuid"];
@@ -115,6 +114,7 @@ export default class Maps extends Phaser.Scene{
             .catch((e) => console.log(e));
     }
 
+
     chargeRoomObjects = async (response) => {
         let objectsList = []
         for (let object of response) {
@@ -128,6 +128,7 @@ export default class Maps extends Phaser.Scene{
                             this.textures.addBase64(objectKey, responseFetch.data.message[0]["data"])
                         }
                     }
+                    this.mapObjects["objects"].push(object);
                     objectsList.push(object);
                 })
                 .catch((e) => console.log(e));
