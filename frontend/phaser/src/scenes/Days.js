@@ -21,7 +21,6 @@ export default class Days extends Phaser.Scene{
                 response[0]['mapFile'] = objectKey;
                 if (!this.textures.exists(objectKey)) {
                         this.textures.addBase64(objectKey,String(responseFetch.data.message[0]['data']))
-                        console.log(this.textures)
                     }
 
                     return response;

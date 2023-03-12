@@ -108,14 +108,8 @@ export default class Reflection extends Phaser.Scene{
         this.events.on('addObject',  ({title, info}) => {
             if (title === DISCOVERED_OBJECTS) {
                 this.addToInventory(info);
-                console.log(this.items);
-                console.log(this.itemsInventory)
-            
             } else {
                 this.addToSelection(info); // retirer un objet de la liste du sac à dos
-                console.log(this.items);
-                console.log(this.itemsInventory)
-
             }
         });
         
@@ -139,7 +133,6 @@ export default class Reflection extends Phaser.Scene{
                             object.yObject = -100;
                             break
                     }
-                    this.calculateCoords(this.itemsInventory,object);
                     this.addToView(this.itemsInventory,object);
                     this.delFromView(this.items,object)
                     break
@@ -150,28 +143,18 @@ export default class Reflection extends Phaser.Scene{
         
         addToSelection(object) {
         for(let i = 0; i< this.items.objectData.length; i++){    
-            console.log(i)
-            console.log(this.itemsInventory)
             if(!this.items.objectData[i].object){
                 this.items.objectData[i] = object;
                 const frame = this.items.container.getByName("frame_"+object.index)
                 object.xObject = frame.x;
                 object.yObject = frame.y;
-                console.log(frame)
                 break
             }
         }
-        this.calculateCoords(this.items,object);
         this.delFromView(this.itemsInventory,object);
         this.removeFromInventory(object);
         this.addToView(this.items,object);
         // this.stateValues('add to selection : ');
-    }
-
-    calculateCoords(items,object){
-    
-        
-
     }
  
     removeFromInventory(object) {
@@ -197,29 +180,19 @@ export default class Reflection extends Phaser.Scene{
         const sprite = this.add.sprite(object.xObject,object.yObject,"image_"+object.object);
         sprite.setName("image_"+object.object)
                 .setScale(120/sprite?.height)
+
         const title = items.title;
         sprite.setInteractive()
                 .on('pointerdown', function () {
                     this.scene.events.emit("addObject", {title, info: object});
                 });
-        items.container.add(sprite)
+        items.container.add(sprite);
+
     }
  
     delFromView(items,object){
-        console.log(`${object.object} has been removed`)
         const sprite = items.container.getByName("image_"+object.object)
-        items.container.remove(sprite)        
+        sprite.destroy()        
     }
  
-    updateInventoryView(){     
-    }
-    
-    updateDayItemsView(){    
-    }
-    
-    update = () =>{    
-    }
-    
-
-    
 }
