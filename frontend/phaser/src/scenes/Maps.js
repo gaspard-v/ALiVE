@@ -96,7 +96,6 @@ export default class Maps extends Phaser.Scene{
             const display = new PromptRoom(key,this,place,this.mapObjects);
             this.scene.add(key,display,true);
         }
-        console.log(this.mapObjects)
         this.scene.bringToTop(key);
     }
 
