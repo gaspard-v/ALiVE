@@ -11,7 +11,6 @@ export default class Rooms extends Phaser.Scene{
         this.doors = doorsData;
         this.uuid = handle
         this.roomFile = roomFile;
-        // console.log('textures : ', this.textures.get(this.roomFile));
     }
     preload(){
         
