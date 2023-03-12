@@ -60,7 +60,7 @@ export default class PromptRoom extends Phaser.Scene{
     }
 
     chargePlace(placeData){
-        if (!this.scene.isActive(placeData.uuid)){
+        if (this.scene.isActive(placeData.uuid == null)){
             const place = new Places(placeData.uuid, placeData.rooms);
             this.scene.add(placeData.key,place,true);
         }

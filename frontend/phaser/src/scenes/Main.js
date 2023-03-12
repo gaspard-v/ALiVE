@@ -10,7 +10,7 @@ class DaysMenu extends Phaser.Scene{
         super(handle)
     }
     preload(){
-        this.load.image('button','/static/assets/images/menu/Bouton.png')
+        this.load.image('button','/static/assets/images/menu/dayOneButton.png')
         this.load.image('background','/static/assets/images/menu/mainMenuBackground.jpg');
     }
     create(){
@@ -54,7 +54,8 @@ class DaysMenu extends Phaser.Scene{
             this.scene.add(key,day,true);
         } 
         // Start the designated scene and stop the rendering of the present one
-        this.scene.start(key)
+        this.scene.bringToTop(key);
+        this.scene.stop();
         // Be warned : Remove deletes the scene 
     }
 }
@@ -64,13 +65,9 @@ export class MainMenu extends Phaser.Scene{
         super({ĸey:"MainMenu",active:true});
     }
     preload(){
-        this.load.image('roomBackground','/static/assets/images/rooms/ancienneClasse.jpeg');
         this.load.image('searchIcon','/static/assets/images/utils/searchIcon.png');
         this.load.image('background','/static/assets/images/menu/menuBackground.png');
         this.load.image('playbutton', '/static/assets/images/menu/playButton.png');
-        this.load.image('settingButton','/static/assets/images/menu/settingsButton.png');
-        this.load.image('gray','/static/assets/images/menu/grayBackground.jpg');
-        this.load.image('green','/static/assets/images/utils/green.jpg')
         this.load.image('dayOneButton','/static/assets/images/menu/dayOneButton.png')
         this.load.image('transitionIcon','/static/assets/images/utils/transitionIcon.png')
         this.load.image('blackBanner','/static/assets/images/utils/blackBanner.png')
@@ -104,7 +101,8 @@ export class MainMenu extends Phaser.Scene{
             this.scene.add(key,day,true);
         } 
         // Start the designated scene and stop the rendering of the present one
-        this.scene.start(key)
+        this.scene.bringToTop(key);
+        this.scene.stop()
         // Be warned : Remove deletes the scene 
     }
 }

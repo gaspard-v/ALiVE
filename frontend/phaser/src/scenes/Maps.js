@@ -11,12 +11,6 @@ export default class Maps extends Phaser.Scene{
     }
 
     preload(){
-        this.load.json('placeData','/static/assets/json/placeData.json');
-        this.load.image('mapbutton','/static/assets/images/utils/reddot.png');
-        this.load.image('closeIcon','/static/assets/images/utils/close2.png')
-        this.load.image('promptBackground','/static/assets/images/utils/papyrus.jfif');
-        this.load.image('placeValidationButton','/static/assets/images/menu/placeValidationButton.png');
-
         this.load.image('mapBackground',"/static/assets/images/map/mapBackground.png");
         this.load.image('mapLabel',"/static/assets/images/map/mapLabel.png");
         this.load.image('mapShape',"/static/assets/images/map/mapShape.png");
@@ -73,7 +67,7 @@ export default class Maps extends Phaser.Scene{
                     () => {
                         this.displayRoomInfo(place)
                     },
-                    0.080
+                    1
                 )
             })
         }
