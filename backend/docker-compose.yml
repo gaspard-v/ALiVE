@@ -24,6 +24,7 @@ services:
     container_name: phpmyadmin
     environment:
       - PMA_HOST=mariadb-database
+      - UPLOAD_LIMIT=900M
     depends_on:
       - database
     networks:
