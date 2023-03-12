@@ -51,11 +51,10 @@ class DaysMenu extends Phaser.Scene{
     chargeDay(key,data){
         if (!this.scene.isActive(key)){
             const day = new Days(key,data);
-            this.scene.add(key,day,true);
+            this.scene.add(key,day);
         } 
         // Start the designated scene and stop the rendering of the present one
-        this.scene.bringToTop(key);
-        this.scene.stop();
+        this.scene.start(key);
         // Be warned : Remove deletes the scene 
     }
 }
@@ -98,11 +97,12 @@ export class MainMenu extends Phaser.Scene{
     chargeScene(sceneObject,key){
         if (this.scene.isActive(key) === null){
             const day = new sceneObject(key);
-            this.scene.add(key,day,true);
+            this.scene.add(key,day);
         } 
         // Start the designated scene and stop the rendering of the present one
-        this.scene.bringToTop(key);
-        this.scene.stop()
+        this.scene.start(key);
+
+
         // Be warned : Remove deletes the scene 
     }
 }

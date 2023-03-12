@@ -14,8 +14,8 @@ export default class Places extends Phaser.Scene{
     preload(){
 
     }
-
-
+    
+    
     async create() {
         // Timer for the scene
         let timer = this.time.addEvent({delay: 1000, callback: this.onTimerEnd, callbackScope: this});

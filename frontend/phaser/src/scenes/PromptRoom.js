@@ -60,15 +60,16 @@ export default class PromptRoom extends Phaser.Scene{
     }
 
     chargePlace(placeData){
-        if (this.scene.isActive(placeData.uuid == null)){
+        if (!this.scene.isActive(placeData.uuid)){
             const place = new Places(placeData.uuid, placeData.rooms);
-            this.scene.add(placeData.key,place,true);
+            this.scene.add(placeData.uuid,place);
         }
-        this.scene.start(placeData.key);
+        this.scene.start(placeData.uuid);
         this.scene.remove();
     }
 
     stopScene() {
         this.scene.start(this.parentScene)
+        this.scene.remove()
     }
 }
