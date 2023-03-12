@@ -20,6 +20,7 @@ export default class Maps extends Phaser.Scene{
     }
 
     create(){
+        this.mapObjects={"objects":[]};
         // Load all interesting variables
         const {width,height} = this.scale;
         
@@ -75,9 +76,10 @@ export default class Maps extends Phaser.Scene{
     displayRoomInfo(place){
         const key = place.uuid+"Prompt";
         if(!this.scene.isActive(key)){
-            const display = new PromptRoom(key,this,place);
+            const display = new PromptRoom(key,this,place,this.mapObjects);
             this.scene.add(key,display,true);
         }
+        console.log(this.mapObjects)
         this.scene.bringToTop(key);
     }
 
@@ -95,6 +97,7 @@ export default class Maps extends Phaser.Scene{
             .catch((e) => console.log(e));
     }
 
+
     chargeRoomObjects = async (response) => {
         let objectsList = []
         for (let object of response) {
@@ -108,6 +111,7 @@ export default class Maps extends Phaser.Scene{
                             this.textures.addBase64(objectKey, responseFetch.data.message[0]["data"])
                         }
                     }
+                    this.mapObjects["objects"].push(object);
                     objectsList.push(object);
                 })
                 .catch((e) => console.log(e));
