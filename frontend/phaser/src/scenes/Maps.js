@@ -97,7 +97,6 @@ export default class Maps extends Phaser.Scene{
             .catch((e) => console.log(e));
     }
 
-
     chargeRoomObjects = async (response) => {
         let objectsList = []
         for (let object of response) {
@@ -112,6 +111,7 @@ export default class Maps extends Phaser.Scene{
                         }
                     }
                     this.mapObjects["objects"].push(object);
+
                     objectsList.push(object);
                 })
                 .catch((e) => console.log(e));

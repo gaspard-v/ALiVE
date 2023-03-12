@@ -66,8 +66,7 @@ export default class Rooms extends Phaser.Scene{
     }
 
     chargeRoom(key){
-        this.scene.start(key);
-        // We should talk about reducing this code 
+        this.scene.bringToTop(key);
         if (isReflectionDelayOver.bool == true) {
             if(!this.scene.isActive('reflectionButton')){
                 const reflectionButton = new ReflectionButton('reflectionButton');

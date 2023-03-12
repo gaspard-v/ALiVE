@@ -65,8 +65,10 @@ export class MainMenu extends Phaser.Scene{
         this.load.image('gray','/static/assets/images/menu/grayBackground.jpg');
         this.load.image('transitionIcon','/static/assets/images/utils/transitionIcon.png')
         this.load.image('green','/static/assets/images/utils/green.jpg')
+
         this.load.image('itemFrame','/static/assets/images/utils/itemRectangle.png');
         this.load.image('itemGroup','/static/assets/images/utils/itemGroup.png');
+
 
     }
     create(){
