@@ -6,14 +6,16 @@ export default class PromptRoom extends Phaser.Scene{
     x = Phaser.Math.Between(400, 600);
     y = Phaser.Math.Between(64, 128);
 
-    constructor(handle,parentScene,placeData){
+    constructor(handle,parentScene,placeData,mapObjects){
         super(handle)
+        this.mapObjects = mapObjects
         this.parentScene = parentScene;
         this.texteData = placeData.name;
         this.place = placeData
     }
 
     preload(){
+        this.load.json('mapObjects',this.mapObjects)
     }
     create(){
 
@@ -54,14 +56,10 @@ export default class PromptRoom extends Phaser.Scene{
 
     }
     chargePlace(placeData){
-
-        // Verify if the scene exists in the scene 
-        
-        if (this.scene.isActive(placeData.uuid) === null){
+        if (!this.scene.isActive(placeData.uuid)){
             const place = new Places(placeData.uuid, placeData.rooms);
             this.scene.add(placeData.key,place,true);
         }
-
         this.scene.start(placeData.key);
         this.scene.remove();
     }

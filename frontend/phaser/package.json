@@ -2,7 +2,7 @@
     "dependencies": {
         "axios": "^1.2.6",
         "phaser": "^3.55.2",
-        "phaser3-rex-plugins": "^1.1.74"
+        "phaser3-rex-plugins": "^1.1.81"
     },
     "devDependencies": {
         "@babel/core": "^7.19.1",

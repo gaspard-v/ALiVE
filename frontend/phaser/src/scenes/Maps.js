@@ -20,8 +20,8 @@ export default class Maps extends Phaser.Scene{
     }
 
     create(){
+        this.mapObjects={"objects":[]};
         // Load all interesting variables
-        
         const {width,height} = this.scale;
         
         // Create sprite for the map  
@@ -75,13 +75,11 @@ export default class Maps extends Phaser.Scene{
 
     displayRoomInfo(place){
         const key = place.uuid+"Prompt";
-
-        if(this.scene.isActive(key) === null){
-            const display = new PromptRoom(key,this,place);
+        if(!this.scene.isActive(key)){
+            const display = new PromptRoom(key,this,place,this.mapObjects);
             this.scene.add(key,display,true);
         }
-        this.scene.launch(key);
-        this.scene.setActive(false);
+        this.scene.bringToTop(key);
     }
 
     chargeRoomBackground = async (response) => {
@@ -105,12 +103,14 @@ export default class Maps extends Phaser.Scene{
             await axios.get(`http://localhost:8080/api/file/object/${uuidObject}`)
                 .then((responseFetch) => {
                     if (responseFetch.data.message.length !== 0) {
-                        const objectKey = 'image_' + responseFetch.data.message[0]["uuid"];
+                        const objectKey = 'image_' + uuidObject;
                         object['objectFile'] = objectKey;
                         if (!this.textures.exists(objectKey)) {
                             this.textures.addBase64(objectKey, responseFetch.data.message[0]["data"])
                         }
                     }
+                    this.mapObjects["objects"].push(object);
+
                     objectsList.push(object);
                 })
                 .catch((e) => console.log(e));

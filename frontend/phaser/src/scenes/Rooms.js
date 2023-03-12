@@ -11,7 +11,6 @@ export default class Rooms extends Phaser.Scene{
         this.doors = doorsData;
         this.uuid = handle
         this.roomFile = roomFile;
-        // console.log('textures : ', this.textures.get(this.roomFile));
     }
     preload(){
         
@@ -77,10 +76,10 @@ export default class Rooms extends Phaser.Scene{
     }
 
     bringPrompt(objectData){
-        const key = objectData.uuid;
-        if (this.scene.isActive(key) === null){
-            const promptObject = new PromptObject(key,this.scene.key,objectData);
-            this.scene.add(key,promptObject,true);
+        const key = objectData.uuid
+        if (!this.scene.isActive(key)){
+            const promptObject = new PromptObject(key,this.scene.key,objectData)
+            this.scene.add(key,promptObject,true)
         }
         this.scene.launch(key);
         this.scene.setActive(false);

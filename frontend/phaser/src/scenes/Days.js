@@ -10,9 +10,9 @@ export default class Days extends Phaser.Scene{
         this.day = handle;
     }
 
+
     create(){
 
-        
         var axiosExperiment = "";
         
         const chargeMapImage = async (response) => {
@@ -23,7 +23,6 @@ export default class Days extends Phaser.Scene{
                 response[0]['mapFile'] = objectKey;
                 if (!this.textures.exists(objectKey)) {
                         this.textures.addBase64(objectKey,String(responseFetch.data.message[0]['data']))
-                        console.log(this.textures)
                     }
 
                     return response;
@@ -37,6 +36,7 @@ export default class Days extends Phaser.Scene{
             axiosExperiment = await chargeMapImage(response.message)
            
             const mapKey = axiosExperiment[0]["map_uuid"];
+
 
             if (!this.scene.isActive(mapKey)) {
                 const map = new Maps(mapKey, axiosExperiment);
@@ -52,5 +52,6 @@ export default class Days extends Phaser.Scene{
             })
             .catch((e) => console.log(e));
 
-        }
-    } 
+    }
+}
+

@@ -110,8 +110,6 @@ export default class PlayScene extends Phaser.Scene {
         glassImg2.addEventListener('click', ()=> {this.displayText2()});
 
         const luxmeterName2 = document.createElement('div');
-        console.log(luxmeterName2)
-
         this.glassLuxmetre = this.add.dom(game.config.width / 2, game.config.height / 2, glassImg);
         this.glassBottle = this.add.dom(game.config.width / 4, game.config.height / 1.3, glassImg2);
         // this.glassLuxmetre = this.add.image(game.config.width / 2, game.config.height / 2, 'mGlass');
