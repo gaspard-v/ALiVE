@@ -55,7 +55,7 @@ class DaysMenu extends Phaser.Scene{
         } 
         // Start the designated scene and stop the rendering of the present one
         this.scene.start(key);
-        // Be warned : Remove deletes the scene 
+
     }
 }
 
@@ -74,6 +74,10 @@ export class MainMenu extends Phaser.Scene{
         this.load.image('levelLabel','/static/assets/images/menu/levelLabel.png')
         this.load.image('itemFrame','/static/assets/images/utils/itemRectangle.png');
         this.load.image('itemGroup','/static/assets/images/utils/itemGroup.png');
+
+        this.load.image('itemFrame','/static/assets/images/utils/itemRectangle.png');
+        this.load.image('itemGroup','/static/assets/images/utils/itemGroup.png');
+
 
     }
 

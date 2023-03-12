@@ -27,6 +27,7 @@ export default class Maps extends Phaser.Scene{
         this.mapObjects={"objects":[]};
         // Load all interesting variables
         const {width,height} = this.scale;
+
         this.add.image(width / 2, height / 2, 'mapBackground');
         this.add.image(150, 100, 'mapLabel');
         this.add.image(width / 2, height / 2, 'mapShape');
@@ -122,6 +123,7 @@ export default class Maps extends Phaser.Scene{
                         }
                     }
                     this.mapObjects["objects"].push(object);
+
                     objectsList.push(object);
                 })
                 .catch((e) => console.log(e));
