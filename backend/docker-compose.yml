@@ -32,7 +32,7 @@ services:
     ports:
       - 9880:80
   backend:
-    image: xosh/alive-backend
+    image: alive-backend
     restart: always
     container_name: alive-backend
     depends_on:

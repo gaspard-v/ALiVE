@@ -44,7 +44,7 @@ class DaysMenu extends Phaser.Scene{
 
     }
     getDayKey(response){
-        return response["message"][0]["uuid"]
+        return response["message"][1]["uuid"]
     }
 
 

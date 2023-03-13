@@ -21,7 +21,8 @@ export default class Rooms extends Phaser.Scene{
         const {width,height} = this.scale;
       
         // Background must be added first  
-        this.add.sprite(width / 2, height / 2, this.roomFile);
+        const roomBackground = this.add.sprite(width/2, height/2, this.roomFile);
+        roomBackground.setScale(width/roomBackground.width);
 
         this.objects.map((objectData)=>{
             const object = new SearchIcon(

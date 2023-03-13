@@ -4,9 +4,9 @@ import { getDialogue } from "./dialogue.js";
 export function getDay(pool, day_uuid = "", full = false) {
   let conn;
   let query = `SELECT HEX(Day.uuid) as uuid, Day.name as name, Day.description as description, HEX(Map.uuid) as map_uuid 
-               FROM Day, Map
-               WHERE
-               Map.id = Day.id `;
+  FROM Day, Map
+  WHERE
+  Map.id = Day.MapId`;
   let parameters = [];
   if (day_uuid) {
     query += ` AND Day.uuid = UNHEX(?) `;
