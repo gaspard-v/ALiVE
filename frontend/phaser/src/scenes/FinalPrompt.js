@@ -8,20 +8,20 @@ export class FinalPrompt extends Phaser.Scene{
     }
     preload(){
         this.load.image('finalBack','/static/assets/images/menu/finalRectangle.png');
+        this.load.image('finalButton','/static/assets/images/menu/reloadGame.png');
+        this.load.image('finalLabel','/static/assets/images/menu/finalLabel.png');
     }
 
     create(){
-        console.log("aaa")
         const {width,height} = this.scale;
         const back = this.add.sprite(width/2,height/2,'finalBack')
         back.setScale(width/back.width)
 
-        let yObject = height/2 - 200;
+        let yObject = height/2 - 50;
         let xObject = (width/2) - (270);
         
         this.finalItems.forEach(element => {
             const frame = this.add.sprite(0,0,'itemFrame')
-            console.log(element)
             xObject = xObject+frame.width*1.2;
             if(element.object){
                 const object = this.add.sprite(xObject,yObject,'image_'+element.object);
@@ -29,10 +29,10 @@ export class FinalPrompt extends Phaser.Scene{
             }
             frame.setPosition(xObject,yObject);
         })
-
-        const lastButton = new Button(width/2,800,'playbutton',this,()=>{this.onClick()},1.5);
+        const finalLabel = this.add.sprite(width/2,(height/2) - 200,'finalLabel');
+        const lastButton = new Button(width/2,800,'finalButton',this,()=>{this.onClick()},1.5);
     }
     onClick(){
-    location.reload();
+    location.reload()
     }
 }
