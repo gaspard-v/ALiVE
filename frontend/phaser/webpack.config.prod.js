@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     mode: 'production',
@@ -54,6 +55,9 @@ module.exports = {
                     noErrorOnMissing: true,
                 },
             ],
+        }),
+        new webpack.DefinePlugin({
+            'process.env.API_HOST': JSON.stringify(''),
         }),
     ],
 };
