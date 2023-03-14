@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  alive-db:
+    image: mariadb:latest
+    restart: always
+    container_name: alive-db
+    volumes:
+      - mariadb-volume:/var/lib/mysql:rw
+      - ./backend/database/alive.sql:/docker-entrypoint-initdb.d/01_alive.sql:ro
+    env_file:
+      - ./backend/.env
+    networks:
+      - alive-network
+    hostname: mariadb-database
+  backend:
+    build: ./backend
+    image: alive-backend
+    restart: always
+    container_name: alive-backend
+    depends_on:
+      - alive-db
+    env_file:
+      - ./backend/.env
+    networks:
+      - alive-network
+    hostname: alive-backend
+  frontend:
+    build: ./frontend/phaser
+    image: alive-frontend
+    restart: always
+    container_name: alive-frontend
+    hostname: alive-frontend
+    environment:
+      - NGINX_PORT=80
+    depends_on:
+      - backend
+    networks:
+      - alive-network
+    ports:
+      - 8081:80
+
+networks:
+  alive-network:
+
+volumes:
+  mariadb-volume:

@@ -9,5 +9,5 @@ RUN npm run build
 RUN mv build ..
 RUN rm -rf *
 RUN mv ../build .
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 RUN apk del nodejs npm
