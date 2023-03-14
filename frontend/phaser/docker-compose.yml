@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+    backend:
+        build: .
+        image: alive-frontend
+        restart: always
+        container_name: alive-frontend
+        ports:
+            - 8081:80
