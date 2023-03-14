@@ -89,9 +89,9 @@ export default class Maps extends Phaser.Scene{
         const key = place.uuid+"Prompt";
         if(!this.scene.isActive(key)){
             const display = new PromptRoom(key,this,place,this.mapObjects);
-            this.scene.add(key,display,true);
+            this.scene.add(key,display);
         }
-        this.scene.bringToTop(key);
+        this.scene.start(key);
     }
 
     chargeRoomBackground = async (response) => {

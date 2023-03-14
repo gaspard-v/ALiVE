@@ -1,6 +1,7 @@
 import * as Phaser from 'phaser';
 import { ItemContainer } from '../objects/ItemsContainer';
 import axios from 'axios';
+import { FinalPrompt } from './FinalPrompt';
 
 const DISCOVERED_OBJECTS = "Objets découverts";
 const BACKPACK = "Mon sac à dos";
@@ -113,7 +114,15 @@ export default class Reflection extends Phaser.Scene{
             }
         });
         
+        let timer = this.time.addEvent({delay: 5000, callback: this.onTimerEnd, callbackScope: this})
     }
+    onTimerEnd(){
+        const end = new FinalPrompt('finalScene',this.inventory);
+        this.scene.add('finalScene',end);
+        this.scene.start(end);
+        
+    }
+
     addToInventory(object) {
         //this.stateValues('add to inventory : ');
         for (let i = 0; i < this.inventory.length; i++){
@@ -179,7 +188,7 @@ export default class Reflection extends Phaser.Scene{
         // ajout d'un objet dans l'inventaire (sac à dos)
         const sprite = this.add.sprite(object.xObject,object.yObject,"image_"+object.object);
         sprite.setName("image_"+object.object)
-                .setScale(120/sprite?.height)
+                .setScale((120/sprite?.height)*0.7)
 
         const title = items.title;
         sprite.setInteractive()

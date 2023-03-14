@@ -38,7 +38,7 @@ export class ItemContainer{
             if (object.object) {
                 const imageObject = scene.add.sprite(0,0,"image_"+object.object);
                 imageObject.setPosition(xObject,yObject).setName("image_"+object.object);
-                imageObject.setScale(frame.height/imageObject?.height);
+                imageObject.setScale((frame.height/imageObject?.height)*0.7);
                 imageObject.setInteractive();
                 imageObject.on('pointerdown', function () {
                     scene.events.emit("addObject", {title, info: object});

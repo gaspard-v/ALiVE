@@ -10,6 +10,7 @@ export default class Places extends Phaser.Scene{
         super(handle);
         this.rooms = roomsData;
         isReflectionDelayOver.bool = false
+        this.launch = "";
     }
     preload(){
 
@@ -27,8 +28,10 @@ export default class Places extends Phaser.Scene{
             .filter(({uuid}) => !this.scene.isActive(uuid))
             .forEach(({uuid, objects, doors, roomFile}) => {
                 const room = new Rooms(uuid, objects, doors, roomFile);
-                this.scene.add(uuid, room, true);
+                this.scene.add(uuid, room);
+                this.launch = uuid
             });
+            this.scene.launch(this.launch)
     }
 
     onTimerEnd()

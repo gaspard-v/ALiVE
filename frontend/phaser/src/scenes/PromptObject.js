@@ -37,9 +37,8 @@ export default class PromptObject extends Phaser.Scene{
             //.setAngle(90)
             //.setScale(6);
             // .setAlpha(0.8);
-        this.add.sprite(width/2,height/2,this.objectData["objectFile"])
-            .setScale(0.7);
-
+        const objImage = this.add.sprite(width/2,height/2,this.objectData["objectFile"])
+        objImage.setScale(200/objImage.height);
         const closeButton = this.add
             .image(width - width/4, 100, 'closeIconWhite')
             .setInteractive({ useHandCursor: true });
