@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  database:
+    image: mariadb:latest
+    restart: always
+    container_name: database
+    volumes:
+      - mariadb-volume:/var/lib/mysql:rw
+      - ./database/mariadb.sql:/docker-entrypoint-initdb.d/01_mariadb.sql:ro
+      - ./database/dummy_mariadb.sql:/docker-entrypoint-initdb.d/03_dummy.sql:ro
+      - ./database/dummy_file.sql:/docker-entrypoint-initdb.d/02_file.sql:ro
+    env_file:
+      - ./.env
+    networks:
+      - mariadb-network
+    hostname: mariadb-database
+  backend:
+    image: xosh/alive-backend
+    restart: always
+    container_name: alive-backend
+    depends_on:
+      - database
+    env_file:
+      - ./.env
+    networks:
+      - mariadb-network
+    ports:
+      - 8080:8080
+networks:
+  mariadb-network:
+
+volumes:
+  mariadb-volume:
