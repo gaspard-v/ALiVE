@@ -7,9 +7,7 @@ services:
     container_name: database
     volumes:
       - mariadb-volume:/var/lib/mysql:rw
-      - ./database/mariadb.sql:/docker-entrypoint-initdb.d/01_mariadb.sql:ro
-      - ./database/dummy_mariadb.sql:/docker-entrypoint-initdb.d/03_dummy.sql:ro
-      - ./database/dummy_file.sql:/docker-entrypoint-initdb.d/02_file.sql:ro
+      - ./database/alive.sql:/docker-entrypoint-initdb.d/01_alive.sql:ro
     env_file:
       - ./.env
     networks:
