@@ -1,4 +1,4 @@
-version: "3.1"
+version: "3.9"
 
 services:
   database:
@@ -32,6 +32,7 @@ services:
     ports:
       - 9880:80
   backend:
+    build: .
     image: alive-backend
     restart: always
     container_name: alive-backend
