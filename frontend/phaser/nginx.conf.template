@@ -1,6 +1,6 @@
 server {
-     listen      80 default_server;
-     listen [::]:80 default_server;
+     listen      ${NGINX_PORT} default_server;
+     listen [::]:${NGINX_PORT} default_server;
      server_name _;
      index index.htm index.html;
      root        /usr/local/app/build;
