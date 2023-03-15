@@ -36,6 +36,9 @@ services:
     container_name: alive-backend
     depends_on:
       - database
+    environment:
+      - MYSQL_HOST=mariadb-database
+      - DEV=1
     env_file:
       - ./.env
     networks:
@@ -43,6 +46,7 @@ services:
     ports:
       - 8080:8080
     hostname: alive-backend
+
 networks:
   mariadb-network:
 

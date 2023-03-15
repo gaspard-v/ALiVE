@@ -20,6 +20,8 @@ services:
     container_name: alive-backend
     depends_on:
       - database
+    environment:
+      - MYSQL_HOST=mariadb-database
     env_file:
       - ./.env
     networks:

@@ -9,7 +9,7 @@ services:
       - mariadb-volume:/var/lib/mysql:rw
       - ./backend/database/alive.sql:/docker-entrypoint-initdb.d/01_alive.sql:ro
     env_file:
-      - ./backend/.env
+      - ./.env
     networks:
       - alive-network
     hostname: mariadb-database
@@ -20,8 +20,10 @@ services:
     container_name: alive-backend
     depends_on:
       - alive-db
+    environment:
+      - MYSQL_HOST=mariadb-database
     env_file:
-      - ./backend/.env
+      - ./.env
     networks:
       - alive-network
     hostname: alive-backend
