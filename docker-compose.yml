@@ -25,6 +25,18 @@ services:
     networks:
       - alive-network
     hostname: alive-backend
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    container_name: alive-phpmyadmin
+    environment:
+      - PMA_HOST=mariadb-database
+      - UPLOAD_LIMIT=900M
+    depends_on:
+      - alive-db
+    networks:
+      - alive-network
+    hostname: alive-phpmyadmin
   frontend:
     build: ./frontend/phaser
     image: alive-frontend
